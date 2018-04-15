@@ -39,5 +39,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     ```
     vue init webpack menu
     ```
+5. git安装位置
+    ```
+    which git
+    ```
 
 

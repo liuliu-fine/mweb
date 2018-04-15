@@ -9,7 +9,8 @@ Vue.use(crypto)
 
 export default {
   install(Vue, options) {
-    Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expire: 30, path: "/"});
+    const t = "037925fa578c4ed98885d7b28ade5462";
+      Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expire: 30, path: "/"});
 
     function getmd5(str) {
       let a;
@@ -20,7 +21,7 @@ export default {
     }
 
     Vue.prototype.getGetUrl = function (u, j) {
-      let t = "037925fa578c4ed98885d7b28ade5462", e = [];
+      let e = [];
       if (Object.keys(j).length) {
         for (let a in j) e.push(a)
       }
@@ -37,9 +38,10 @@ export default {
       return location.origin + u + "?" + n;
     }
     Vue.prototype.getPostUrl = function (u) {
-      for (let r = "037925fa578c4ed98885d7b28ade5462", t = (new Date).getTime(), e = getmd5("timestamp=" + t + r), a = "", n = 0; n < e.length; n += 2) a += e.charAt(n);
+      let r = (new Date).getTime(), e = getmd5("timestamp=" + t + r),a = "", n = 0;
+      for (; n < e.length; n += 2) a += e.charAt(n);
       for (let f = 1; f < e.length; f += 2) a += e.charAt(f);
-      return location.origin + u + "timestamp=" + t + "&signature=" + a;
+      return location.origin + u + "timestamp=" + r + "&signature=" + a;
     }
   }
 }

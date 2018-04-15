@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import Login from '@/components/Login'
 import Payment from '@/components/Payment'
 import Charge from '@/components/Charge'
 
@@ -33,24 +34,30 @@ export default new Router({
           component: Charge
         }
       ]
+    },
+    {
+      path: '/charge',
+      name: 'Charge',
+      component: Charge
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
 /* eslint-disable */
 
-/*router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!auth.loggedIn()) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
-  } else {
+/*route.beforeEach((to, from, next) => {
+  if(!Vue.cookie.get("cookie")){
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+
+  }else{
     next() // 确保一定要调用 next()
+
   }
 })*/

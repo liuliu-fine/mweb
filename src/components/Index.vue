@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <router-link to="payment">Home</router-link>
-    <router-link to="charge">Charge</router-link>
+    <router-link :to="{ name:'Payment',params: { id: 'status'}}">payment</router-link>
+    <router-link :to="{ name:'Charge',query: { id: 'status'}}">charge</router-link>
     <router-view></router-view>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   }
+
 }
 </script>
 

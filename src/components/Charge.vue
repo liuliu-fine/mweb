@@ -1,6 +1,6 @@
 <template>
   <div class="charge">
-222
+{{this.$route.query}}
   </div>
 
 </template>
