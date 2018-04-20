@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="18px" viewBox="0 0 17 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>attention</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="8.5" cy="8.47058824" rx="8" ry="8.47058824"></ellipse>
+    </defs>
+    <g id="门店首页（自助式）-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-引导出示券" transform="translate(-90.000000, -71.000000)">
+            <g id="Group-7" transform="translate(-0.500000, 63.500000)">
+                <g id="attention" transform="translate(90.258789, 8.149219)">
+                    <g id="Oval-4">
+                        <use fill="#FD4B1A" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <ellipse stroke="#FFFFFF" stroke-width="1" cx="8.5" cy="8.47058824" rx="7.5" ry="7.97058824"></ellipse>
+                    </g>
+                    <rect id="Rectangle-10" fill="#FFFFFF" x="7.5" y="3.70588235" width="2" height="6.35294118"></rect>
+                    <rect id="Rectangle-10" fill="#FFFFFF" x="7.5" y="11.1176471" width="2" height="1.58823529"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

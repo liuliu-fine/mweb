@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="88px" height="31px" viewBox="0 0 88 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>代用币ico</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="12.6074219%" x2="50%" y2="78.4228516%" id="linearGradient-1">
+            <stop stop-color="#D2D0D3" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M33.0498306,5.89845938 L33.0498306,21.849997 C33.0498306,22.6503764 32.8141852,23.2551995 32.3428874,23.6644844 C31.8715896,24.0737694 31.3217505,24.2784087 30.6933534,24.2784087 L28.4971549,24.2784087 L28.4971549,3.62326638 L51.8520377,3.62326638 L51.8520377,21.849997 C51.8520377,22.6503764 51.6205265,23.2551995 51.1574971,23.6644844 C50.6944677,24.0737694 50.1487627,24.2784087 49.5203656,24.2784087 L45.1050716,24.2784087 L45.1050716,22.5321352 L46.8910332,22.5321352 C47.0894744,22.5321352 47.2631078,22.4502794 47.4119387,22.2865654 C47.5607696,22.1228515 47.6351839,21.9318547 47.6351839,21.7135694 L47.6351839,5.89845938 L33.0498306,5.89845938 Z" id="path-2"></path>
+        <filter x="-30.0%" y="-24.2%" width="159.9%" height="167.8%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FCD037" offset="0%"></stop>
+            <stop stop-color="#F7A319" offset="100%"></stop>
+        </linearGradient>
+        <path d="M38.0363187,9.33853441 L31.151756,3.22945699 L34.6162423,0.276029848 L40.4226465,8.6974553 L46.2290508,0.276029848 L49.693537,3.22945699 L42.8089744,9.33853441 L48.5319809,9.33853441 L48.5319809,11.4374209 L42.8077449,11.4374209 L42.8077449,15.635194 L48.5319809,15.635194 L48.5319809,17.7340805 L42.8077449,17.7340805 L42.8077449,24.5554618 L38.0375482,24.5554618 L38.0375482,17.7340805 L32.3133122,17.7340805 L32.3133122,15.635194 L38.0375482,15.635194 L38.0375482,11.4374209 L32.3133122,11.4374209 L32.3133122,9.33853441 L38.0363187,9.33853441 Z" id="path-5"></path>
+        <filter x="-27.2%" y="-16.3%" width="154.4%" height="140.7%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M14.042447,9.59669745 L8.66840138,9.59669745 L8.66840138,7.82313833 L13.1726626,7.82313833 L10.939015,3.26855456 L15.4535291,3.26855456 L17.692547,7.82313833 L20.0539068,7.82313833 L19.3593661,5.72215291 L23.4521949,5.72215291 L24.1467355,7.82313833 L25.5110118,7.82313833 L25.5110118,9.59669745 L18.5644226,9.59669745 L25.7953155,24.3056943 L21.2559963,24.3056943 L14.042447,9.59669745 Z" id="path-7"></path>
+        <filter x="-40.9%" y="-23.8%" width="181.7%" height="166.5%" filterUnits="objectBoundingBox" id="filter-8">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M3.89248048,14.6822995 L0,14.6822995 L4.33897089,3.21398351 L8.70465487,3.21398351 L5.25322343,11.9411537 L8.10933433,11.9411537 L8.10933433,24.1965522 L3.89248048,24.1965522 L3.89248048,14.6822995 Z" id="path-9"></path>
+        <filter x="-80.4%" y="-23.8%" width="260.8%" height="166.7%" filterUnits="objectBoundingBox" id="filter-10">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M69.5570855,5.31496893 L69.5570855,9.06567916 L79.2558493,9.06567916 L79.2558493,20.9894536 C79.2558493,21.6806903 79.0408746,22.2627757 78.6109187,22.7357271 C78.1809629,23.2086786 77.6517943,23.4451508 77.0233973,23.4451508 L72.285638,23.4451508 L72.285638,21.6715917 L74.0964046,21.6715917 C74.3775296,21.6715917 74.6049067,21.5669982 74.7785427,21.3578081 C74.9521788,21.1486181 75.0389955,20.8894082 75.0389955,20.5801707 L75.0389955,10.8392383 L69.5570855,10.8392383 L69.5570855,24.3056943 L65.3650366,24.3056943 L65.3650366,10.8392383 L59.8831266,10.8392383 L59.8831266,23.4451508 L55.6662728,23.4451508 L55.6662728,9.06567916 L65.3650366,9.06567916 L65.3650366,5.31496893 L55.1949773,5.31496893 L55.1949773,3.54140981 L79.7271448,3.54140981 L79.7271448,5.31496893 L69.5570855,5.31496893 Z" id="path-11"></path>
+        <filter x="-28.5%" y="-24.1%" width="157.1%" height="167.4%" filterUnits="objectBoundingBox" id="filter-12">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="彩蛋计划-V3.1（满额即开）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.-彩蛋计划--首页未购买-活动主页" transform="translate(-198.000000, -300.000000)">
+            <g id="1" transform="translate(27.000000, 288.000000)">
+                <g id="代用币ico" transform="translate(175.000000, 13.000000)">
+                    <g id="代用币">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                    </g>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                        <use fill="url(#linearGradient-4)" fill-rule="evenodd" xlink:href="#path-5"></use>
+                    </g>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+                        <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-7"></use>
+                    </g>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-10)" xlink:href="#path-9"></use>
+                        <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-9"></use>
+                    </g>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11"></use>
+                        <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-11"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

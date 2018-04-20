@@ -43,5 +43,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     ```
     which git
     ```
+###查看log
+ ```
+ssh:47.96.190.4
+tail -f /alidata/www/mws/logs/catalina.out 
+ ```
+
 
 

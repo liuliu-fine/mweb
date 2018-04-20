@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="354px" height="330px" viewBox="0 0 354 330" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="100%" x2="0%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#D4C786" offset="0%"></stop>
+            <stop stop-color="#F2E0AA" offset="100%"></stop>
+        </linearGradient>
+        <path d="M3,0.5 L351,0.5 C352.656854,0.5 354,1.84314575 354,3.5 L354,327.5 C354,329.156854 352.656854,330.5 351,330.5 L3,330.5 C1.34314575,330.5 2.02906125e-16,329.156854 0,327.5 L0,3.5 C-2.02906125e-16,1.84314575 1.34314575,0.5 3,0.5 Z" id="path-2"></path>
+        <linearGradient x1="66.5692794%" y1="0%" x2="35.4225852%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#DFCE91" offset="0%"></stop>
+            <stop stop-color="#E6D59D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="66.5692794%" y1="0%" x2="3.88386461%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#E9D99F" offset="0%"></stop>
+            <stop stop-color="#ECDAA2" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="2.-助力人扫canvas后（有手机号领取成功）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-11.000000, -817.000000)">
+        <g id="Group-29" transform="translate(11.000000, 816.500000)">
+            <g id="bg">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="Rectangle-2" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <polygon id="Rectangle-5" fill="url(#linearGradient-4)" mask="url(#mask-3)" points="311 0 433 0 433 331 151 331"></polygon>
+                <polygon id="Rectangle-5" fill="url(#linearGradient-5)" mask="url(#mask-3)" points="221 0 235.5 0 75.5 331 61 331"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

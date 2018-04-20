@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="63px" height="43px" viewBox="0 0 63 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>cheap price</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="28.3940874 31.8148601 21.2938601 36.2464188 18.7080177 30.2008944 8.99590567 31.8310548 11.6173225 25.791458 1.89567836 24.18342 9.02194792 19.7680559 1.89567836 15.3526919 11.6173225 13.7446538 8.99590567 7.70505707 18.7080177 9.33521749 21.2938601 3.28969304 28.3940874 7.72125176 35.4943148 3.28969304 38.0801572 9.33521749 47.1605263 7.69402996 45.1708524 13.7446538 54.8924965 15.3526919 47.766227 19.7680559 54.8924965 24.18342 45.1708524 25.791458 47.7922692 31.8310548 38.0801572 30.2008944 35.4943148 36.2464188"></polygon>
+        <filter x="-14.2%" y="-16.7%" width="128.3%" height="145.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.835294118   0 0 0 0 0.0666666667   0 0 0 0 0.0431372549  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="28.3940444 29.9144073 21.2938171 34.3459661 18.7079746 28.3004416 7.68826835 32.4355194 11.6172794 23.8910053 0.599068143 24.1561417 9.02190485 17.8676032 0.610095256 14.6936707 11.6172794 11.8442011 8.0976437 6.91141875 18.7079746 7.43476472 21.2938171 1.38924027 28.3940444 5.82079899 35.4942717 1.38924027 38.0801141 7.43476472 48.5458364 6.66344678 45.1708093 11.8442011 56.6151416 15.019457 47.7661839 17.8676032 56.7546008 24.2112772 45.1708093 23.8910053 49.0116035 32.4796279 38.0801141 28.3004416 35.4942717 34.3459661"></polygon>
+        <filter x="-12.5%" y="-15.2%" width="124.9%" height="142.5%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.835294118   0 0 0 0 0.0666666667   0 0 0 0 0.0431372549  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="在线砍价-A发起人" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="发起人-001-自砍第一刀" transform="translate(-273.000000, -459.000000)">
+            <g id="Group-22" transform="translate(12.000000, 182.000000)">
+                <g id="Group-12" transform="translate(0.000000, 248.000000)">
+                    <g id="Group-11" transform="translate(263.392920, 29.052734)">
+                        <g id="cheap-price">
+                            <g id="Star" transform="translate(28.394087, 19.768056) rotate(-1.000000) translate(-28.394087, -19.768056) ">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                <use stroke="#FFFFFF" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            </g>
+                            <g id="Star" transform="translate(28.676834, 17.867603) rotate(-1.000000) translate(-28.676834, -17.867603) ">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

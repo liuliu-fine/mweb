@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="88px" height="22px" viewBox="0 0 88 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>02 标签背景@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-1.11022302e-14%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#F04A4F" offset="0%"></stop>
+            <stop stop-color="#F865B6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="新人有礼-V3.0-完全新人" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="新人有礼弹窗-02" transform="translate(-38.000000, -110.000000)" fill="url(#linearGradient-1)">
+            <g id="noticer" transform="translate(38.000000, 97.000000)">
+                <path d="M0,13 L83.7879833,13 C85.9971223,13 87.7879833,14.790861 87.7879833,17 C87.7879833,17.5710035 87.6657321,18.1353893 87.4294492,18.6552118 L81.0658128,32.6552118 C80.4167323,34.0831889 78.9929209,35 77.4243469,35 L0,35 L0,13 Z" id="02-标签背景"></path>
+            </g>
+        </g>
+    </g>
+</svg>

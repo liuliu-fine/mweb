@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="235px" height="329px" viewBox="0 0 235 329" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>红包BG</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="75.7439193%" id="linearGradient-1">
+            <stop stop-color="#FD1F2F" offset="0%"></stop>
+            <stop stop-color="#D3072D" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="235" height="328.509766" rx="20"></rect>
+        <linearGradient x1="86.1016757%" y1="14.367513%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FE5D2C" offset="0%"></stop>
+            <stop stop-color="#FE2F39" offset="100%"></stop>
+        </linearGradient>
+        <radialGradient cx="48.991406%" cy="32.2761821%" fx="48.991406%" fy="32.2761821%" r="63.0565653%" id="radialGradient-5">
+            <stop stop-color="#FC603E" offset="0%"></stop>
+            <stop stop-color="#FD1F1F" offset="100%"></stop>
+        </radialGradient>
+        <circle id="path-6" cx="117.5" cy="70.4980469" r="172"></circle>
+        <linearGradient x1="0%" y1="2.18054235%" x2="20.4789028%" y2="36.1852454%" id="linearGradient-7">
+            <stop stop-color="#FF9700" offset="0%"></stop>
+            <stop stop-color="#FE193D" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="113.59277%" y1="3.01734597%" x2="65.6265421%" y2="58.7395482%" id="linearGradient-8">
+            <stop stop-color="#FF9700" offset="0%"></stop>
+            <stop stop-color="#FE193D" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="凑单V3.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.弹窗红包先弹出" transform="translate(-71.000000, -162.000000)">
+            <g id="红包BG" transform="translate(71.000000, 162.000000)">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="Rectangle-16" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <path d="M-11,285 C18.3333333,305 52.3333333,314.666667 91,314 C149,313 213,273 236,167 C251.333333,96.3333333 261,145.333333 265,314 L236,370 L-8,374 L-11,285 Z" id="Path-2" fill="url(#linearGradient-4)" mask="url(#mask-3)"></path>
+                <path d="M42.0800781,363.683594 C100.346119,363.683594 147.580078,316.449635 147.580078,258.183594 C147.580078,199.917553 106.30315,252.039062 48.0371094,252.039062 C-10.2289317,252.039062 -63.4199219,199.917553 -63.4199219,258.183594 C-63.4199219,316.449635 -16.185963,363.683594 42.0800781,363.683594 Z" id="Oval" fill-opacity="0.5" fill="url(#linearGradient-4)" mask="url(#mask-3)" transform="translate(42.080078, 297.138094) scale(-1, 1) rotate(-49.000000) translate(-42.080078, -297.138094) "></path>
+                <g id="Oval-3" mask="url(#mask-3)">
+                    <use fill="url(#radialGradient-5)" fill-rule="evenodd" xlink:href="#path-6"></use>
+                    <circle stroke="#C8062A" stroke-width="3" cx="117.5" cy="70.4980469" r="173.5"></circle>
+                </g>
+                <path d="M-14.8120557,48.9952286 C32.493434,51.6603048 68.3667638,76.9785287 92.8079335,124.9499 C129.469688,196.906958 155.487707,248.875944 254.829236,218.893837 C321.056921,198.905765 321.056921,237.54937 254.829236,334.824651 L-23.0905164,338.822266 L-23.0905164,41 L-14.8120557,48.9952286 Z" id="Path-3" fill="url(#linearGradient-7)" opacity="0.601902174" mask="url(#mask-3)"></path>
+                <path d="M249.507368,48.9952286 C202.201878,51.6603048 166.328549,76.9785287 141.887379,124.9499 C105.225625,196.906958 79.2076052,248.875944 -20.1339233,218.893837 C-86.3616089,198.905765 -86.3616089,237.54937 -20.1339233,334.824651 L257.785829,338.822266 L257.785829,41 L249.507368,48.9952286 Z" id="Path-3" fill="url(#linearGradient-8)" opacity="0.601902174" mask="url(#mask-3)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

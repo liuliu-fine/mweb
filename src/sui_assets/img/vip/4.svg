@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="26px" viewBox="0 0 55 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.5" y="0" width="59" height="25"></rect>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#F5CFA9" offset="0%"></stop>
+            <stop stop-color="#E2BB8E" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-4" points="-5 0 47 0 54 13 47 25 -5 25"></polygon>
+    </defs>
+    <g id="会员列表页简版-w375" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4" transform="translate(0.466309, 0.166992)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Rectangle-6"></g>
+            <g id="Combined-Shape" mask="url(#mask-2)">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                <path stroke="url(#linearGradient-3)" stroke-width="2" d="M-4,1 L-4,24 L46.4256297,24 L52.8537093,12.9804349 L46.4027059,1 L-4,1 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

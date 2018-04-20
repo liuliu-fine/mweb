@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="211px" height="109px" viewBox="0 0 211 109" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>canvas Coupon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M199,58.4810552 L199,96.590287 C199,98.8190838 198.767936,99.6272994 198.332168,100.442114 C197.896401,101.256929 197.256929,101.896401 196.442114,102.332168 C195.627299,102.767936 194.819084,103 192.590287,103 L18.409713,103 C16.1809162,103 15.3727006,102.767936 14.5578857,102.332168 C13.7430709,101.896401 13.1035995,101.256929 12.6678318,100.442114 C12.232064,99.6272994 12,98.8190838 12,96.590287 L12,58.4810552 C12.1650208,58.4936085 12.331764,58.5 12.5,58.5 C16.0898509,58.5 19,55.5898509 19,52 C19,48.4101491 16.0898509,45.5 12.5,45.5 C12.331764,45.5 12.1650208,45.5063915 12,45.5189448 L12,17.409713 C12,15.1809162 12.232064,14.3727006 12.6678318,13.5578857 C13.1035995,12.7430709 13.7430709,12.1035995 14.5578857,11.6678318 C15.3727006,11.232064 16.1809162,11 18.409713,11 L192.590287,11 C194.819084,11 195.627299,11.232064 196.442114,11.6678318 C197.256929,12.1035995 197.896401,12.7430709 198.332168,13.5578857 C198.767936,14.3727006 199,15.1809162 199,17.409713 L199,45.5189448 C198.834979,45.5063915 198.668236,45.5 198.5,45.5 C194.910149,45.5 192,48.4101491 192,52 C192,55.5898509 194.910149,58.5 198.5,58.5 C198.668236,58.5 198.834979,58.4936085 199,58.4810552 Z" id="path-1"></path>
+        <filter x="-2.1%" y="-2.2%" width="104.3%" height="108.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="-1.18657228%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#DDC47D" offset="0%"></stop>
+            <stop stop-color="#D7B96A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="-1.18657228%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#DDC47D" offset="0%"></stop>
+            <stop stop-color="#EAD692" offset="15.2351474%"></stop>
+            <stop stop-color="#EFDEB9" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="11.关闭提交弹窗显露canvas-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-83.000000, -448.000000)">
+        <g id="Group-9" transform="translate(37.000000, 281.000000)">
+            <g id="Group-8" transform="translate(45.000000, 167.000000)">
+                <g id="canvas-Coupon" transform="translate(0.500000, 0.000000)">
+                    <path d="M1,60 L90.4526498,4.75813351 C100.134325,-1.2208262 112.365294,-1.20758951 122.034005,4.7923117 L211,60 L211,108 L1,108 L1,60 Z" id="Path" fill="#E4E4E4"></path>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Group-7" transform="translate(0.000000, 60.000000)">
+                        <polygon id="Path-2" fill="url(#linearGradient-3)" points="88.5 47.656776 199.083936 2.99878664 211.139424 0 211.139424 47.656776"></polygon>
+                        <polygon id="Path-2" fill="url(#linearGradient-3)" points="123.139424 47.656776 0.5 47.656776 0.5 0 12.555488 2.99878664"></polygon>
+                        <path d="M111.099849,29.5796629 L157.376899,48.0836906 L52.6010201,48.0836906 L100.071897,29.5360861 C103.620056,28.1497656 107.562757,28.1653451 111.099849,29.5796629 Z" id="Rectangle-5" fill="url(#linearGradient-4)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

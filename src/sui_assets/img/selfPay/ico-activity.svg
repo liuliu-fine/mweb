@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="33px" viewBox="0 0 32 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>ico-activity</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="30" height="30" rx="15"></rect>
+    </defs>
+    <g id="门店首页（自助式）-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-门店首页（买单状态-自助式）-2" transform="translate(-284.000000, -599.000000)">
+            <g id="ico-activity" transform="translate(285.000000, 600.100000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Rectangle-8">
+                    <use fill="#FFE8E8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#FFFFFF" stroke-width="1" x="-0.5" y="-0.5" width="31" height="31" rx="15.5"></rect>
+                </g>
+                <polygon id="Star" fill="#F75D5D" mask="url(#mask-2)" points="9.48439694 12.1679859 6.28371582 13.8506836 6.89499152 10.2866728 4.3055861 7.76262632 7.88405638 7.24264415 9.48439694 4 11.0847375 7.24264415 14.6632078 7.76262632 12.0738024 10.2866728 12.6850781 13.8506836"></polygon>
+                <polygon id="Star" fill="#F75D5D" mask="url(#mask-2)" points="20.129918 23.5247828 15.1055299 26.1662599 16.0651026 20.5715215 12.0002873 16.6093058 17.6177239 15.7930445 20.129918 10.7027834 22.642112 15.7930445 28.2595487 16.6093058 24.1947334 20.5715215 25.1543061 26.1662599"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

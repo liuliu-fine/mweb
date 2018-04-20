@@ -4,36 +4,23 @@ import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Payment from '@/components/Payment'
 import Charge from '@/components/Charge'
+import SelfPay from '@/components/SelfPay'
+import Error from '@/components/Error'
 
 Vue.use(Router)
 
 export default new Router({
+  // mode: 'history',
   routes: [
     {
       path: '/',
       name: 'Index',
       component: Index,
-      children: [
-        {
-          // 当 /user/:id/profile 匹配成功，
-          // UserProfile 会被渲染在 User 的 <router-view> 中
-          path: 'charge',
-          component: Charge
-        }
-      ]
     },
     {
       path: '/payment',
       name: 'Payment',
       component: Payment,
-      children: [
-        {
-          // 当 /user/:id/profile 匹配成功，
-          // UserProfile 会被渲染在 User 的 <router-view> 中
-          path: 'charge',
-          component: Charge
-        }
-      ]
     },
     {
       path: '/charge',
@@ -44,6 +31,16 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/selfPay',
+      name: 'SelfPay',
+      component: SelfPay
+    },
+    {
+      path: '/error',
+      name: 'Error',
+      component: Error
     }
   ]
 })

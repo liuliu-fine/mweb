@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="24px" viewBox="0 0 35 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>抵扣券图片</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="3.5" cy="3.5" r="3.5"></circle>
+        <circle id="path-2" cx="12.5" cy="9.5" r="3.5"></circle>
+    </defs>
+    <g id="H5优化-&gt;-领券、会员卡样式合集" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="截止5月券样式" transform="translate(-439.000000, -396.000000)">
+            <g id="抵扣券图片" transform="translate(439.000000, 396.000000)">
+                <path d="M15.1089692,21 L2.89103079,21 C1.29435857,21 0,19.6544098 0,17.991212 L0,3.00878799 C0,1.34708027 1.2943422,0 2.89103079,0 L25.1089692,0 C26.7056414,0 28,1.34559019 28,3.00878799 L28,7.99121201 L15.1089692,21 Z" id="Path" fill="#C7BCAA"></path>
+                <path d="M26,10 L26,3.00878799 C26,2.44866874 25.5712079,2 25.0454894,2 L2.95451061,2 C2.42942274,2 2,2.44948417 2,3.00878799 L2,17.991212 C2,18.5513313 2.42879206,19 2.95451061,19 L17,19 L26,10 Z" id="Rectangle" fill="#EAE0CF" fill-rule="nonzero"></path>
+                <path d="M19,7.73684211 L8.00390625,7.73684211" id="Line" stroke="#C7BCAA" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M15,13.2631579 L8,13.2631579" id="Line" stroke="#C7BCAA" stroke-width="2" stroke-linecap="square"></path>
+                <g id="Group-6" transform="translate(19.000000, 11.000000)">
+                    <path d="M13,2 L3,11" id="Line" stroke="#C7BCAA" stroke-width="2" stroke-linecap="square"></path>
+                    <g id="Oval-2">
+                        <use fill="#EAE0CF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <circle stroke="#C7BCAA" stroke-width="2" cx="3.5" cy="3.5" r="2.5"></circle>
+                    </g>
+                    <g id="Oval-2">
+                        <use fill="#EAE0CF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        <circle stroke="#C7BCAA" stroke-width="2" cx="12.5" cy="9.5" r="2.5"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

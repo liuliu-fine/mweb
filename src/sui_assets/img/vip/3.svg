@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="217px" height="26px" viewBox="0 0 217 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="47.686852%" cy="-11.8828125%" fx="47.686852%" fy="-11.8828125%" r="260.696098%" gradientTransform="translate(0.476869,-0.118828),scale(0.115207,1.000000),rotate(-109.292037),scale(1.000000,2.158002),translate(-0.476869,0.118828)" id="radialGradient-1">
+            <stop stop-color="#F8D2AD" offset="0%"></stop>
+            <stop stop-color="#C8A06B" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="会员列表页简版-w375" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3" transform="translate(0.000000, 0.859375)" fill="url(#radialGradient-1)">
+            <path d="M0,0 L217,0 L217,0 L217,0 C217,13.8071187 205.807119,25 192,25 L25,25 L25,25 C11.1928813,25 1.69088438e-15,13.8071187 0,3.061617e-15 L0,0 Z" id="Rectangle-5"></path>
+        </g>
+    </g>
+</svg>

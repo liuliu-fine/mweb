@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="43px" height="48px" viewBox="0 0 43 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="有智能推荐" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-308.000000, -90.000000)">
+        <g id="Group" transform="translate(191.500000, 90.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M116.739666,8.42494773 L117.500191,9.07425572 C121.844618,3.98568791 128.178534,1 135,1 C147.702549,1 158,11.2974508 158,24 C158,36.7025492 147.702549,47 135,47 C130.650938,47 126.482391,45.7919095 122.870482,43.5454701 L122.342345,44.394629 C126.016872,46.6800136 130.354286,48 135,48 C148.254834,48 159,37.254834 159,24 C159,10.745166 148.254834,0 135,0 C127.689075,0 121.141656,3.26895708 116.739666,8.42494773 Z" id="circle"></path>
+        </g>
+    </g>
+</svg>

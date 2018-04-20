@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="19px" viewBox="0 0 24 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>如何使用</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="在线砍价-A发起人" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="购买订单页面-copy" transform="translate(-23.000000, -284.000000)">
+            <g id="如何使用" transform="translate(24.000000, 284.000000)">
+                <circle id="Oval-12" stroke="#000000" fill="#FFFFFF" cx="8.5" cy="9.5" r="8.5"></circle>
+                <path d="M15,14.7053686 L19.4803651,18.501097 L19.4803651,18.501097 C20.4026086,19.2824141 21.7836175,19.1681707 22.5649346,18.2459272 C22.5750382,18.2340012 22.5850137,18.2219673 22.5948595,18.2098276 L22.5948595,18.2098276 L22.5948595,18.2098276 C23.252524,17.3989366 23.1283094,16.2084372 22.3174184,15.5507728 C22.2355983,15.4844134 22.1483745,15.4250095 22.0566579,15.3731815 L16.0873696,12 L15,14.7053686 Z" id="Line-2" fill="#000000"></path>
+                <text id="？" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#000000">
+                    <tspan x="5" y="15">？</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

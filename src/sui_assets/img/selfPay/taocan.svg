@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="323px" height="32px" viewBox="0 0 323 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>选择特价 深蓝</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-1">
+            <stop stop-color="#00BDFF" offset="0%"></stop>
+            <stop stop-color="#009EFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#009FFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#009EFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M178.047992,26 C176.085291,29.0102093 172.688477,31 168.826923,31 L154.173077,31 C150.311523,31 146.914709,29.0102093 144.952008,26 L26,26 C11.6405965,26 1.75851975e-15,14.3594035 0,-1.24344979e-14 L323,-1.24344979e-14 C323,14.3594035 311.359403,26 297,26 L178.047992,26 Z" id="path-3"></path>
+        <linearGradient x1="50%" y1="50%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#00B7FF" offset="0%"></stop>
+            <stop stop-color="#3DC5FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="首页轮播广告" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-门店首页-自助式" transform="translate(-25.000000, -261.000000)" fill-rule="nonzero">
+            <g id="选择特价-深蓝" transform="translate(25.000000, 261.500000)">
+                <g id="Combined-Shape">
+                    <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <path stroke="url(#linearGradient-2)" stroke-width="1" d="M322.495196,0.5 L0.504804128,0.5 C0.771211359,14.3524911 12.0837856,25.5 26,25.5 L145.222893,25.5 L145.370844,25.7269129 C147.297359,28.6816236 150.579869,30.5 154.173077,30.5 L168.826923,30.5 C172.420131,30.5 175.702641,28.6816236 177.629156,25.7269129 L177.777107,25.5 L297,25.5 C310.916214,25.5 322.228789,14.3524909 322.495196,0.5 Z"></path>
+                </g>
+                <path d="M145.173077,16 L177.826923,16 C177.826923,20.418278 174.245201,24 169.826923,24 L153.173077,24 C148.754799,24 145.173077,20.418278 145.173077,16 Z" id="Rectangle-2" fill="url(#linearGradient-4)" transform="translate(161.500000, 20.000000) scale(-1, 1) rotate(-180.000000) translate(-161.500000, -20.000000) "></path>
+                <path d="M160.5,22 L160.5,19.5 C160.5,18.9477153 160.947715,18.5 161.5,18.5 C162.052285,18.5 162.5,18.9477153 162.5,19.5 L162.5,22 L165,22 C165.552285,22 166,22.4477153 166,23 C166,23.5522847 165.552285,24 165,24 L162.5,24 L162.5,26.5 C162.5,27.0522847 162.052285,27.5 161.5,27.5 C160.947715,27.5 160.5,27.0522847 160.5,26.5 L160.5,24 L158,24 C157.447715,24 157,23.5522847 157,23 C157,22.4477153 157.447715,22 158,22 L160.5,22 Z" id="Combined-Shape" fill="#077BD5"></path>
+            </g>
+        </g>
+    </g>
+</svg>

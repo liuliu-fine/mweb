@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="293px" height="356px" viewBox="0 0 293 356" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>vipFetchBg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="5.-仅领卡（点击后判断手机号）" transform="translate(-13.000000, -94.000000)" fill="#FFFFFF">
+            <g id="vipFetchBg" transform="translate(13.000000, 94.500000)">
+                <path d="M22,116 L25,116 L25,342.5 L256,342.5 L256,3.5 L25,3.5 L25,100 L22,100 L22,0 L260,0 L260,346 L22,346 L22,116 Z M0,111.5 L0,108.5 L19.8333333,108.5 L19.8333333,111.5 L0,111.5 Z M11.1666667,103 L11.1666667,100 L28.5,100 L28.5,103 L11.1666667,103 Z" id="Combined-Shape"></path>
+                <path d="M54.5,125.5 L57.5,125.5 L57.5,352 L288.5,352 L288.5,13 L57.5,13 L57.5,109.5 L54.5,109.5 L54.5,9.5 L292.5,9.5 L292.5,355.5 L54.5,355.5 L54.5,125.5 Z M32.5,121 L32.5,118 L52.3333333,118 L52.3333333,121 L32.5,121 Z M43.6666667,112.5 L43.6666667,109.5 L61,109.5 L61,112.5 L43.6666667,112.5 Z" id="Combined-Shape" transform="translate(162.500000, 182.500000) scale(-1, -1) translate(-162.500000, -182.500000) "></path>
+                <rect id="Rectangle-14" x="32.5" y="9.5" width="227" height="336"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

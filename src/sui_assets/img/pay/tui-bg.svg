@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="157px" viewBox="0 0 375 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#0186FF" offset="0%"></stop>
+            <stop stop-color="#00A8FF" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="0 0 375 0 375 157 0 157"></polygon>
+        <linearGradient x1="36.4202297%" y1="9.49850684%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#0F01FF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="有智能推荐" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, -57.000000)">
+        <g id="bg" transform="translate(0.000000, 57.000000)">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Rectangle-6" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            <path d="M250.550612,-30.8492424 L274.007389,-30.8492424 L274.007389,223.471609 L250.550612,223.471609 L250.550612,-30.8492424 Z M282.64936,-30.8492424 L323.390079,-30.8492424 L323.390079,223.471609 L282.64936,223.471609 L282.64936,-30.8492424 Z M329.562915,-30.8492424 L335.735751,-30.8492424 L335.735751,223.471609 L329.562915,223.471609 L329.562915,-30.8492424 Z" id="Combined-Shape" fill="url(#linearGradient-4)" opacity="0.1" mask="url(#mask-3)" transform="translate(293.143182, 96.311183) rotate(45.000000) translate(-293.143182, -96.311183) "></path>
+        </g>
+    </g>
+</svg>
