@@ -3,9 +3,12 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Payment from '@/components/Payment'
-import Charge from '@/components/Charge'
-import SelfPay from '@/components/SelfPay'
 import Error from '@/components/Error'
+import Test from '@/components/Test'
+
+const  Charge = r => require.ensure( [], () => r (require('@/components/Charge')))
+const  More = r => require.ensure( [], () => r (require('@/components/More')))
+const  User = r => require.ensure( [], () => r (require('@/components/User')))
 
 Vue.use(Router)
 
@@ -32,15 +35,30 @@ export default new Router({
       name: 'Login',
       component: Login
     },
+    // {
+    //   path: '/selfPay',
+    //   name: 'SelfPay',
+    //   component: SelfPay
+    // },
     {
-      path: '/selfPay',
-      name: 'SelfPay',
-      component: SelfPay
+      path: '/more',
+      name: 'More',
+      component: More
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: User
     },
     {
       path: '/error',
       name: 'Error',
       component: Error
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     }
   ]
 })

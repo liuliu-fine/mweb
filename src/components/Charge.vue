@@ -103,8 +103,7 @@
     },
     methods: {
       submitFn () {
-        _self = this;
-        $.showIndicator();
+        let _self = this;
         let para = {
           activityId: _self.data.activity[_self.key].activityId,
           ruleTupleId: _self.data.activity[_self.key].ruleTupleId,
@@ -118,37 +117,34 @@
         this.$http.post("/benefit/recharge/guest/" + this.$route.query.id, para).then(response => {
           if (response.body.code != 200) {
             if (response.body.code == 405017) {
-              var re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
+              let re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
               if (re) {
                 ajaxUrl("upgrade.html");
                 return;
               }
             } else {
-              alert(data.message);
+              alert(response.body.message);
             }
-            $.hideIndicator();
             return;
           }
           let order_id = response.body.result.orderId;
-          $.fn.cookie("order_id", order_id);
+          _self.$cookie.set("order_id", order_id);
           if (response.body.result.url) {
             location.href = response.body.result.url;
             return;
           }
           switch (_self.payment.payMode) {
             case "1005":
-              var js = response.body.result.js;
-              var pay = response.body.result.pay;
+              let js = response.body.result.js;
+              let pay = response.body.result.pay;
               pay.success = function () {
                 earnCheck(order_id);
               };
               pay.cancel = function () {
                 cancelPay();
-                $.hideIndicator();
               };
               pay.fail = function (res) {
                 cancelPay();
-                $.hideIndicator();
                 alert("支付失败");
               };
               js.debug = false;
@@ -170,7 +166,6 @@
                 if (result.resultCode == "9000") {
                   earnCheck(order_id);
                 }
-                $.hideIndicator();
               });
               break;
           }
@@ -180,6 +175,6 @@
   }
 </script>
 
-<style lang="sass" rel="stylesheet/scss" type="text/css" scoped>
+<style lang="scss" rel="stylesheet/scss" type="text/css" scoped>
   @import "../sui_assets/scss/charge.scss";
 </style>

@@ -1,0 +1,1024 @@
+.selfpay {
+  background: #DBE1E2;
+  height: -webkit-fill-available;
+  #cover {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .second-pay {
+    background: white;
+
+  }
+  .btn-green {
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 1rem;
+    border: 1px solid #FF392E;
+    background: #FF392E;
+    line-height: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  //old
+
+  .ellipsis {
+    color: rgb(130, 130, 130);
+    display: inline-block;
+    width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-inline-box;
+  }
+
+  .swiper-slide [class*=bg] {
+    height: 8rem;
+  }
+
+  .e-black {
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .swiper-slide .cbg:after {
+    content: "";
+    background: url(/sui_assets/img/tuijian.svg) no-repeat;
+    padding: 11px 31px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .float {
+    position: absolute;
+    top: 21px;
+    right: 20px;
+    width: 77px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    border: 1px solid #ffffff;
+  }
+  #cover.remove {
+    animation: scales .4s;
+    -webkit-animation: scales .4s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+  }
+  @keyframes scales {
+    0% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      transform-origin: 50% 68% 0;
+      -webkit-transform-origin: 50% 68% 0;
+    }
+  }
+
+  @-webkit-keyframes scales {
+    0% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      transform-origin: 50% 68% 0;
+      -webkit-transform-origin: 50% 68% 0;
+    }
+  }
+
+  @-moz-keyframes scales {
+    0% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      transform-origin: 50% 68% 0;
+      -webkit-transform-origin: 50% 68% 0;
+    }
+  }
+
+  @-ms-keyframes scales {
+    0% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      transform-origin: 50% 68% 0;
+      -webkit-transform-origin: 50% 68% 0;
+    }
+  }
+
+  @-o-keyframes scales {
+    0% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+      transform-origin: 50% 68% 0;
+      -webkit-transform-origin: 50% 68% 0;
+    }
+  }
+
+  .over-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10352;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: .7rem .8rem .9rem .6rem;
+    box-sizing: border-box;
+    .coupons-item {
+      width: 70%;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      padding-bottom: 1rem;
+      .coupon-item {
+        object-fit: contain;
+        background: url("/sui_assets/img/selfPay/bg-modal.png") 0 -1px no-repeat;
+        background-size: 100% auto;
+        .big-title {
+          font-size: 1rem;
+          line-height: 2.2;
+          padding: 2rem 0 .5rem;
+          color: #ffffff;
+          font-weight: bold;
+        }
+        .blue-border {
+          width: 112px;
+          border-radius: 3px;
+          border: solid 1px #1b8ff3;
+          margin: auto;
+          padding: 5px;
+          background: #ffffff;
+          color: #000000;
+          img{
+            margin: auto;
+          }
+        }
+        .coupons-detail {
+          font-size: .6rem;
+          padding: 1rem;
+          .a4001 + .item, .item:first-child {
+            flex-grow: 1;
+            -webkit-flex-grow: 1;
+          }
+          .item {
+            margin: .4rem;
+            clear: both;
+            text-align: left;
+            .left {
+              float: left;
+              width: 3rem;
+              text-align: right;
+              color: #aaa;
+            }
+             .right {
+              margin-left: 3.1rem;
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+    .md-close {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    .md-close:before {
+      content: "";
+      background: url(/sui_assets/img/pay/close-white.svg) center no-repeat;
+      padding: 16px;
+      left: 0;
+      right: 0;
+      width: 1px;
+      margin: auto;
+      position: absolute;
+      top: 1rem;
+      border: 1px solid #fff;
+      border-radius: 50%;
+    }
+  }
+
+  img + .over-content {
+    height: 93%;
+  }
+
+  img + .over-content .overlay-detail {
+    height: 81%;
+  }
+
+  .over-content {
+    background: #ffffff;
+    border-radius: 5px;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+
+  }
+
+  .m-bg {
+    background-image: url('/sui_assets/img/coupon/bg1.jpg');
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 7rem;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .m-bg .m-title {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0 .5rem;
+    height: 1.4rem;
+    line-height: 1.4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .m-content {
+    font-size: .5rem;
+    padding: .5rem 0 .3rem;
+  }
+
+  .m-detail {
+    font-size: .5rem;
+    color: #818181;
+    padding: .3rem 0 .7rem;
+  }
+
+  .amount {
+    font-size: .5rem;
+    padding-left: 4px;
+  }
+
+  .icon3 {
+    background: url("/sui_assets/img/selfPay/icons.svg") center no-repeat;
+    background-position: 0 -45px;
+    padding: 5px 10px;
+    margin-left: .2rem;
+    margin-right: .6rem;
+  }
+
+  .left-img {
+    width: 3.6rem;
+    height: 3rem;
+    margin: .4rem .5rem .6rem 0;
+    padding: 0;
+    float: left;
+  }
+
+  .left-img img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .d-detail {
+    padding: .4rem 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .reduce {
+    background: url("/sui_assets/img/plusicon.svg") center no-repeat;
+    background-position: 0 3px;
+    padding: 7px 12px;
+    background-size: 23px;
+  }
+
+  .plus {
+    background: url(/sui_assets/img/plusicon.svg) center no-repeat;
+    padding: 6px 12px;
+    background-position: 0 -32px;
+    display: inline;
+    background-size: 23px;
+  }
+
+  .current {
+    padding: 0 .5rem;
+  }
+
+  .choose {
+    background: #000000;
+    width: 4rem;
+    float: left;
+    height: 100%;
+    color: #ffffff;
+    border-radius: 5px;
+    line-height: 2.2rem;
+    text-align: center;
+    font-size: .8rem;
+    position: relative;
+  }
+
+  .choose .number {
+    position: absolute;
+    top: -.4rem;
+    right: -.5rem;
+    border-radius: 50%;
+    background: #e75040;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  .number:empty {
+    display: none;
+  }
+
+  .check {
+    background: #ff4d63;
+    border-radius: 5px;
+    line-height: 2.2rem;
+    text-align: center;
+    margin-left: 4.8rem;
+    font-size: .8rem;
+    color: #ffffff;
+    height: 100%;
+  }
+
+  .dish-item {
+    clear: both;
+  }
+  .overlay-title {
+    font-size: .8rem;
+    padding: 1rem 0 .8rem;
+  }
+
+  .overlay-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: .5rem .5rem;
+    background: #ffffff;
+    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.11);
+  }
+
+  .overlay-detail {
+    height: 86%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+  }
+
+  .border-round {
+    color: #5b5b5b;
+    font-size: .6rem;
+    padding-bottom: .5rem;
+  }
+
+  .border-round:before {
+    content: "";
+    background: #5b5b5b;
+    width: 4rem;
+    height: 1px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 .5rem;
+  }
+
+  .border-round:after {
+    content: "";
+    background: #5b5b5b;
+    width: 4rem;
+    height: 1px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 .5rem;
+  }
+
+  .dish-item.active {
+    background: #e8f8ff;
+  }
+
+  .dish-item, .meal-item {
+    padding: 0 2.2rem;
+    text-align: left;
+    overflow: auto;
+  }
+
+  .overlay-title .close:before {
+    content: "";
+    float: right;
+    background: url(/sui_assets/img/selfPay/close.svg) center no-repeat;
+    padding: 17px;
+    position: absolute;
+    top: .1rem;
+    right: .5rem;
+  }
+
+  .modal-overlay-visible {
+    z-index: 10370;
+  }
+
+  .addon2 {
+    border-radius: 3px;
+    background: rgba(255, 255, 255, .2);
+    color: white;
+    font-size: .5rem;
+    line-height: 1.1rem;
+    width: 5rem;
+    text-align: center;
+    position: absolute;
+    right: .3rem;
+    top: .3rem;
+  }
+
+  .text-orange {
+    color: #e75040;
+  }
+
+  .meal-pic {
+    background: url("/sui_assets/img/selfPay/taocan1.svg") center no-repeat;
+    background-size: contain;
+    text-align: center;
+    height: 71px;
+    position: relative;
+  }
+
+  .meal-pic img {
+    width: 101px;
+    height: 50px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .check-meal-border {
+    background: url("/sui_assets/img/selfPay/taocan.svg?v=2") center no-repeat;
+    background-size: contain;
+    min-height: 32px;
+    color: #ffffff;
+    font-size: .55rem;
+    text-align: center;
+    line-height: 2.2;
+  }
+
+  .label1 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.5rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: .45rem;
+    color: black;
+    width: 42px;
+    margin: auto;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+  }
+
+  .i-flex.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 55px;
+    background-color: rgba(250, 250, 250, 0.9);
+    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.11);
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 2;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    align-items: center;
+    .avatar {
+      display: block;
+      margin: 0 auto;
+      border-radius: 50%;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+    span {
+      display: block;
+      padding: 15px;
+    }
+    .item {
+      flex-grow: 1;
+      -webkit-flex-grow: 1;
+      position: relative;
+      .icon1 {
+        background: url("/sui_assets/img/selfPay/ico-coupon.svg") center no-repeat;
+      }
+
+      .icon2 {
+        background: url("/sui_assets/img/selfPay/ico-sell.svg") center no-repeat;
+      }
+    }
+  }
+
+  .info {
+    background-image: linear-gradient(to bottom, #ff5400, #fc4430);
+    border: solid 1px #e44f3f;
+    color: #ffffff;
+    text-align: center;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    margin-bottom: 1.7rem;
+
+  }
+
+  .info:before {
+    content: "";
+    background: url("/sui_assets/img/selfPay/attention.svg") center no-repeat;
+    padding: 15px;
+  }
+
+  .indirect {
+    position: fixed;
+    left: 10%;
+    right: 10%;
+    top: 35%;
+    height: 134px;
+    background: rgba(0, 0, 0, .8);
+    z-index: 100000;
+    border-radius: 5px;
+    color: #ffffff;
+  }
+
+  .indirect div {
+    background: url('/sui_assets/img/selfPay/illus.svg') center no-repeat;
+    padding-top: 4rem;
+  }
+
+  .label3 {
+    background: red;
+    font-size: .5rem;
+    position: absolute;
+    top: -.3rem;
+    right: 1rem;
+    color: #fff;
+    height: .8rem;
+    line-height: .9rem;
+    padding: 0 8px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  .label2 {
+    padding: 10px;
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 110px;
+    height: 56px;
+  }
+
+  .new {
+    background: url(/sui_assets/img/selfPay/noticer.png) center bottom no-repeat;
+    background-size: 160px;
+    width: 160px;
+    margin-left: -17px;
+  }
+
+  .old {
+    background: url(/sui_assets/img/selfPay/old1.gif?v=1) center bottom no-repeat;
+    background-size: contain;
+    width: 125px;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+  .modal-inner {
+    width: 13.5rem;
+    position: fixed;
+    z-index: 11000;
+    left: 50%;
+    margin-left: -6.75rem;
+    margin-top: 0;
+    top: 14%;
+    text-align: center;
+    border-radius: .35rem;
+    animation: show-modal .5s;
+    -webkit-animation: show-modal .5s;
+    color: #3d4145;
+    .close {
+      position: absolute;
+      top: -.4rem;
+      right: -1rem;
+      z-index: 1;
+    }
+    .close:after {
+      content: "";
+      background: url(/sui_assets/img/vipModal/close.svg) center no-repeat;
+      padding: 1rem;
+    }
+  }
+
+  @keyframes show-modal {
+    from {
+      opacity: 0;
+      transform: translate(0, -150%);
+      -webkit-transform: translate(0, -150%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+      -webkit-transform: translate(0, 0);
+    }
+  }
+}
+
+.addVip {
+  input::-webkit-input-placeholder {
+    color: #A9A9A9;
+    font-size: 13px;
+  }
+  .overflow {
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: content-box;
+    max-height: 11rem;
+
+  }
+  .modal-inner:before {
+    content: "";
+    background: url(/sui_assets/img/addVip/slogan.png) center no-repeat;
+    left: 0;
+    right: 0;
+    top: -0.5rem;
+    padding: 24px 0;
+    text-align: left;
+    display: block;
+    position: absolute;
+    background-size: 50%;
+    z-index: 1;
+  }
+  .modal-content {
+    background: url(/sui_assets/img/addVip/bg.jpg) center no-repeat;
+    background-color: red;
+    padding-top: 30px;
+    position: relative;
+    margin-bottom: -1rem;
+    color: #ffffff;
+    border-radius: 5px;
+    padding-bottom: 7px;
+    .modal-button {
+      border-radius: 30px !important;
+      background: #ffdf30;
+      color: #640a00;
+      margin: auto 1rem;
+    }
+    .usable {
+      background-image: linear-gradient(to left, rgba(244, 40, 54, 0), #b91823 53%, rgba(244, 40, 54, 0));
+      color: #fff671;
+      font-size: 13px;
+      line-height: 3;
+    }
+    .usable:before {
+      content: "";
+      background: url(/sui_assets/img/addVip/hui.svg) center top no-repeat;
+      padding: 15px 23px;
+      vertical-align: middle;
+      display: inline-block;
+      margin-top: -10px;
+    }
+
+    .modal-phone {
+      border-radius: 5px;
+      background-color: #ACE2FF;
+      padding: 1rem;
+      position: relative;
+      margin: auto .35rem;
+      box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-phone input {
+      line-height: 2rem;
+      height: 2rem;
+      border: 1px solid #359BD1;
+      border-radius: 5px;
+      width: 100%;
+      padding: 0 .5rem;
+      font-size: .75rem;
+      color: #000000;
+      box-shadow: inset 0 1px 3px 0 #7CA1B5;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .modal-phone .input-text {
+      position: relative;
+      top: -1.5rem;
+      padding: .2rem .4rem;
+      font-size: .5rem;
+      margin: -.2rem .2rem -.5rem;
+      color: #fff;
+      box-shadow: 0 2px 0 0 #af0812;
+      background-color: #ff4955;
+      border: 1px solid #b41214;
+      border-radius: 3px;
+      width: 70px;
+      float: right;
+    }
+
+    .modal-phone .v-button {
+      background-image: linear-gradient(to bottom, #FAD961, #F7BD1C);
+      padding: 0 .25rem;
+      height: 2.4rem;
+      font-size: .9rem;
+      line-height: 2.4rem;
+      text-align: center;
+      border-radius: 30px !important;
+      color: #640a00;
+      margin-top: 1rem;
+      font-weight: 700;
+    }
+    .v-item {
+      background: url(/sui_assets/img/addVip/coupon.svg) center top no-repeat;
+      color: #000000;
+      width: 266px;
+      /*width: 218px;*/
+      height: 74px;
+      font-size: .75rem;
+      display: flex;
+      -webkit-display: flex;
+      align-items: center;
+      margin: .7rem auto 0;
+      text-align: left;
+      font-weight: 600;
+      position: relative;
+      .grey {
+        color: #b5b5b5;
+        font-size: 10px;
+        font-weight: 500;
+      }
+      .left {
+        color: #ff2c2c;
+        font-size: 36px;
+        width: 95px;
+        text-align: center;
+        .dollar:before {
+          content: "￥";
+          font-size: 15px;
+        }
+      }
+      .coupon-icon {
+        background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;
+        background-size: 42px;
+      }
+      .right {
+        padding: 0 1.5rem 0 .6rem;
+        flex: 1;
+        -webkit-flex: 1;
+      }
+    }
+    .todayUsable:after {
+      content: "";
+      background: url(/sui_assets/img/addVip/tag.svg) center top no-repeat;
+      position: absolute;
+      padding: 32px 12px;
+      background-size: contain;
+      right: -10px;
+      top: 0;
+    }
+  }
+}
+
+.addVip1 {
+  padding-top: 4rem;
+  .modal-inner {
+    padding: 0;
+    .modal-content {
+      background: url("/sui_assets/img/addVip/02 bg@2x.png") center top no-repeat;
+      background-color: #e8ecf9;
+      background-size: contain;
+      /*padding: 1rem 2rem;*/
+      margin-bottom: 1rem;
+      .o-box {
+        background: url("/sui_assets/img/addVip/box1.svg") center top no-repeat;
+        background-size: contain;
+        font-size: 14px;
+        color: #312d48;
+        padding: 1.5rem 1rem 1rem;
+        .o-item {
+          background: url(/sui_assets/img/addVip/cupon@2x.png) center bottom no-repeat;
+          padding: .8rem 0.5rem;
+          height: 69px;
+          background-size: 100% 100%;
+          margin: .2rem 0;
+          color: #003a6a;
+          font-size: 15px;
+          position: relative;
+          font-weight: bold;
+          .grey {
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            right: 0;
+            font-weight: normal;
+          }
+        }
+      }
+      .o-box1 {
+        background: url("/sui_assets/img/addVip/box.svg") center top no-repeat;
+        background-size: contain;
+        text-align: left;
+        font-size: 14px;
+        color: #312d48;
+        padding: 1.5rem 1rem 1rem;
+        margin-top: 5px;
+        .o-item {
+          background: url(/sui_assets/img/addVip/txt-icon.svg) left .7rem no-repeat;
+          padding: .5rem 0 .5rem 1.4rem;
+          text-align: justify;
+        }
+      }
+      .grey {
+        color: #8caad3;
+        font-size: 10px;
+        padding-top: 2px;
+      }
+
+    }
+  }
+  .overflow {
+    max-height: 12rem;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: content-box;
+  }
+  .modal-button {
+    border-radius: 22.9px;
+    border: solid 2px #ffffff;
+    background: transparent;
+    color: #ffffff;
+    margin: 1rem;
+    padding: 0 .25rem;
+    height: 2.2rem;
+    font-size: .85rem;
+    line-height: 2.2rem;
+    display: block;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  .card-box {
+    display: flex;
+    min-height: 100px;
+    padding: .6rem .5rem .6rem 0;
+    .tag {
+      background: url("/sui_assets/img/addVip/label.svg") center left no-repeat;
+      background-size: contain;
+      line-height: 22px;
+      height: 22px;
+      width: 85px;
+      color: white;
+    }
+
+    .name {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(86deg, #f04a4f, #f865b6);
+      font-size: 1rem;
+      text-align: left;
+      padding: .8rem;
+    }
+    .item {
+      flex: 1;
+      width: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 5px;
+      height: 77px;
+      position: relative;
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin: 10px;
+        float: left;
+      }
+    }
+    .second:after {
+      content: "";
+      background: url(/sui_assets/img/addVip/card-shadow@2x.png) center no-repeat;
+      position: absolute;
+      height: 20px;
+      /* width: 100px; */
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      background-size: contain;
+    }
+
+  }
+  .addon {
+    border-top: dashed 1px #becee7;
+    background: url(/sui_assets/img/addVip/bottom.svg) center no-repeat;
+    height: 45px;
+  }
+  .big-title {
+    font-size: .8rem;
+    font-weight: bold;
+    color: #000000;
+  }
+}
+
+.bindPhone {
+  .modal-inner {
+    background: white;
+    padding: .75rem;
+    box-sizing: border-box;
+    .modal-title {
+      font-weight: 500;
+      font-size: .9rem;
+      text-align: center;
+    }
+  }
+  input {
+    line-height: 2rem;
+    height: 2.2rem;
+    border: 1px solid #ED1E37;
+    border-radius: 5px;
+    padding: 0 .5rem;
+    font-size: .75rem;
+  }
+  .input-text {
+    position: relative;
+    top: -1.5rem;
+    padding: .3rem .4rem;
+    font-size: .5rem;
+    margin: -.3rem .6rem;
+    border-left: 1px solid #ED1E37;
+    color: #ED1E37;
+    float: right;
+  }
+  .submit {
+    color: #fff;
+    border-radius: 5px;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    margin: 1rem .6rem 0.2rem;
+    border: 1px solid #ff392e;
+    background: #ff392e;
+    font-size: .8rem;
+  }
+}
+
+
+
+

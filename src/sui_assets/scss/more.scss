@@ -1,0 +1,313 @@
+.more-css {
+  background: white;
+
+  .card-grey {
+    background-color: #f0f9fc;
+    padding: 1px 10%;
+    .card-bg {
+      background-image: url(/sui_assets/img/card/bg.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: transparent;
+      height: 8.5rem;
+      margin: .5rem 0;
+      color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      position: relative;
+      .card-content {
+        padding: 15px;
+        text-shadow: 1px 1px rgba(0,0,0,.5);
+        font-weight: 600;
+        position: relative;
+        font-size: .7rem;
+        .avatar {
+          margin-right: 10px;
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+          vertical-align: middle;
+        }
+        .rule {
+          background: url('/sui_assets/img/coupon/rule.svg') no-repeat;
+          padding: 12px 36px;
+        }
+      }
+    }
+  }
+  .separate {
+    padding: .35rem;
+    background: #ebebeb;
+  }
+
+  .code{
+    margin: 0 .6rem;
+  }
+
+  .coupons {
+    transition: height 2s;
+    overflow: auto;
+    margin: .9rem 0;
+    clear: both;
+    height: auto;
+    padding-bottom: .2rem;
+    position: relative;
+    border-bottom: 1px solid #e1e1e1;
+    .set-title {
+      padding-left: .2rem;
+      .content-title {
+        text-overflow: ellipsis;
+        font-size: .8rem;
+        padding: .4rem 0 .6rem;
+        font-weight: 600;
+      }
+
+    }
+    .col-66 {
+      margin: 0 -4px 0 4px;
+      width: 70%;
+      .coupon-content {
+        box-shadow: 0 0 2rem #e1e1e1;
+        position: relative;
+        margin: 1rem 0;
+        .coupon-left {
+          padding: .5rem .5rem 0;
+          -webkit-box-flex: 1.6;
+          -ms-flex: 1.6;
+          flex: 1.6;
+          -webkit-flex: 1.6;
+          width: 60%;
+          .text-grey {
+            margin-left: -1.2rem;
+            margin-top: 0;
+            margin-right: 5px;
+            text-align: left;
+            color: #828282;
+            font-size: .5rem;
+            padding-top: 5px;
+            li {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            li:before {
+              content: "●";
+              position: absolute;
+              left: 13px;
+            }
+          }
+        }
+        .coupon-right {
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          -webkit-flex: 1;
+          -ms-flex-item-align: baseline;
+          align-self: baseline;
+          -webkit-align-self: baseline;
+          position: relative;
+          background: #EEE8DE;
+          min-height: 6rem;
+          color: #b79f72;
+          padding-left: 10px;
+          background-clip: content-box;
+          border-left: 1px dashed;
+          text-align: center;
+          .current-amount {
+            color: #b79f72;
+            font-size: 1.2rem;
+            clear: both;
+            margin-top: 1.7rem;
+          }
+          .amount{
+            font-size: .6rem;
+            margin-top: 1px;
+          }
+        }
+      }
+      .card1 {
+        margin: .1rem 0 .5rem;
+        border-radius: 5px;
+        box-shadow: 0 0 2rem #e1e1e1;
+        padding-bottom: 40px;
+        .square {
+          background: #e1e1e1;
+          padding: 5px;
+          margin: 10px;
+          display: inline-block;
+        }
+      }
+      .list-block {
+        margin: 0 0 .8rem;
+        font-size: .7rem;
+        ul {
+          background: #fff;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          position: relative;
+          .item-content {
+            font-size: .7rem;
+            min-height: 2.5rem;
+          }
+        }
+      }
+    }
+    .col-33 {
+      width: 24%;
+    }
+    .coupon-button {
+      float: right!important;
+      position: absolute;
+      right: 0;
+      top: 40%;
+      text-align: center;
+      .btn-green-light {
+        height: 1.8rem;
+        line-height: 1.7rem;
+        background: #fff;
+        color: #5fa5a1;
+        border-radius: 3px;
+        margin: .5rem 0;
+        border: 1px solid;
+        font-size: .65rem;
+        padding: 0 10px;
+      }
+      .text-grey{
+        color: #828282;
+        font-size: .5rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .coupon-content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+    padding: .3rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    font-size: .7rem;
+  }
+  .content-title:before {
+    content: "";
+    font-size: .7rem;
+    color: white;
+    padding: .25rem .3rem;
+    margin-right: .3rem;
+  }
+  .content-desc {
+    padding-left: .3rem;
+    margin: .3rem 0 0;
+    border-left: 2px solid;
+    font-size: .75rem;
+  }
+  .DISCOUNT .content-desc {
+    border-color: #8FC0FF;
+  }
+
+  .SPECIAL_PRICE .content-desc {
+    border-color: #96D8C9;
+  }
+
+  .COUPON .content-desc {
+    border-color: #A3A1EF;
+  }
+
+  .POINT .content-desc {
+    border-color: #a1d0ef;
+  }
+
+  .SPECIAL_PRICE .content-title:before {
+    content: "特";
+    background: #96D8C9;
+  }
+
+  .COUPON .content-title:before {
+    content: "返";
+    background: #A3A1EF;
+  }
+
+  .DISCOUNT .content-title:before {
+    content: "折";
+    background: #8FC0FF;
+  }
+
+  .POINT .content-title:before {
+    content: "积";
+    background: #a1d0ef;
+  }
+
+  .SPENDAS .content-title:before {
+    content: "抵";
+    background: #7AD7C1;
+  }
+
+  .LIMITREDUCE .content-title:before {
+    content: "减";
+    background: #A3DA7A;
+  }
+
+  .MEMBERUPGRADE .content-title:before {
+    content: "会";
+    background: black;
+    color: #E1C951;
+  }
+
+  .CHARGE .content-title:before {
+    content: "充";
+    color: #E1C951;
+    background: black;
+  }
+
+  .EXCHANGE .content-title:before {
+    content: "兑";
+    color: #E1C951;
+    background: black;
+  }
+
+  .COUPONFREE .content-title:before {
+    content: "券";
+    color: #E1C951;
+    background: black;
+  }
+
+  .GAME .content-title:before {
+    content: "爆";
+    color: white;
+    background-color: #DC8122;
+  }
+
+  .GAME .content-title img {
+    position: absolute;
+    margin-top: -16px;
+    margin-left: -27px;
+    width: .8rem;
+  }
+
+  .SETMEAL .content-title:before {
+    content: "餐";
+    color: white;
+    background-color: #ffa400;
+  }
+
+  .SETMEAL .content-title img {
+    position: absolute;
+    margin-top: -16px;
+    margin-left: -27px;
+    width: .8rem;
+  }
+
+
+}

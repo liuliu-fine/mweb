@@ -1,3 +1,4 @@
+
 let version,ua = window.navigator.userAgent.toLowerCase();
 
 if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -9,6 +10,6 @@ if (ua.match(/MicroMessenger/i) == 'micromessenger') {
 }
 
 export default {
-  version
+  version,
 }
 

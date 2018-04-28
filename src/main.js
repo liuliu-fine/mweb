@@ -6,14 +6,22 @@ import router from './router'
 import VueResource from 'vue-resource'
 import Crypto from 'crypto';
 import VueCookie from 'vue-cookie'
+import Redirect from './utils/redirect'
 import Common from './utils/common'
-import wcKeyBoard from 'wc-keyboard'
-import 'wc-keyboard/style.css'
+
+import './components/toast/toast.css';
+import Toast from './components/toast/index'
+
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+
 // Tell Vue to use the plugin
 Vue.use(VueResource)
 Vue.use(VueCookie)
 Vue.use(Crypto)
-Vue.use(wcKeyBoard);
+Vue.use(Toast)
+Vue.use(VueAwesomeSwiper)
+Vue.use(Redirect)
 
 Vue.prototype.GLOBAL = Common
 Vue.config.productionTip = false
@@ -43,8 +51,26 @@ Vue.http.interceptors.push(function (request) {
     return a;
   }
 
-  let getGetUrl = function (u, j = {}) {
+  let getUrl = function (url, para = {}) {
+    url += "?";
+    const password = "037925fa578c4ed98885d7b28ade5462";
+    let j = JSON.parse(JSON.stringify(para));//param's json
+    j.timestamp = (new Date).getTime();
+    let key_json = Object.keys(j);
+    key_json.sort();
+    let encode_str = "";
+    for (let h in key_json) {
+      encode_str += key_json[h] + "=" + j[key_json[h]];
+      url += key_json[h] + "=" + j[key_json[h]] + "&";
+    }
+    let i = getmd5(encode_str + password), m = "";
+    for (let o = 0; o < i.length; o += 2) m += i.charAt(o);
+    for (let s = 1; s < i.length; s += 2) m += i.charAt(s);
+    return location.origin + url + "signature=" + m;
+  }
+  let getGetUrl = function (u, json = {}) {
     let e = [];
+    let j = JSON.parse(JSON.stringify(json));
     if (Object.keys(j).length) {
       for (let a in j) e.push(a)
     }
@@ -58,16 +84,22 @@ Vue.http.interceptors.push(function (request) {
     n += "signature=" + m;
     return location.origin + u + "?" + n;
   }
-  request.url = getGetUrl(request.url);
+  console.log(request);
+  request.url = getUrl(request.url, request.key);
   // return response callback
   return function (response) {
     // modify response
-    console.log(response);
     switch (response.status) {
       case 200:
         if (response.body.code == 403000) {
+          this.$cookie.set("url", location.href, {expires: '2m'});
           localStorage.setItem("url", location.href);
-          router.push({path: '/', query: this.$route.query});
+          if (this.$route.query.id) {
+            location.href = "index.html?id=" + this.$route.query.id;
+          } else {
+            location.href = "index.html?id=" + this.$route.query.guestid;
+          }
+          // router.push({path: '/', query: this.$route.query});
         }
         break;
       default:
