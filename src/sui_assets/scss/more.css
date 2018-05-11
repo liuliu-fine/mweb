@@ -1,21 +1,21 @@
 /*
 Error: Invalid GBK character "\xE2"
-        on line 95 of more.scss
+        on line 113 of more.scss
 
-90:               overflow: hidden;
-91:               text-overflow: ellipsis;
-92:               white-space: nowrap;
-93:             }
-94:             li:before {
-95:               content: "●";
-96:               position: absolute;
-97:               left: 13px;
-98:             }
-99:           }
-100:         }
+108:                 white-space: nowrap;
+109:                 display: block;
+110:                 margin-left: 2rem;
+111:               }
+112:               li:before {
+113:                 content: "●";
+114:                 position: absolute;
+115:                 left: .8rem;
+116:               }
+117:             }
+118:           }
 
 Backtrace:
-more.scss:95
+more.scss:113
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE2\"\A         on line 95 of more.scss\A \A 90:               overflow: hidden;\A 91:               text-overflow: ellipsis;\A 92:               white-space: nowrap;\A 93:             }\A 94:             li:before {\A 95:               content: \"●\";\A 96:               position: absolute;\A 97:               left: 13px;\A 98:             }\A 99:           }\A 100:         }"; }
+  content: "Error: Invalid GBK character \"\xE2\"\A         on line 113 of more.scss\A \A 108:                 white-space: nowrap;\A 109:                 display: block;\A 110:                 margin-left: 2rem;\A 111:               }\A 112:               li:before {\A 113:                 content: \"●\";\A 114:                 position: absolute;\A 115:                 left: .8rem;\A 116:               }\A 117:             }\A 118:           }"; }

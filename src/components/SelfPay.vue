@@ -22,8 +22,8 @@
           <div class="second-pay" style="background: #ffffff">
             <div style="padding: .9rem 1.3rem">
               <div style="padding-bottom: .7rem">
-                <span style=" border: solid 1px #f3f3f3;display: inline-block;vertical-align: middle">
-                <img class="avatar" :src="init.logo" width="30" style="margin: 2px;border-radius: 0">
+                <span style="display: inline-block;vertical-align: middle">
+                <img class="avatar" :src="init.logo" width="30" style="margin: 2px;border: solid 1px #f3f3f3;padding: 2px">
                </span>
                 <span class="ellipsis">{{init.brandName}} （{{init.name}}）</span>
                 <span class="pull-right" style="line-height: 1.7rem" v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span>
@@ -72,7 +72,7 @@
           </div>
           <!---->
           <swiper :options="swiperOption" v-if="ads">
-            <swiper-slide v-for="(item,index) in ads">
+            <swiper-slide v-for="(item,index) in ads" :key="index">
               <div class="cbg" v-on:click="replaceUrl(item)"
                    :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
               </div>
@@ -179,7 +179,7 @@
                 下列优惠券可立即出示使用
               </div>
               <swiper :options="swiperOption1">
-                <swiper-slide v-for="(coupon,index) in coupons">
+                <swiper-slide v-for="(coupon,index) in coupons" :key="index">
                   <div class="coupons-item">
                     <div class="a4001" v-bind:class="'a'+coupon.state"
                          style="padding: 22px;position: absolute;top: -.1rem;left: 0"></div>
@@ -224,7 +224,7 @@
                     </div>
                   </div>
                 </swiper-slide>
-                <div class="swiper-pagination" slot="swiper-pagination1" id="swiper-pagination1"></div>
+                <div class="swiper-pagination" slot="swiper-pagination" id="swiper-pagination1"></div>
               </swiper>
               <div class="md-close" v-on:click="closeCouponModal"></div>
             </div>
@@ -274,7 +274,7 @@
             <div class="overflow">
               <div class="usable">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
               <div class="v-coupon" v-if="vip.coupons">
-                <div class="v-item" v-for="(coupon,index) in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
+                <div class="v-item" v-for="coupon in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
                   <div class="left" v-if="coupon.hasOwnProperty('amount')"><span class="dollar"></span>10</div>
                   <div class="left coupon-icon" v-else></div>
                   <div class="right">
@@ -326,6 +326,8 @@
   import Vue from 'vue'
   import 'swiper/dist/css/swiper.css'
   import wcKeyboard from './wcKeyboard/KeyboardInput.vue'
+  import VueAwesomeSwiper from 'vue-awesome-swiper'
+  Vue.use(VueAwesomeSwiper)
 
   export default {
     name: 'SelfPay',
@@ -340,7 +342,7 @@
         disk: {dish: 0, meal: 0},
         visible: {dish: false, coupon: false, couponModal: false, timer: 3, count: 4},
         post: {amount: '', nonParticationAmount: ''},
-        coupons: {},
+        coupons: [],
         init: {},
         socketObj: {},
         swiper: "",
@@ -348,13 +350,14 @@
         ad: "",
         vip: "",
         swiperOption: {
+          initialSlide :0,
+          loop: true,
+          speed: 400,
+          autoplay: true,
           pagination: {
             el: '#swiper-pagination',
             paginationClickable: true,
             spaceBetween: 30,
-            centeredSlides: true,
-            autoplay: 3000,
-            autoplayDisableOnInteraction: false
           }
         },
         swiperOption1: {
@@ -364,8 +367,6 @@
           },
           spaceBetween: 30,
           centeredSlides: true,
-          autoplay: 3000,
-          autoplayDisableOnInteraction: false
         },
         phone: ""
       }

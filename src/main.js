@@ -8,35 +8,32 @@ import Crypto from 'crypto';
 import VueCookie from 'vue-cookie'
 import Redirect from './utils/redirect'
 import Common from './utils/common'
+import 'vue2-animate/dist/vue2-animate.min.css';
 
 import './components/toast/toast.css';
 import Toast from './components/toast/index'
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-
 
 // Tell Vue to use the plugin
 Vue.use(VueResource)
 Vue.use(VueCookie)
 Vue.use(Crypto)
 Vue.use(Toast)
-Vue.use(VueAwesomeSwiper)
 Vue.use(Redirect)
 
 Vue.prototype.GLOBAL = Common
 Vue.config.productionTip = false
-// router.beforeEach((to, from, next) => {
-//   if (to.path == '/') {
-//     next();
-//     return;
-//   }
-//   if (document.cookie.split("token").length < 2) {
-//     next({path: '/', query: to.query});
-//     // next({name: 'Index',});
-//   } else {
-//     next();
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (document.cookie.split("token").length < 2) {
+    if (this.$route.query.id) {
+      location.href = "index.html?id=" + this.$route.query.id;
+    } else {
+      location.href = "index.html?id=" + this.$route.query.guestid;
+    }
+  } else {
+
+    next();
+  }
+})
 //rest request 请求加密处理
 Vue.http.interceptors.push(function (request) {
 
@@ -84,7 +81,6 @@ Vue.http.interceptors.push(function (request) {
     n += "signature=" + m;
     return location.origin + u + "?" + n;
   }
-  console.log(request);
   request.url = getUrl(request.url, request.key);
   // return response callback
   return function (response) {
@@ -99,7 +95,6 @@ Vue.http.interceptors.push(function (request) {
           } else {
             location.href = "index.html?id=" + this.$route.query.guestid;
           }
-          // router.push({path: '/', query: this.$route.query});
         }
         break;
       default:

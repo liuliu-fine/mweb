@@ -1,40 +1,71 @@
 <template>
-  <div class="hello">
-    <router-view></router-view>
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+  <div>
+    <v-scroll :on-refresh="onRefresh" :on-infinite="onInfinite">
+      <ul>
+        <li v-for="(item,index) in listdata" >{{item.name}}</li>
+        <li v-for="(item,index) in downdata" >{{item.name}}</li>
+      </ul>
+    </v-scroll>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import Scroll from './refresh/scroll';
+
+  export default{
+    data () {
+      return {
+        counter : 1, //默认已经显示出15条数据 count等于一是让从16条开始加载
+        num : 15,  // 一次显示多少条
+        pageStart : 0, // 开始页数
+        pageEnd : 0, // 结束页数
+        listdata: [], // 下拉更新数据存放数组
+        downdata: []  // 上拉更多的数据存放数组
+      }
+    },
+    mounted : function(){
+      this.getList();
+    },
+    methods: {
+      getList(){
+        let vm = this;
+        vm.$http.get('https://api.github.com/repos/typecho-fans/plugins/contents/').then((response) => {
+          vm.listdata = response.data.slice(0,15);
+        }, (response) => {
+          console.log('error');
+        });
+      },
+      onRefresh(done) {
+        this.getList();
+
+        done() // call done
+
+      },
+      onInfinite(done) {
+        let vm = this;
+        vm.$http.get('https://api.github.com/repos/typecho-fans/plugins/contents/').then((response) => {
+          vm.counter++;
+          vm.pageEnd = vm.num * vm.counter;
+          vm.pageStart = vm.pageEnd - vm.num;
+          let arr = response.data;
+          let i = vm.pageStart;
+          let end = vm.pageEnd;
+          for(; i<end; i++){
+            let obj ={};
+            obj["name"] = arr[i].name;
+            vm.downdata.push(obj);
+            if((i + 1) >= response.data.length){
+              this.$el.querySelector('.load-more').style.display = 'none';
+              return;
+            }
+          }
+          done() // call done
+        }, (response) => {
+          console.log('error');
+        });
+      }
+    },
+    components : {
+      'v-scroll': Scroll
     }
-  },
-  created(){
-    this.$toast.show({text:"请先填写不参与优惠项金额，如未消费此类项目，请输入0",position:'bottom'});
-
   }
-}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

@@ -1,8 +1,5 @@
 <template>
-  <transition name="bounce">
-    <div id="loading" v-if="loading">
-      Loading...
-    </div>
+  <transition name="slideLeft">
     <div class="charge" v-if="data">
       <div class="header">
         <div class="record" v-if="data.customerRelationId" onclick="ajaxUrl('remainder.html')">充值记录</div>
@@ -51,22 +48,20 @@
     name: 'Charge',
     data() {
       return {
-        loading:true,
         data: "",
         key: 0,
         payment: {},
         showModal: false
       }
     },
-    created () {
-      this.$http.get("/shop/" + this.$route.query.id + "/paymode", {"type": this.GLOBAL.version}).then(response => {
+    created() {
+      this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {"type": this.GLOBAL.version}).then(response => {
         if (response.body.code == 200) {
           this.payment = response.body.result;
         }
       });
-      this.$http.get("/activities/recharge/guest/" + this.$route.query.id).then(response => {
+      this.$http.get("/activities/recharge/guest/" + (this.$route.query.id || this.$route.query.guestid)).then(response => {
         if (response.body.code == 200) {
-          this.loading = false;
           let data = response.body;
           if (data.result.customerRelationId) {
             localStorage.setItem("relation_id", data.result.customerRelationId);
@@ -102,7 +97,7 @@
       });
     },
     methods: {
-      submitFn () {
+      submitFn() {
         let _self = this;
         let para = {
           activityId: _self.data.activity[_self.key].activityId,

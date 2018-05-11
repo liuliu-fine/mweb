@@ -36,6 +36,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     display: -webkit-inline-box;
+    font-size: .7rem;
   }
 
   .swiper-slide [class*=bg] {
@@ -636,11 +637,11 @@
   background: rgba(0, 0, 0, .7);
   z-index: 1;
   .modal-inner {
-    width: 13.5rem;
+    width: 15.5rem;
     position: fixed;
     z-index: 11000;
     left: 50%;
-    margin-left: -6.75rem;
+    margin-left: -7.75rem;
     margin-top: 0;
     top: 14%;
     text-align: center;
