@@ -12,6 +12,10 @@ const User = r => require.ensure([], () => r(require('@/components/User')))
 const SelfPay = r => require.ensure([], () => r(require('@/components/SelfPay')))
 const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
 const Exchange = r => require.ensure([], () => r(require('@/components/Exchange')))
+const Exchange1 = r => require.ensure([], () => r(require('@/components/Exchange1')))
+const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
+const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
+const Mall = r => require.ensure([], () => r(require('@/components/Mall')))
 
 Vue.use(Router)
 
@@ -61,9 +65,29 @@ export default new Router({
       component: Exchange
     },
     {
+      path: '/exchange1',
+      name: 'Exchange1',
+      component: Exchange1
+    },
+    {
       path: '/upgrade',
       name: 'Upgrade',
       component: Upgrade
+    },
+    {
+      path: '/grouponInfo',
+      name: 'GrouponInfo',
+      component: GrouponInfo
+    },
+    {
+      path: '/mall',
+      name: 'Mall',
+      component: Mall
+    },
+    {
+      path: '/groupon',
+      name: 'Groupon',
+      component: Groupon
     },
     {
       path: '/error',

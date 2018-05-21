@@ -23,7 +23,8 @@
             <div style="padding: .9rem 1.3rem">
               <div style="padding-bottom: .7rem">
                 <span style="display: inline-block;vertical-align: middle">
-                <img class="avatar" :src="init.logo" width="30" style="margin: 2px;border: solid 1px #f3f3f3;padding: 2px">
+                <img class="avatar" :src="init.logo" width="30"
+                     style="margin: 2px;border: solid 1px #f3f3f3;padding: 2px">
                </span>
                 <span class="ellipsis">{{init.brandName}} （{{init.name}}）</span>
                 <span class="pull-right" style="line-height: 1.7rem" v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span>
@@ -33,7 +34,7 @@
                            v-bind:val="post.amount"
                            v-bind:unabled="init.preCheckData?true:false"
                            placeholder="询问服务员后在此输入"
-                           label="消费金额"  @input="inputFn"/>
+                           label="消费金额" @input="inputFn"/>
             </div>
 
             <div v-if="init.nonPart" style="padding: .9rem 1.3rem;border-top: 1px solid #f4f4f4;font-size: .6rem">
@@ -42,11 +43,11 @@
               <!--<span id="none" class="checkbox" onclick="checkbox()"></span>-->
               <!--</div>-->
               <wc-keyboard
-                           inter="5"
-                           v-bind:val="post.nonParticationAmount"
-                           decimal="2" v-bind:unabled="init.preCheckData?true:false"
-                           v-bind:placeholder="init.nonPart"
-                           label="不参与优惠项" @input="nonPartsFn"/><!--
+                inter="5"
+                v-bind:val="post.nonParticationAmount"
+                decimal="2" v-bind:unabled="init.preCheckData?true:false"
+                v-bind:placeholder="init.nonPart"
+                label="不参与优惠项" @input="nonPartsFn"/><!--
               <input-val v-bind:val="post.nonParticationAmount" v-bind:label="'不参与优惠项'"
                          v-bind:placeholder="init.nonPart" @input="nonPartsFn"></input-val>-->
 
@@ -224,7 +225,7 @@
                     </div>
                   </div>
                 </swiper-slide>
-                <div class="swiper-pagination" slot="swiper-pagination" id="swiper-pagination1"></div>
+                <div class="swiper-pagination" slot="pagination" id="swiper-pagination1"></div>
               </swiper>
               <div class="md-close" v-on:click="closeCouponModal"></div>
             </div>
@@ -327,6 +328,7 @@
   import 'swiper/dist/css/swiper.css'
   import wcKeyboard from './wcKeyboard/KeyboardInput.vue'
   import VueAwesomeSwiper from 'vue-awesome-swiper'
+
   Vue.use(VueAwesomeSwiper)
 
   export default {
@@ -350,7 +352,7 @@
         ad: "",
         vip: "",
         swiperOption: {
-          initialSlide :0,
+          initialSlide: 0,
           loop: true,
           speed: 400,
           autoplay: true,
@@ -390,7 +392,6 @@
                 _self.loading = false;
                 return;
               }
-              console.log(_self.$route.query.id);
               this.$cookie.set(_self.$route.query.id + "cover", true, {"expires": '30m'});
               _self.ad = JSON.parse(JSON.stringify(_self.ads[i]));
               _self.ad.index = i;
@@ -419,12 +420,11 @@
         let data = response.body;
         if (data.code == 200) {
           document.title = (data.result.brandName + "(" + data.result.name + ")");
-
           _self.init = data.result;
           if (_self.init.preCheckData) _self.post = _self.init.preCheckData;
           if (data.result.order) {
             let re = confirm('您' + (data.result.order.tableNo ? ("在" + data.result.order.tableNo + "号桌") : "") + '有个买单未完成,取消？');
-            if(re){
+            if (re) {
               this.$http.post("/check/" + data.result.order.orderId + "/cancel", {}).then(response => {
                 let data1 = response.body;
                 if (data1.code != 200) {
@@ -532,45 +532,49 @@
           }
           return;
         }
+        this.$route.query.aid = item.activityId;
         switch (item.activityCategory) {
           //送券
           case '6004':
-            this.ajaxUrl('couponActivity.html?aid=' + item.activityId);
+            ajaxUrl('couponActivity.html?aid=' + item.activityId);
             break;
           //套餐
           case "6015":
-            this.ajaxUrl('mealActivity.html?aid=' + item.activityId);
-            break;
-
-          //砍价
-          case "6041":
-            this.ajaxUrl('grouponInfo.html?aid=' + item.activityId);
+            ajaxUrl('mealActivity.html?aid=' + item.activityId);
             break;
           //充值
           case "6002":
-            this.ajaxUrl('charge.html');
+            ajaxUrl('charge.html');
             break;
           //入会及升级
           case "6001":
-            this.ajaxUrl('upgrade.html?tid=' + item.activityId);
+            ajaxUrl('upgrade.html?tid=' + item.activityId);
             break;
           //积分兑换
           case "6003":
-            this.ajaxUrl('exchange.html');
+            ajaxUrl('exchange.html');
+            break;
+          //砍价
+          case "6041":
+            this.$router.push({path:"/grouponInfo",query:this.$route.query});
+
+            // location.href = '/grouponInfo.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           //评赏
           case "6050":
-            this.ajaxUrl('lottery.html');
+            location.href = '/lottery.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           //抽奖
           case "6051":
-            this.ajaxUrl('raffleActivity.html');
+            this.$router.push({path:"/more",query:this.$route.query})
+            // location.href = '/raffleActivity.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           default:
-            this.ajaxUrl('activity.html?aid=' + item.activityId);
+            ajaxUrl('activity.html?aid=' + item.activityId);
 
         }
       },
+
       textFn(obj) {
         let str = "";
         for (let i in obj) {

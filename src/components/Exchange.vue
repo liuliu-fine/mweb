@@ -9,16 +9,16 @@
     </div>
     <div class="content">
       <div v-for="activity in data.activity">
-        <div class="item">
+        <div class="item" :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.desUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}">
           <div class="remain" v-if="activity.remainCount!==undefined">{{activity.remainCount}}</div>
           <div class="addon">
             <div class="left" v-if="activity.type=='1020'">
               <div class="ellipsis bold">{{activity.name}}<span class="name">会员升级</span></div>
-              <div class="ellipsis text-xs">适用对象：{{activity.from}}</div>
+              <div class="ellipsis text-xs" v-if="activity.from">仅限：{{activity.from}}</div>
             </div>
             <div class="left" v-for="coupon in activity.coupons" v-else>
               <div class="ellipsis bold">￥{{coupon.amount}}<span class="name">{{coupon.name}}</span></div>
-              <div class="ellipsis text-xs">适用对象：{{activity.from}} {{coupon.useStrategy}}</div>
+              <div class="ellipsis text-xs"><span v-if="activity.from">仅限：{{activity.from}}</span> {{coupon.times}}</div>
             </div>
             <div class="right" v-on:click="submitFn(activity.activityId,activity.ruleTupleId,activity.usable)">{{activity.amount}}</div>
           </div>

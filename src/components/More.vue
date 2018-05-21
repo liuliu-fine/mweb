@@ -15,74 +15,76 @@
         <!--icon-->
       </div>
       <div class="code">
-        <div v-for="item in data.activities">
-          <div v-if="item.activityCategory=='6004'||item.activityCategory=='6007'" v-for="activity in item.activities"
-               class="padded"
-               :class="types[item.activityCategory]"
+        <div v-for="item in data.activities1">
+          <div v-if="item.activityCategory=='6004'||item.activityCategory=='6007'"
                v-on:click="ajaxUrl('couponActivity.html?aid='+ activity.activityId)">
-            <div class="set-title">
-              <div class="content-title">
-                <span class="text">{{activity.name}}</span>
+            <div v-for="activity in item.activities"
+                 class="padded"
+                 :class="types[item.activityCategory]">
+              <div class="set-title">
+                <div class="content-title">
+                  <span class="text">{{activity.name}}</span>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="set_coupon col-66">
-                <div class="coupon-content"
-                     :class="activity.strategy[0].coupons[0].category =='901'?'money-box':'good-box'">
-                  <div class="coupon-left">
-                    <div class="name">{{activity.strategy[0].coupons[0].name}}</div>
-                    <ul class="text-grey">
-                      <li>{{activity.strategy[0].coupons[0].effectTimes}}</li>
-                      <li>{{activity.strategy[0].coupons[0].useStrategy}}</li>
-                      <!--<li>到店出示给服务员即可获得测试礼品券</li>-->
-                    </ul>
-                  </div>
-                  <div class="coupon-right">
-                    <div class="limit-label" v-if="activity.strategy[0].remainCount !== undefined">{{"剩" +
-                      activity.strategy[0].remainCount + "份"}}
+              <div class="row">
+                <div class="set_coupon col-66">
+                  <div class="coupon-content"
+                       :class="activity.strategy[0].coupons[0].category =='901'?'money-box':'good-box'">
+                    <div class="coupon-left">
+                      <div class="name">{{activity.strategy[0].coupons[0].name}}</div>
+                      <ul class="text-grey">
+                        <li>{{activity.strategy[0].coupons[0].effectTimes}}</li>
+                        <li>{{activity.strategy[0].coupons[0].useStrategy}}</li>
+                        <!--<li>到店出示给服务员即可获得测试礼品券</li>-->
+                      </ul>
                     </div>
+                    <div class="coupon-right">
+                      <div class="limit-label" v-if="activity.strategy[0].remainCount !== undefined">{{"剩" +
+                        activity.strategy[0].remainCount + "份"}}
+                      </div>
 
-                    <div class="coupon-amount">
-                      <div v-if="activity.strategy[0].coupons[0].category =='901'">
-                        <div class="current-amount">
-                          <div class="text-gold">{{activity.strategy[0].coupons[0].value}}</div>
+                      <div class="coupon-amount">
+                        <div v-if="activity.strategy[0].coupons[0].category =='901'">
+                          <div class="current-amount">
+                            <div class="text-gold">{{activity.strategy[0].coupons[0].value}}</div>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        v-else-if="activity.strategy[0].coupons[0].category =='902'||activity.strategy[0].coupons[0].category =='9021'">
-                        <div class="current-amount">
-                          {{activity.strategy[0].coupons[0].currentAmount ? ("￥" +
-                          activity.strategy[0].coupons[0].currentAmount) : "免费"}}
+                        <div
+                          v-else-if="activity.strategy[0].coupons[0].category =='902'||activity.strategy[0].coupons[0].category =='9021'">
+                          <div class="current-amount">
+                            {{activity.strategy[0].coupons[0].currentAmount ? ("￥" +
+                            activity.strategy[0].coupons[0].currentAmount) : "免费"}}
+                          </div>
+                          <div class="amount" style="font-size: .6rem;margin-top: -2px">{{"￥" +
+                            activity.strategy[0].coupons[0].amount}}
+                          </div>
                         </div>
-                        <div class="amount" style="font-size: .6rem;margin-top: -2px">{{"￥" +
-                          activity.strategy[0].coupons[0].amount}}
+                        <div v-else-if="activity.strategy[0].coupons[0].category =='9011'">
+                          <div class="current-amount">
+                            <img src="/sui_assets/img/card/dikou.svg"
+                                 style="width: 2.2rem;margin: 0 -.5rem 0 0;display: inline">
+                          </div>
                         </div>
-                      </div>
-                      <div v-else-if="activity.strategy[0].coupons[0].category =='9011'">
-                        <div class="current-amount">
-                          <img src="/sui_assets/img/card/dikou.svg"
-                               style="width: 2.2rem;margin: 0 -.5rem 0 0;display: inline">
+                        <div
+                          v-else-if="activity.strategy[0].coupons[0].category =='903'||activity.strategy[0].coupons[0].category =='9031'">
+                          <div class="current-amount">
+                            {{activity.strategy[0].coupons[0].amount+'折'}}
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        v-else-if="activity.strategy[0].coupons[0].category =='903'||activity.strategy[0].coupons[0].category =='9031'">
-                        <div class="current-amount">
-                          {{activity.strategy[0].coupons[0].amount+'折'}}
+                        <div v-else class="current-amount">
+                          <img src="/sui_assets/img/card/coupon.svg"
+                               style="width: 2.2rem;margin: -1.1rem -.5rem 0 0;display: inline">
                         </div>
+                        <div class="amount" style="font-size: .6rem;margin-top: -2px"></div>
                       </div>
-                      <div v-else class="current-amount">
-                        <img src="/sui_assets/img/card/coupon.svg"
-                             style="width: 2.2rem;margin: -1.1rem -.5rem 0 0;display: inline">
-                      </div>
-                      <div class="amount" style="font-size: .6rem;margin-top: -2px"></div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="coupon-button col-33">
-                <button class="btn-green-light"><span v-if="item.activityCategory=='6004'">立即领取</span>
-                  <span v-else>买单即享</span></button>
-                <div class="text-grey text-center">{{activity.from}}</div>
+                <div class="coupon-button col-33">
+                  <button class="btn-green-light"><span v-if="item.activityCategory=='6004'">立即领取</span>
+                    <span v-else>买单即享</span></button>
+                  <div class="text-grey text-center">{{activity.from}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -94,9 +96,9 @@
                 <span class="text">{{item.activities[0].name}}</span>
               </div>
             </div>
-            <div class="row">
+            <div class="row" v-for="(activity,index) in item.activities">
 
-              <div class="set_coupon col-66" v-for="activity in item.activities">
+              <div class="set_coupon col-66">
                 <div class="card1">
                   <div class="charge-content" v-for="strategy in activity.strategy">
                     <div class="row no-gutter exchange">
@@ -132,8 +134,8 @@
                 <span class="text">{{item.activities[0].name}}</span>
               </div>
             </div>
-            <div class="row">
-              <div class="set_coupon col-66" v-for="activity in item.activities">
+            <div class="row"  v-for="activity in item.activities">
+              <div class="set_coupon col-66">
                 <div class="card1">
                   <div class="charge-content" v-for="strategy in activity.strategy">
                     <div class="row no-gutter">
@@ -273,8 +275,7 @@
           if (data.topActivity) {
             activities = [data.topActivity];
           }
-          data.activities = activities.concat(data.activeActivities || []).concat(data.checkActivities || []);
-          console.log(data.activities);
+          data.activities1 = activities.concat(data.activeActivities || []).concat(data.checkActivities || []);
           this.data = data;
         }
       })
