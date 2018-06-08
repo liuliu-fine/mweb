@@ -12,6 +12,10 @@ import 'vue2-animate/dist/vue2-animate.min.css';
 
 import './components/toast/toast.css';
 import Toast from './components/toast/index'
+import './components/bind/bind.css';
+import Bind from './components/bind/index'
+import './components/couponShow/coupon.css';
+import Coupon from './components/couponShow/index'
 
 // Tell Vue to use the plugin
 Vue.use(VueResource)
@@ -19,27 +23,28 @@ Vue.use(VueCookie)
 Vue.use(Crypto)
 Vue.use(Toast)
 Vue.use(Redirect)
+Vue.use(Bind)
+Vue.use(Coupon)
 
 Vue.prototype.GLOBAL = Common
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   if (document.cookie.split("token").length < 2) {
-    if (this.$route.query.id) {
-      location.href = "index.html?id=" + this.$route.query.id;
+    Vue.cookie.set("url", location.href, {expires: '2m'});
+    if (to.query.id) {
+      location.href = "index.html?id=" + to.query.id;
     } else {
-      location.href = "index.html?id=" + this.$route.query.guestid;
+      location.href = "index.html?guestid=" + to.query.guestid;
     }
   } else {
-
+    Vue.cookie.delete("url");
     next();
   }
 })
 //rest request 请求加密处理
 Vue.http.interceptors.push(function (request) {
-
   const t = "037925fa578c4ed98885d7b28ade5462";
   Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expires: 30, path: "/"});
-
   function getmd5(str) {
     let a;
     let md5 = Crypto.createHash("md5");
@@ -93,7 +98,7 @@ Vue.http.interceptors.push(function (request) {
           if (this.$route.query.id) {
             location.href = "index.html?id=" + this.$route.query.id;
           } else {
-            location.href = "index.html?id=" + this.$route.query.guestid;
+            location.href = "index.html?guestid=" + this.$route.query.guestid;
           }
         }
         break;

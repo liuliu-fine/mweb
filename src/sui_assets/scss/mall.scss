@@ -1,4 +1,5 @@
 .goods-list-wrapper {
+
   ul {
     margin: 0;
     padding: 0;
@@ -56,6 +57,10 @@
             font: inherit;
             font-size: 14px;
             margin-top: 10px;
+            font-weight: bold;
+          }
+          .time{
+            font-size: 12px;
           }
           .sale-info {
             position: absolute;

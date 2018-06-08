@@ -12,10 +12,11 @@ const User = r => require.ensure([], () => r(require('@/components/User')))
 const SelfPay = r => require.ensure([], () => r(require('@/components/SelfPay')))
 const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
 const Exchange = r => require.ensure([], () => r(require('@/components/Exchange')))
-const Exchange1 = r => require.ensure([], () => r(require('@/components/Exchange1')))
 const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
 const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
 const Mall = r => require.ensure([], () => r(require('@/components/Mall')))
+const MallDetail = r => require.ensure([], () => r(require('@/components/MallDetail')))
+const MallRecord = r => require.ensure([], () => r(require('@/components/MallRecord')))
 
 Vue.use(Router)
 
@@ -65,11 +66,6 @@ export default new Router({
       component: Exchange
     },
     {
-      path: '/exchange1',
-      name: 'Exchange1',
-      component: Exchange1
-    },
-    {
       path: '/upgrade',
       name: 'Upgrade',
       component: Upgrade
@@ -83,6 +79,16 @@ export default new Router({
       path: '/mall',
       name: 'Mall',
       component: Mall
+    },
+    {
+      path: '/mallDetail',
+      name: 'MallDetail',
+      component: MallDetail
+    },
+    {
+      path: '/mallRecord',
+      name: 'MallRecord',
+      component: MallRecord
     },
     {
       path: '/groupon',
