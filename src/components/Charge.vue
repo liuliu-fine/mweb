@@ -1,44 +1,44 @@
 <template>
-  <transition name="slideLeft">
-    <div class="charge" v-if="data">
-      <div class="header">
-        <div class="record" v-if="data.customerRelationId" onclick="ajaxUrl('remainder.html')">充值记录</div>
-        <div class="right" v-if="data.used" v-on:click="showModal=true"><span>?</span>使用规则</div>
-        <strong class="number">当前余额<span>￥{{data.charge}}</span></strong>
-        <div class="limit" v-if="data.used&&data.used[0].limit">{{data.used[0].limit[0]}}</div>
+  <div class="charge" v-if="data">
+    <div class="header">
+      <div class="record" v-if="data.customerRelationId"
+           v-on:click="ajaxUrl('remainder.html?rid='+ data.customerRelationId)">充值记录
       </div>
-      <div class="detail" v-if="data.activity&&data.activity.length">
-        <div class="box" v-for="(item,index) in data.activity" v-on:click="key=index">
-          <div class="left" v-bind:class="{'active': (key == index)}"></div>
-          <div class="right">
-            <span class="label" v-if="item.from&&item.from!='普通顾客'">{{item.from}}</span>
-            <span class="">{{item.amount}}元</span><span v-if="item.str"> 送{{item.str}}</span>
-            <div class="grey">{{item.times}}</div>
-          </div>
+      <div class="right" v-if="data.used" v-on:click="showModal=true"><span>?</span>使用规则</div>
+      <strong class="number">当前余额<span>￥{{data.charge}}</span></strong>
+      <div class="limit" v-if="data.used&&data.used[0].limit">{{data.used[0].limit[0]}}</div>
+    </div>
+    <div class="detail" v-if="data.activity&&data.activity.length">
+      <div class="box" v-for="(item,index) in data.activity" v-on:click="key=index">
+        <div class="left" v-bind:class="{'active': (key == index)}"></div>
+        <div class="right">
+          <span class="label" v-if="item.from&&item.from!='普通顾客'">{{item.from}}</span>
+          <span class="">{{item.amount}}元</span><span v-if="item.str"> 送{{item.str}}</span>
+          <div class="grey">{{item.times}}</div>
         </div>
-      </div>
-      <div class="submit" v-if="payment&&payment.payMode&&data.activity&&data.activity.length">
-        <div class="left">支付{{data.activity[key].amount}}元</div>
-        <div class="right" v-on:click="submitFn">确认充值</div>
-      </div>
-
-      <div class="gmodal" v-if="showModal">
-        <div class="g-modal-border" style="margin-top: 25%;">
-          <div class="text1">充值卡使用规则</div>
-          <ul>
-            <li v-if="data.used[0].time">{{data.used[0].time}}</li>
-            <li v-if="data.used[0].periods">{{data.used[0].periods}}</li>
-            <li v-if="data.used[0].shared">{{data.used[0].shared}}</li>
-            <li v-if="data.used[0].shops">{{data.used[0].shops}}</li>
-            <li v-if="data.used[0].nonParticipations">{{data.used[0].nonParticipations}}</li>
-            <li v-for="item in data.used[0].limit"><span>{{item}}</span></li>
-            <li>最终解释权归本店所有</li>
-          </ul>
-        </div>
-        <div class="close-white" v-on:click="showModal = false"></div>
       </div>
     </div>
-  </transition>
+    <div class="submit" v-if="payment&&payment.payMode&&data.activity&&data.activity.length">
+      <div class="left">支付{{data.activity[key].amount}}元</div>
+      <div class="right" v-on:click="submitFn">确认充值</div>
+    </div>
+
+    <div class="gmodal" v-if="showModal">
+      <div class="g-modal-border" style="margin-top: 25%;">
+        <div class="text1">充值卡使用规则</div>
+        <ul>
+          <li v-if="data.used[0].time">{{data.used[0].time}}</li>
+          <li v-if="data.used[0].periods">{{data.used[0].periods}}</li>
+          <li v-if="data.used[0].shared">{{data.used[0].shared}}</li>
+          <li v-if="data.used[0].shops">{{data.used[0].shops}}</li>
+          <li v-if="data.used[0].nonParticipations">{{data.used[0].nonParticipations}}</li>
+          <li v-for="item in data.used[0].limit"><span>{{item}}</span></li>
+          <li>最终解释权归本店所有</li>
+        </ul>
+      </div>
+      <div class="close-white" v-on:click="showModal = false"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -62,8 +62,8 @@
         if (response.body.code == 200) {
           let data = response.body;
           if (data.result.customerRelationId) {
-            localStorage.setItem("relation_id", data.result.customerRelationId);
             localStorage.setItem("charge", data.result.charge);
+            this.$cookie.set("charge", data.result.charge);
           }
           if (data.result.activity && data.result.activity.length) {
             for (let i in data.result.activity) {
@@ -112,7 +112,7 @@
             if (response.body.code == 405017) {
               let re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
               if (re) {
-                ajaxUrl("upgrade.html");
+                this.ajaxUrl("upgrade.html");
                 return;
               }
             } else {
@@ -131,13 +131,13 @@
               let js = response.body.result.js;
               let pay = response.body.result.pay;
               pay.success = function () {
-                earnCheck(order_id);
+                this.earnCheck(order_id);
               };
               pay.cancel = function () {
-                cancelPay();
+                this.cancelPay(order_id);
               };
               pay.fail = function (res) {
-                cancelPay();
+                this.cancelPay(order_id);
                 alert("支付失败");
               };
               js.debug = false;
@@ -153,16 +153,33 @@
                 tradeNO: response.body.result.pay.tradeNO
               }, function (result) {
                 if (result.resultCode == "6001") {
-                  cancelPay();
+                  this.cancelPay(order_id);
                   return;
                 }
                 if (result.resultCode == "9000") {
-                  earnCheck(order_id);
+                  this.earnCheck(order_id);
                 }
               });
               break;
           }
         });
+      },
+      cancelPay(orderId) {
+        this.$loading.close();
+        this.$http.post("/order/" + orderId + "/pay/revoke").then(response => {
+        });
+      },
+      earnCheck(order_id) {
+        y = setInterval(function () {
+          rest("/order/" + order_id + "/pay/result", {}, "get", function (data1) {
+            if (data1.code == "200" || data1.code == "404014") {
+              clearInterval(y);
+              this.$toast.center('操作成功');
+            } else {
+              $.toast("支付结果查询中");
+            }
+          });
+        }, 1000)
       }
     }
   }

@@ -38,8 +38,11 @@
 
 .lx-toast.lx-toast-center {
   top: 50%;
-  margin-top: -20px;
+  margin-top: -3rem;
   bottom: inherit;
+  height: auto;
+  font-size: .9rem;
+  line-height: 1.5;
 }
 
 @keyframes show-toast {

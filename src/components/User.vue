@@ -8,11 +8,10 @@
               <img class="avatar" :src="data.logoUrl">
               <span class="shop">{{data.brandName}}</span>
             </div>
-            <div class="text-center" style="text-align: center"></div>
             <div class="i-footer i-flex" v-if="data.memberGradeName">
               <div class="set-content">
-                <div style="font-size: .7rem">{{data.memberGradeName}}</div>
-                <div>{{data.memberCardNo}}</div>
+                <div>{{data.memberGradeName}}</div>
+                <div>NO. {{data.memberCardNo}}</div>
               </div>
               <div><span class="iconA"></span></div>
             </div>
@@ -33,13 +32,20 @@
               <span class="i-red point">{{data.point||0}}</span>
             </div>
           </div>
-          <div class="item" v-on:click="ajaxUrl('charge.html')">
+          <router-link class="item" :to="{ path: 'charge', query:  $route.query}">
             <div><span>余额 </span><span class="pl i-icon i-icon5"></span></div>
             <div class="pt">
               <span class="i-icon i-icon0"></span>
               <span class="i-red charge">{{data.charge||0}}</span>
             </div>
-          </div>
+          </router-link>
+        <!--  <div class="item" v-on:click="ajaxUrl('charge.html')">
+            <div><span>余额 </span><span class="pl i-icon i-icon5"></span></div>
+            <div class="pt">
+              <span class="i-icon i-icon0"></span>
+              <span class="i-red charge">{{data.charge||0}}</span>
+            </div>
+          </div>-->
           <div class="item" v-on:click="ajaxUrl('reward.html')">
             <div><span>代用币 </span><span class="pl i-icon8"></span></div>
             <div class="pt">
@@ -72,6 +78,10 @@
           <span class="phone-box" v-else-if="!data.phone">补全手机，保护/同步您的权益</span>
 
         </div>
+        <div class="i-list arrow" v-on:click="ajaxUrl('face.html')">
+          <span class="i-icon i-icon-code"></span>
+          我的身份码
+        </div>
         <div class="i-list arrow" v-on:click="ajaxUrl('more.html')">
           <span class="i-icon i-icon2"></span>
           更多活动
@@ -81,15 +91,15 @@
             我的优惠券 {{coupons.total}}
           </div>
           <div class="set-coupon" v-if="coupons.items">
-            <div class="coupon_show" v-for="item in coupons.items" id="5376e7d9198543b1bbe2e1e2f65e20b3">
+            <div class="coupon_show" v-for="item in coupons.items" id="5376e7d9198543b1bbe2e1e2f65e20b3" v-on:click="couponFn($event,item)">
               <div class="i-flex i-coupon">
                 <div class="a4001" :class="'a'+ item.state"></div>
                 <div class="item">
                   <!--<img class="avatar" src="/sui_assets/img/avatar.png">-->
-                  <div class="name" style="padding-top: 0.4rem">{{item.value}}</div>
+                  <div class="name" style="padding-top: 0.4rem">{{item.name}}</div>
                   <div class="amount0" v-if="item.category =='9031'">
-                    <span style="font-size: .6rem">可抵 ￥</span>{{item.amount - item.currentAmount}}
-                    <div class="through">{{item.amount}}</div>
+                    <span style="font-size: .6rem">{{item.value}}</span>{{item.amount}}
+                    <span style="font-size: .6rem">折</span>
                   </div>
                   <div class="amount0" v-else-if="item.category =='902'||item.category =='9021'">
                     <span style="font-size: .6rem">可抵 ￥</span>{{item.amount - item.currentAmount}}
@@ -126,7 +136,7 @@
     data() {
       return {
         data: "",
-        coupons: {page: 0, count: 5, total: 0}
+        coupons: {page: 0, count: 20, total: 0}
       }
     },
     created() {
@@ -149,6 +159,9 @@
       });
     },
     methods: {
+      couponFn(event,id){
+        this.$couponShow(event,id,'earned')
+      },
       onRefresh(done) {
         location.reload();
       },

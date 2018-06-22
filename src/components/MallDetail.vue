@@ -9,7 +9,12 @@
     <div class="content">时间：{{data.startDate}}-{{data.endDate}}</div>
     <div class="content" v-if="data.stock === undefined">不限量</div>
     <div class="content" v-else>库存：{{data.stock}}</div>
-    <div class="content">说明：{{data.additional}}</div>
+    <div class="content" v-html="replaceMethod(data.additional)"></div>
+    <div class="content" v-for="pic in data.picUrls">
+      <div class="desc">{{pic.title}}</div>
+      <img :src="pic.url" width="100%">
+    </div>
+    <div style="height: 3rem"></div>
     <div class="fixed">
       <div class="left">需付款{{data.sales[0].price}}元</div>
       <div class="right" :class="payment&&data.usable?'':'disabled'" v-on:click="submitFn"><span v-if="data.stock===0">已售完</span><span v-else>立即购买</span>

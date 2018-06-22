@@ -4,7 +4,7 @@
       <div class="g-tips1">
         欲使用已购买的券，请点击券面上的“使用方法”查看
       </div>
-      <div class="buy-box" v-for="item in data.items" v-on:click="couponFn($event,item.coupons[0].id)">
+      <div class="buy-box" v-for="item in data.items" v-on:click="couponFn($event,item.coupons[0])">
         <div class="left">购买时间：{{item.time}}</div>
         <div class="right"> 花费金额：<span style="color: #e4020f">{{item.amount}}</span>元</div>
         <div class="coupon_show" v-for="coupon in item.coupons" :id="coupon.id">

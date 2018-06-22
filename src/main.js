@@ -38,13 +38,40 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     Vue.cookie.delete("url");
-    next();
+    //第二次授权
+    let ua = window.navigator.userAgent.toLowerCase();
+    let _id = to.query.id || to.query.guestid;
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      if (!Vue.cookie.get("token")) {
+      } else if (!Vue.cookie.get(_id)) {
+        Vue.http.get("/author/guest/" + _id + "/check").then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            //正确
+            Vue.cookie.set(_id, "true", {expires: '1d'});
+            next();
+          } else if (data.code == 403020) {
+            //未授权
+            location.href = location.origin + "/author/guest/" + _id + "?url=" + encodeURIComponent(location.href.split("&state=1")[0]);
+          } else {
+            //token非法
+            Vue.cookie.set("url", location.href, {expires: '2m'});
+            location.href = "index.html" + location.search.split("&state=1")[0];
+          }
+        })
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
   }
 })
 //rest request 请求加密处理
 Vue.http.interceptors.push(function (request) {
   const t = "037925fa578c4ed98885d7b28ade5462";
   Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expires: 30, path: "/"});
+
   function getmd5(str) {
     let a;
     let md5 = Crypto.createHash("md5");
@@ -93,7 +120,7 @@ Vue.http.interceptors.push(function (request) {
     switch (response.status) {
       case 200:
         if (response.body.code == 403000) {
-          this.$cookie.set("url", location.href, {expires: '2m'});
+          Vue.cookie.set("url", location.href, {expires: '2m'});
           localStorage.setItem("url", location.href);
           if (this.$route.query.id) {
             location.href = "index.html?id=" + this.$route.query.id;
@@ -103,7 +130,7 @@ Vue.http.interceptors.push(function (request) {
         }
         break;
       default:
-        alert(response.status);
+        console.log(response);
     }
 
   };

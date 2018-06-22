@@ -1,18 +1,19 @@
+$grey-blue: rgb(107, 162, 186);
+$warm-grey: rgb(156, 156, 156);
 .selfpay {
   background: #DBE1E2;
-  height: -webkit-fill-available;
-  #cover {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
+  height: 110vh;
   .second-pay {
     background: white;
-
+    padding: 1rem 1.3rem .8rem;
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
   }
+
   .btn-green {
     color: #fff;
     border-radius: 5px;
@@ -23,12 +24,12 @@
     height: 2.5rem;
     font-size: 0.9rem;
     text-align: center;
+
   }
 
   //old
-
   .ellipsis {
-    color: rgb(130, 130, 130);
+    //color: #828282;
     display: inline-block;
     width: 10rem;
     overflow: hidden;
@@ -36,25 +37,64 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     display: -webkit-inline-box;
-    font-size: .7rem;
+    vertical-align: middle;
+    font-size: 15px;
+    line-height: 21px;
   }
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: -5px;
+  }
+  //.swiper-slide [class*=bg] {
+  //  height: 8rem;
+  //}
+  .ad-show {
+    border: 1px solid #e8e8e8;
+    color: #8b8b8b;
+    overflow: auto;
+    line-height: 2;
+    margin: .3rem;
+    margin-bottom: 55px;
+    background: white;
+    .cbg {
+      height: 8rem;
+      background-size: cover;
+    }
+    .pull-left:before {
+      content: "推荐";
+      display: inline-block;
+      width: 30px;
+      line-height: 15px;
+      border: 1px solid;
+      color: #FF9393;
+      font-size: 10px;
+      text-align: center;
+      font-weight: normal;
+      margin-right: .5rem;
+      vertical-align: text-bottom;
+    }
+    .pull-left {
+      margin: .4rem;
+      color: #788486;
+      font-weight: bold;
+      float: left;
+      font-size: .7rem;
+    }
+    .pull-right {
+      /*color: #5d6993;*/
+      color: #ffffff;
+      background: #EC1700;
+      margin: .5rem;
+      font-size: .6rem;
+      border-radius: 10px;
+      width: 63px;
+      text-align: center;
+    }
 
-  .swiper-slide [class*=bg] {
-    height: 8rem;
   }
 
   .e-black {
     margin-bottom: 4rem;
     position: relative;
-  }
-
-  .swiper-slide .cbg:after {
-    content: "";
-    background: url(/sui_assets/img/tuijian.svg) no-repeat;
-    padding: 11px 31px;
-    position: absolute;
-    top: 0;
-    right: 0;
   }
 
   .float {
@@ -71,78 +111,6 @@
     border-radius: 15px;
     border: 1px solid #ffffff;
   }
-  #cover.remove {
-    animation: scales .4s;
-    -webkit-animation: scales .4s;
-    animation-timing-function: ease-out;
-    -webkit-animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-  }
-  @keyframes scales {
-    0% {
-      transform: scale(1);
-      -webkit-transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-      -webkit-transform: scale(0);
-      transform-origin: 50% 68% 0;
-      -webkit-transform-origin: 50% 68% 0;
-    }
-  }
-
-  @-webkit-keyframes scales {
-    0% {
-      transform: scale(1);
-      -webkit-transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-      -webkit-transform: scale(0);
-      transform-origin: 50% 68% 0;
-      -webkit-transform-origin: 50% 68% 0;
-    }
-  }
-
-  @-moz-keyframes scales {
-    0% {
-      transform: scale(1);
-      -webkit-transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-      -webkit-transform: scale(0);
-      transform-origin: 50% 68% 0;
-      -webkit-transform-origin: 50% 68% 0;
-    }
-  }
-
-  @-ms-keyframes scales {
-    0% {
-      transform: scale(1);
-      -webkit-transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-      -webkit-transform: scale(0);
-      transform-origin: 50% 68% 0;
-      -webkit-transform-origin: 50% 68% 0;
-    }
-  }
-
-  @-o-keyframes scales {
-    0% {
-      transform: scale(1);
-      -webkit-transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-      -webkit-transform: scale(0);
-      transform-origin: 50% 68% 0;
-      -webkit-transform-origin: 50% 68% 0;
-    }
-  }
 
   .over-bg {
     position: fixed;
@@ -157,7 +125,7 @@
     box-sizing: border-box;
     .swiper-container {
       height: 75%;
-      .swiper-wrapper{
+      .swiper-wrapper {
         height: 93%;
       }
     }
@@ -188,7 +156,7 @@
           padding: 5px;
           background: #ffffff;
           color: #000000;
-          img{
+          img {
             margin: auto;
           }
         }
@@ -209,7 +177,7 @@
               text-align: right;
               color: #aaa;
             }
-             .right {
+            .right {
               margin-left: 3.1rem;
               color: #000;
             }
@@ -282,17 +250,14 @@
     font-size: .5rem;
     padding: .5rem 0 .3rem;
   }
+  //
+  //.m-detail {
+  //  font-size: .5rem;
+  //  color: #818181;
+  //  padding: .3rem 0 .7rem;
+  //}
 
-  .m-detail {
-    font-size: .5rem;
-    color: #818181;
-    padding: .3rem 0 .7rem;
-  }
 
-  .amount {
-    font-size: .5rem;
-    padding-left: 4px;
-  }
 
   .icon3 {
     background: url("/sui_assets/img/selfPay/icons.svg") center no-repeat;
@@ -383,6 +348,7 @@
   .dish-item {
     clear: both;
   }
+
   .overlay-title {
     font-size: .8rem;
     padding: 1rem 0 .8rem;
@@ -435,9 +401,14 @@
   }
 
   .dish-item, .meal-item {
-    padding: 0 2.2rem;
+    padding: 0.5rem 2.2rem 1rem;
     text-align: left;
     overflow: auto;
+    .amount {
+      font-size: .5rem;
+      text-decoration: line-through;
+      padding-left: 4px;
+    }
   }
 
   .overlay-title .close:before {
@@ -472,93 +443,302 @@
   }
 
   .meal-pic {
-    background: url("/sui_assets/img/selfPay/taocan1.svg") center no-repeat;
-    background-size: contain;
-    text-align: center;
-    height: 71px;
+    background: url(/sui_assets/img/selfPay/edit.svg) 93% center no-repeat;
+    text-align: left;
+    height: 49px;
     position: relative;
+    padding: 2px 5px;
+
   }
 
   .meal-pic img {
-    width: 101px;
-    height: 50px;
-    border-radius: 0 0 8px 8px;
+    width: 66px;
+    height: 45px;
+    vertical-align: middle;
   }
 
   .check-meal-border {
-    background: url("/sui_assets/img/selfPay/taocan.svg?v=2") center no-repeat;
-    background-size: contain;
-    min-height: 32px;
-    color: #ffffff;
+    background: #E0F5FF;
+    color: #009EFF;
+    border: 1px solid #7BBDDE;
+    line-height: 26px;
     font-size: .55rem;
     text-align: center;
-    line-height: 2.2;
+    margin-top: 15px;
+    border-radius: 9px;
   }
 
   .label1 {
-    position: absolute;
     left: 0;
     right: 0;
     bottom: 1.5rem;
     border-radius: 2px;
-    background-color: rgba(255, 255, 255, 0.7);
-    font-size: .45rem;
-    color: black;
-    width: 42px;
+    font-size: 12px;
     margin: auto;
     display: inline-block;
     height: 14px;
     line-height: 14px;
+    color: #009EFF;
+    vertical-align: middle;
   }
 
-  .i-flex.bottom {
+  .bottom {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
-    height: 55px;
-    background-color: rgba(250, 250, 250, 0.9);
-    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.11);
-    font-size: 10px;
-    font-weight: bold;
-    line-height: 2;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    justify-content: space-between;
-    -webkit-justify-content: space-between;
-    align-items: center;
-    .avatar {
-      display: block;
-      margin: 0 auto;
-      border-radius: 50%;
-      width: 1.6rem;
-      height: 1.6rem;
-    }
-    span {
-      display: block;
-      padding: 15px;
-    }
-    .item {
-      flex-grow: 1;
-      -webkit-flex-grow: 1;
-      position: relative;
-      .icon1 {
-        background: url("/sui_assets/img/selfPay/ico-coupon.svg") center no-repeat;
+    z-index: 1;
+    .flower-bg {
+      height: 100vh;
+      background: rgba(0, 0, 0, .7);
+      .header {
+        font-size: .9rem;
+        border-bottom: 1px solid rgb(217, 217, 217);
+        height: 3rem;
+        line-height: 3rem;
+        position: relative;
+        .pull-right {
+          background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
+          background-position: 0 -153px;
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          padding: 14px;
+          background-size: 57px;
+        }
+        .pull-left {
+          color: #6ba2ba;
+          font-size: 10px;
+          text-decoration: underline;
+          position: absolute;
+          left: .8rem;
+          top: 0;
+        }
       }
 
-      .icon2 {
-        background: url("/sui_assets/img/selfPay/ico-sell.svg") center no-repeat;
+      .flower {
+        min-height: 84%;
+        background: #ffffff;
+        border-radius: 5px 5px 0 0;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: .8rem;
+        right: .8rem;
+        //min-height: 10rem;
+        color: rgb(51, 51, 51);
+        .content {
+          padding: 1rem 2.3rem;
+          text-align: center;
+          .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            vertical-align: middle;
+            display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+          .nickname {
+            font-size: .8rem;
+            padding-left: .7rem;
+            vertical-align: middle;
+          }
+          .staff {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -1.5rem;
+            .item {
+              width: 46%;
+              border-radius: 5px;
+              border: 1px solid $warm-grey;
+              height: 3.2rem;
+              line-height: 3.2rem;
+              margin-bottom: 1rem;
+            }
+            .item:active {
+              background: $grey-blue;
+              color: white;
+            }
+          }
+          .labels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 1.2rem 0;
+            .label {
+              width: 4.7rem;
+              height: 1.5rem;
+              line-height: 1.55rem;
+              border-radius: 20.8px;
+              box-shadow: 0 0 1px 1px #9c9c9c inset;
+              color: rgb(156, 156, 156);
+              flex: 1;
+              margin: 0 .7rem;
+              .up {
+                background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
+                background-size: 55px;
+                background-position: -2px -69px;
+                display: inline-block;
+                padding: 10px 9px;
+                vertical-align: middle;
+                margin-right: 5px;
+              }
+              .down {
+                background-position: -2px -21px;
+              }
+            }
+            .active {
+              color: white;
+              background: $grey-blue;
+              box-shadow: none;
+              .up {
+                background-position: -2px -92px;
+              }
+              .down {
+                background-position: -2px -44px;
+              }
+            }
+          }
+          .decs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .dec {
+              margin: .25rem 3%;
+              width: 43%;
+              height: 1.3rem;
+              line-height: 1.35rem;
+              border-radius: 5px;
+              color: rgb(156, 156, 156);
+              box-shadow: 0 0 1px 1px #9c9c9c inset;
+            }
+            .active {
+              color: white;
+              background: $grey-blue;
+              box-shadow: none;
+            }
+          }
+        }
+        .grey {
+          padding: .5rem;
+          text-align: center;
+          position: absolute;
+          right: 0;
+          left: 0;
+          bottom: 3rem;
+          img {
+            width: 16px;
+            height: 16px;
+            vertical-align: text-bottom;
+          }
+          .blue-text {
+            color: $grey-blue;
+            font-size: .6rem;
+            font-weight: bold;
+          }
+
+        }
+        .submit {
+          color: #fff;
+          border-radius: 5px;
+          background: $grey-blue;
+          line-height: 2.2rem;
+          height: 2.2rem;
+          font-size: 0.8rem;
+          text-align: center;
+          margin: 0rem .8rem 1rem;
+          position: absolute;
+          right: 0;
+          left: 0;
+          bottom: 0rem;
+        }
+      }
+    }
+    .flower-close {
+      background: $grey-blue;
+      height: 2rem;
+      line-height: 2rem;
+      border-radius: 5px 5px 0 0;
+      margin: 0 .8rem;
+      color: white;
+      font-size: .7rem;
+      text-align: left;
+      position: relative;
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        vertical-align: middle;
+        display: inline-block;
+        margin: auto .5rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .flower-close:after {
+      content: "现在去评价";
+      color: $grey-blue;
+      font-size: .6rem;
+      border-radius: 10px;
+      width: 76px;
+      height: 1rem;
+      line-height: 1rem;
+      background: white;
+      display: inline-block;
+      text-align: center;
+      position: absolute;
+      right: .5rem;
+      top: .5rem;
+
+    }
+    .i-flex {
+      height: 55px;
+      background-color: rgba(250, 250, 250, 0.9);
+      box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.11);
+      font-size: 10px;
+      font-weight: bold;
+      line-height: 2;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -moz-box-orient: horizontal;
+      -moz-box-direction: normal;
+      -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      align-items: center;
+
+      .item {
+        flex-grow: 1;
+        -webkit-flex-grow: 1;
+        position: relative;
+        .icon1 {
+          background: url("/sui_assets/img/selfPay/ico-coupon.svg") center no-repeat;
+        }
+
+        .icon2 {
+          background: url("/sui_assets/img/selfPay/ico-sell.svg") center no-repeat;
+        }
+        .avatar {
+          display: block;
+          margin: 0 auto;
+          border-radius: 50%;
+          width: 1.6rem;
+          height: 1.6rem;
+        }
+        span {
+          display: block;
+          padding: 15px;
+        }
       }
     }
   }
@@ -611,6 +791,9 @@
     display: inline-block;
   }
 
+  .label2:empty {
+    display: none;
+  }
   .label2 {
     padding: 10px;
     position: absolute;
@@ -634,6 +817,7 @@
     background-size: contain;
     width: 125px;
   }
+
 }
 
 .modal {
@@ -990,7 +1174,7 @@
 .bindPhone {
   .modal-inner {
     background: white;
-    padding: .75rem;
+    padding: 1rem 1.6rem;
     box-sizing: border-box;
     .modal-title {
       font-weight: 500;
@@ -1005,6 +1189,7 @@
     border-radius: 5px;
     padding: 0 .5rem;
     font-size: .75rem;
+    width: 100%;
   }
   .input-text {
     position: relative;
@@ -1021,7 +1206,7 @@
     border-radius: 5px;
     height: 2.2rem;
     line-height: 2.2rem;
-    margin: 1rem .6rem 0.2rem;
+    margin: 1rem 0 0.2rem;
     border: 1px solid #ff392e;
     background: #ff392e;
     font-size: .8rem;

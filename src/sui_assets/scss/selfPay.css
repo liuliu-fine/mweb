@@ -1,21 +1,21 @@
 /*
 Error: Invalid GBK character "\xEF"
-        on line 811 of selfPay.scss
+        on line 752 of selfPay.scss
 
-806:         color: #ff2c2c;
-807:         font-size: 36px;
-808:         width: 95px;
-809:         text-align: center;
-810:         .dollar:before {
-811:           content: "￥";
-812:           font-size: 15px;
-813:         }
-814:       }
-815:       .coupon-icon {
-816:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;
+747:         color: #ff2c2c;
+748:         font-size: 36px;
+749:         width: 95px;
+750:         text-align: center;
+751:         .dollar:before {
+752:           content: "￥";
+753:           font-size: 15px;
+754:         }
+755:       }
+756:       .coupon-icon {
+757:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;
 
 Backtrace:
-selfPay.scss:811
+selfPay.scss:752
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xEF\"\A         on line 811 of selfPay.scss\A \A 806:         color: #ff2c2c;\A 807:         font-size: 36px;\A 808:         width: 95px;\A 809:         text-align: center;\A 810:         .dollar:before {\A 811:           content: \"￥\";\A 812:           font-size: 15px;\A 813:         }\A 814:       }\A 815:       .coupon-icon {\A 816:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;"; }
+  content: "Error: Invalid GBK character \"\xEF\"\A         on line 752 of selfPay.scss\A \A 747:         color: #ff2c2c;\A 748:         font-size: 36px;\A 749:         width: 95px;\A 750:         text-align: center;\A 751:         .dollar:before {\A 752:           content: \"￥\";\A 753:           font-size: 15px;\A 754:         }\A 755:       }\A 756:       .coupon-icon {\A 757:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;"; }

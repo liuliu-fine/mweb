@@ -1,17 +1,11 @@
 <template>
   <div>
     <div class="selfpay">
-      <div id="loading" v-if="loading">
-      </div>
-      <div id="cover" v-else-if="ad">
-        <img v-on:click="replaceUrl(ad)" :src="ad.verticalPicUrl" style="height: 100%;width: 100%">
-        <div class="float" v-on:click="closeSelfPayAd()">跳过 {{visible.count}}</div>
-      </div>
-      <div class="content" v-else-if="init.user">
+      <div class="content" v-if="init.user">
         <div class="content-inner">
           <!-- Slider -->
           <div class="e-ad" v-if="init.rollingActivities" style="background: #1c1c20;padding: 4px">
-            <div class="e-ad1" onclick="this.ajaxUrl('follow.html')">
+            <div class="e-ad1" v-on:click="ajaxUrl('follow.html')">
               <img src="/sui_assets/img/coupon/ad.svg" style="position: relative;left: 0">
 
               <div style="display:inline-block" class="ad1-text">
@@ -19,32 +13,22 @@
               </div>
             </div>
           </div>
-          <div class="second-pay" style="background: #ffffff">
-            <div style="padding: .9rem 1.3rem">
-              <div style="padding-bottom: .7rem">
-                <span style="display: inline-block;vertical-align: middle">
-                <img class="avatar" :src="init.logo" width="30"
-                     style="margin: 2px;border: solid 1px #f3f3f3;padding: 2px">
-               </span>
-                <span class="ellipsis">{{init.brandName}} （{{init.name}}）</span>
-                <span class="pull-right" style="line-height: 1.7rem" v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span>
-              </div>
-              <wc-keyboard inter="5"
-                           decimal="2"
-                           v-bind:val="post.amount"
-                           v-bind:unabled="init.preCheckData?true:false"
-                           placeholder="询问服务员后在此输入"
-                           label="消费金额" @input="inputFn"/>
+          <div class="second-pay">
+            <div style="padding-bottom: .7rem">
+              <img class="avatar" :src="init.logo" width="30">
+              <span class="ellipsis"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
+                v-else>前台</span></span>
             </div>
-
-            <div v-if="init.nonPart" style="padding: .9rem 1.3rem;border-top: 1px solid #f4f4f4;font-size: .6rem">
-              <!--<div>-->
-              <!--<span style="font-size: .65rem">不参与优惠的金额</span>-->
-              <!--<span id="none" class="checkbox" onclick="checkbox()"></span>-->
-              <!--</div>-->
+            <wc-keyboard inter="5"
+                         decimal="2"
+                         v-bind:value="post.amount"
+                         v-bind:unabled="init.preCheckData?true:false"
+                         placeholder="询问服务员后在此输入"
+                         label="消费金额" @input="inputFn"/>
+            <div v-if="init.nonPart" style="padding-top: .8rem;">
               <wc-keyboard
                 inter="5"
-                v-bind:val="post.nonParticationAmount"
+                v-bind:value="post.nonParticationAmount"
                 decimal="2" v-bind:unabled="init.preCheckData?true:false"
                 v-bind:placeholder="init.nonPart"
                 label="不参与优惠项" @input="nonPartsFn"/><!--
@@ -54,44 +38,110 @@
             </div>
           </div>
           <div style="padding: 0 1.3rem 1rem">
-            <div :class="number?'':'check-meal-border'" v-on:click="getDishes" v-if="init.activityTypes">
+            <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
               <div class="meal-pic" v-if="view.dishes&&number">
                 <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
                      v-for="(item,index) in validateDish">
                 <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
                      v-for="(item,index) in validateMeal">
 
-                <div class="label1" v-if="view.dishes&&number">已选 <span class="text-orange">{{number}}</span>个</div>
+                <div class="label1" v-if="view.dishes&&number">已选{{number}}个</div>
               </div>
-              <div v-else>勾选已消费的特价或套餐</div>
+              <div v-else><img src="/sui_assets/img/selfPay/plus.svg">勾选已消费的特价或套餐</div>
             </div>
 
-            <div class="btn-green" @touchstart.stop.prevent="submitFn"
-                 style="line-height: 2.5rem;height: 2.5rem;font-size: .9rem">
-              算一算优惠
+            <div class="btn-green" @touchstart.stop.prevent="submitFn">
+              买单自动计算优惠
             </div>
           </div>
           <!---->
-          <swiper :options="swiperOption" v-if="ads">
-            <swiper-slide v-for="(item,index) in ads" :key="index">
-              <div class="cbg" v-on:click="replaceUrl(item)"
-                   :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
-          </swiper>
-
+          <div class="ad-show" v-for="(item,index) in ads" v-on:click="replaceUrl(item)" v-if="ads" v-show="index==0">
+            <div class="cbg" :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
+            </div>
+            <div class="pull-left">{{item.title}}</div>
+            <div class="pull-right">看一看 ></div>
+          </div>
+          <div style="height: 6rem"></div>
           <!---->
-          <div class="i-flex bottom">
-            <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCoupons">
-              <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
-              <span class="icon2"></span>可出示的券
+          <div class="bottom">
+            <div class="flower-bg" v-if="flower.staffs && flower.state != 'close'">
+              <div class="flower" v-if="!flower.state">
+                <div class="header">
+                  <div class="title">服务评价</div>
+                  <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
+                  <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
+                </div>
+                <div class="content">
+                  <span class="avatar"
+                        :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
+                  <span class="nickname">{{flower.staffs[posts.index].nickname}}</span>
+                  <div class="labels">
+                    <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
+                      class="up"></span>满意
+                    </div>
+                    <div class="label" :class="posts.satisfied?'':'active'" v-on:click="posts.satisfied = false"><span
+                      class="up down"></span>不满意
+                    </div>
+                  </div>
+                  <div class="decs">
+                    <div class="dec" v-show="!posts.satisfied" :class="item.check?'active':''"
+                         v-on:click="chooseTagFn(item)"
+                         v-for="item in flower.negative">{{item.content}}
+                    </div>
+                    <div class="dec" v-show="posts.satisfied" :class="item.check?'active':''"
+                         v-on:click="chooseTagFn(item)"
+                         v-for="item in flower.positive">{{item.content}}
+                    </div>
+                  </div>
+                </div>
+                <div class="grey" v-show="posts.satisfied">
+                  <img :src="flower.gratuity.ico">送我{{flower.countlimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
+                  <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
+                </div>
+                <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
+                  v-else>提交</span></div>
+              </div>
+              <div class="flower" v-if="flower.state == 'other'">
+                <div class="header">
+                  <div class="title">请选择您的服务员</div>
+                  <div class="pull-right" v-on:click="flowerStateFn()"></div>
+                </div>
+                <div class="content">
+                  <div class="staff">
+                    <div class="item" v-for="(item,key) in flower.staffs" v-on:click="choosedStaffFn(key)">
+                      <span class="avatar"
+                            :style="{'backgroundImage':'url('+(item.avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
+                      <span class="nickname">{{item.nickname}}</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div class="item" v-on:click="ajaxUrl('my.html')">
-              <div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>
-              <img class="avatar" width="32" :src="init.user.avatarUrl">我的权益
+            <div class="flower-close" v-if="flower.state == 'close'" v-on:click="flowerStateFn()">
+                      <span class="avatar"
+                            :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
+              <span class="ellipsis"> 服务评价获赠 <strong v-for="item in flower.benefits">{{item.name}} </strong></span>
+
             </div>
-            <div class="item" v-on:click="ajaxUrl('more.html')"><span class="icon1"></span>门店活动</div>
+            <div class="i-flex" v-if="flower.state == 'close'||!flower.staffs">
+              <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCouponsModal(1)">
+                <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
+                <span class="icon2"></span>可出示的券
+              </div>
+              <router-link class="item" :to="{ path: 'user', query: { id: $route.query.id }}">
+                <div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>
+                <img class="avatar" width="32" :src="init.user.avatarUrl">我的权益
+              </router-link>
+              <router-link class="item" :to="{ path: 'more', query: { id: $route.query.id }}">
+                <span class="icon1"></span>门店活动
+              </router-link>
+              <!--<div class="item"  v-on:click="ajaxUrl('user.html')">-->
+              <!--<div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>-->
+              <!--<img class="avatar" width="32" :src="init.user.avatarUrl">我的权益-->
+              <!--</div>-->
+              <!--<div class="item" v-on:click="ajaxUrl('more.html')"><span class="icon1"></span>门店活动</div>-->
+            </div>
           </div>
           <div id="all" style="text-align: center">
             <div class="over-bg" style="" v-if="visible.dish&&data.result">
@@ -128,7 +178,7 @@
                         </span>
                       </div>
 
-                      <div class="m-detail">{{meal.descriptor}}</div>
+                      <!--<div class="m-detail">{{meal.descriptor}}</div>-->
                     </div>
                   </div>
                   <div id="dish" v-if="data.result.specialDishes">
@@ -179,7 +229,7 @@
               <div class="info">
                 下列优惠券可立即出示使用
               </div>
-              <swiper :options="swiperOption1">
+              <swiper :options="swiperOption">
                 <swiper-slide v-for="(coupon,index) in coupons" :key="index">
                   <div class="coupons-item">
                     <div class="a4001" v-bind:class="'a'+coupon.state"
@@ -225,7 +275,7 @@
                     </div>
                   </div>
                 </swiper-slide>
-                <div class="swiper-pagination" slot="pagination" id="swiper-pagination1"></div>
+                <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
               </swiper>
               <div class="md-close" v-on:click="closeCouponModal"></div>
             </div>
@@ -338,7 +388,6 @@
     },
     data() {
       return {
-        loading: false,
         data: "",
         view: {},
         disk: {dish: 0, meal: 0},
@@ -349,28 +398,21 @@
         socketObj: {},
         swiper: "",
         ads: [],
-        ad: "",
         vip: "",
         swiperOption: {
-          initialSlide: 0,
-          loop: true,
-          speed: 400,
-          autoplay: true,
           pagination: {
             el: '#swiper-pagination',
-            paginationClickable: true,
-            spaceBetween: 30,
-          }
-        },
-        swiperOption1: {
-          pagination: {
-            el: '#swiper-pagination1',
             paginationClickable: true
           },
           spaceBetween: 30,
           centeredSlides: true,
         },
-        phone: ""
+        phone: "",
+        flower: {},
+        posts: {
+          satisfied: true,
+          index: 0
+        }//评赏
       }
     },
     created() {
@@ -380,42 +422,6 @@
       if (this.$route.query.d) {
         para.tableId = this.$route.query.d;
       }
-      this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
-        let data = response.body;
-        if (data.code == 200) {
-          let _self = this;
-          _self.ads = data.result;
-          for (let i = 0; i < data.result.length; i++) {
-            if (data.result[i].cover) {
-              if (this.$cookie.get(_self.$route.query.id + "cover")) {
-                _self.addVip();
-                _self.loading = false;
-                return;
-              }
-              this.$cookie.set(_self.$route.query.id + "cover", true, {"expires": '30m'});
-              _self.ad = JSON.parse(JSON.stringify(_self.ads[i]));
-              _self.ad.index = i;
-              _self.ad.intera = setInterval(function () {
-                if (_self.visible.count <= 0) {
-                  _self.closeSelfPayAd();
-                  return;
-                }
-                _self.visible.count--;
-              }, 1000)
-
-            }
-          }
-          if (!_self.ad) {
-            _self.addVip();
-            _self.loading = false;
-            _self.visible.count = 0;
-          }
-        } else {
-          _self.addVip();
-          _self.loading = false;
-        }
-      });
-
       this.$http.get("/activities/shop/" + this.$route.query.id + "/check", {key: para}).then(response => {
         let data = response.body;
         if (data.code == 200) {
@@ -431,37 +437,19 @@
                   this.$toast(data1.message);
                   if (data1.code == 403108) {
                     setTimeout(function () {
-                      this.ajaxUrl("strategy.html?oid=" + data.result.order.orderId);
+                      _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
                     }, 2000)
                   } else {
-                    this.ajaxUrl("entrance.html");
+                    location.reload();
                   }
                 } else {
                   delete _self.init.order;
-                  if (_self.init.couponCount) {
-                    delete _self.init.couponCount;
-                    _self.init.existCoupon = true;
-                  }
                 }
               });
+            } else {
+              _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
+              return;
             }
-            $.modal({
-              title: '注意',
-              afterText: '您' + (data.result.order.tableNo ? ("在" + data.result.order.tableNo + "号桌") : "") + '有个买单未完成',
-              buttons: [{
-                text: '取消买单',
-                bold: true,
-                onClick: function () {
-                }
-              }, {
-                text: '继续买单',
-                bold: true,
-                onClick: function () {
-                  _self.$cookie.set("order_id", data.result.order.orderId);
-                  state();
-                }
-              }]
-            });
           }
           if (data.result.rollingActivities) {
             let i = $(".e-ad1").width();
@@ -477,6 +465,29 @@
 
         } else {
           location.href = "error.html";
+        }
+      });
+
+      if (this.$route.query.d) {
+        let json = {};
+        json.tableId = this.$route.query.d;
+        this.$http.get("/gratuity/shop/" + this.$route.query.id, {key: json}).then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            let _self = this;
+            _self.flower = data.result;
+          } else {
+            this.addVip();
+          }
+        });
+      } else {
+        this.addVip();
+      }
+      this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
+        let data = response.body;
+        if (data.code == 200) {
+          let _self = this;
+          _self.ads = data.result;
         }
       });
     },
@@ -496,6 +507,57 @@
       }
     },
     methods: {
+      choosedStaffFn(index) {
+        this.posts.index = index;
+        this.$set(this.flower, 'state', '');
+      },
+      flowerStateFn(state) {
+        console.log(1);
+        this.$set(this.flower, 'state', state);
+        if (state == 'close' && !this.flower.once) {
+          this.flower.once = true;
+          this.addVip();
+        }
+      },
+      chooseTagFn(item) {
+        this.$set(item, 'check', !item.check);
+      },
+      sendFlowerFn() {
+        let json = {
+          count: 1
+        };
+        json.activityId = this.flower.activityId;
+        json.satisfied = this.posts.satisfied;
+        json.staffId = this.flower.staffs[this.posts.index].id;
+        json.gratuityId = this.flower.gratuity.id;
+        json.tableId = this.$route.query.d;
+        json.tags = [];
+        let tags = [];
+        if (json.satisfied == true) {
+          tags = this.flower.positive;
+        } else {
+          tags = this.flower.negative;
+        }
+        for (let i in tags) {
+          if (tags[i].check) {
+            json.tags.push(tags[i].id);
+          }
+        }
+        this.$http.post("/gratuity/shop/" + this.$route.query.id + "/staff", json).then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            if (json.satisfied) {
+              this.$toast.center("感谢您的评价<br><br>奖励金将在买单后发放<br>到您的账户");
+            } else {
+              this.$toast.center("感谢您的评价<br>我们会重视您本次的反馈");
+            }
+            this.flower = {};
+          } else {
+            this.$toast(data.message);
+          }
+        });
+
+      },
       addVip() {
         this.$http.get("/remind/guest/" + this.$route.query.id).then(response => {
           let data = response.body;
@@ -519,12 +581,6 @@
           }
         });
       },
-      closeSelfPayAd() {
-        clearInterval(this.ad.intera);
-        this.ad = "";
-        this.visible.count = 0;
-        this.addVip();
-      },
       replaceUrl(item) {
         if (!item.activityCategory) {
           if (item.linkUrl) {
@@ -536,27 +592,27 @@
         switch (item.activityCategory) {
           //送券
           case '6004':
-            ajaxUrl('couponActivity.html?aid=' + item.activityId);
+            this.ajaxUrl('couponActivity.html?aid=' + item.activityId);
             break;
           //套餐
           case "6015":
-            ajaxUrl('mealActivity.html?aid=' + item.activityId);
+            this.ajaxUrl('mealActivity.html?aid=' + item.activityId);
             break;
           //充值
           case "6002":
-            ajaxUrl('charge.html');
+            this.ajaxUrl('charge.html');
             break;
           //入会及升级
           case "6001":
-            ajaxUrl('upgrade.html?tid=' + item.activityId);
+            this.ajaxUrl('upgrade.html?tid=' + item.activityId);
             break;
           //积分兑换
           case "6003":
-            ajaxUrl('exchange.html');
+            this.ajaxUrl('exchange.html');
             break;
           //砍价
           case "6041":
-            this.$router.push({path:"/grouponInfo",query:this.$route.query});
+            this.$router.push({path: "/grouponInfo", query: this.$route.query});
 
             // location.href = '/grouponInfo.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
@@ -566,15 +622,14 @@
             break;
           //抽奖
           case "6051":
-            this.$router.push({path:"/more",query:this.$route.query})
+            this.$router.push({path: "/more", query: this.$route.query})
             // location.href = '/raffleActivity.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           default:
-            ajaxUrl('activity.html?aid=' + item.activityId);
+            this.ajaxUrl('activity.html?aid=' + item.activityId);
 
         }
       },
-
       textFn(obj) {
         let str = "";
         for (let i in obj) {
@@ -790,8 +845,8 @@
           }
         });
       },
-      getCouponsModal: function () {
-        if (this.$cookie.get(this.$route.query.id + "modal")) {
+      getCouponsModal: function (state) {
+        if (this.$cookie.get(this.$route.query.id + "modal") && !state) {
           this.visible.timer = 0;
           return;
         }
@@ -863,20 +918,25 @@
         Vue.set(this.data.result.setmealDishes, index, json);
       },
       submitFn: function (event) {
+        this.$loading();
         let json = {};
         let _self = this;
         let result = this.data.result;
         if (!(this.post.amount && parseFloat(this.post.amount))) {
-          this.$toast("请先填写消费总额");
+          this.$loading.close();
+          this.$toast.center("请先填写消费总额");
           return;
         }
         if (this.init.nonPart) {
           if (!this.post.nonParticationAmount && this.post.nonParticationAmount != "0") {
-            this.$toast.show({text: "请先填写不参与优惠项金额，如未消费此类项目，请输入0", position: 'bottom'});
+            this.$loading.close();
+            this.$toast.center("请先填写不参与优惠项金额，<br>如未消费此类项目，请输入0");
+            // this.$toast.show({text: "请先填写不参与优惠项金额，如未消费此类项目，请输入0", position: 'bottom'});
             return;
           } else {
             if (parseInt(this.post.nonParticationAmount) > parseInt(this.post.amount)) {
-              this.$toast("不参与金额不得大于总金额");
+              this.$loading.close();
+              this.$toast.center("不参与金额不得大于总金额");
               return;
             }
             json.nonParticationAmount = this.post.nonParticationAmount;
@@ -905,9 +965,10 @@
         }
         this.$http.post("/check/shop/" + this.$route.query.id + "/autonomy", json).then(response => {
           let data = response.body;
+          this.$loading.close();
           if (data.code == 200) {
             _self.$cookie.set("order_id", data.result.orderId);
-            this.ajaxUrl("strategy.html?oid=" + data.result.orderId);
+            this.ajaxUrl("strategy.html?oid=" + data.result.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
           } else if (data.code == 405004) {
             let re = confirm("您在" + (data.result.shopname || ("本店" + data.result.tableNo + "号桌")) + "有一个买单正在进行中,是否放弃此订单？")
             if (re) {
@@ -934,6 +995,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" rel="stylesheet/scss" type="text/css" scoped>
-  @import "../sui_assets/scss/selfPay.scss"
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../sui_assets/scss/selfPay.scss";
 </style>

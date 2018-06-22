@@ -3,12 +3,29 @@
  */
 let Coupon = {};
 Coupon.install = function (Vue) {
-  // 参数
-  Vue.prototype.$couponShow = function (e, id, type) {
+  /*
+  * e:点击事件
+  * item:coupon包含的json
+  * type 'earned'表示已领取的券，其他为未领取
+  *
+  * */
+  Vue.prototype.$couponShow = function (e, item, type) {
     if ("deletefont" == e.target.classList[0]) return;
     if (type != 'earned') {
-      this.$route.query.cid = id;
-      this.$router.push({path: "/couponDetail", query: this.$route.query});
+      let path = "/couponDetail.html?cid=" + item.id + "&";
+      if (this.$route.query.id) {
+        path += "id=" + this.$route.query.id;
+      } else if (this.$route.query.guestid) {
+        path += "guestid=" + this.$route.query.guestid;
+      }
+      if (item.category == '1017') {
+        path += '&type=reward';
+      }
+      location.href = path;
+
+
+      // this.$route.query.cid = id;
+      // this.$router.push({path: "/couponDetail", query: this.$route.query});
       return;
     }
     if (e.target.getElementsByClassName("a4002").length || e.target.getElementsByClassName("a4003").length) {
@@ -19,7 +36,7 @@ Coupon.install = function (Vue) {
       data() {
         return {
           data: "",
-          id: id,
+          id: item.id,
           category: {
             "901": "本券买单时自动抵用",
             "902": "本券在买单时出示使用",
@@ -33,7 +50,7 @@ Coupon.install = function (Vue) {
       },
       beforeCreate() {
         this.$loading("加载中...");
-        this.$http.get("/benefit/userCoupon/" + id).then(response => {
+        this.$http.get("/benefit/userCoupon/" + item.id).then(response => {
           let data = response.body;
           if (data.code == 200) {
             this.data = data.result;
@@ -68,7 +85,7 @@ Coupon.install = function (Vue) {
       "        <div class=\"right\" v-if=\"data.category == '902' || data.category == '9021'\">\n" +
       "          原价:{{data.amount}}元，现价:{{data.currentAmount}}元\n" +
       "        </div>\n" +
-      "        <div class=\"right\" v-else-if=\"data.category == '902' || data.category == '9021'\">{{data.amount}}元</div>\n" +
+      "        <div class=\"right\" v-else-if=\"data.category == '901' || data.category == '904'\">{{data.amount}}元</div>\n" +
       "      </div>\n" +
       "      <div class=\"item\">\n" +
       "        <div class=\"left\">使用条件：</div>\n" +

@@ -9,9 +9,9 @@
   .input-box {
     user-select: none;
     font-size: 16px;
-    border: solid 1px #e8e8e8;
-    background-color: #f5f5f5;
-    height: 29px;
+    border: solid 1px #f3f3f3;
+    background-color: #fcfcfc;
+    height: 51px;
     line-height: 31px;
     padding: 10px 13px;
     display: flex;
@@ -56,10 +56,10 @@
       <!-- 右侧内容 -->
       <div class="content">
         <p class="input">
-          <span class="currency" v-show="val">¥</span>
+          <span class="currency" v-show="val||val===0">¥</span>
           {{val}}
         </p>
-        <p class="placeholder" v-show="val.length === 0">
+        <p class="placeholder" v-show="!val&&val!==0">
           {{placeholder}}
         </p>
         <!-- 光标 -->
@@ -83,12 +83,12 @@
       keyboard
     },
     created() {
+      if (this.unabled) return;
       document.addEventListener('touchstart', () => {
         this.blur();
       });
     },
     props: {
-      value: '',
       unabled: false,
       inter: {
         default: 5
@@ -103,7 +103,7 @@
         default: '询问服务员后输入'
       },
       /*value 在组件中的值*/
-      val: ''
+      value: ''
     },
     data() {
       return {
@@ -112,8 +112,16 @@
         aIllegal: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '0..', '.'],
         cursorDuration: 600,
         bodyHeight: '',
-        bodyOverflow: ''
+        bodyOverflow: '',
+        val: typeof(this.value)=='number'?this.value:''
       }
+    },
+    watch: {
+      // value: {
+      //   handle() {
+      //     this.val = this.value;
+      //   }
+      // }
     },
     methods: {
       /*focus*/
@@ -169,9 +177,9 @@
         this.cursor = false;
       },
       checkValue() {
-        if (parseFloat(this.val) === 0) {
-          this.val = '';
-        }
+        // if (parseFloat(this.val) === 0) {
+        //   this.val = '';
+        // }
       },
       /*判读是否需要加0*/
       // toCompletion () {

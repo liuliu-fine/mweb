@@ -132,6 +132,20 @@
             background-clip: content-box;
             border-left: 1px dashed;
             text-align: center;
+            .limit-label {
+              width: 65px;
+              font-size: .4rem;
+              color: #fff;
+              transform: rotate(45deg);
+              -webkit-transform: rotate(45deg);
+              background: url(/sui_assets/img/label.svg) 0 14px no-repeat;
+              background-size: 66px auto;
+              padding-top: 6px;
+              line-height: 32px;
+              position: absolute;
+              right: -18px;
+              top: -4px;
+            }
             .current-amount {
               color: #b79f72;
               font-size: 1.2rem;
@@ -407,6 +421,11 @@
     margin-top: -16px;
     margin-left: -27px;
     width: .8rem;
+  }
+  .CHARGEFREE .content-title:before {
+    content: "免";
+    color: white;
+    background-color: #dad087;
   }
 
 }

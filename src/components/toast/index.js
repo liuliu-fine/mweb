@@ -23,7 +23,7 @@ Toast.install = function (Vue, options) {
     let curType = type ? type : opt.defaultType;
     let wordWrap = opt.wordWrap ? 'lx-word-wrap' : '';
     let style = opt.width ? 'style="width: ' + opt.width + '"' : '';
-    let tmp = '<div v-show="show" :class="type" class="lx-toast ' + wordWrap + '" ' + style + '>{{tip}}</div>';
+    let tmp = '<div v-show="show" :class="type" class="lx-toast ' + wordWrap + '" ' + style + ' v-html="tip"></div>';
 
     if (showToast) {
       // 如果toast还在，则不再执行
@@ -73,7 +73,7 @@ Toast.install = function (Vue, options) {
             show: showLoad
           }
         },
-        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf loading_leaf_0"></div><div class="loading_leaf loading_leaf_1"></div><div class="loading_leaf loading_leaf_2"></div><div class="loading_leaf loading_leaf_3"></div><div class="loading_leaf loading_leaf_4"></div><div class="loading_leaf loading_leaf_5"></div><div class="loading_leaf loading_leaf_6"></div><div class="loading_leaf loading_leaf_7"></div><div class="loading_leaf loading_leaf_8"></div><div class="loading_leaf loading_leaf_9"></div><div class="loading_leaf loading_leaf_10"></div><div class="loading_leaf loading_leaf_11"></div></div><div class="lx-load-content">' + tips + '</div></div></div>'
+        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf loading_leaf_0"></div><div class="loading_leaf loading_leaf_1"></div><div class="loading_leaf loading_leaf_2"></div><div class="loading_leaf loading_leaf_3"></div><div class="loading_leaf loading_leaf_4"></div><div class="loading_leaf loading_leaf_5"></div><div class="loading_leaf loading_leaf_6"></div><div class="loading_leaf loading_leaf_7"></div><div class="loading_leaf loading_leaf_8"></div><div class="loading_leaf loading_leaf_9"></div><div class="loading_leaf loading_leaf_10"></div><div class="loading_leaf loading_leaf_11"></div></div><div class="lx-load-content">' + (tips||'') + '</div></div></div>'
       });
       loadNode = new loadTpl();
       let tpl = loadNode.$mount().$el;
