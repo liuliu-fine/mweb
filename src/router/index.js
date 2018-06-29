@@ -17,6 +17,7 @@ const Groupon = r => require.ensure([], () => r(require('@/components/Groupon'))
 const Mall = r => require.ensure([], () => r(require('@/components/Mall')))
 const MallDetail = r => require.ensure([], () => r(require('@/components/MallDetail')))
 const MallRecord = r => require.ensure([], () => r(require('@/components/MallRecord')))
+const Coupon = r => require.ensure([], () => r(require('@/components/Coupon')))
 
 Vue.use(Router)
 
@@ -89,6 +90,11 @@ export default new Router({
       path: '/mallRecord',
       name: 'MallRecord',
       component: MallRecord
+    },
+    {
+      path: '/coupon',
+      name: 'Coupon',
+      component: Coupon
     },
     {
       path: '/groupon',

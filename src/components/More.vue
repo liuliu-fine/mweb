@@ -16,7 +16,7 @@
     <div class="code">
       <div v-for="item in data.activities1">
         <div v-if="item.activityCategory=='6004'||item.activityCategory=='6007'">
-          <div v-for="activity in item.activities" v-on:click="ajaxUrl('couponActivity.html?aid='+ activity.activityId)"
+          <div v-for="activity in item.activities"  v-on:click="ajaxUrl('couponActivity.html?aid='+ activity.activityId)"
                class="padded"
                :class="types[item.activityCategory]">
             <div class="set-title">

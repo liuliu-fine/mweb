@@ -69,6 +69,7 @@ router.beforeEach((to, from, next) => {
 })
 //rest request 请求加密处理
 Vue.http.interceptors.push(function (request) {
+  console.log(this);
   const t = "037925fa578c4ed98885d7b28ade5462";
   Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expires: 30, path: "/"});
 

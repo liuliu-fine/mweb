@@ -18,6 +18,9 @@
               <img class="avatar" :src="init.logo" width="30">
               <span class="ellipsis"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
                 v-else>前台</span></span>
+              <span class="staff" v-if="flower.staffs" v-on:click="flowerStateFn()"
+                    :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
+
             </div>
             <wc-keyboard inter="5"
                          decimal="2"
@@ -64,67 +67,70 @@
           <div style="height: 6rem"></div>
           <!---->
           <div class="bottom">
-            <div class="flower-bg" v-if="flower.staffs && flower.state != 'close'">
-              <div class="flower" v-if="!flower.state">
-                <div class="header">
-                  <div class="title">服务评价</div>
-                  <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
-                  <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
-                </div>
-                <div class="content">
+            <transition name="zoom">
+              <div class="flower-bg" v-if="flower.staffs && flower.state != 'close'">
+                <div class="flower" v-if="!flower.state">
+                  <div class="header">
+                    <div class="title">服务评价</div>
+                    <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
+                    <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
+                  </div>
+                  <div class="content">
                   <span class="avatar"
                         :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
-                  <span class="nickname">{{flower.staffs[posts.index].nickname}}</span>
-                  <div class="labels">
-                    <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
-                      class="up"></span>满意
+                    <span class="nickname">{{flower.staffs[posts.index].nickname}}</span>
+                    <div class="labels">
+                      <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
+                        class="up"></span>满意
+                      </div>
+                      <div class="label" :class="posts.satisfied?'':'active'" v-on:click="posts.satisfied = false"><span
+                        class="up down"></span>不满意
+                      </div>
                     </div>
-                    <div class="label" :class="posts.satisfied?'':'active'" v-on:click="posts.satisfied = false"><span
-                      class="up down"></span>不满意
+                    <div class="decs">
+                      <div class="dec" v-show="!posts.satisfied" :class="item.check?'active':''"
+                           v-on:click="chooseTagFn(item)"
+                           v-for="item in flower.negative">{{item.content}}
+                      </div>
+                      <div class="dec" v-show="posts.satisfied" :class="item.check?'active':''"
+                           v-on:click="chooseTagFn(item)"
+                           v-for="item in flower.positive">{{item.content}}
+                      </div>
                     </div>
                   </div>
-                  <div class="decs">
-                    <div class="dec" v-show="!posts.satisfied" :class="item.check?'active':''"
-                         v-on:click="chooseTagFn(item)"
-                         v-for="item in flower.negative">{{item.content}}
-                    </div>
-                    <div class="dec" v-show="posts.satisfied" :class="item.check?'active':''"
-                         v-on:click="chooseTagFn(item)"
-                         v-for="item in flower.positive">{{item.content}}
-                    </div>
+                  <div class="grey" v-show="posts.satisfied">
+                    <img :src="flower.gratuity.ico">送我{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
+                    <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
                   </div>
+                  <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
+                    v-else>提交</span></div>
                 </div>
-                <div class="grey" v-show="posts.satisfied">
-                  <img :src="flower.gratuity.ico">送我{{flower.countlimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
-                  <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
-                </div>
-                <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
-                  v-else>提交</span></div>
-              </div>
-              <div class="flower" v-if="flower.state == 'other'">
-                <div class="header">
-                  <div class="title">请选择您的服务员</div>
-                  <div class="pull-right" v-on:click="flowerStateFn()"></div>
-                </div>
-                <div class="content">
-                  <div class="staff">
-                    <div class="item" v-for="(item,key) in flower.staffs" v-on:click="choosedStaffFn(key)">
+                <div class="flower" v-if="flower.state == 'other'">
+                  <div class="header">
+                    <div class="title">请选择您的服务员</div>
+                    <div class="pull-right back" v-on:click="flowerStateFn()"></div>
+                  </div>
+                  <div class="content">
+                    <div class="staff">
+                      <div class="item" v-for="(item,key) in flower.staffs" v-on:click="choosedStaffFn(key)">
                       <span class="avatar"
                             :style="{'backgroundImage':'url('+(item.avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
-                      <span class="nickname">{{item.nickname}}</span>
+                        <span class="nickname">{{item.nickname}}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
+                </div>
               </div>
-            </div>
+            </transition>
+            <!--
             <div class="flower-close" v-if="flower.state == 'close'" v-on:click="flowerStateFn()">
                       <span class="avatar"
                             :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
               <span class="ellipsis"> 服务评价获赠 <strong v-for="item in flower.benefits">{{item.name}} </strong></span>
 
-            </div>
-            <div class="i-flex" v-if="flower.state == 'close'||!flower.staffs">
+            </div>-->
+            <div class="i-flex" v-show="flower.state == 'close'||!flower.staffs">
               <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCouponsModal(1)">
                 <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
                 <span class="icon2"></span>可出示的券
@@ -154,8 +160,6 @@
                   <div class="close" v-on:click="visible.checked=false"></div>
                 </div>
                 <div class="overlay-title" v-else>
-                  <!--<span>选择您消费过的菜品</span>-->
-
                   <div class="close" v-on:click="confirmDish"></div>
                 </div>
                 <div class="overlay-detail">
@@ -402,7 +406,7 @@
         swiperOption: {
           pagination: {
             el: '#swiper-pagination',
-            paginationClickable: true
+            clickable: true,
           },
           spaceBetween: 30,
           centeredSlides: true,
@@ -416,80 +420,7 @@
       }
     },
     created() {
-      let _self = this;
-      let para = {};
-      para.type = this.GLOBAL.version == "WXPAY" ? "wx" : "ali";
-      if (this.$route.query.d) {
-        para.tableId = this.$route.query.d;
-      }
-      this.$http.get("/activities/shop/" + this.$route.query.id + "/check", {key: para}).then(response => {
-        let data = response.body;
-        if (data.code == 200) {
-          document.title = (data.result.brandName + "(" + data.result.name + ")");
-          _self.init = data.result;
-          if (_self.init.preCheckData) _self.post = _self.init.preCheckData;
-          if (data.result.order) {
-            let re = confirm('您' + (data.result.order.tableNo ? ("在" + data.result.order.tableNo + "号桌") : "") + '有个买单未完成,取消？');
-            if (re) {
-              this.$http.post("/check/" + data.result.order.orderId + "/cancel", {}).then(response => {
-                let data1 = response.body;
-                if (data1.code != 200) {
-                  this.$toast(data1.message);
-                  if (data1.code == 403108) {
-                    setTimeout(function () {
-                      _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
-                    }, 2000)
-                  } else {
-                    location.reload();
-                  }
-                } else {
-                  delete _self.init.order;
-                }
-              });
-            } else {
-              _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
-              return;
-            }
-          }
-          if (data.result.rollingActivities) {
-            let i = $(".e-ad1").width();
-            setInterval(function () {
-              if (i < 5 - $(".ad1-text").width()) {
-                i = $(".e-ad1").width();
-              }
-              $(".ad1-text").css("margin-left", i--);
-            }, 20)
-          }
-          //ads
-          // $.init();
-
-        } else {
-          location.href = "error.html";
-        }
-      });
-
-      if (this.$route.query.d) {
-        let json = {};
-        json.tableId = this.$route.query.d;
-        this.$http.get("/gratuity/shop/" + this.$route.query.id, {key: json}).then(response => {
-          let data = response.body;
-          if (data.code == 200) {
-            let _self = this;
-            _self.flower = data.result;
-          } else {
-            this.addVip();
-          }
-        });
-      } else {
-        this.addVip();
-      }
-      this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
-        let data = response.body;
-        if (data.code == 200) {
-          let _self = this;
-          _self.ads = data.result;
-        }
-      });
+      this.initFn();
     },
     computed: {
       number() {
@@ -507,12 +438,93 @@
       }
     },
     methods: {
+      initFn() {
+        let _self = this;
+        let para = {};
+        para.type = this.GLOBAL.version == "WXPAY" ? "wx" : "ali";
+        if (this.$route.query.d) {
+          para.tableId = this.$route.query.d;
+        }
+        this.$http.get("/activities/shop/" + this.$route.query.id + "/check", {key: para}).then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            document.title = (data.result.brandName + "(" + data.result.name + ")");
+            _self.init = data.result;
+            if (_self.init.preCheckData) _self.post = _self.init.preCheckData;
+            if (data.result.order) {
+              let re = confirm('您' + (data.result.order.tableNo ? ("在" + data.result.order.tableNo + "号桌") : "") + '有个买单未完成,取消？');
+              if (re) {
+                this.$http.post("/check/" + data.result.order.orderId + "/cancel", {}).then(response => {
+                  let data1 = response.body;
+                  if (data1.code != 200) {
+                    this.$toast(data1.message);
+                    if (data1.code == 403108) {
+                      setTimeout(function () {
+                        _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
+                      }, 2000)
+                    } else {
+                      _self.initFn();
+                    }
+                  } else {
+                    _self.initFn();
+                    // delete _self.init.order;
+                  }
+                });
+              } else {
+                _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
+                return;
+              }
+            }
+            if (data.result.rollingActivities) {
+              let i = $(".e-ad1").width();
+              setInterval(function () {
+                if (i < 5 - $(".ad1-text").width()) {
+                  i = $(".e-ad1").width();
+                }
+                $(".ad1-text").css("margin-left", i--);
+              }, 20)
+            }
+            //ads
+            // $.init();
+
+          } else {
+            location.href = "error.html";
+          }
+        });
+
+        if (this.$route.query.d) {
+          let json = {};
+          json.tableId = this.$route.query.d;
+          this.$http.get("/gratuity/shop/" + this.$route.query.id, {key: json}).then(response => {
+            let data = response.body;
+            if (data.code == 200) {
+              let _self = this;
+              if (data.result.commentedTags) {
+                for (var i in data.result.commentedTags) {
+
+                }
+              }
+              _self.flower = data.result;
+            } else {
+              this.addVip();
+            }
+          });
+        } else {
+          this.addVip();
+        }
+        this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            let _self = this;
+            _self.ads = data.result;
+          }
+        });
+      },
       choosedStaffFn(index) {
         this.posts.index = index;
         this.$set(this.flower, 'state', '');
       },
       flowerStateFn(state) {
-        console.log(1);
         this.$set(this.flower, 'state', state);
         if (state == 'close' && !this.flower.once) {
           this.flower.once = true;
@@ -547,7 +559,7 @@
           let data = response.body;
           if (data.code == 200) {
             if (json.satisfied) {
-              this.$toast.center("感谢您的评价<br><br>奖励金将在买单后发放<br>到您的账户");
+              this.$toast.center("感谢您的评价<br><br>回馈奖励将在买单后发放<br>到您的账户");
             } else {
               this.$toast.center("感谢您的评价<br>我们会重视您本次的反馈");
             }
@@ -562,6 +574,7 @@
         this.$http.get("/remind/guest/" + this.$route.query.id).then(response => {
           let data = response.body;
           if (data.code == 200) {
+            alert(JSON.stringify(data));
             if (data.result.needPhone) {
               this.vip = data.result;
             } else {
