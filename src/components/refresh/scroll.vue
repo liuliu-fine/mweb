@@ -15,9 +15,9 @@
       </header>
       <slot></slot>
       <footer class="load-more">
-        <slot name="load-more">
-          <span>加载中……</span>
-        </slot>
+        <!--<slot name="load-more">-->
+          <!--<span>加载中……</span>-->
+        <!--</slot>-->
       </footer>
     </section>
   </div>

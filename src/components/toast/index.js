@@ -11,7 +11,7 @@ Toast.install = function (Vue, options) {
   // 参数
   let opt = {
     defaultType: 'bottom',
-    duration: '2500',
+    duration: '3000',
     wordWrap: false
   };
   for (let property in options) {
@@ -73,7 +73,7 @@ Toast.install = function (Vue, options) {
             show: showLoad
           }
         },
-        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf loading_leaf_0"></div><div class="loading_leaf loading_leaf_1"></div><div class="loading_leaf loading_leaf_2"></div><div class="loading_leaf loading_leaf_3"></div><div class="loading_leaf loading_leaf_4"></div><div class="loading_leaf loading_leaf_5"></div><div class="loading_leaf loading_leaf_6"></div><div class="loading_leaf loading_leaf_7"></div><div class="loading_leaf loading_leaf_8"></div><div class="loading_leaf loading_leaf_9"></div><div class="loading_leaf loading_leaf_10"></div><div class="loading_leaf loading_leaf_11"></div></div><div class="lx-load-content">' + (tips||'') + '</div></div></div>'
+        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf"></div></div></div></div>'
       });
       loadNode = new loadTpl();
       let tpl = loadNode.$mount().$el;
@@ -87,6 +87,32 @@ Toast.install = function (Vue, options) {
       return Vue.prototype.$loading(tips, type)
     }
   });
+  //modal
+  Vue.prototype.$message = function (title, content = "", callback) {
+    // toastVM.show = showToast = false;
+    let tmp = '<div class="lx-message-bg" v-if="showMessage"><div class="lx-message"><div class="title" v-html="title"></div><div class="content" v-html="content"></div><div class="close" v-on:click="callback">我知道了</div></div></div>';
+
+    let toastTpl = Vue.extend({
+      data: function () {
+        return {
+          showMessage: true,
+          title: title,
+          content: content,
+        }
+      },
+      template: tmp,
+      methods: {
+        callback: function () {
+          this.showMessage = false;
+          if (callback) {
+            callback();
+          }
+        }
+      }
+    });
+    let tpl = new toastTpl().$mount().$el;
+    document.body.appendChild(tpl);
+  }
 }
 
 // 向外暴露接口

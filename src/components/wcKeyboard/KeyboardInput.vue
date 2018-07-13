@@ -38,6 +38,10 @@
 
   .placeholder {
     color: #ccc;
+    width: 8rem;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
   }
 
   .currency {

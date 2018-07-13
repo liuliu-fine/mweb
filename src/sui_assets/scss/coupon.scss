@@ -46,6 +46,7 @@
       .item + .item {
         border-left: 1px dashed #ffdede;
         width: auto;
+        padding: 1rem .5rem;
       }
 
     }
@@ -71,13 +72,21 @@
       }
     }
   }
-  .swiper-wrapper{
-    padding-top: 3rem;
+  .swiper-wrapper {
+    padding-top: 2rem;
+    .empty {
+      text-align: center;
+      padding-top: 38%;
+      display: block;
+    }
   }
   .swiper-pagination {
-    top: 2.9rem;
-    position: fixed;
-    height: 3rem;
+    top: 0;
+    height: 2rem;
+    border-bottom: 1px solid #f0f0f0;
+    :focus {
+      outline: none;
+    }
     .swiper-pagination-bullet:first-child:before {
       content: "待使用";
     }
@@ -88,13 +97,19 @@
       content: "已过期";
     }
     .swiper-pagination-bullet {
-      width: 5rem;
+      width: 3rem;
+      margin: 0 1rem;
       height: 2rem;
-      border-radius: 5px;
+      border-radius: 0;
       line-height: 2rem;
+      box-shadow: none;
+      border-bottom: 1px solid #f0f0f0;
+
     }
     .swiper-pagination-bullet-active {
-    color: white;
+      color: rgb(0, 122, 255);
+      border-bottom: 2px solid;
+      background: transparent;
     }
   }
 }

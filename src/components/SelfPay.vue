@@ -1,291 +1,300 @@
 <template>
-  <div>
+  <div v-if="init.user">
     <div class="selfpay">
-      <div class="content" v-if="init.user">
-        <div class="content-inner">
-          <!-- Slider -->
-          <div class="e-ad" v-if="init.rollingActivities" style="background: #1c1c20;padding: 4px">
-            <div class="e-ad1" v-on:click="ajaxUrl('follow.html')">
-              <img src="/sui_assets/img/coupon/ad.svg" style="position: relative;left: 0">
+      <!-- Slider -->
+      <div class="e-ad" v-if="init.rollingActivities" style="background: #1c1c20;padding: 4px">
+        <div class="e-ad1" v-on:click="ajaxUrl('follow.html')">
+          <img src="/sui_assets/img/coupon/ad.svg" style="position: relative;left: 0">
 
-              <div style="display:inline-block" class="ad1-text">
-                <img src='/sui_assets/img/coupon/2.svg'> {{data.result.rollingActivities[0].name}}
-              </div>
-            </div>
+          <div style="display:inline-block" class="ad1-text">
+            <img src='/sui_assets/img/coupon/2.svg'> {{data.result.rollingActivities[0].name}}
           </div>
-          <div class="second-pay">
-            <div style="padding-bottom: .7rem">
-              <img class="avatar" :src="init.logo" width="30">
-              <span class="ellipsis"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
-                v-else>前台</span></span>
-              <span class="staff" v-if="flower.staffs" v-on:click="flowerStateFn()"
-                    :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
+        </div>
+      </div>
+      <div class="second-pay">
+        <div style="padding-bottom: .7rem">
+          <img class="avatar" :src="init.logo" width="30">
+          <span class="ellipsis"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
+            v-else>前台</span></span>
+          <span class="staff" v-if="flower.staffs" v-on:click="flowerStateFn()"
+                :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
 
-            </div>
-            <wc-keyboard inter="5"
-                         decimal="2"
-                         v-bind:value="post.amount"
-                         v-bind:unabled="init.preCheckData?true:false"
-                         placeholder="询问服务员后在此输入"
-                         label="消费金额" @input="inputFn"/>
-            <div v-if="init.nonPart" style="padding-top: .8rem;">
-              <wc-keyboard
-                inter="5"
-                v-bind:value="post.nonParticationAmount"
-                decimal="2" v-bind:unabled="init.preCheckData?true:false"
-                v-bind:placeholder="init.nonPart"
-                label="不参与优惠项" @input="nonPartsFn"/><!--
+        </div>
+        <wc-keyboard inter="5"
+                     decimal="2"
+                     v-bind:value="post.amount"
+                     v-bind:unabled="init.preCheckData?true:false"
+                     placeholder="询问服务员后在此输入"
+                     label="消费金额" @input="inputFn"/>
+        <div v-if="init.nonPart" style="padding-top: .8rem;">
+          <wc-keyboard
+            inter="5"
+            v-bind:value="post.nonParticationAmount"
+            decimal="2" v-bind:unabled="init.preCheckData?true:false"
+            v-bind:placeholder="init.nonPart"
+            label="不参与优惠项" @input="nonPartsFn"/><!--
               <input-val v-bind:val="post.nonParticationAmount" v-bind:label="'不参与优惠项'"
                          v-bind:placeholder="init.nonPart" @input="nonPartsFn"></input-val>-->
 
-            </div>
-          </div>
-          <div style="padding: 0 1.3rem 1rem">
-            <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
-              <div class="meal-pic" v-if="view.dishes&&number">
-                <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
-                     v-for="(item,index) in validateDish">
-                <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
-                     v-for="(item,index) in validateMeal">
+        </div>
+      </div>
+      <div style="padding: 0 1.3rem 1rem">
+        <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
+          <div class="meal-pic" v-if="view.dishes&&number">
+            <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
+                 v-for="(item,index) in validateDish">
+            <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
+                 v-for="(item,index) in validateMeal">
 
-                <div class="label1" v-if="view.dishes&&number">已选{{number}}个</div>
+            <div class="label1" v-if="view.dishes&&number">已选{{number}}个</div>
+          </div>
+          <div v-else><img src="/sui_assets/img/selfPay/plus.svg">勾选已消费的特价或套餐</div>
+        </div>
+
+        <div class="btn-green" @touchstart.stop.prevent="submitFn">
+          买单自动计算优惠
+        </div>
+      </div>
+      <!---->
+      <div class="ad-show" v-for="(item,index) in ads" v-on:click="replaceUrl(item)" v-if="ads" v-show="index==0">
+        <div class="cbg" :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
+        </div>
+        <div class="pull-left">{{item.title}}</div>
+        <div class="pull-right">看一看 ></div>
+      </div>
+      <div style="height: 6rem"></div>
+      <!---->
+      <div class="bottom">
+        <div class="flower-bg opacity" v-if="flower.staffs && flower.state != 'close'">
+          <div class="flower zoom" v-if="flower.already">
+            <div class="header">
+              <div class="title">服务评价</div>
+              <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
+            </div>
+            <div class="content1">
+              <div class="avatar"
+                   :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></div>
+              <div class="nickname">{{flower.staffs[posts.index].nickname}}</div>
+              <div class="thanks">感谢您对我的评价</div>
+              <div class="labels">
+                <div class="label active" v-if="flower.satisfied"><span class="up"></span>满意</div>
+                <div class="label active" v-else><span class="up down"></span>不满意</div>
               </div>
-              <div v-else><img src="/sui_assets/img/selfPay/plus.svg">勾选已消费的特价或套餐</div>
-            </div>
-
-            <div class="btn-green" @touchstart.stop.prevent="submitFn">
-              买单自动计算优惠
-            </div>
-          </div>
-          <!---->
-          <div class="ad-show" v-for="(item,index) in ads" v-on:click="replaceUrl(item)" v-if="ads" v-show="index==0">
-            <div class="cbg" :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
-            </div>
-            <div class="pull-left">{{item.title}}</div>
-            <div class="pull-right">看一看 ></div>
-          </div>
-          <div style="height: 6rem"></div>
-          <!---->
-          <div class="bottom">
-            <transition name="zoom">
-              <div class="flower-bg" v-if="flower.staffs && flower.state != 'close'">
-                <div class="flower" v-if="!flower.state">
-                  <div class="header">
-                    <div class="title">服务评价</div>
-                    <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
-                    <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
-                  </div>
-                  <div class="content">
-                  <span class="avatar"
-                        :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
-                    <span class="nickname">{{flower.staffs[posts.index].nickname}}</span>
-                    <div class="labels">
-                      <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
-                        class="up"></span>满意
-                      </div>
-                      <div class="label" :class="posts.satisfied?'':'active'" v-on:click="posts.satisfied = false"><span
-                        class="up down"></span>不满意
-                      </div>
-                    </div>
-                    <div class="decs">
-                      <div class="dec" v-show="!posts.satisfied" :class="item.check?'active':''"
-                           v-on:click="chooseTagFn(item)"
-                           v-for="item in flower.negative">{{item.content}}
-                      </div>
-                      <div class="dec" v-show="posts.satisfied" :class="item.check?'active':''"
-                           v-on:click="chooseTagFn(item)"
-                           v-for="item in flower.positive">{{item.content}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="grey" v-show="posts.satisfied">
-                    <img :src="flower.gratuity.ico">送我{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
-                    <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
-                  </div>
-                  <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
-                    v-else>提交</span></div>
+              <div class="decs">
+                <div class="dec active"
+                     v-for="item in flower.tags">{{item.content}}
                 </div>
-                <div class="flower" v-if="flower.state == 'other'">
-                  <div class="header">
-                    <div class="title">请选择您的服务员</div>
-                    <div class="pull-right back" v-on:click="flowerStateFn()"></div>
-                  </div>
-                  <div class="content">
-                    <div class="staff">
-                      <div class="item" v-for="(item,key) in flower.staffs" v-on:click="choosedStaffFn(key)">
+              </div>
+            </div>
+            <div class="submit" v-on:click="flowerStateFn('close')">关闭</div>
+          </div>
+          <div class="flower zoom" v-else-if="!flower.state">
+            <div class="header">
+              <div class="title">服务评价</div>
+              <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
+              <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
+            </div>
+            <div class="content1">
+              <div class="avatar"
+                   :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></div>
+              <div class="nickname">{{flower.staffs[posts.index].nickname}}</div>
+              <div class="labels">
+                <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
+                  class="up"></span>满意
+                </div>
+                <div class="label" :class="posts.satisfied?'':'active'" v-on:click="posts.satisfied = false"><span
+                  class="up down"></span>不满意
+                </div>
+              </div>
+              <div class="decs">
+                <div class="dec" v-show="!posts.satisfied" :class="item.check?'active':''"
+                     v-on:click="chooseTagFn(item)"
+                     v-for="item in flower.negative">{{item.content}}
+                </div>
+                <div class="dec" v-show="posts.satisfied" :class="item.check?'active':''"
+                     v-on:click="chooseTagFn(item)"
+                     v-for="item in flower.positive">{{item.content}}
+                </div>
+              </div>
+            </div>
+            <div class="grey" v-show="posts.satisfied">
+              <img :src="flower.gratuity.ico">送我{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
+              <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
+            </div>
+            <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
+              v-else>提交</span></div>
+          </div>
+          <div class="flower" v-if="flower.state == 'other'">
+            <div class="header">
+              <div class="title">请选择您的服务员</div>
+              <div class="pull-right back" v-on:click="flowerStateFn()"></div>
+            </div>
+            <div class="content">
+              <div class="staff">
+                <div class="item" v-for="(item,key) in flower.staffs" v-on:click="choosedStaffFn(key)">
                       <span class="avatar"
                             :style="{'backgroundImage':'url('+(item.avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
-                        <span class="nickname">{{item.nickname}}</span>
-                      </div>
-                    </div>
-                  </div>
-
+                  <span class="nickname">{{item.nickname}}</span>
                 </div>
               </div>
-            </transition>
-            <!--
-            <div class="flower-close" v-if="flower.state == 'close'" v-on:click="flowerStateFn()">
-                      <span class="avatar"
-                            :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
-              <span class="ellipsis"> 服务评价获赠 <strong v-for="item in flower.benefits">{{item.name}} </strong></span>
-
-            </div>-->
-            <div class="i-flex" v-show="flower.state == 'close'||!flower.staffs">
-              <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCouponsModal(1)">
-                <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
-                <span class="icon2"></span>可出示的券
-              </div>
-              <router-link class="item" :to="{ path: 'user', query: { id: $route.query.id }}">
-                <div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>
-                <img class="avatar" width="32" :src="init.user.avatarUrl">我的权益
-              </router-link>
-              <router-link class="item" :to="{ path: 'more', query: { id: $route.query.id }}">
-                <span class="icon1"></span>门店活动
-              </router-link>
-              <!--<div class="item"  v-on:click="ajaxUrl('user.html')">-->
-              <!--<div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>-->
-              <!--<img class="avatar" width="32" :src="init.user.avatarUrl">我的权益-->
-              <!--</div>-->
-              <!--<div class="item" v-on:click="ajaxUrl('more.html')"><span class="icon1"></span>门店活动</div>-->
             </div>
+
           </div>
-          <div id="all" style="text-align: center">
-            <div class="over-bg" style="" v-if="visible.dish&&data.result">
-              <img src="sui_assets/img/selfPay/bg_fake.png" style="width: 103%;margin: 0 -1.5%" v-if="visible.checked">
+        </div>
 
-              <div class="over-content">
-                <div class="overlay-title" v-if="visible.checked">
-                  <span>已选 {{number}} 套餐/菜品</span>
+        <div class="i-flex" v-show="flower.state == 'close'||!flower.staffs">
+          <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCouponsModal(1)">
+            <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
+            <span class="icon2"></span>可出示的券
+          </div>
+          <router-link class="item" :to="{ path: 'user', query: { id: $route.query.id }}">
+            <div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>
+            <img class="avatar" width="32" :src="init.user.avatarUrl">我的权益
+          </router-link>
+          <!--<router-link class="item" :to="{ path: 'more', query: { id: $route.query.id }}">-->
+          <!--<span class="icon1"></span>门店活动-->
+          <!--</router-link>-->
+          <!--<div class="item"  v-on:click="ajaxUrl('user.html')">-->
+          <!--<div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>-->
+          <!--<img class="avatar" width="32" :src="init.user.avatarUrl">我的权益-->
+          <!--</div>-->
+          <div class="item" v-on:click="ajaxUrl('more.html')"><span class="icon1"></span>门店活动</div>
+        </div>
+      </div>
+      <div id="all" style="text-align: center">
+        <div class="over-bg" style="" v-if="visible.dish&&data.result">
+          <img src="sui_assets/img/selfPay/bg_fake.png" style="width: 103%;margin: 0 -1.5%" v-if="visible.checked">
 
-                  <div class="close" v-on:click="visible.checked=false"></div>
-                </div>
-                <div class="overlay-title" v-else>
-                  <div class="close" v-on:click="confirmDish"></div>
-                </div>
-                <div class="overlay-detail">
-                  <div id="meal" v-if="data.result.setmealDishes">
-                    <div class="border-round" v-show="!visible.checked">可享套餐</div>
-                    <div class="meal-item" v-for="(meal,index) in data.result.setmealDishes"
-                         v-show="visible.checked?(meal.count>0):true">
-                      <div class="m-bg" v-bind:style="{backgroundImage:'url('+meal.picUrl+')'}">
-                        <div class="m-title">{{meal.name}}</div>
-                      </div>
-                      <div class="m-content" ng-if="meal.dishess"> 本套餐包含：
-                        <span v-for="item in meal.dishess"> {{item.dishes}}x{{item.count}},</span></div>
-                      <div>
-                        <span class="text-orange">{{"￥"+meal.currentAmount}}</span>
-                        <span class="amount">{{"￥"+meal.amount}}</span>
-                        <span class="pull-right" style="white-space: nowrap;">
+          <div class="over-content">
+            <div class="overlay-title" v-if="visible.checked">
+              <span>已选 {{number}} 套餐/菜品</span>
+
+              <div class="close" v-on:click="visible.checked=false"></div>
+            </div>
+            <div class="overlay-title" v-else>
+              <div class="close" v-on:click="confirmDish"></div>
+            </div>
+            <div class="overlay-detail">
+              <div id="meal" v-if="data.result.setmealDishes">
+                <div class="border-round" v-show="!visible.checked">可享套餐</div>
+                <div class="meal-item" v-for="(meal,index) in data.result.setmealDishes"
+                     v-show="visible.checked?(meal.count>0):true">
+                  <div class="m-bg" v-bind:style="{backgroundImage:'url('+meal.picUrl+')'}">
+                    <div class="m-title">{{meal.name}}</div>
+                  </div>
+                  <div class="m-content" ng-if="meal.dishess"> 本套餐包含：
+                    <span v-for="item in meal.dishess"> {{item.dishes}}x{{item.count}},</span></div>
+                  <div>
+                    <span class="text-orange">{{"￥"+meal.currentAmount}}</span>
+                    <span class="amount">{{"￥"+meal.amount}}</span>
+                    <span class="pull-right" style="white-space: nowrap;">
                             <span class="reduce" v-on:click="reduceMeal(index)" v-if="meal.count"></span>
                             <span class="current" :code="meal.code">{{meal.count||''}}</span>
                             <span class="plus" v-on:click="plusMeal(index)"></span>
                         </span>
-                      </div>
-
-                      <!--<div class="m-detail">{{meal.descriptor}}</div>-->
-                    </div>
                   </div>
-                  <div id="dish" v-if="data.result.specialDishes">
-                    <div class="border-round" v-show="!visible.checked">
-                      特价菜
-                    </div>
-                    <div class="set-dish">
-                      <div class="dish-item" style="padding: 0 2.2rem;text-align: left" :index="index.toString()"
-                           v-for="(dish,index) in data.result.specialDishes">
-                        <div v-show="visible.checked?(dish.count>0):true">
-                          <div class="left-img"><img :src="dish.picUrl||'sui_assets/img/space.png'"></div>
-                          <div class="d-content">
-                            <div class="d-detail">{{dish.name}}</div>
-                            <div>
-                              <span class="text-orange">{{"￥"+dish.currentAmount}}</span>
-                              <span class="amount">{{"￥"+dish.amount}}</span>
-                              <span class="pull-right" style="white-space: nowrap;">
+
+                  <!--<div class="m-detail">{{meal.descriptor}}</div>-->
+                </div>
+              </div>
+              <div id="dish" v-if="data.result.specialDishes">
+                <div class="border-round" v-show="!visible.checked">
+                  特价菜
+                </div>
+                <div class="set-dish">
+                  <div class="dish-item" style="padding: 0 2.2rem;text-align: left" :index="index.toString()"
+                       v-for="(dish,index) in data.result.specialDishes">
+                    <div v-show="visible.checked?(dish.count>0):true">
+                      <div class="left-img"><img :src="dish.picUrl||'sui_assets/img/space.png'"></div>
+                      <div class="d-content">
+                        <div class="d-detail">{{dish.name}}</div>
+                        <div>
+                          <span class="text-orange">{{"￥"+dish.currentAmount}}</span>
+                          <span class="amount">{{"￥"+dish.amount}}</span>
+                          <span class="pull-right" style="white-space: nowrap;">
                                 <span class="reduce" v-on:click="reduce(index)" v-if="dish.count"></span>
                                 <span class="current dish" :code="dish.code">{{dish.count||''}}</span>
                                 <span class="plus dish" v-on:click="plus(index)"></span>
                               </span>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="overlay-footer" v-if="number>0">
-                  <div style="color: #ff4d63;font-size: .8rem;line-height: 2" v-on:click="clear"
-                       v-if="visible.checked">清空
-                  </div>
-                  <div v-else>
-                    <div class="choose" v-on:click="checked">已选
-                      <div class="number">{{number}}</div>
-                    </div>
-                    <div class="check" v-on:click="confirmDish">选好了</div>
-                  </div>
-                </div>
-                <div class="overlay-footer" v-else style="line-height: 2;font-size: .8rem;"><span class="icon3"></span>请据实选择您消费的菜品
                 </div>
               </div>
             </div>
-            <div class="over-bg" style="padding: 0" v-if="visible.couponModal">
-              <div v-if="visible.timer&&coupons&&coupons.length>1" class="indirect">
-                <div>左右滑动卡片查看 ({{visible.timer}}s)</div>
+            <div class="overlay-footer" v-if="number>0">
+              <div style="color: #ff4d63;font-size: .8rem;line-height: 2" v-on:click="clear"
+                   v-if="visible.checked">清空
               </div>
-              <div class="info">
-                下列优惠券可立即出示使用
+              <div v-else>
+                <div class="choose" v-on:click="checked">已选
+                  <div class="number">{{number}}</div>
+                </div>
+                <div class="check" v-on:click="confirmDish">选好了</div>
               </div>
-              <swiper :options="swiperOption">
-                <swiper-slide v-for="(coupon,index) in coupons" :key="index">
-                  <div class="coupons-item">
-                    <div class="a4001" v-bind:class="'a'+coupon.state"
-                         style="padding: 22px;position: absolute;top: -.1rem;left: 0"></div>
-                    <div class="addon2" v-if="coupon.state!='4001'" v-on:click.stop="cancel(coupon.id)">放弃使用本券</div>
-
-                    <div class="coupon-item">
-                      <div class="big-title">{{coupon.name}}</div>
-                      <div class="blue-border">
-                        <div v-bind:id="'code'+index"></div>
-                        <div class="" style="padding-top: 2px;font-size: 14px">{{coupon.code}}</div>
-                      </div>
-                      <div class="coupons-detail">
-                        <div class="item">
-                          <div class="left">价值：</div>
-                          <div class="right">
-                            <span v-if="coupon.category=='903'||coupon.category=='9031'">
-                              {{coupon.amount}}折
-                            </span>
-                            <span v-else-if="coupon.category=='904'">
-                             <span v-if="coupon.amount">{{coupon.amount}}元</span>
-                            </span>
-                            <span v-else>
-                            {{coupon.currentAmount?('原价：'+ coupon.amount +'元，现价'+ coupon.currentAmount):coupon.amount}}元
-                              </span>
-                          </div>
-                        </div>
-                        <div class="item">
-                          <div class="left">使用条件：</div>
-                          <div class="right">{{coupon.useStrategy}}</div>
-                        </div>
-                        <div class="item">
-                          <div class="left">有效期：</div>
-                          <div class="right">{{coupon.times}}</div>
-                        </div>
-                        <div class="item">
-                          <div class="left">详情：</div>
-                          <div class="right">
-                            <div v-for="content in coupon.content">{{content}}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </swiper-slide>
-                <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
-              </swiper>
-              <div class="md-close" v-on:click="closeCouponModal"></div>
+            </div>
+            <div class="overlay-footer" v-else style="line-height: 2;font-size: .8rem;"><span class="icon3"></span>请据实选择您消费的菜品
             </div>
           </div>
         </div>
+        <div class="over-bg" style="padding: 0" v-if="visible.couponModal">
+          <div v-if="visible.timer&&coupons&&coupons.length>1" class="indirect">
+            <div>左右滑动卡片查看 ({{visible.timer}}s)</div>
+          </div>
+          <div class="info">
+            下列优惠券可立即出示使用
+          </div>
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="(coupon,index) in coupons" :key="index">
+              <div class="coupons-item">
+                <div class="a4001" v-bind:class="'a'+coupon.state"
+                     style="padding: 22px;position: absolute;top: -.1rem;left: 0"></div>
+                <div class="addon2" v-if="coupon.state!='4001'" v-on:click.stop="cancel(coupon.id)">放弃使用本券</div>
 
+                <div class="coupon-item">
+                  <div class="big-title">{{coupon.name}}</div>
+                  <div class="blue-border">
+                    <div v-bind:id="'code'+index"></div>
+                    <div class="" style="padding-top: 2px;font-size: 14px">{{coupon.code}}</div>
+                  </div>
+                  <div class="coupons-detail">
+                    <div class="item">
+                      <div class="left">价值：</div>
+                      <div class="right">
+                            <span v-if="coupon.category=='903'||coupon.category=='9031'">
+                              {{coupon.amount}}折
+                            </span>
+                        <span v-else-if="coupon.category=='904'">
+                             <span v-if="coupon.amount">{{coupon.amount}}元</span>
+                            </span>
+                        <span v-else>
+                            {{coupon.currentAmount?('原价：'+ coupon.amount +'元，现价'+ coupon.currentAmount):coupon.amount}}元
+                              </span>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="left">使用条件：</div>
+                      <div class="right">{{coupon.useStrategy}}</div>
+                    </div>
+                    <div class="item">
+                      <div class="left">有效期：</div>
+                      <div class="right">{{coupon.times}}</div>
+                    </div>
+                    <div class="item">
+                      <div class="left">详情：</div>
+                      <div class="right">
+                        <div v-for="content in coupon.content">{{content}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
+          </swiper>
+          <div class="md-close" v-on:click="closeCouponModal"></div>
+        </div>
       </div>
     </div>
     <div v-if="vip">
@@ -486,22 +495,31 @@
             }
             //ads
             // $.init();
-
           } else {
             location.href = "error.html";
           }
         });
-
         if (this.$route.query.d) {
+          //服务评价
           let json = {};
           json.tableId = this.$route.query.d;
           this.$http.get("/gratuity/shop/" + this.$route.query.id, {key: json}).then(response => {
             let data = response.body;
             if (data.code == 200) {
-              let _self = this;
-              if (data.result.commentedTags) {
-                for (var i in data.result.commentedTags) {
-
+              if (data.result.hasOwnProperty('satisfied')) {
+                //已经评价过了
+                data.result.already = true;
+                data.result.tags = [];
+                //
+                data.result.state = 'close';
+                let arr = data.result.negative;
+                if (data.result.satisfied) {
+                  arr = data.result.positive;
+                }
+                for (let i in arr) {
+                  if (data.result.commentedTags.includes(arr[i].id)) {
+                    data.result.tags.push(arr[i]);
+                  }
                 }
               }
               _self.flower = data.result;
@@ -558,12 +576,31 @@
         this.$http.post("/gratuity/shop/" + this.$route.query.id + "/staff", json).then(response => {
           let data = response.body;
           if (data.code == 200) {
-            if (json.satisfied) {
-              this.$toast.center("感谢您的评价<br><br>回馈奖励将在买单后发放<br>到您的账户");
-            } else {
-              this.$toast.center("感谢您的评价<br>我们会重视您本次的反馈");
+            //改变视图
+            this.$set(this.flower, 'state', 'close');
+            this.flower.already = true;
+            this.flower.tags = [];
+            for (let i in tags) {
+              if (tags[i].check) {
+                this.flower.tags.push(tags[i]);
+              }
             }
-            this.flower = {};
+            //
+            let _self = this;
+            if (json.satisfied) {
+              this.$message("感谢您的评价", "回馈奖励将在买单后发放<br>到您的账户", function () {
+                _self.flower.once = true;
+                _self.addVip();
+              });
+            } else {
+              this.$message("感谢您的评价", "我们会重视您本次的反馈", function () {
+                _self.flower.once = true;
+                _self.addVip();
+              });
+            }
+            // this.flower.once = true;
+            // this.addVip();
+            // this.flower = {};
           } else {
             this.$toast(data.message);
           }
@@ -574,7 +611,6 @@
         this.$http.get("/remind/guest/" + this.$route.query.id).then(response => {
           let data = response.body;
           if (data.code == 200) {
-            alert(JSON.stringify(data));
             if (data.result.needPhone) {
               this.vip = data.result;
             } else {
@@ -625,9 +661,8 @@
             break;
           //砍价
           case "6041":
-            this.$router.push({path: "/grouponInfo", query: this.$route.query});
-
-            // location.href = '/grouponInfo.html?aid=' + item.activityId + "&guestid=" + item.guestId;
+            // this.$router.push({path: "/grouponInfo", query: this.$route.query});
+            location.href = '/grouponInfo.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           //评赏
           case "6050":
@@ -635,8 +670,8 @@
             break;
           //抽奖
           case "6051":
-            this.$router.push({path: "/more", query: this.$route.query})
-            // location.href = '/raffleActivity.html?aid=' + item.activityId + "&guestid=" + item.guestId;
+            // this.$router.push({path: "/more", query: this.$route.query})
+            location.href = '/raffleActivity.html?aid=' + item.activityId + "&guestid=" + item.guestId;
             break;
           default:
             this.ajaxUrl('activity.html?aid=' + item.activityId);
@@ -697,7 +732,9 @@
               if (data.result && data.result.token) {
                 this.$cookie.set("token", data.result.token, {"expires": '30d'});
               }
-              this.addVip();
+              this.$http.get("/remind/guest/" + this.$route.query.id + '/result').then(response => {
+                this.vip = response.body.result;
+              });
             } else {
               this.$toast(data.message);
             }
@@ -768,7 +805,7 @@
             switch (data.type) {
               case "500100":
               case "500101":
-                app.getCouponData();
+                this.getCouponData();
                 break;
             }
           };

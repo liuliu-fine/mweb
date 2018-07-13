@@ -1,18 +1,21 @@
 <template>
-  <div class="more-css">        <!--蓝色背景-->
-    <div class="card-grey" v-if="data.cardUrl">
-      <!--卡-->
-      <div class="card-bg" v-on:click="ajaxUrl('vip.html')"
+  <div class="more-css">
+    <div class="i-bg" v-if="data.cardUrl">
+      <div class="i-card" v-on:click="ajaxUrl('vip.html')"
            :style="{backgroundImage: 'url('+ (data.cardUrl||'') +')'}">
-        <div class="card-content">
+        <div>
           <img class="avatar" :src="data.logo">
           <span class="shop">{{data.brandName}}</span>
-
         </div>
-        <div class="rule"></div>
+        <div class="i-footer">
+          <div class="set-content">
+            <div style="font-size: .7rem">加入会员 尊享特权</div>
+          </div>
+          <div><span class="i-icon i-icon6"></span></div>
+        </div>
       </div>
-      <!--icon-->
     </div>
+
     <div class="code">
       <div v-for="item in data.activities1">
         <div v-if="item.activityCategory=='6004'||item.activityCategory=='6007'">
@@ -89,7 +92,7 @@
         <div v-else-if="item.activityCategory=='6003'"
              class="coupons padded EXCHANGE"
              v-on:click="ajaxUrl('exchange.html')">
-          <div class="set-title">
+          <div class="set-title" v-if="item.activities.length">
             <div class="content-title">
               <span class="text">{{item.activities[0].name}}</span>
             </div>
@@ -216,6 +219,22 @@
                           {{activity.time}}
                         </div>
                       </div>
+                      <div class="item-title" v-if="strategy.type=='1013'">
+                        <div class="name">
+                          {{strategy.from}}：满{{strategy.amount}}减{{strategy.benefit}}
+                        </div>
+                        <div class="text-grey">
+                          {{activity.time}}
+                        </div>
+                      </div>
+                      <div class="item-title" v-if="strategy.type=='1014'">
+                        <div class="name">
+                          {{strategy.from}}：充值{{strategy.amount}}倍免单
+                        </div>
+                        <div class="text-grey">
+                          {{activity.time}}
+                        </div>
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -249,6 +268,7 @@
           "6006": "SPECIAL_PRICE",
           "6007": "COUPON",
           "6008": "POINT",
+          "6011": "CHRGEFREE",
           "6012": "SPENDAS",
           "6014": "LIMITREDUCE",
           "6015": "SETMEAL",

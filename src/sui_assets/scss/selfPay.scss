@@ -1,5 +1,36 @@
 $grey-blue: rgb(107, 162, 186);
 $warm-grey: rgb(156, 156, 156);
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.opacity {
+  animation: opacity 1s;
+  animation-direction: alternate; //反向播放
+}
+
+@keyframes zoom {
+  from {
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.zoom {
+  animation: zoom .5s;
+  animation-direction: alternate;
+  transform-origin: 95% 30px;
+}
+
 .selfpay {
   background: #DBE1E2;
   min-height: 100vh;
@@ -510,11 +541,13 @@ $warm-grey: rgb(156, 156, 156);
     right: 0;
     text-align: center;
     z-index: 1;
+
     .flower-bg {
       height: 100vh;
+      animation: show-modal2 .5s;
+      animation-direction: alternate;
       //height: calc(100vh - 55px);
       background: rgba(0, 0, 0, .7);
-      transform-origin: 95% 30px;
       .header {
         font-size: .9rem;
         border-bottom: 1px solid rgb(217, 217, 217);
@@ -551,11 +584,10 @@ $warm-grey: rgb(156, 156, 156);
         left: .8rem;
         right: .8rem;
         top: 30px;
-        //min-height: 10rem;
         color: rgb(51, 51, 51);
         .content {
           padding: 1rem 2.3rem;
-          text-align: center;
+          text-align: left;
           .avatar {
             width: 36px;
             height: 36px;
@@ -564,11 +596,21 @@ $warm-grey: rgb(156, 156, 156);
             display: inline-block;
             background-size: contain;
             background-repeat: no-repeat;
+            margin: auto 8px;
           }
           .nickname {
             font-size: .8rem;
-            padding-left: .7rem;
             vertical-align: middle;
+            width: calc(100% - 57px);
+            //max-width: 4.5rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+          .thanks {
+            font-size: .7rem;
+            padding-top: .5rem;
           }
           .staff {
             display: flex;
@@ -602,6 +644,110 @@ $warm-grey: rgb(156, 156, 156);
               color: rgb(156, 156, 156);
               flex: 1;
               margin: 0 .7rem;
+              max-width: 42%;
+              .up {
+                background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
+                background-size: 55px;
+                background-position: -2px -69px;
+                display: inline-block;
+                padding: 10px 9px;
+                vertical-align: middle;
+                margin-right: 5px;
+              }
+              .down {
+                background-position: -2px -21px;
+              }
+            }
+            .active {
+              color: white;
+              background: $grey-blue;
+              box-shadow: none;
+              .up {
+                background-position: -2px -92px;
+              }
+              .down {
+                background-position: -2px -44px;
+              }
+            }
+          }
+          .decs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .dec {
+              margin: .25rem 3%;
+              width: 43%;
+              height: 1.4rem;
+              line-height: 1.45rem;
+              border-radius: 5px;
+              color: rgb(156, 156, 156);
+              box-shadow: 0 0 1px 1px #9c9c9c inset;
+            }
+            .active {
+              color: white;
+              background: $grey-blue;
+              box-shadow: none;
+            }
+          }
+        }
+        .content1 {
+          padding: 1rem 2.3rem;
+          text-align: center;
+          .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            vertical-align: middle;
+            //display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 auto .5rem;
+          }
+          .nickname {
+            font-size: .8rem;
+            vertical-align: middle;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+          .thanks {
+            font-size: .7rem;
+            padding-top: .5rem;
+          }
+          .staff {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -1.5rem;
+            .item {
+              width: 46%;
+              border-radius: 5px;
+              border: 1px solid $warm-grey;
+              height: 3.2rem;
+              line-height: 3.2rem;
+              margin-bottom: 1rem;
+            }
+            .item:active {
+              background: $grey-blue;
+              color: white;
+            }
+          }
+          .labels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 1.2rem 0;
+            .label {
+              width: 4.7rem;
+              height: 1.5rem;
+              line-height: 1.55rem;
+              border-radius: 20.8px;
+              box-shadow: 0 0 1px 1px #9c9c9c inset;
+              color: rgb(156, 156, 156);
+              flex: 1;
+              margin: 0 .7rem;
+              max-width: 42%;
               .up {
                 background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
                 background-size: 55px;
@@ -660,9 +806,41 @@ $warm-grey: rgb(156, 156, 156);
             vertical-align: text-bottom;
           }
           .blue-text {
-            color: $grey-blue;
+            color: rgb(255, 57, 46);
             font-size: .6rem;
             font-weight: bold;
+            position: relative;
+          }
+          .blue-text:after {
+            content: "查看详情";
+            background: url(/sui_assets/img/selfPay/anim.png) center no-repeat;
+            padding: 7px 7px 11px 11px;
+            line-height: 1.3;
+            position: absolute;
+            top: -47px;
+            left: 0;
+            right: 0;
+            animation: run 0.5s infinite;
+            animation-direction: alternate;
+            animation-delay: .5s;
+            color: white;
+            font-size: 10px;
+            width: 37px;
+            letter-spacing: 3px;
+            text-align: center;
+            background-size: contain;
+            margin: auto;
+          }
+          @keyframes run {
+            0% {
+              transform: rotate(-17deg) scale(1);
+            }
+            //80%{
+            //  transform: rotate(10deg)  scale(1.1);
+            //}
+            100% {
+              transform: rotate(-10deg) scale(1.1);
+            }
           }
 
         }
@@ -846,7 +1024,7 @@ $warm-grey: rgb(156, 156, 156);
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;

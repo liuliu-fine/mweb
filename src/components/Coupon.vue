@@ -36,7 +36,10 @@
                 </div>
               </div>
               <div class="set-coupon" v-else>
-                <div style="text-align: center;padding: 1rem 0"><img src="/sui_assets/img/my/empty.svg"></div>
+                <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
+                  <img src="/sui_assets/img/my/empty.svg">
+                </router-link>
+                <!--<div style="text-align: center;padding-top: 38%;"><img src="/sui_assets/img/my/empty.svg"></div>-->
               </div>
             </swiper-slide>
             <swiper-slide>
@@ -55,7 +58,7 @@
                         <span style="font-size: .6rem">可抵 ￥</span>{{item.amount - item.currentAmount}}
                         <div class="through">{{item.amount}}</div>
                       </div>
-                      <div class="amount0" v-else-if="item.category =='904'">
+                      <div class="amount0" v-else-if="item.category =='904'&&item.amount">
                         <span style="font-size: .6rem">价值 ￥</span>{{item.amount}}
                       </div>
                     </div>
@@ -67,14 +70,17 @@
                 </div>
               </div>
               <div class="set-coupon" v-else>
-                <div style="text-align: center;padding: 1rem 0"><img src="/sui_assets/img/my/empty.svg"></div>
+                <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
+                  <img src="/sui_assets/img/my/empty.svg">
+                </router-link>
+                <!--<div style="text-align: center;padding-top: 38%;"><img src="/sui_assets/img/my/empty.svg"></div>-->
               </div>
             </swiper-slide>
             <swiper-slide>
               <div class="set-coupon" v-if="data.overdue.items">
                 <div class="coupon_show" v-for="item in data.overdue.items">
                   <div class="i-flex i-coupon">
-                    <div class="a4001" :class="'a'+ item.state"></div>
+                    <div class="a4001" :class="'a'+  item.state"></div>
                     <div class="item">
                       <!--<img class="avatar" src="/sui_assets/img/avatar.png">-->
                       <div class="name" style="padding-top: 0.4rem">{{item.name}}</div>
@@ -98,7 +104,10 @@
                 </div>
               </div>
               <div class="set-coupon" v-else>
-                <div style="text-align: center;padding: 1rem 0"><img src="/sui_assets/img/my/empty.svg"></div>
+                <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
+                  <img src="/sui_assets/img/my/empty.svg">
+                </router-link>
+                <!--<div style="text-align: center;padding-top: 38%;"></div>-->
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
@@ -114,17 +123,21 @@
   import Scroll from './refresh/scroll';
   import 'swiper/dist/css/swiper.css'
   import VueAwesomeSwiper from 'vue-awesome-swiper'
+
   Vue.use(VueAwesomeSwiper)
 
   export default {
     name: "User",
     data() {
+      const self = this;
       return {
         data: {
           usable: {},//待使用
           used: {},//已使用
           overdue: {}//已过期
         },
+        type: ['usable', 'used', 'overdue'],
+        active: 0,
         swiperOption: {
           pagination: {
             el: '#swiper-pagination',
@@ -133,33 +146,45 @@
           spaceBetween: 30,
           centeredSlides: true,
           autoHeight: true,
+          on: {
+            slideChange() {
+              self.toggleMenu(this.activeIndex);
+            }
+          }
         }
       }
     },
+    // computed: {
+    //   swiper() {
+    //     return this.$refs.swiper.swiper
+    //   }
+    // },
     created() {
       this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid)).then((response) => {
         if (response.body.code == 200) {
           this.data.usable = response.body.result;
         } else {
-          alert(response.body.message);
-        }
-      });
-      this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid) + "/used").then((response) => {
-        if (response.body.code == 200) {
-          this.data.used = response.body.result;
-        } else {
-          alert(response.body.message);
-        }
-      });
-      this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid) + "/overdue").then((response) => {
-        if (response.body.code == 200) {
-          this.data.overdue = response.body.result;
-        } else {
-          alert(response.body.message);
+          this.data.usable = {total: 0, page: 0, count: 20};
+          this.$el.querySelector('.load-more').style.display = 'none';
+          console.log(response.body.message);
         }
       });
     },
     methods: {
+      toggleMenu(index) {
+        this.active = index;
+        if (index && !this.data[this.type[index]].total) {
+          this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid) + "/" + this.type[index]).then((response) => {
+            if (response.body.code == 200) {
+              this.data[this.type[index]] = response.body.result;
+            } else {
+              this.$el.querySelector('.load-more').style.display = 'none';
+              this.data[this.type[index]] = {total: 0, page: 0, count: 20};
+              console.log(response.body.message);
+            }
+          });
+        }
+      },
       couponFn(event, id) {
         this.$couponShow(event, id, 'earned')
       },
@@ -167,23 +192,32 @@
         location.reload();
       },
       onInfinite(done) {
-        // if (this.coupons.total <= this.coupons.count * this.coupons.page) {
-        //   this.$el.querySelector('.load-more').style.display = 'none';
-        //   return;
-        // }
-        // this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid), {
-        //   key: {
-        //     page: ++this.coupons.page,
-        //     count: this.coupons.count
-        //   }
-        // }).then(response => {
-        //   if (response.body.code == 200) {
-        //     this.coupons.items = this.coupons.items.concat(response.body.result.items);
-        //     done();
-        //   }
-        // });
+        if (this.data[this.type[this.active]].page == 0 || (this.data[this.type[this.active]].total <= this.data[this.type[this.active]].count * this.data[this.type[this.active]].page)) {
+          // this.$el.querySelector('.load-more').style.display = 'none';
+          done();
+          return;
+        } else {
+          // this.$el.querySelector('.load-more').style.display = 'block';
+        }
+        console.log(1);
+        let str = "";
+        if (this.active) {
+          str = "/" + this.type[this.active];
+        }
+        this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid) + str, {
+          key: {
+            page: ++this.data[this.type[this.active]].page,
+            count: 20
+          }
+        }).then(response => {
+          if (response.body.code == 200) {
+            this.data[this.type[this.active]].items = this.data[this.type[this.active]].items.concat(response.body.result.items);
+            done();
+          }
+        });
       }
-    },
+    }
+    ,
     components: {
       'v-scroll': Scroll
     }

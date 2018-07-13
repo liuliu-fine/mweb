@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
           } else {
             //token非法
             Vue.cookie.set("url", location.href, {expires: '2m'});
-            location.href = "index.html" + location.search.split("&state=1")[0];
+            location.href = "index.html?" + location.search.split("&state=1")[0];
           }
         })
       } else {
@@ -69,7 +69,6 @@ router.beforeEach((to, from, next) => {
 })
 //rest request 请求加密处理
 Vue.http.interceptors.push(function (request) {
-  console.log(this);
   const t = "037925fa578c4ed98885d7b28ade5462";
   Vue.cookie.set("apikey", "6b774cc5eb7d45818a9c7cc0a4b6920f", {expires: 30, path: "/"});
 
@@ -98,22 +97,6 @@ Vue.http.interceptors.push(function (request) {
     for (let s = 1; s < i.length; s += 2) m += i.charAt(s);
     return location.origin + url + "signature=" + m;
   }
-  let getGetUrl = function (u, json = {}) {
-    let e = [];
-    let j = JSON.parse(JSON.stringify(json));
-    if (Object.keys(j).length) {
-      for (let a in j) e.push(a)
-    }
-    j.timestamp = (new Date).getTime(), e.push("timestamp"), e.sort();
-    let n = "", f = {};
-    for (let h in e) n += e[h] + "=" + j[e[h]] + "&", f[e[h]] = j[e[h]];
-    let i = getmd5("timestamp=" + j.timestamp + t), m = "", o = 0;
-    for (; o < i.length; o += 2) m += i.charAt(o);
-    for (let s = 1; s < i.length; s += 2) m += i.charAt(s);
-    f.signature = m;
-    n += "signature=" + m;
-    return location.origin + u + "?" + n;
-  }
   request.url = getUrl(request.url, request.key);
   // return response callback
   return function (response) {
@@ -123,11 +106,7 @@ Vue.http.interceptors.push(function (request) {
         if (response.body.code == 403000) {
           Vue.cookie.set("url", location.href, {expires: '2m'});
           localStorage.setItem("url", location.href);
-          if (this.$route.query.id) {
-            location.href = "index.html?id=" + this.$route.query.id;
-          } else {
-            location.href = "index.html?guestid=" + this.$route.query.guestid;
-          }
+          location.href = "index.html?" + location.hash.split("?")[1];
         }
         break;
       default:

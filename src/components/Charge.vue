@@ -64,6 +64,7 @@
           if (data.result.customerRelationId) {
             localStorage.setItem("charge", data.result.charge);
             this.$cookie.set("charge", data.result.charge);
+            this.$cookie.set("relation_id", data.result.customerRelationId);
           }
           if (data.result.activity && data.result.activity.length) {
             for (let i in data.result.activity) {
