@@ -1162,7 +1162,7 @@ $warm-grey: rgb(156, 156, 156);
       background-color: #ff4955;
       border: 1px solid #b41214;
       border-radius: 3px;
-      width: 70px;
+      width: 80px;
       float: right;
     }
 
@@ -1181,7 +1181,7 @@ $warm-grey: rgb(156, 156, 156);
     .v-item {
       background: url(/sui_assets/img/addVip/coupon.svg) center top no-repeat;
       color: #000000;
-      width: 266px;
+      width: 233px;
       /*width: 218px;*/
       height: 74px;
       font-size: .75rem;
@@ -1210,6 +1210,7 @@ $warm-grey: rgb(156, 156, 156);
       .coupon-icon {
         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;
         background-size: 42px;
+        height: 40px;
       }
       .right {
         padding: 0 1.5rem 0 .6rem;
@@ -1396,12 +1397,13 @@ $warm-grey: rgb(156, 156, 156);
   }
   .input-text {
     position: relative;
-    top: -1.5rem;
-    padding: .3rem .4rem;
+    top: -1.6rem;
+    padding: .3rem 0;
     font-size: .5rem;
     margin: -.3rem .6rem;
     border-left: 1px solid #ED1E37;
     color: #ED1E37;
+    width: 78px;
     float: right;
   }
   .submit {

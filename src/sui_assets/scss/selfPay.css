@@ -1,21 +1,21 @@
 /*
-Error: Invalid GBK character "\xEF"
-        on line 752 of selfPay.scss
+Error: Invalid GBK character "\xE5"
+        on line 15 of selfPay.scss
 
-747:         color: #ff2c2c;
-748:         font-size: 36px;
-749:         width: 95px;
-750:         text-align: center;
-751:         .dollar:before {
-752:           content: "￥";
-753:           font-size: 15px;
-754:         }
-755:       }
-756:       .coupon-icon {
-757:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;
+10:   }
+11: }
+12: 
+13: .opacity {
+14:   animation: opacity 1s;
+15:   animation-direction: alternate; //反向播放
+16: }
+17: 
+18: @keyframes zoom {
+19:   from {
+20:     -webkit-transform: scale3d(0.3, 0.3, 0.3);
 
 Backtrace:
-selfPay.scss:752
+selfPay.scss:15
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xEF\"\A         on line 752 of selfPay.scss\A \A 747:         color: #ff2c2c;\A 748:         font-size: 36px;\A 749:         width: 95px;\A 750:         text-align: center;\A 751:         .dollar:before {\A 752:           content: \"￥\";\A 753:           font-size: 15px;\A 754:         }\A 755:       }\A 756:       .coupon-icon {\A 757:         background: url(/sui_assets/img/addVip/icon.png) 1rem center/contain no-repeat;"; }
+  content: "Error: Invalid GBK character \"\xE5\"\A         on line 15 of selfPay.scss\A \A 10:   }\A 11: }\A 12: \A 13: .opacity {\A 14:   animation: opacity 1s;\A 15:   animation-direction: alternate; //反向播放\A 16: }\A 17: \A 18: @keyframes zoom {\A 19:   from {\A 20:     -webkit-transform: scale3d(0.3, 0.3, 0.3);"; }

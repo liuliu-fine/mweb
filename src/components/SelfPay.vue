@@ -360,10 +360,11 @@
                 </div>
               </div>
             </div>
-            <div class="modal-phone"><input type="tel" placeholder="输入您的手机号码" id="tel" maxlength="11">
-              <div class="input-text">获取验证码</div>
-              <input type="tel" placeholder="输入收到的验证码" id="validate" maxlength="6">
-              <div id="bindPhone" class="v-button">立即领取</div>
+            <div class="modal-phone"><input type="tel" v-model="phone1.phone" placeholder="输入您的手机号码" id="tel"
+                                            maxlength="11">
+              <div class="input-text" v-on:click.stop="validate1Fn">{{phone1.text}}</div>
+              <input type="tel" placeholder="输入收到的验证码" v-model="phone1.validateCode" id="validate" maxlength="6">
+              <div id="bindPhone" v-on:click.stop="bindPhone1" class="v-button">立即领取</div>
             </div>
             <div class="close" v-on:click="vip = null"></div>
           </div>
@@ -421,6 +422,7 @@
           centeredSlides: true,
         },
         phone: "",
+        phone1: "",
         flower: {},
         posts: {
           satisfied: true,
@@ -613,6 +615,7 @@
           if (data.code == 200) {
             if (data.result.needPhone) {
               this.vip = data.result;
+              this.phone1 = {text: '获取验证码', able: true};
             } else {
               this.$http.post("/membership", {id: this.$route.query.id}).then(response => {
                 let data = response.body;
@@ -692,6 +695,7 @@
         this.phone = {text: '获取验证码', able: true};
       },
       validateFn() {
+        console.log(1);
         if (!this.phone.able) return;
         if (!this.phone.phone || this.phone.phone.length != 11) {
           this.$toast("手机格式不正确");
@@ -729,6 +733,57 @@
             let data = response.data;
             if (data.code == 200) {
               this.phone = null;
+              if (data.result && data.result.token) {
+                this.$cookie.set("token", data.result.token, {"expires": '30d'});
+              }
+              this.$http.get("/remind/guest/" + this.$route.query.id + '/result').then(response => {
+                this.vip = response.body.result;
+              });
+            } else {
+              this.$toast(data.message);
+            }
+          });
+        }
+      },
+      validate1Fn() {
+        console.log(1);
+        if (!this.phone1.able) return;
+        if (!this.phone1.phone || this.phone1.phone.length != 11) {
+          this.$toast("手机格式不正确");
+          return;
+        }
+        this.phone1.able = false;
+        let _self = this;
+        this.$http.post("/validate/bindup", {"phone": this.phone1.phone}).then(response => {
+          let data = response.data;
+          if (data.code == 200) {
+            this.$toast("获取成功");
+            let second = 90;
+            let init = setInterval(function () {
+              second--;
+              if (!second || !_self.phone1) {
+                clearInterval(init);
+                _self.phone1.text = "重新获取验证码";
+                _self.phone1.able = true;
+                return;
+              }
+              _self.phone1.text = "已发送 " + second + " s";
+            }, 1000);
+          } else {
+            this.phone1.able = true;
+            this.$toast(data.message);
+          }
+        });
+      },
+      bindPhone1() {
+        if (this.phone1.phone && this.phone1.validateCode && this.phone1.phone.length == 11 && this.phone1.validateCode.length == 6) {
+          let jsonA = {shopId: this.$route.query.id};
+          jsonA.phone = this.phone1.phone;
+          jsonA.validateCode = this.phone1.validateCode;
+          this.$http.post("/phone/bindup", jsonA).then(response => {
+            let data = response.data;
+            if (data.code == 200) {
+              this.vip = null;
               if (data.result && data.result.token) {
                 this.$cookie.set("token", data.result.token, {"expires": '30d'});
               }
