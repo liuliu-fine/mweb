@@ -11,6 +11,12 @@
         <div class="left text-bold">{{data.order.paymentModeText}}支付</div>
         <div class="right text-bold">{{data.order.strategy.finalAmount}}</div>
       </div>
+      <div class="award border" v-if="data.order.strategy.used">
+        <div class="left">金额抵用</div>
+        <div class="left" style="width: auto">
+          <div v-for="item in data.order.strategy.used">{{item.content}} -{{item.amount}} </div>
+        </div>
+      </div>
       <div class="award border" v-if="data.order.strategy.got">
         <div class="left">获得奖励</div>
         <div class="left" style="width: auto">
@@ -218,7 +224,7 @@
               // }
             } else {
               if (data.code == 404000) {
-                this.$toast("正在查询支付结果");
+                alert("正在查询支付结果");
               } else {
                 alert(data.message);
               }

@@ -28,14 +28,14 @@
           <div class="icon-left i-icon0"></div>
           <div class="right">
             <div>积分<span class="pl">兑换</span></div>
-            <div class="text-xs">{{data.point||0}}</div>
+            <div class="i-red">{{data.point||0}}</div>
           </div>
         </div>
         <router-link class="item" :to="{ path: 'charge', query:  $route.query}">
           <div class="icon-left i-icon3"></div>
           <div class="right">
             <div>余额<span class="pl">充值</span></div>
-            <div class="text-xs">{{data.charge||0}}</div>
+            <div class="i-red">{{data.charge||0}}</div>
           </div>
         </router-link>
         <router-link class="item" :to="{ path: 'coupon', query:  $route.query}">
@@ -49,7 +49,7 @@
           <div class="icon-left i-icon2"></div>
           <div class="right">
             <div>代用币</div>
-            <div class="text-xs">{{data.reward||0}}</div>
+            <div class="i-red">{{data.reward||0}}</div>
           </div>
         </div>
         <!--  <div class="item" v-on:click="ajaxUrl('charge.html')">

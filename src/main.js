@@ -107,6 +107,12 @@ Vue.http.interceptors.push(function (request) {
           Vue.cookie.set("url", location.href, {expires: '2m'});
           localStorage.setItem("url", location.href);
           location.href = "index.html?" + location.hash.split("?")[1];
+        }else if (response.body.code == 400000) {
+          location.href = "error.html#7";
+        } else if (response.body.code == 403060) {
+          location.href = "bind.html?" + location.hash.split("?")[1];
+          // alert("请先绑定手机号");
+          return;
         }
         break;
       default:

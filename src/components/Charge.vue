@@ -26,7 +26,7 @@
     <div class="gmodal" v-if="showModal">
       <div class="g-modal-border" style="margin-top: 25%;">
         <div class="text1">充值卡使用规则</div>
-        <ul>
+        <ul style="padding-left: 0">
           <li v-if="data.used[0].time">{{data.used[0].time}}</li>
           <li v-if="data.used[0].periods">{{data.used[0].periods}}</li>
           <li v-if="data.used[0].shared">{{data.used[0].shared}}</li>
