@@ -339,7 +339,12 @@
               <div class="usable">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
               <div class="v-coupon" v-if="vip.coupons">
                 <div class="v-item" v-for="coupon in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
-                  <div class="left" v-if="coupon.hasOwnProperty('amount')"><span class="dollar"></span>10</div>
+                  <div class="left" v-if="coupon.hasOwnProperty('amount')">
+                      <span v-if="coupon.category=='903'||coupon.category=='9031'">
+                              {{coupon.amount}}折
+                            </span>
+                    <span v-else><span class="dollar"></span>{{coupon.amount}}</span>
+                  </div>
                   <div class="left coupon-icon" v-else></div>
                   <div class="right">
                     <div>{{coupon.name}}</div>

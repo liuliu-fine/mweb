@@ -34,7 +34,7 @@
 
 
     </div>
-    <div class="benefit">
+    <div class="benefit" v-if="data.redEnvelopes||data.lottery||data.commentBenefit">
       <div class="title">精彩活动</div>
       <div class="activity" :style="{backgroundImage: 'url('+ (data.redEnvelopes.picUrl||'/sui_assets/img/payment/activity1.jpg') +')'}" v-on:click="openFn()" v-if="data.redEnvelopes" style="line-height: 1.4">
         <!--<div class="text-red">发红包</div>-->
