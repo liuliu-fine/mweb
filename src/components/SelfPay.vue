@@ -143,7 +143,7 @@
         </div>
 
         <div class="i-flex" v-show="flower.state == 'close'||!flower.staffs">
-          <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCouponsModal(1)">
+          <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCoupons()">
             <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
             <span class="icon2"></span>可出示的券
           </div>
@@ -633,7 +633,7 @@
                 }
               });
             }
-          } else if (this.init.existCoupon) {
+          } else if (this.init.existCoupon||this.init.couponCount) {
             this.getCouponsModal();
           }
         });
@@ -849,7 +849,6 @@
         let _self = this;
         setTimeout(function () {
           let a;
-          let code = 12;
           let uri = "wss://" + location.hostname + "/websocket?id=" + _self.init.user.id;
           let websocket;
           _self.socketObj = websocket = new WebSocket(uri);
@@ -865,7 +864,7 @@
             switch (data.type) {
               case "500100":
               case "500101":
-                this.getCouponData();
+                _self.getCouponData();
                 break;
             }
           };
@@ -920,7 +919,6 @@
 
       },
       getCouponData: function () {
-        $("input").blur();
         let _self = this;
         let json = {};
         if (this.post.amount) json.amount = this.post.amount;
