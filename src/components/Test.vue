@@ -11,7 +11,7 @@
 <script>
 
 </script>
-<style>
+<style scoped>
   .bg {
     position: fixed;
     top: 0;
