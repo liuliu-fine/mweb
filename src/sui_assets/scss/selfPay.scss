@@ -32,11 +32,11 @@ $warm-grey: rgb(156, 156, 156);
 }
 
 .selfpay {
-  background: #DBE1E2;
+  background: rgb(240, 240, 240);
   min-height: 100vh;
   .second-pay {
     background: white;
-    padding: 1rem 1.3rem .8rem;
+    padding: 1rem .8rem .8rem;
     .avatar {
       width: 34px;
       height: 34px;
@@ -44,8 +44,8 @@ $warm-grey: rgb(156, 156, 156);
       vertical-align: middle;
     }
     .staff {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       vertical-align: middle;
       display: inline-block;
@@ -82,7 +82,7 @@ $warm-grey: rgb(156, 156, 156);
   }
 
   //old
-  .ellipsis {
+  .table {
     //color: #828282;
     display: inline-block;
     width: 10rem;
@@ -92,8 +92,10 @@ $warm-grey: rgb(156, 156, 156);
     -webkit-line-clamp: 1;
     display: -webkit-inline-box;
     vertical-align: middle;
-    font-size: 15px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 40px;
+    color: rgb(140,140,140);
+    padding-bottom: 1rem;
   }
   .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: -5px;
@@ -106,8 +108,7 @@ $warm-grey: rgb(156, 156, 156);
     color: #8b8b8b;
     overflow: auto;
     line-height: 2;
-    margin: .3rem;
-    margin-bottom: 55px;
+    margin: 1rem .8rem;
     background: white;
     .cbg {
       height: 8rem;
@@ -516,8 +517,9 @@ $warm-grey: rgb(156, 156, 156);
     line-height: 26px;
     font-size: .55rem;
     text-align: center;
-    margin-top: 15px;
     border-radius: 9px;
+    width: 13.5rem;
+    margin: 1rem auto;
   }
 
   .label1 {
