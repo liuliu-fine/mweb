@@ -97,6 +97,7 @@
     },
     methods: {
       submitFn() {
+        this.$loading();
         let _self = this;
         let para = {
           activityId: _self.data.activity[_self.key].activityId,
@@ -108,7 +109,7 @@
         if (this.$route.query.type == "channel") {
           para.channel = "401";
         }
-        this.$http.post("/benefit/recharge/guest/" + this.$route.query.id, para).then(response => {
+        this.$http.post("/benefit/recharge/guest/" + (this.$route.query.id || this.$route.query.guestid), para).then(response => {
           if (response.body.code != 200) {
             if (response.body.code == 405017) {
               let re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
@@ -117,6 +118,7 @@
                 return;
               }
             } else {
+              this.$loading.close();
               alert(response.body.message);
             }
             return;
@@ -132,13 +134,13 @@
               let js = response.body.result.js;
               let pay = response.body.result.pay;
               pay.success = function () {
-                this.earnCheck(order_id);
+                _self.earnCheck(order_id);
               };
               pay.cancel = function () {
-                this.cancelPay(order_id);
+                _self.cancelPay(order_id);
               };
               pay.fail = function (res) {
-                this.cancelPay(order_id);
+                _self.cancelPay(order_id);
                 alert("支付失败");
               };
               js.debug = false;
@@ -154,11 +156,11 @@
                 tradeNO: response.body.result.pay.tradeNO
               }, function (result) {
                 if (result.resultCode == "6001") {
-                  this.cancelPay(order_id);
+                  _self.cancelPay(order_id);
                   return;
                 }
                 if (result.resultCode == "9000") {
-                  this.earnCheck(order_id);
+                  _self.earnCheck(order_id);
                 }
               });
               break;
@@ -171,13 +173,17 @@
         });
       },
       earnCheck(order_id) {
-        y = setInterval(function () {
-          rest("/order/" + order_id + "/pay/result", {}, "get", function (data1) {
+        this.$loading.close();
+        let _self = this;
+        let y = setInterval(function () {
+          _self.$http.get("/order/" + order_id + "/pay/result").then(response => {
+            let data1 = response.body;
             if (data1.code == "200" || data1.code == "404014") {
               clearInterval(y);
-              this.$toast.center('操作成功');
+              _self.$toast.center('操作成功');
+              location.reload();
             } else {
-              $.toast("支付结果查询中");
+              _self.$toast("支付结果查询中");
             }
           });
         }, 1000)

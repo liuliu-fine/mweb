@@ -700,7 +700,7 @@
         this.phone = {text: '获取验证码', able: true};
       },
       validateFn() {
-        console.log(1);
+//        console.log(1);
         if (!this.phone.able) return;
         if (!this.phone.phone || this.phone.phone.length != 11) {
           this.$toast("手机格式不正确");

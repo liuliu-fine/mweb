@@ -73,7 +73,7 @@
           return;
         }
       }
-      this.$http.get("/remind/guest/" + this.$route.query.id).then(response => {
+      this.$http.get("/remind/guest/" + (this.$route.query.id||this.$route.query.guestid)).then(response => {
         let data = response.body;
         if (data.code == 200) {
           if (node.attr("id") && (result.category == "902" || result.category == "9021" || result.category == "904" || result.category == "9031")) {

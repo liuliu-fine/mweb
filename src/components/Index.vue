@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <router-link :to="{ name:'Payment',params: { id: 'status'}}">payment</router-link>
-    <router-link :to="{ name:'Charge',query: { id: this.$route.query.id,guestid: this.$route.query.guestid}}">charge
+    <router-link :to="{ name:'Charge',query: this.$route.query}">charge
     </router-link>
     <router-view></router-view>
   </div>
