@@ -490,7 +490,7 @@
                 return;
               }
             } else {
-              if (_self.init.user.phone) {
+              if (_self.init.existCoupon || _self.init.couponCount) {
                 _self.getCouponsModal();
               } else {
                 _self.addVip();
@@ -637,8 +637,6 @@
                 }
               });
             }
-          } else if (this.init.existCoupon || this.init.couponCount) {
-            this.getCouponsModal();
           } else {
             this.getFlower();
           }
@@ -985,7 +983,7 @@
           }, 1000);
         } else {
           this.visible.timer = 0;
-          this.getFlower();
+          this.addVip();
         }
       },
       checked: function () {
