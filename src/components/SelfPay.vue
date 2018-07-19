@@ -600,13 +600,13 @@
             let _self = this;
             if (json.satisfied) {
               this.$message("感谢您的评价", "回馈奖励将在买单后发放<br>到您的账户", function () {
-                _self.flower.once = true;
-                _self.addVip();
+                // _self.flower.once = true;
+                // _self.addVip();
               });
             } else {
               this.$message("感谢您的评价", "我们会重视您本次的反馈", function () {
-                _self.flower.once = true;
-                _self.addVip();
+                // _self.flower.once = true;
+                // _self.addVip();
               });
             }
             // this.flower.once = true;
@@ -825,7 +825,7 @@
           delete this.init.couponCount;
           this.init.existCoupon = true;
         }
-        this.getFlower();
+        this.addVip();
       },
       clear: function () {
         if (this.data.result.specialDishes) {
@@ -968,7 +968,7 @@
           this.visible.timer = 0;
         } else if (this.$cookie.get(this.$route.query.id + "modal")) {
           this.visible.timer = 0;
-          this.getFlower();
+          this.addVip();
           return;
         }
         if (this.init.couponCount || this.init.existCoupon) {
