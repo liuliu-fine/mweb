@@ -1026,7 +1026,7 @@ $warm-grey: rgb(156, 156, 156);
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -1164,7 +1164,7 @@ $warm-grey: rgb(156, 156, 156);
       background-color: #ff4955;
       border: 1px solid #b41214;
       border-radius: 3px;
-      width: 80px;
+      //width: 80px;
       float: right;
     }
 
@@ -1290,7 +1290,7 @@ $warm-grey: rgb(156, 156, 156);
     }
   }
   .overflow {
-    max-height: 12rem;
+    max-height: 11rem;
     overflow: auto;
     overflow-x: hidden;
     margin-top: 1rem;
@@ -1399,10 +1399,9 @@ $warm-grey: rgb(156, 156, 156);
   }
   .input-text {
     position: relative;
-    top: -1.6rem;
-    padding: .3rem 0;
+    top: -1.8rem;
+    padding: .3rem;
     font-size: .5rem;
-    margin: -.3rem .6rem;
     border-left: 1px solid #ED1E37;
     color: #ED1E37;
     width: 78px;

@@ -113,6 +113,41 @@ Toast.install = function (Vue, options) {
     let tpl = new toastTpl().$mount().$el;
     document.body.appendChild(tpl);
   }
+  //confirm
+  Vue.prototype.$confirm = function (title, success, fail) {
+    // toastVM.show = showToast = false;
+    let tmp = '<div class="lx-confirm-bg" v-if="showMessage">' +
+      '<div class="lx-confirm">' +
+      '<div class="title" v-html="title"></div>' +
+      '<div class="buttons">' +
+      '<div class="item" v-on:click="callback(false)">取消</div>' +
+      '<div class="item" v-on:click="callback(true)">确认</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+
+    let toastTpl = Vue.extend({
+      data: function () {
+        return {
+          showMessage: true,
+          title: title,
+        }
+      },
+      template: tmp,
+      methods: {
+        callback: function (state) {
+          this.showMessage = false;
+          if (state) {
+            success && success()
+          } else {
+            fail && fail();
+          }
+        }
+      }
+    });
+    let tpl = new toastTpl().$mount().$el;
+    document.body.appendChild(tpl);
+  }
 }
 
 // 向外暴露接口

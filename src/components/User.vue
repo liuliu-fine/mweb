@@ -24,13 +24,13 @@
         </div>
       </div>
       <div class="i-flex">
-        <div class="item" v-on:click="ajaxUrl('exchange.html')">
+        <router-link class="item" :to="{ path: 'exchange', query:  $route.query}">
           <div class="icon-left i-icon0"></div>
           <div class="right">
             <div>积分<span class="pl">兑换</span></div>
             <div class="i-red">{{data.point||0}}</div>
           </div>
-        </div>
+        </router-link>
         <router-link class="item" :to="{ path: 'charge', query:  $route.query}">
           <div class="icon-left i-icon3"></div>
           <div class="right">

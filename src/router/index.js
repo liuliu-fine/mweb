@@ -1,23 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/Index'
-import Login from '@/components/Login'
-import Payment from '@/components/Payment'
-import Error from '@/components/Error'
-import Test from '@/components/Test'
 
 const Charge = r => require.ensure([], () => r(require('@/components/Charge')))
-const More = r => require.ensure([], () => r(require('@/components/More')))
 const User = r => require.ensure([], () => r(require('@/components/User')))
 const SelfPay = r => require.ensure([], () => r(require('@/components/SelfPay')))
-const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
 const Exchange = r => require.ensure([], () => r(require('@/components/Exchange')))
-const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
-const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
 const Mall = r => require.ensure([], () => r(require('@/components/Mall')))
 const MallDetail = r => require.ensure([], () => r(require('@/components/MallDetail')))
 const MallRecord = r => require.ensure([], () => r(require('@/components/MallRecord')))
 const Coupon = r => require.ensure([], () => r(require('@/components/Coupon')))
+const Payment = r => require.ensure([], () => r(require('@/components/Payment')))
+
+//无入口
+const Error = r => require.ensure([], () => r(require('@/components/Error')))
+const More = r => require.ensure([], () => r(require('@/components/More')))
+const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
+const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
+const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
+
+//test
+const Login = r => require.ensure([], () => r(require('@/components/Login')))
+const Test = r => require.ensure([], () => r(require('@/components/Test')))
+const Index = r => require.ensure([], () => r(require('@/components/Index')))
+
 
 Vue.use(Router)
 
