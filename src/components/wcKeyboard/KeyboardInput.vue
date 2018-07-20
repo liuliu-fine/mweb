@@ -11,7 +11,7 @@
     font-size: 16px;
     border: solid 1px #f3f3f3;
     background-color: #fcfcfc;
-    height: 51px;
+    height: 49px;
     line-height: 31px;
     padding: 10px 13px;
     display: flex;
@@ -41,13 +41,13 @@
     width: 8rem;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap
+    white-space:nowrap;
+    text-align: right;
   }
 
   .currency {
     color: #c1c1c1;
   }
-
   }
   }
 </style>

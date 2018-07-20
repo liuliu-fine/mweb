@@ -2,20 +2,20 @@
   <div v-if="init.user">
     <div class="selfpay">
       <!-- Slider -->
-      <div class="e-ad" v-if="init.rollingActivities" style="background: #1c1c20;padding: 4px">
-        <div class="e-ad1" v-on:click="ajaxUrl('follow.html')">
-          <img src="/sui_assets/img/coupon/ad.svg" style="position: relative;left: 0">
+      <!-- <div class="e-ad" v-if="init.rollingActivities" style="background: #1c1c20;padding: 4px">
+         <div class="e-ad1" v-on:click="ajaxUrl('follow.html')">
+           <img src="/sui_assets/img/coupon/ad.svg" style="position: relative;left: 0">
 
-          <div style="display:inline-block" class="ad1-text">
-            <img src='/sui_assets/img/coupon/2.svg'> {{data.result.rollingActivities[0].name}}
-          </div>
-        </div>
-      </div>
+           <div style="display:inline-block" class="ad1-text">
+             <img src='/sui_assets/img/coupon/2.svg'> {{data.result.rollingActivities[0].name}}
+           </div>
+         </div>
+       </div>-->
       <div class="second-pay">
-        <div style="padding-bottom: .7rem">
-          <img class="avatar" :src="init.logo" width="30">
-          <span class="ellipsis"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
-            v-else>前台</span></span>
+        <div>
+          <!--<img class="avatar" :src="init.logo" width="30">-->
+          <span class="table"><span v-if="init.tableNo">【{{init.tableNo+ "桌"}}】</span><span
+            v-else>【前台】</span></span>
           <span class="staff" v-if="flower.staffs" v-on:click="flowerStateFn()"
                 :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
 
@@ -37,8 +37,6 @@
                          v-bind:placeholder="init.nonPart" @input="nonPartsFn"></input-val>-->
 
         </div>
-      </div>
-      <div style="padding: 0 1.3rem 1rem">
         <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
           <div class="meal-pic" v-if="view.dishes&&number">
             <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
@@ -54,14 +52,15 @@
         <div class="btn-green" @touchstart.stop.prevent="submitFn">
           买单自动计算优惠
         </div>
+        <!---->
       </div>
-      <!---->
       <div class="ad-show" v-for="(item,index) in ads" v-on:click="replaceUrl(item)" v-if="ads" v-show="index==0">
         <div class="cbg" :style="{backgroundImage: 'url('+ (item.transversePicUrl||'') +')'}">
         </div>
         <div class="pull-left">{{item.title}}</div>
         <div class="pull-right">看一看 ></div>
       </div>
+
       <div style="height: 6rem"></div>
       <!---->
       <div class="bottom">
@@ -325,7 +324,7 @@
               </div>
             </div>
             <div class="addon"></div>
-            <div class="close" v-if="vip.needPhone" v-on:click="vip = null"></div>
+            <div class="close" v-if="vip.needPhone" v-on:click="closeAddVip()"></div>
             <div class="close" v-else v-on:click="refresh()"></div>
             <div class="modal-button" v-on:click="phoneModal()" v-if="vip.needPhone">立即入会 尊享特权</div>
             <div class="modal-button" v-else v-on:click="refresh()">我知道了</div>
@@ -371,7 +370,7 @@
               <input type="tel" placeholder="输入收到的验证码" v-model="phone1.validateCode" id="validate" maxlength="6">
               <div id="bindPhone" v-on:click.stop="bindPhone1" class="v-button">立即领取</div>
             </div>
-            <div class="close" v-on:click="vip = null"></div>
+            <div class="close" v-on:click="closeAddVip()"></div>
           </div>
         </div>
       </div>
@@ -386,7 +385,7 @@
           <div class="input-text" v-on:click.stop="validateFn">{{phone.text}}</div>
           <input type="tel" placeholder="验证码" maxlength="6" v-model="phone.validateCode"></div>
         <div class="submit" v-on:click.stop="bindPhone">确认</div>
-        <div class="close" v-on:click="phone = ''"></div>
+        <div class="close" v-on:click="closeAddVip"></div>
       </div>
     </div>
   </div>
@@ -490,25 +489,45 @@
                 _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
                 return;
               }
+            } else {
+              if (_self.init.existCoupon || _self.init.couponCount) {
+                _self.getCouponsModal();
+              } else {
+                _self.addVip();
+              }
             }
-            if (data.result.rollingActivities) {
-              let i = $(".e-ad1").width();
-              setInterval(function () {
-                if (i < 5 - $(".ad1-text").width()) {
-                  i = $(".e-ad1").width();
-                }
-                $(".ad1-text").css("margin-left", i--);
-              }, 20)
-            }
+            /* if (data.result.rollingActivities) {
+               let i = $(".e-ad1").width();
+               setInterval(function () {
+                 if (i < 5 - $(".ad1-text").width()) {
+                   i = $(".e-ad1").width();
+                 }
+                 $(".ad1-text").css("margin-left", i--);
+               }, 20)
+             }*/
             //ads
             // $.init();
           } else {
             location.href = "error.html";
           }
         });
+
+        this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            let _self = this;
+            _self.ads = data.result;
+          }
+        });
+      },
+      choosedStaffFn(index) {
+        this.posts.index = index;
+        this.$set(this.flower, 'state', '');
+      },
+      getFlower() {
         if (this.$route.query.d) {
           //服务评价
-          let json = {};
+          let json = {}, _self = this;
           json.tableId = this.$route.query.d;
           this.$http.get("/gratuity/shop/" + this.$route.query.id, {key: json}).then(response => {
             let data = response.body;
@@ -530,31 +549,16 @@
                 }
               }
               _self.flower = data.result;
-            } else {
-              this.addVip();
             }
           });
-        } else {
-          this.addVip();
         }
-        this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
-          let data = response.body;
-          if (data.code == 200) {
-            let _self = this;
-            _self.ads = data.result;
-          }
-        });
-      },
-      choosedStaffFn(index) {
-        this.posts.index = index;
-        this.$set(this.flower, 'state', '');
       },
       flowerStateFn(state) {
         this.$set(this.flower, 'state', state);
-        if (state == 'close' && !this.flower.once) {
-          this.flower.once = true;
-          this.addVip();
-        }
+        /* if (state == 'close' && !this.flower.once) {
+           this.flower.once = true;
+           this.addVip();
+         }*/
       },
       chooseTagFn(item) {
         this.$set(item, 'check', !item.check);
@@ -596,13 +600,13 @@
             let _self = this;
             if (json.satisfied) {
               this.$message("感谢您的评价", "回馈奖励将在买单后发放<br>到您的账户", function () {
-                _self.flower.once = true;
-                _self.addVip();
+                // _self.flower.once = true;
+                // _self.addVip();
               });
             } else {
               this.$message("感谢您的评价", "我们会重视您本次的反馈", function () {
-                _self.flower.once = true;
-                _self.addVip();
+                // _self.flower.once = true;
+                // _self.addVip();
               });
             }
             // this.flower.once = true;
@@ -633,10 +637,15 @@
                 }
               });
             }
-          } else if (this.init.existCoupon||this.init.couponCount) {
-            this.getCouponsModal();
+          } else {
+            this.getFlower();
           }
         });
+      },
+      closeAddVip() {
+        this.vip = null;
+        this.phone = '';
+        this.getFlower();
       },
       replaceUrl(item) {
         if (!item.activityCategory) {
@@ -816,6 +825,7 @@
           delete this.init.couponCount;
           this.init.existCoupon = true;
         }
+        this.addVip();
       },
       clear: function () {
         if (this.data.result.specialDishes) {
@@ -954,11 +964,14 @@
         });
       },
       getCouponsModal: function (state) {
-        if (this.$cookie.get(this.$route.query.id + "modal") && !state) {
+        if (state) {
           this.visible.timer = 0;
+        } else if (this.$cookie.get(this.$route.query.id + "modal")) {
+          this.visible.timer = 0;
+          this.addVip();
           return;
         }
-        if (!this.init.couponCount) {
+        if (this.init.couponCount || this.init.existCoupon) {
           this.getCoupons();
           let _self = this;
           let t = setInterval(function () {
@@ -970,6 +983,7 @@
           }, 1000);
         } else {
           this.visible.timer = 0;
+          this.addVip();
         }
       },
       checked: function () {
