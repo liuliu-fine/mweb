@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.8);
   box-sizing: border-box; }
   .lx-bg .content {
-    padding: .75rem;
+    padding: 1rem;
     background: #fff;
     width: 14.5rem;
     text-align: center;
@@ -16,13 +16,13 @@
     color: #000;
     box-sizing: border-box;
     position: relative;
-    margin: 37% auto; }
+    margin: 34% auto; }
     .lx-bg .content .title {
       font-size: .9rem;
       font-weight: 700; }
     .lx-bg .content .text {
       font-size: .5rem;
-      padding: .5rem 0 2.5rem;
+      padding: .5rem 0 2rem;
       position: relative; }
     .lx-bg .content .text:after {
       content: "";

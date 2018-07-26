@@ -152,15 +152,6 @@
 </script>
 
 <style lang="scss" scoped>
-  /*html {*/
-    /*font-family: Arial, Helvetica, "STHeiti STXihei", "Microsoft YaHei", Tohoma;*/
-
-  /*body {*/
-    /*background: #f8f8f8;*/
-    /*font: inherit;*/
-  /*}*/
-
-  /*}*/
   @import "../sui_assets/scss/mall.scss";
 
 </style>

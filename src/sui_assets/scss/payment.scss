@@ -1,5 +1,4 @@
 .payment {
-  //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   .order {
     text-align: center;
     color: rgb(51, 51, 51);
@@ -42,6 +41,9 @@
         padding-top: .1rem;
         text-align: left;
       }
+      .left + .left {
+        width: auto;
+      }
       .right {
         margin-left: calc(100% - 3.6rem);
         text-align: right;
@@ -62,45 +64,6 @@
     }
 
   }
-
-  //.benefit {
-  //  padding: .5rem 0.5rem 1rem;
-  //  text-align: center;
-  //  .item {
-  //    background: url(/sui_assets/img/payment1/coupon_bg.svg) center no-repeat;
-  //    width: 166px;
-  //    height: 192px;
-  //    position: relative;
-  //    padding: 0;
-  //    background-size: contain;
-  //    .text-red {
-  //      font-size: .9rem;
-  //      font-weight: 700;
-  //      padding: .8rem 0 .4rem;
-  //    }
-  //    .lg {
-  //      font-size: 1rem;
-  //      color: #ff3e3a;
-  //      vertical-align: baseline;
-  //      padding-right: 3px;
-  //      line-height: 1rem;
-  //    }
-  //    .btn {
-  //      width: 82px;
-  //      height: 26px;
-  //      line-height: 26px;
-  //      font-size: .7rem;
-  //      border-radius: 3px;
-  //      background-color: #ff5338;
-  //      color: #ffffff;
-  //      position: absolute;
-  //      bottom: 16px;
-  //      margin: auto;
-  //      left: 0;
-  //      right: 0;
-  //    }
-  //  }
-  //}
   .benefit.i-flex {
     justify-content: space-around;
     -webkit-justify-content: space-around;
@@ -169,4 +132,132 @@
     }
 
   }
+  //modal
+  .modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: 1;
+    .modal-inner {
+      width: 15.5rem;
+      position: fixed;
+      z-index: 11000;
+      left: 50%;
+      margin-left: -7.75rem;
+      margin-top: 0;
+      top: 9%;
+      text-align: center;
+      border-radius: .35rem;
+      animation: show-modal .5s;
+      -webkit-animation: show-modal .5s;
+      color: #3d4145;
+      .close {
+        position: absolute;
+        top: -.4rem;
+        right: -1rem;
+        z-index: 1;
+      }
+      .close:after {
+        content: "";
+        background: url(/sui_assets/img/vipModal/close.svg) center no-repeat;
+        padding: 1rem;
+      }
+
+      .modal-content {
+        background-color: #D74E4E;
+        position: relative;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 1px 0;
+        input::-webkit-input-placeholder {
+          color: #A9A9A9;
+          font-size: 13px;
+        }
+        .top {
+          background: url(/sui_assets/img/addVip/oval.png) bottom center no-repeat/contain;
+          background-color: #D15353;
+          padding: .75rem 0 2rem;
+          .card-text {
+            background: url(/sui_assets/img/payment/notice.png) top center no-repeat;
+            background-size: 3rem;
+            padding-top: 3.5rem;
+            line-height: 2;
+            font-size: .9rem;
+          }
+          .overflow {
+            max-height: 6rem;
+            overflow: auto;
+            .coupon {
+              background: url(/sui_assets/img/payment/border.png) center no-repeat;
+              height: 2.2rem;
+              line-height: 2.2rem;
+              width: 7rem;
+              color: rgb(247, 98, 96);
+              font-size: .75rem;
+              background-size: contain;
+              margin: .5rem auto;
+            }
+          }
+        }
+        .modal-phone {
+          padding: 1rem;
+          margin: auto .35rem;
+          input {
+            border-width: 0;
+            line-height: 2rem;
+            height: 2rem;
+            border-radius: 5px;
+            width: 100%;
+            padding: 0 .5rem;
+            font-size: .75rem;
+            color: #000000;
+            background-color: #ffffff;
+            margin: .25rem auto;
+          }
+          .input-text {
+            position: relative;
+            top: -2rem;
+            right: .3rem;
+            padding: .2rem .4rem;
+            color: rgb(190, 73, 73);
+            background-color: rgb(255, 238, 122);
+            border-radius: 3px;
+            float: right;
+            font-size: .7rem;
+          }
+          .v-button {
+            background-image: linear-gradient(to bottom, #FAD961, #F7BD1C);
+            height: 2rem;
+            font-size: .9rem;
+            line-height: 2rem;
+            text-align: center;
+            border-radius: 25px;
+            color: rgb(190, 73, 73);
+            clear: both;
+            position: relative;
+            top: -.5rem;
+            letter-spacing: 3px;
+          }
+        }
+      }
+
+    }
+
+    @keyframes show-modal {
+      from {
+        opacity: 0;
+        transform: translate(0, -150%);
+        -webkit-transform: translate(0, -150%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+      }
+    }
+  }
+
 }

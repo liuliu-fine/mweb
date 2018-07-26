@@ -33,7 +33,6 @@
       }
     },
     created() {
-      // this.$bind();
       this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.GLOBAL.version}}).then(response => {
         if (response.body.code == 200) {
           this.payment = response.body.result;

@@ -1,21 +1,21 @@
 /*
-Error: Invalid GBK character "\xE5"
-        on line 711 of index.scss
+Error: Invalid GBK character "\xE4"
+        on line 59 of strategy.scss
 
-706:         position: absolute;
-707:         right: 1rem;
-708:         bottom: 0.5rem;
-709:       }
-710:       .through:before {
-711:         content: "原价 ￥";
-712:         font-size: .6rem;
-713:       }
-714:       span {
-715:         display: inline-block;
-716:       }
+54:     .used {
+55:       color: rgb(140, 140, 140);
+56:       padding: .5rem 0;
+57:       border-bottom: 1px solid rgb(240, 240, 240);
+58:       .none:before {
+59:         content: "不计优惠部分：";
+60:         width: 30px;
+61:       }
+62:       .text-blue {
+63:         color: $blue;
+64:         font-size: .7rem;
 
 Backtrace:
-index.scss:711
+strategy.scss:59
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE5\"\A         on line 711 of index.scss\A \A 706:         position: absolute;\A 707:         right: 1rem;\A 708:         bottom: 0.5rem;\A 709:       }\A 710:       .through:before {\A 711:         content: \"原价 ￥\";\A 712:         font-size: .6rem;\A 713:       }\A 714:       span {\A 715:         display: inline-block;\A 716:       }"; }
+  content: "Error: Invalid GBK character \"\xE4\"\A         on line 59 of strategy.scss\A \A 54:     .used {\A 55:       color: rgb(140, 140, 140);\A 56:       padding: .5rem 0;\A 57:       border-bottom: 1px solid rgb(240, 240, 240);\A 58:       .none:before {\A 59:         content: \"不计优惠部分：\";\A 60:         width: 30px;\A 61:       }\A 62:       .text-blue {\A 63:         color: $blue;\A 64:         font-size: .7rem;"; }

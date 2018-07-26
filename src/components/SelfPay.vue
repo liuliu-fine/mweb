@@ -20,37 +20,54 @@
                 :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></span>
 
         </div>
-        <wc-keyboard inter="5"
-                     decimal="2"
-                     v-bind:value="post.amount"
-                     v-bind:unabled="init.preCheckData?true:false"
-                     placeholder="询问服务员后在此输入"
-                     label="消费金额" @input="inputFn"/>
-        <div v-if="init.nonPart" style="padding-top: .8rem;">
-          <wc-keyboard
-            inter="5"
-            v-bind:value="post.nonParticationAmount"
-            decimal="2" v-bind:unabled="init.preCheckData?true:false"
-            v-bind:placeholder="init.nonPart"
-            label="不参与优惠项" @input="nonPartsFn"/><!--
+        <div v-if="init.checkType =='102'">
+          <wc-keyboard inter="5"
+                       decimal="2"
+                       v-bind:value="post.amount"
+                       v-bind:unabled="init.preCheckData?true:false"
+                       placeholder="询问服务员后在此输入"
+                       label="消费金额" @input="inputFn"/>
+          <div v-if="init.nonPart" style="padding-top: .8rem;">
+            <wc-keyboard
+              inter="5"
+              v-bind:value="post.nonParticationAmount"
+              decimal="2" v-bind:unabled="init.preCheckData?true:false"
+              v-bind:placeholder="init.nonPart"
+              label="不参与优惠项" @input="nonPartsFn"/><!--
               <input-val v-bind:val="post.nonParticationAmount" v-bind:label="'不参与优惠项'"
                          v-bind:placeholder="init.nonPart" @input="nonPartsFn"></input-val>-->
 
-        </div>
-        <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
-          <div class="meal-pic" v-if="view.dishes&&number">
-            <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
-                 v-for="(item,index) in validateDish">
-            <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
-                 v-for="(item,index) in validateMeal">
-
-            <div class="label1" v-if="view.dishes&&number">已选{{number}}个</div>
           </div>
-          <div v-else><img src="/sui_assets/img/selfPay/plus.svg">勾选已消费的特价或套餐</div>
-        </div>
+          <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
+            <div class="meal-pic" v-if="view.dishes&&number">
+              <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
+                   v-for="(item,index) in validateDish">
+              <img :src="item.picUrl||'sui_assets/img/space.png'" v-if="index == 0"
+                   v-for="(item,index) in validateMeal">
 
-        <div class="btn-green" @touchstart.stop.prevent="submitFn">
-          买单自动计算优惠
+              <div class="label1" v-if="view.dishes&&number">已选{{number}}个</div>
+            </div>
+            <div v-else><img src="/sui_assets/img/selfPay/plus.svg">勾选已消费的特价或套餐</div>
+          </div>
+
+          <div class="btn-green" @touchstart.stop.prevent="submitFn">
+            买单自动计算优惠
+          </div>
+        </div>
+        <div class="other-pay" v-else>
+          <div class="state" v-if="init.order" v-on:click="stateFn()">
+            <img src="sui_assets/img/coupon/run.gif" style="height: 2rem"> 买单进行中...
+            <span class="pull-right">点击查看 ></span>
+          </div>
+          <div v-else-if="init.checkType =='101'">
+            <div class="text">请将身份码出示给服务员</div>
+            <div id="mycode"></div>
+          </div>
+          <div v-else>
+            <div class="btn-green" @touchstart.stop.prevent="submitForAutoFn">
+              呼叫服务员进行买单
+            </div>
+          </div>
         </div>
         <!---->
       </div>
@@ -148,15 +165,8 @@
           </div>
           <router-link class="item" :to="{ path: 'user', query: { id: $route.query.id }}">
             <div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>
-            <img class="avatar" width="32" :src="init.user.avatarUrl">我的权益
+            <img class="avatar" width="32" :src="init.user.avatarUrl">会员中心
           </router-link>
-          <!--<router-link class="item" :to="{ path: 'more', query: { id: $route.query.id }}">-->
-          <!--<span class="icon1"></span>门店活动-->
-          <!--</router-link>-->
-          <!--<div class="item"  v-on:click="ajaxUrl('user.html')">-->
-          <!--<div class="label2" :class="(vip&&vip.needPhone)?'old':''"></div>-->
-          <!--<img class="avatar" width="32" :src="init.user.avatarUrl">我的权益-->
-          <!--</div>-->
           <div class="item" v-on:click="ajaxUrl('more.html')"><span class="icon1"></span>门店活动</div>
         </div>
       </div>
@@ -262,7 +272,7 @@
                       <div class="left">价值：</div>
                       <div class="right">
                             <span v-if="coupon.category=='903'||coupon.category=='9031'">
-                              {{coupon.amount}}折
+                              {{coupon.amount}}<span style="font-size: 14px">折</span>
                             </span>
                         <span v-else-if="coupon.category=='904'">
                              <span v-if="coupon.amount">{{coupon.amount}}元</span>
@@ -297,12 +307,79 @@
       </div>
     </div>
     <div v-if="vip">
-      <div class="modal addVip1" v-if="vip.memberGradeName">
+      <div v-if="vip.needPhone">
+        <!--无手机号，只有领卡-->
+        <div class="modal addVip2" v-if="vip.memberGradeName">
+          <div class="modal-inner">
+            <div class="modal-content">
+
+              <div class="top">
+                <div class="card-box" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}">></div>
+                <div class="card-text">欢迎新人，送您一张会员卡<br>希望您常来光顾！</div>
+              </div>
+              <div class="modal-phone">
+                <input type="tel" v-model="phone1.phone" placeholder="输入您的手机号码" maxlength="11">
+                <input type="tel" placeholder="输入收到的验证码" v-model="phone1.validateCode" maxlength="6">
+                <div class="input-text" v-on:click.stop="validate1Fn">{{phone1.text}}</div>
+                <div v-on:click.stop="bindPhone1" class="v-button">领取会员卡</div>
+              </div>
+
+              <div class="close" v-on:click="closeAddVip()"></div>
+            </div>
+          </div>
+        </div>
+        <!--无手机号，有新人礼-->
+        <div class="modal addVip" v-else>
+          <div class="modal-inner">
+            <div class="modal-content">
+              <div class="overflow">
+                <div class="usable">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
+                <div class="v-coupon" v-if="vip.coupons">
+                  <div class="v-item" v-for="coupon in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
+                    <div class="left" v-if="coupon.hasOwnProperty('amount')">
+                      <span v-if="coupon.category=='903'||coupon.category=='9031'">
+                              {{coupon.amount}}折
+                            </span>
+                      <span v-else><span class="dollar"></span>{{coupon.amount}}</span>
+                    </div>
+                    <div class="left coupon-icon" v-else></div>
+                    <div class="right">
+                      <div>{{coupon.name}}</div>
+                      <div class="grey">{{coupon.times}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="v-point" v-if="vip.point">
+                  <div class="v-item">
+                    <div class="left">{{vip.point}}</div>
+                    <div class="right">积分</div>
+                  </div>
+                </div>
+                <div class="v-reward" v-if="vip.reward">
+                  <div class="v-item">
+                    <div class="left">{{vip.reward}}</div>
+                    <div class="right">无门槛代用币</div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-phone">
+                <input type="tel" v-model="phone1.phone" placeholder="输入您的手机号码" maxlength="11">
+                <div class="input-text" v-on:click.stop="validate1Fn">{{phone1.text}}</div>
+                <input type="tel" placeholder="输入收到的验证码" v-model="phone1.validateCode" id="validate" maxlength="6">
+                <div id="bindPhone" v-on:click.stop="bindPhone1" class="v-button">立即领取</div>
+              </div>
+              <div class="close" v-on:click="closeAddVip()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--有手机号，直接领卡-->
+      <div class="modal addVip1" v-else>
         <div class="modal-inner">
           <div class="modal-content">
             <div class="card-box">
               <div class="item">
-                <div class="tag"><span v-if="vip.needPhone">立即入会</span><span v-else>恭喜获得</span></div>
+                <div class="tag">恭喜获得</div>
                 <div class="name">{{vip.memberGradeName}}</div>
               </div>
               <div class="item second" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}">
@@ -324,68 +401,10 @@
               </div>
             </div>
             <div class="addon"></div>
-            <div class="close" v-if="vip.needPhone" v-on:click="closeAddVip()"></div>
-            <div class="close" v-else v-on:click="refresh()"></div>
-            <div class="modal-button" v-on:click="phoneModal()" v-if="vip.needPhone">立即入会 尊享特权</div>
-            <div class="modal-button" v-else v-on:click="refresh()">我知道了</div>
+            <div class="close" v-on:click="initFn()"></div>
+            <div class="modal-button" v-on:click="initFn()">我知道了</div>
           </div>
         </div>
-      </div>
-      <div class="modal addVip" v-else>
-        <div class="modal-inner">
-          <div class="modal-content">
-            <div class="overflow">
-              <div class="usable">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
-              <div class="v-coupon" v-if="vip.coupons">
-                <div class="v-item" v-for="coupon in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
-                  <div class="left" v-if="coupon.hasOwnProperty('amount')">
-                      <span v-if="coupon.category=='903'||coupon.category=='9031'">
-                              {{coupon.amount}}折
-                            </span>
-                    <span v-else><span class="dollar"></span>{{coupon.amount}}</span>
-                  </div>
-                  <div class="left coupon-icon" v-else></div>
-                  <div class="right">
-                    <div>{{coupon.name}}</div>
-                    <div class="grey">{{coupon.times}}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="v-point" v-if="vip.point">
-                <div class="v-item">
-                  <div class="left">{{vip.point}}</div>
-                  <div class="right">积分</div>
-                </div>
-              </div>
-              <div class="v-reward" v-if="vip.reward">
-                <div class="v-item">
-                  <div class="left">{{vip.reward}}</div>
-                  <div class="right">无门槛代用币</div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-phone"><input type="tel" v-model="phone1.phone" placeholder="输入您的手机号码" id="tel"
-                                            maxlength="11">
-              <div class="input-text" v-on:click.stop="validate1Fn">{{phone1.text}}</div>
-              <input type="tel" placeholder="输入收到的验证码" v-model="phone1.validateCode" id="validate" maxlength="6">
-              <div id="bindPhone" v-on:click.stop="bindPhone1" class="v-button">立即领取</div>
-            </div>
-            <div class="close" v-on:click="closeAddVip()"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal bindPhone" v-if="phone" style="display: block; margin-top: -5rem;">
-      <div class="modal-inner">
-        <div class="modal-title"><strong>【补全手机 领取权益】</strong></div>
-        <div class="text-xs" style="padding-top: .5rem">绑定手机号后，您的权益将立即到账</div>
-        <div class="text-center">
-          <div style="height: 2px;background: #e1e1e1;margin: 1rem 40%"></div>
-          <input type="tel" placeholder="手机号" v-model="phone.phone" maxlength="11">
-          <div class="input-text" v-on:click.stop="validateFn">{{phone.text}}</div>
-          <input type="tel" placeholder="验证码" maxlength="6" v-model="phone.validateCode"></div>
-        <div class="submit" v-on:click.stop="bindPhone">确认</div>
-        <div class="close" v-on:click="closeAddVip"></div>
       </div>
     </div>
   </div>
@@ -413,7 +432,7 @@
         post: {amount: '', nonParticationAmount: ''},
         coupons: [],
         init: {},
-        socketObj: {},
+        socketObj: "",
         swiper: "",
         ads: [],
         vip: "",
@@ -425,7 +444,6 @@
           spaceBetween: 30,
           centeredSlides: true,
         },
-        phone: "",
         phone1: "",
         flower: {},
         posts: {
@@ -460,64 +478,112 @@
         if (this.$route.query.d) {
           para.tableId = this.$route.query.d;
         }
-        this.$http.get("/activities/shop/" + this.$route.query.id + "/check", {key: para}).then(response => {
+        this.$http.get("/shop/" + this.$route.query.id, {key: para}).then(response => {
           let data = response.body;
           if (data.code == 200) {
             document.title = (data.result.brandName + "(" + data.result.name + ")");
+            localStorage.setItem("userId", data.result.user.id);
             _self.init = data.result;
             if (_self.init.preCheckData) _self.post = _self.init.preCheckData;
-            if (data.result.order) {
-              let re = confirm('您' + (data.result.order.tableNo ? ("在" + data.result.order.tableNo + "号桌") : "") + '有个买单未完成,取消？');
-              if (re) {
-                this.$http.post("/check/" + data.result.order.orderId + "/cancel", {}).then(response => {
+            //有进行中的自助买单
+            if (_self.init.order && _self.init.checkType == "102") {
+              _self.$confirm('您' + (_self.init.order.tableNo ? ("在" + _self.init.order.tableNo + "号桌") : "") + '有个买单未完成,放弃这笔交易？', function () {
+                _self.$http.post("/check/" + _self.init.order.orderId + "/cancel", {}).then(response => {
                   let data1 = response.body;
                   if (data1.code != 200) {
-                    this.$toast(data1.message);
+                    _self.$toast(data1.message);
                     if (data1.code == 403108) {
                       setTimeout(function () {
-                        _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
-                      }, 2000)
+                        _self.ajaxUrl("strategy.html?oid=" + _self.init.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
+                      }, 200)
                     } else {
                       _self.initFn();
                     }
                   } else {
                     _self.initFn();
-                    // delete _self.init.order;
                   }
                 });
-              } else {
-                _self.ajaxUrl("strategy.html?oid=" + data.result.order.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
-                return;
-              }
+
+              }, function () {
+                _self.ajaxUrl("strategy.html?oid=" + _self.init.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
+              });
             } else {
-              if (_self.init.existCoupon || _self.init.couponCount) {
-                _self.getCouponsModal();
-              } else {
-                _self.addVip();
-              }
+              _self.$nextTick(function () {
+                _self.socket();
+                /*-----------买单类型-----------*/
+                if (!_self.init.order && _self.init.checkType == "101") {
+                  //扫码买单
+                  /*     let qrcode = new QRCode(document.getElementById("mycode"), {
+                         width: 160,
+                         height: 160
+                       });
+                       qrcode.makeCode(_self.init.checkUserCode);*/
+                  _self.refreshCode();
+                  setInterval(_self.refreshCode, 30000);
+                }
+                /*----------------------*/
+                //买单状态
+                this.$http.get("/activities/shop/" + this.$route.query.id, {key: para}).then(response => {
+                  let data1 = response.body;
+                  if (data1.code == 200) {
+                    _self.init = JSON.parse((JSON.stringify(_self.init) + JSON.stringify(data1.result)).replace(/}{/, ','));
+                    if (_self.init.order) {
+                      _self.init.existGratuity = false
+                    }
+                    if (_self.init.existCoupon || _self.init.couponCount) {
+                      //有券
+                      _self.getCouponsModal();
+                    } else if (_self.init.existRemindBenefit) {
+                      //有新人礼
+                      _self.addVip();
+                    } else if (_self.init.existGratuity) {
+                      //有打赏
+                      _self.getFlower();
+                    }
+                    /* if (data.result.rollingActivities) {
+                     let i = $(".e-ad1").width();
+                     setInterval(function () {
+                       if (i < 5 - $(".ad1-text").width()) {
+                         i = $(".e-ad1").width();
+                       }
+                       $(".ad1-text").css("margin-left", i--);
+                     }, 20)
+                   }*/
+                    //ads
+                  } else {
+                    location.href = "error.html";
+                  }
+                });
+                this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
+                  let data = response.body;
+                  if (data.code == 200) {
+                    let _self = this;
+                    _self.ads = data.result;
+                  }
+                });
+                /*----------------------*/
+              })
             }
-            /* if (data.result.rollingActivities) {
-               let i = $(".e-ad1").width();
-               setInterval(function () {
-                 if (i < 5 - $(".ad1-text").width()) {
-                   i = $(".e-ad1").width();
-                 }
-                 $(".ad1-text").css("margin-left", i--);
-               }, 20)
-             }*/
-            //ads
-            // $.init();
           } else {
-            location.href = "error.html";
+            alert(data.message);
+            // location.href = "error.html";
           }
         });
 
-        this.$http.get("/activities/shop/" + this.$route.query.id + "/placards").then(response => {
+      },
+      refreshCode() {
+        this.$http.get("/check/code").then(response => {
           let data = response.body;
           if (data.code == 200) {
-            let _self = this;
-            _self.ads = data.result;
+            document.getElementById("mycode").innerHTML = "";
+            let qrcode = new QRCode(document.getElementById("mycode"), {
+              width: 160,
+              height: 160
+            });
+            //当面付
+            qrcode.makeCode(data.result.code);
           }
+
         });
       },
       choosedStaffFn(index) {
@@ -525,7 +591,7 @@
         this.$set(this.flower, 'state', '');
       },
       getFlower() {
-        if (this.$route.query.d) {
+        if (this.init.existGratuity) {
           //服务评价
           let json = {}, _self = this;
           json.tableId = this.$route.query.d;
@@ -619,6 +685,7 @@
 
       },
       addVip() {
+        let _self = this;
         this.$http.get("/remind/guest/" + this.$route.query.id).then(response => {
           let data = response.body;
           if (data.code == 200) {
@@ -644,8 +711,18 @@
       },
       closeAddVip() {
         this.vip = null;
-        this.phone = '';
-        this.getFlower();
+        if (this.init.existGratuity) {
+          this.getFlower();
+        }
+      },
+      closeSuccessAddVip() {
+        let _self = this;
+        this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
+          _self.vip = null;
+          if (this.init.existGratuity) {
+            _self.getFlower();
+          }
+        });
       },
       replaceUrl(item) {
         if (!item.activityCategory) {
@@ -666,15 +743,17 @@
             break;
           //充值
           case "6002":
-            this.ajaxUrl('charge.html');
+            this.$router.push({path: '/charge', query: this.$route.query});
             break;
           //入会及升级
           case "6001":
-            this.ajaxUrl('upgrade.html?tid=' + item.activityId);
+            this.$router.push({path: '/upgrade', query: this.$route.query});
+            // this.ajaxUrl('upgrade.html?tid=' + item.activityId);
             break;
           //积分兑换
           case "6003":
-            this.ajaxUrl('exchange.html');
+            this.$router.push({path: '/exchange', query: this.$route.query});
+            // this.ajaxUrl('exchange.html');
             break;
           //砍价
           case "6041":
@@ -704,63 +783,7 @@
         }
         return str;
       },
-      phoneModal() {
-        this.vip = null;
-        this.phone = {text: '获取验证码', able: true};
-      },
-      validateFn() {
-//        console.log(1);
-        if (!this.phone.able) return;
-        if (!this.phone.phone || this.phone.phone.length != 11) {
-          this.$toast("手机格式不正确");
-          return;
-        }
-        this.phone.able = false;
-        let _self = this;
-        this.$http.post("/validate/bindup", {"phone": this.phone.phone}).then(response => {
-          let data = response.data;
-          if (data.code == 200) {
-            this.$toast("获取成功");
-            let second = 90;
-            let init = setInterval(function () {
-              second--;
-              if (!second || !_self.phone) {
-                clearInterval(init);
-                _self.phone.text = "重新获取验证码";
-                _self.phone.able = true;
-                return;
-              }
-              _self.phone.text = "已发送 " + second + " s";
-            }, 1000);
-          } else {
-            this.phone.able = true;
-            this.$toast(data.message);
-          }
-        });
-      },
-      bindPhone() {
-        if (this.phone.phone && this.phone.validateCode && this.phone.phone.length == 11 && this.phone.validateCode.length == 6) {
-          let jsonA = {shopId: this.$route.query.id};
-          jsonA.phone = this.phone.phone;
-          jsonA.validateCode = this.phone.validateCode;
-          this.$http.post("/phone/bindup", jsonA).then(response => {
-            let data = response.data;
-            if (data.code == 200) {
-              this.phone = null;
-              if (data.result && data.result.token) {
-                this.$cookie.set("token", data.result.token, {"expires": '30d'});
-              }
-              this.$http.get("/remind/guest/" + this.$route.query.id + '/result').then(response => {
-                this.vip = response.body.result;
-              });
-            } else {
-              this.$toast(data.message);
-            }
-          });
-        }
-      },
       validate1Fn() {
-        console.log(1);
         if (!this.phone1.able) return;
         if (!this.phone1.phone || this.phone1.phone.length != 11) {
           this.$toast("手机格式不正确");
@@ -801,9 +824,7 @@
               if (data.result && data.result.token) {
                 this.$cookie.set("token", data.result.token, {"expires": '30d'});
               }
-              this.$http.get("/remind/guest/" + this.$route.query.id + '/result').then(response => {
-                this.vip = response.body.result;
-              });
+              this.closeSuccessAddVip();
             } else {
               this.$toast(data.message);
             }
@@ -871,7 +892,42 @@
             if (evt.data == "success") return false;
             let data = JSON.parse(evt.data);
             data.orderId && _self.$cookie.set("order_id", data.orderId, {"path": "/"});
+            let json = _self.$route.query;
+            json.oid = data.orderId;
             switch (data.type) {
+              case "500000":
+                _self.ajaxUrl("waiting.html");
+                break;
+              case "500042":
+                _self.$toast("支付完成");
+                _self.$router.push({path: '/payment', query: json});
+                break;
+              case "500051":
+                alert("买单被取消");
+                _self.initFn();
+                break;
+              case "500052":
+                alert("pad下线");
+                _self.initFn();
+                break;
+              case "500053":
+                alert("买单请求超时未处理被取消");
+                _self.initFn();
+                break;
+              case "500054":
+                _self.ajaxUrl("strategy.html?oid=" + data.orderId);
+                break;
+              case "500005":
+                _self.$router.push({path: '/payment', query: json});
+                break;
+              case "500055":
+                _self.ajaxUrl("strategy.html?oid=" + data.orderId);
+                break;
+              case "500050":
+                alert("服务员未响应");
+                _self.initFn();
+                break;
+              //coupon state
               case "500100":
               case "500101":
                 _self.getCouponData();
@@ -958,7 +1014,7 @@
                 });
                 qrcode.makeCode(_self.coupons[index].id);
               }
-              _self.socket();
+              // !_self.socketObj && _self.socket();
             })
           }
         });
@@ -968,7 +1024,11 @@
           this.visible.timer = 0;
         } else if (this.$cookie.get(this.$route.query.id + "modal")) {
           this.visible.timer = 0;
-          this.addVip();
+          if (this.init.existRemindBenefit) {
+            this.addVip();
+          } else if (this.init.existGratuity) {
+            this.getFlower();
+          }
           return;
         }
         if (this.init.couponCount || this.init.existCoupon) {
@@ -983,7 +1043,11 @@
           }, 1000);
         } else {
           this.visible.timer = 0;
-          this.addVip();
+          if (this.init.existRemindBenefit) {
+            this.addVip();
+          } else if (this.init.existGratuity) {
+            this.getFlower();
+          }
         }
       },
       checked: function () {
@@ -1090,7 +1154,12 @@
           this.$loading.close();
           if (data.code == 200) {
             _self.$cookie.set("order_id", data.result.orderId);
-            this.ajaxUrl("strategy.html?oid=" + data.result.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
+
+            json = _self.$route.query;
+            json.oid = data.result.orderId;
+            _self.$router.push({path: '/strategy', query: json})
+
+            // this.ajaxUrl("strategy.html?oid=" + data.result.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
           } else if (data.code == 405004) {
             let re = confirm("您在" + (data.result.shopname || ("本店" + data.result.tableNo + "号桌")) + "有一个买单正在进行中,是否放弃此订单？")
             if (re) {
@@ -1111,6 +1180,66 @@
             alert(data.message);
           }
         })
+      },
+      submitForAutoFn() {
+        let json = {}, _self = this;
+        if (this.$route.query.d) {
+          json = {
+            tableId: this.$route.query.d
+          };
+        }
+        this.$http.post("/check/shop/" + this.$route.query.id, json).then(response => {
+            let data = response.body;
+            switch (data.code) {
+              case 200:
+                this.$cookie.set("order_id", data.result.orderId);
+                this.$cookie.set("table_no", data.result.tableNo);
+                this.ajaxUrl("waiting.html");
+                break;
+              case 405004:
+                this.$confirm("您在" + (data.result.shopname || ("本店" + data.result.tableNo + "号桌")) + "有一个买单正在进行中,是否取消？", function () {
+                  this.$http.post("/check/shop/" + data.result.shopId + "/cancel", json).then(response => {
+                    let data = response.body;
+                    if (data.code == 200) {
+                      alert("取消成功！");
+                      _self.submitForAutoFn();
+                    }
+                  });
+                });
+                $("#loading").addClass("hide");
+                break;
+              case 405007:
+                alert("当前桌台有个请求正在处理，请让服务员处理");
+                break;
+              default:
+                alert(data.message);
+            }
+          }
+        );
+      },
+      stateFn() {
+        this.$http.get("/check/" + this.init.order.orderId).then(response => {
+          let data = response.body;
+          if (data.code == 200) {
+            let result = data.result;
+            if (result.step == 1) {
+              if (result.online) {
+                this.$cookie.set("order_id", data.result.orderId);
+                this.$cookie.set("table_no", data.result.tableNo);
+
+                this.ajaxUrl("waiting.html");
+              } else {
+                this.$toast("上宾正在加速为您配置专属优惠方案");
+              }
+            } else if (result.state >= 2) {
+              this.ajaxUrl("strategy.html?oid=" + data.result.orderId);
+            } else {
+              this.initFn();
+            }
+          } else {
+            this.initFn();
+          }
+        });
       }
     }
   }

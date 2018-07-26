@@ -10,6 +10,7 @@ const MallDetail = r => require.ensure([], () => r(require('@/components/MallDet
 const MallRecord = r => require.ensure([], () => r(require('@/components/MallRecord')))
 const Coupon = r => require.ensure([], () => r(require('@/components/Coupon')))
 const Payment = r => require.ensure([], () => r(require('@/components/Payment')))
+const Strategy = r => require.ensure([], () => r(require('@/components/Strategy')))
 
 //无入口
 const Error = r => require.ensure([], () => r(require('@/components/Error')))
@@ -38,6 +39,11 @@ export default new Router({
       path: '/payment',
       name: 'Payment',
       component: Payment,
+    },
+    {
+      path: '/strategy',
+      name: 'Strategy',
+      component: Strategy,
     },
     {
       path: '/charge',

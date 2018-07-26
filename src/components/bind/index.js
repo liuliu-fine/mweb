@@ -44,7 +44,7 @@ Phone.install = function (Vue, options) {
           deep: true
         }
       },
-      template: "<div class=\"lx-bg\" v-if='show' style=\"display: block;\"><div class=\"content\"><div class=\"title\">" + title + "</div><div class=\"text\">" + text + "</div><input type=\"tel\" v-model='bind.phone' placeholder=\"手机号\" id=\"tel\" maxlength=\"11\"><div class=\"input-text\"  v-on:click.stop='validate()' :class=\"bind.phone.length==11&&helpBlock.usable?'':'disabled'\">{{helpBlock.text}}</div><input type=\"tel\" placeholder=\"验证码\" v-model='bind.validateCode' id=\"validate\" maxlength=\"6\"><div v-on:click.stop='submit()' :class=\"bind.phone.length == 11 && bind.validateCode.length == 6?'':'disabled'\" class=\"submit\">确定</div><div class=\"close\" v-on:click.stop='show=false'></div></div></div>",
+      template: "<div class=\"lx-bg\" v-if='show' style=\"display: block;\"><div class=\"content\"><div class=\"title\">" + title + "</div><div class=\"text\">" + text + "</div><input type=\"tel\" v-model='bind.phone' placeholder=\"手机号\" id=\"tel\" maxlength=\"11\"><div class=\"input-text\"  v-on:click.stop='validate()' :class=\"helpBlock.usable?'':'disabled'\">{{helpBlock.text}}</div><input type=\"tel\" placeholder=\"验证码\" v-model='bind.validateCode' id=\"validate\" maxlength=\"6\"><div v-on:click.stop='submit()' :class=\"bind.phone.length == 11 && bind.validateCode.length == 6?'':'disabled'\" class=\"submit\">确定</div><div class=\"close\" v-on:click.stop='show=false'></div></div></div>",
       methods: {
         validate() {
           if (this.bind.phone.length == 11) {

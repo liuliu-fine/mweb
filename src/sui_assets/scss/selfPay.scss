@@ -36,7 +36,37 @@ $warm-grey: rgb(156, 156, 156);
   min-height: 100vh;
   .second-pay {
     background: white;
-    padding: 1rem .8rem .8rem;
+    padding: 1rem .8rem;
+    .other-pay {
+      border-top: 1px solid rgb(216, 216, 216);
+      color: rgb(51, 51, 51);
+      font-size: .9rem;
+      .state {
+        background: linear-gradient(to right, #ffa31c, #ff5060);
+        border-width: 0;
+        color: #ffffff;
+        text-align: left;
+        margin-top: 1rem;
+        padding: .2rem .5rem .2rem .2rem;
+        line-height: 2rem;
+        font-size: .7rem;
+        img{
+          height: 2rem;
+          vertical-align: middle;
+        }
+      }
+      .text {
+        padding: 1rem 0 .7rem;
+        text-align: center;
+      }
+      #mycode {
+        width: 160px;
+        margin: auto;
+        border: 1px solid #333333;
+        padding: 4px;
+        box-sizing: content-box;
+      }
+    }
     .avatar {
       width: 34px;
       height: 34px;
@@ -94,7 +124,7 @@ $warm-grey: rgb(156, 156, 156);
     vertical-align: middle;
     font-size: 18px;
     line-height: 40px;
-    color: rgb(140,140,140);
+    color: rgb(140, 140, 140);
     padding-bottom: 1rem;
   }
   .swiper-container-horizontal > .swiper-pagination-bullets {
@@ -1022,7 +1052,6 @@ $warm-grey: rgb(156, 156, 156);
     background-size: contain;
     width: 125px;
   }
-
 }
 
 .modal {
@@ -1040,7 +1069,7 @@ $warm-grey: rgb(156, 156, 156);
     left: 50%;
     margin-left: -7.75rem;
     margin-top: 0;
-    top: 14%;
+    top: 9%;
     text-align: center;
     border-radius: .35rem;
     animation: show-modal .5s;
@@ -1085,7 +1114,7 @@ $warm-grey: rgb(156, 156, 156);
     padding-bottom: 1rem;
     box-sizing: content-box;
     max-height: 11rem;
-
+    min-height: 8rem;
   }
   .modal-inner:before {
     content: "";
@@ -1171,19 +1200,19 @@ $warm-grey: rgb(156, 156, 156);
     .modal-phone .v-button {
       background-image: linear-gradient(to bottom, #FAD961, #F7BD1C);
       padding: 0 .25rem;
-      height: 2.4rem;
+      height: 2.2rem;
       font-size: .9rem;
-      line-height: 2.4rem;
+      line-height: 2.2rem;
       text-align: center;
-      border-radius: 30px !important;
+      border-radius: 20px;
       color: #640a00;
       margin-top: 1rem;
-      font-weight: 700;
+      letter-spacing: 3px;
     }
     .v-item {
       background: url(/sui_assets/img/addVip/coupon.svg) center top no-repeat;
       color: #000000;
-      width: 233px;
+      width: 13rem;
       /*width: 218px;*/
       height: 74px;
       font-size: .75rem;
@@ -1201,8 +1230,8 @@ $warm-grey: rgb(156, 156, 156);
       }
       .left {
         color: #ff2c2c;
-        font-size: 36px;
-        width: 95px;
+        font-size: 28px;
+        width: 4.5rem;
         text-align: center;
         .dollar:before {
           content: "￥";
@@ -1377,54 +1406,84 @@ $warm-grey: rgb(156, 156, 156);
   }
 }
 
-.bindPhone {
-  .modal-inner {
-    background: white;
-    padding: 1rem 1.6rem;
-    box-sizing: border-box;
-    .modal-title {
-      font-weight: 500;
-      font-size: .9rem;
-      text-align: center;
+.addVip2 {
+  input::-webkit-input-placeholder {
+    color: #A9A9A9;
+    font-size: 13px;
+  }
+  .overflow {
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: content-box;
+    max-height: 11rem;
+
+  }
+  .modal-content {
+    background-color: #D74E4E;
+    position: relative;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 1px 0;
+    .top {
+      background: #D15353;
+      .card-box {
+        width: 9.2rem;
+        height: 5.5rem;
+        box-shadow: 0 1px 4px 4px rgba(0, 0, 0, .1);
+        background-size: cover;
+        margin: 1.5rem auto 1rem;
+        border-radius: 6px;
+      }
+      .card-text {
+        font-size: .7rem;
+        line-height: 2;
+        background: url(/sui_assets/img/addVip/oval.png) bottom center no-repeat/contain;
+        padding-bottom: 2rem;
+      }
+    }
+    .modal-phone {
+      padding: 1rem;
+      margin: auto .35rem;
+      input {
+        border-width: 0;
+        line-height: 2rem;
+        height: 2rem;
+        border-radius: 5px;
+        width: 100%;
+        padding: 0 .5rem;
+        font-size: .75rem;
+        color: #000000;
+        background-color: #ffffff;
+        margin: .25rem auto;
+      }
+      .input-text {
+        position: relative;
+        top: -2rem;
+        right: .3rem;
+        padding: .2rem .4rem;
+        color: rgb(190, 73, 73);
+        background-color: rgb(255, 238, 122);
+        border-radius: 3px;
+        float: right;
+        font-size: .7rem;
+      }
+      .v-button {
+        background-image: linear-gradient(to bottom, #FAD961, #F7BD1C);
+        height: 2rem;
+        font-size: .9rem;
+        line-height: 2rem;
+        text-align: center;
+        border-radius: 25px;
+        color: rgb(190, 73, 73);
+        clear: both;
+        position: relative;
+        top: -.5rem;
+        letter-spacing: 3px;
+      }
     }
   }
-  input {
-    line-height: 2rem;
-    height: 2.2rem;
-    border: 1px solid #ED1E37;
-    border-radius: 5px;
-    padding: 0 .5rem;
-    font-size: .75rem;
-    width: 100%;
-  }
-  .input-text {
-    position: relative;
-    top: -1.8rem;
-    padding: .3rem;
-    font-size: .5rem;
-    border-left: 1px solid #ED1E37;
-    color: #ED1E37;
-    width: 78px;
-    float: right;
-  }
-  .submit {
-    color: #fff;
-    border-radius: 5px;
-    height: 2.2rem;
-    line-height: 2.2rem;
-    margin: 1rem 0 0.2rem;
-    border: 1px solid #ff392e;
-    background: #ff392e;
-    font-size: .8rem;
-  }
-}
-
-.rotate-enter-active, .rotate-leave-active {
-  transition: opacity .5s
-}
-
-.rotate-enter, .rotate-leave-active {
-  opacity: 0
 }
 
 

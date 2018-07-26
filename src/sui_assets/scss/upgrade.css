@@ -1,21 +1,21 @@
 /*
-Error: Invalid GBK character "\xE5"
-        on line 711 of index.scss
+Error: Invalid GBK character "\xE6"
+        on line 65 of upgrade.scss
 
-706:         position: absolute;
-707:         right: 1rem;
-708:         bottom: 0.5rem;
-709:       }
-710:       .through:before {
-711:         content: "原价 ￥";
-712:         font-size: .6rem;
-713:       }
-714:       span {
-715:         display: inline-block;
-716:       }
+60:         display: -webkit-box;
+61:         overflow: hidden;
+62:       }
+63:     }
+64:     .swiper-slide.add:after {
+65:       content: "查看详情";
+66:       position: absolute;
+67:       bottom: 0;
+68:       left: 0;
+69:       right: 0;
+70:       line-height: 3;
 
 Backtrace:
-index.scss:711
+upgrade.scss:65
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE5\"\A         on line 711 of index.scss\A \A 706:         position: absolute;\A 707:         right: 1rem;\A 708:         bottom: 0.5rem;\A 709:       }\A 710:       .through:before {\A 711:         content: \"原价 ￥\";\A 712:         font-size: .6rem;\A 713:       }\A 714:       span {\A 715:         display: inline-block;\A 716:       }"; }
+  content: "Error: Invalid GBK character \"\xE6\"\A         on line 65 of upgrade.scss\A \A 60:         display: -webkit-box;\A 61:         overflow: hidden;\A 62:       }\A 63:     }\A 64:     .swiper-slide.add:after {\A 65:       content: \"查看详情\";\A 66:       position: absolute;\A 67:       bottom: 0;\A 68:       left: 0;\A 69:       right: 0;\A 70:       line-height: 3;"; }

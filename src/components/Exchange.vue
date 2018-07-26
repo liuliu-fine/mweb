@@ -12,7 +12,7 @@
     <div class="content">
       <div v-for="activity in data.activity" v-on:click="directFn(activity.coupons)">
         <div class="item"
-             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.desUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}">
+             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}">
           <div class="remain" v-if="activity.remainCount!==undefined">{{activity.remainCount}}</div>
           <div class="addon">
             <div class="left" v-if="activity.type=='1020'">
@@ -30,7 +30,6 @@
               {{activity.amount}}<span style="font-size: .75rem;">积分</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

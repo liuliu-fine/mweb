@@ -9,8 +9,8 @@
   .input-box {
     user-select: none;
     font-size: 16px;
-    border: solid 1px #f3f3f3;
-    background-color: #fcfcfc;
+    border: solid 1px #e8e8e8;
+    background-color: #f5f5f5;
     height: 49px;
     line-height: 31px;
     padding: 10px 13px;

@@ -1,0 +1,374 @@
+<template>
+  <div class="strategy" v-if="data">
+    <div v-for="(item,index) in data.strategies" class="plan"
+         :class="{'plan-active':(key==index)}" v-if="index==0||more||index==1"
+         v-on:click="key=index">
+      <div class="title">
+        <div class="tag"></div>
+        <div class="center">
+          <div class="amount">￥{{item.finalAmount}}</div>
+          <div class="text-blue" v-on:click="modal = true" v-if="item.charges">本方案参加了充值活动</div>
+        </div>
+        <div>原单￥{{data.amount}}</div>
+      </div>
+
+      <div class="used" v-if="item.useAll.length||item.nonPart||item.segmentAll.length">
+        <div class="all" v-if="item.useAll.length||item.nonPart">
+          <div class="label">门店折扣</div>
+          <div class="benefit" v-if="item.nonPart">
+            <div class="none">{{item.nonPart.name}}</div>
+            <div class="">￥{{item.nonPart.amount}}</div>
+          </div>
+          <div class="benefit" v-for="use in item.useAll">
+            <div class="">{{use.content}}</div>
+            <div class="">
+              -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
+            </div>
+          </div>
+        </div>
+        <div class="segment" v-if="item.segmentAll.length">
+          <div class="label">账户抵扣</div>
+          <div class="benefit" :class="use.type=='6011'?'text-blue':''" v-for="use in item.segmentAll">
+            <div class=""><span v-if="use.type=='6011'">使用充值卡</span><span v-else>使用{{use.content}}</span></div>
+            <div class="">
+              -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="got" v-if="item.got||item.charges">
+        <!---->
+        <div class="label">消费奖励</div>
+        <div class="overflow">
+          <div class="benefit1">
+            <div class="item" v-if="item.charges&&item.remindCharge">
+              <div>充值卡余额</div>
+              <div class="text-blue">{{item.remindCharge}}元</div>
+            </div>
+            <!---->
+            <div class="item" v-for="upgrade in item.upgrades">
+              <div v-if="upgrade.category == '1013'">升级为</div>
+              <div v-else class="ellipsis" style="-webkit-box-orient: vertical;">{{upgrade.name}}</div>
+              <div class="text-blue" v-if="upgrade.category == '1013'">{{upgrade.name}}</div>
+              <span class="text-blue" v-else-if="upgrade.count">{{upgrade.count}}张</span>
+            </div>
+            <div class="item" v-for="get in item.got">
+              <div class="" v-if="get.category == '1016'">
+                <div class="ellipsis" style="-webkit-box-orient: vertical;"> {{get.name}}</div>
+                <div class="text-blue">{{get.count}}张</div>
+              </div>
+              <div class="" v-else>
+                <div> 获得积分</div>
+                <div class="text-blue">{{get.point}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="!(item.nonPart||item.used||item.got)" style='padding: 1rem;background: white;'>
+        本策略不使用优惠
+      </div>
+    </div>
+    <!--addon end-->
+    <div class="other" v-if="data.strategies.length>2&&!more" v-on:click="more=true">
+      展开其他方案
+    </div>
+    <div style="height: 4.5rem"></div>
+    <div class="pay-fixed">
+      <div class="flower" v-if="data.gratuity" v-on:click="flowerFn(data.gratuity)">
+        <span class="tag" :class="data.gratuity.check?'':'check'"></span>
+        送{{data.gratuity.staffName}}{{data.gratuity.count}}{{data.gratuity.unit}}{{data.gratuity.name}}
+        <span class="text-blue">获赠<span
+          v-if="data.gratuity.benefits" v-for="gift in data.gratuity.benefits"><span
+          v-if="gift.category == '1017'">{{gift.amount}}元</span>{{gift.name}}</span></span> <span class="pull-right"> +{{data.gratuity.amount}}</span>
+      </div>
+      <div class="submit"
+           v-if="(payment&&payment.payMode)||data.strategies[key].finalAmount ==0"
+           v-on:click="submitFn">支付
+        ￥{{(data.gratuity&&!data.gratuity.check)?(parseFloat(data.strategies[key].finalAmount) +
+        parseFloat(data.gratuity.amount)).toFixed(2):data.strategies[key].finalAmount}}
+      </div>
+    </div>
+    <div class="moreFn" v-if="modal">
+      <div class="close" v-on:click="modal = false"></div>
+      <div class="harder">本次推荐优惠方案</div>
+      <div class="charge-amount">充值{{data.charge.charges[0].amount}}</div>
+      <div class="charge-box">
+        <div class="inner-box">
+          <div v-for="(charge,index) in data.charge.charges" v-if="index!=0">
+            <span class="benefit" v-if="charge.category=='1014'">
+              <span>{{charge.name}}</span>
+              <span> {{charge.amount}}元</span>
+            </span>
+            <span class="benefit" v-else="charge.category=='1015'||charge.category=='1016'">
+              <span>{{charge.name}}</span>
+              <span v-if="charge.amount"> {{charge.amount}}</span>
+              <span v-else-if="charge.count">{{charge.count}}张</span>
+            </span>
+          </div>
+          <div class="benefit" v-for="upgrade in data.charge.upgrades">
+            <span><span v-if="upgrade.category == '1013'">升级为</span>{{upgrade.name}}</span>
+            <span v-if="upgrade.amount">{{upgrade.amount}}</span>
+            <span v-else-if="upgrade.count">{{upgrade.count}}张</span>
+          </div>
+        </div>
+        <div class="benefit" v-for="use in data.strategies[0].used" v-if="use.type=='6011'">
+          <div class="text-gradient">本次使用</div>
+          <div class="text-gradient">-{{use.amount}}元</div>
+        </div>
+        <div class="add-text">充值当日可使用{{data.charge.charges[0].celling*100}}%</div>
+        <div class="benefit" v-if="data.charge.remindCharge">
+          <div class="text-gradient">充值卡余额</div>
+          <div class="text-gradient" style="font-weight: bold;font-size: .8rem">{{data.charge.remindCharge}}元</div>
+        </div>
+      </div>
+      <div class="more" onclick="ajaxUrl('charge.html')">查看其它充值方案</div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "strategy",
+    data() {
+      return {
+        data: "",
+        id: "",//orderId
+        key: 0,
+        payment: {},
+        more: false,
+        modal: false
+      }
+    },
+    created() {
+      this.initFn();
+    },
+    methods: {
+      initFn() {
+        let _self = this;
+        this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.GLOBAL.version}}).then(response => {
+          if (response.body.code == 200) {
+            this.payment = response.body.result;
+          }
+        });
+        a();
+
+        function a() {
+          const id = _self.$route.query.oid || _self.$cookie.get("order_id");
+          _self.id = id;
+          _self.$http.get("/check/" + id).then(response => {
+            let data = response.body;
+            if (data.code == 200) {
+              if (!data.result.strategy && !data.result.strategies) {
+                setTimeout(function () {
+                  a();
+                }, 1000);
+                return;
+              }
+              if (data.result.strategy) {
+                data.result.strategies = [data.result.strategy];
+              }
+              if (data.result.strategies[0].charges) {
+                data.result.charge = data.result.strategies[0];
+              }
+
+              for (let i in data.result.strategies) {
+                let useAll = [], segmentAll = [];
+                if (data.result.strategies[i].used) {
+                  let item = data.result.strategies[i].used;
+                  for (let j in item) {
+                    let type = item[j].type;
+                    //自己的权益放在segment中
+                    if (type == '6010' || type == '6009' || type == '6011' || type == '6016') {
+                      segmentAll.push(item[j]);
+                    } else {
+                      useAll.push(item[j]);
+                    }
+                  }
+
+                }
+                data.result.strategies[i].useAll = useAll;
+                data.result.strategies[i].segmentAll = segmentAll;
+              }
+              _self.data = data.result;
+              _self.socket();
+            } else {
+              _self.$router.push({path: '/selfPay', query: _self.$route.query});
+            }
+          });
+        }
+      },
+      socket: function () {
+        let _self = this;
+        setTimeout(function () {
+          let a;
+          let uri = "wss://" + location.hostname + "/websocket?id=" + _self.data.userId;
+          let websocket;
+          websocket = new WebSocket(uri);
+          websocket.onopen = function () {
+            a = setInterval(function () {
+              websocket.send("1");
+            }, 30000)
+          };
+          websocket.onmessage = function (evt) {
+            if (evt.data == "success") return false;
+            let data = JSON.parse(evt.data);
+            data.orderId && _self.$cookie.set("order_id", data.orderId, {"path": "/"});
+            let json = _self.$route.query;
+            json.oid = data.orderId;
+            switch (data.type) {
+              case "500000":
+                _self.ajaxUrl("waiting.html");
+                break;
+              case "500042":
+                _self.$toast("支付完成");
+                _self.$router.push({path: '/payment', query: json});
+                break;
+              case "500051":
+                alert("买单被取消");
+                _self.initFn();
+                break;
+              case "500052":
+                alert("pad下线");
+                _self.initFn();
+                break;
+              case "500053":
+                alert("买单请求超时未处理被取消");
+                _self.initFn();
+                break;
+              case "500054":
+                _self.$router.push({path: '/strategy', query: json});
+                break;
+              case "500005":
+                _self.$router.push({path: '/payment', query: json});
+                break;
+              case "500055":
+                _self.$router.push({path: '/strategy', query: json});
+                break;
+              case "500050":
+                alert("服务员未响应");
+                _self.$router.push({path: '/selfPay', query: json});
+                break;
+            }
+          };
+          websocket.onclose = function () {
+          };
+          websocket.onerror = function () {
+          };
+        }, 3000)
+      },
+      flowerFn: function (item) {
+        this.$set(item, "check", !item.check);
+      },
+      showMore: function (index) {
+        this.$set(this.data.strategies[index], "check", !this.data.strategies[index].check);
+      },
+      chargeFn: function () {
+        this.ajaxUrl("admin.html#/charge?type=channel&rid=" + this.data.recommend.ruleTupleId);
+      },
+      submitFn: function () {
+        let _self = this;
+        if (_self.data.strategies[_self.key].needValidate) {
+          this.$bind({
+            title: "绑定手机号",
+            text: "绑定手机号后后，获得买单优惠",
+            submit: function () {
+              _self.data.strategies[_self.key].needValidate = false;
+              _self.submitFn();
+            }
+          })
+          return;
+        }
+        let mode = _self.payment;
+        _self.$loading();
+        let json = {
+          orderId: _self.id,
+          strategyId: _self.data.strategies[_self.key].id,
+          payCategory: mode ? mode.payMode : '',
+          url: encodeURIComponent(location.origin + "/admin.html#/payment" + location.search),
+          failedUrl: encodeURIComponent(location.href)
+        };
+        if (_self.data.gratuity && !_self.data.gratuity.check) {
+          json.gratuityId = _self.data.gratuity.id;
+        }
+        this.$http.post("/check/pay", json).then(response => {
+          let data = response.body;
+          if (data.code == 404014) {
+            _self.$loading.close();
+            alert("订单不存在！");
+            _self.$router.push({path: '/selfPay', query: _self.$route.query})
+          } else if (data.code != 200) {
+            _self.$loading.close();
+            alert(data.message);
+            return;
+          }
+          //跳转链接参数
+          let json = _self.$route.query;
+          json.oid = json.oid || _self.id;
+          if (_self.data.strategies[_self.key].finalAmount == 0) {
+            if (_self.data.gratuity && (_self.data.gratuity.check || _self.data.gratuity.amount == '0')) {
+              _self.$router.push({path: '/payment', query: json});
+              return;
+            } else if (!_self.data.gratuity) {
+              _self.$router.push({path: '/payment', query: json});
+              return;
+            }
+          }
+          switch (mode.payMode) {
+            case "1005":
+              let js = data.result.js;
+              let pay = data.result.pay;
+              pay.success = function () {
+                //查询支付结果
+                _self.$http.get("/order/" + _self.id + "/pay/result", {}).then(response => {
+                  _self.$router.push({path: '/payment', query: json});
+                });
+              };
+              pay.cancel = function () {
+                _self.cancelPay();
+              };
+              pay.fail = function () {
+                _self.cancelPay();
+              };
+              js.debug = false;
+              js.jsApiList = ['chooseWXPay'];
+              delete js.url;
+              wx.config(js);
+              wx.ready(function () {
+                wx.chooseWXPay(pay);
+              });
+              break;
+            case "1101":
+              AlipayJSBridge.call("tradePay", {
+                tradeNO: data.result.pay.tradeNO
+              }, function (result) {
+                if (result.resultCode == "6001") {
+                  _self.cancelPay();
+                  return;
+                }
+                if (result.resultCode == "9000") {
+                  _self.$http.get("/order/" + _self.id + "/pay/result", {}).then(response => {
+                    _self.$router.push({path: '/payment', query: json});
+                  });
+                }
+              });
+              break;
+          }
+        });
+
+      },
+      cancelPay: function () {
+        this.$http.get("/order/" + this.id + "/pay/revoke", {}).then(response => {
+          this.$loading.close();
+        });
+      }
+    },
+
+  }
+</script>
+
+<style lang="scss" scoped>
+  @import "../sui_assets/scss/strategy.scss";
+</style>

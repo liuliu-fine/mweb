@@ -22,6 +22,9 @@ export default {
       }
       if (this.$route.query.id) {
         path += "id=" + this.$route.query.id;
+        if(this.$route.query.d){
+          path += "&d=" + this.$route.query.d;
+        }
       } else if (this.$route.query.guestid) {
         path += "guestid=" + this.$route.query.guestid;
       }
