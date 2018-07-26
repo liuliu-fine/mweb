@@ -79,10 +79,11 @@
           };
           _self.$http.post("/benefit/exchange/guest/" + (_self.$route.query.id || _self.$route.query.guestid), para).then(response => {
             if (response.body.code == 200) {
-              _self.$toast("兑换成功！");
-              _self.initFn();
+              _self.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
+                _self.$router.push({path: 'user', query: _self.$route.query});
+              })
             } else {
-              _self.$toast(response.body.message);
+              alert(response.body.message);
             }
           });
         });

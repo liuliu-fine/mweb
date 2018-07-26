@@ -114,7 +114,7 @@
             if (response.body.code == 405017) {
               let re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
               if (re) {
-                this.ajaxUrl("upgrade.html");
+                _self.$router.push({path: 'upgrade', query: _self.$route.query});
                 return;
               }
             } else {
@@ -180,8 +180,17 @@
             let data1 = response.body;
             if (data1.code == "200" || data1.code == "404014") {
               clearInterval(y);
-              _self.$toast.center('操作成功');
-              location.reload();
+              if (_self.$route.query.type == 'channel') {
+                _self.$confirm('操作成功!', function () {
+                  history.go(-1);
+                }, function () {
+                  _self.$router.push({path: 'user', query: _self.$route.query});
+                }, "继续买单", "会员中心")
+              } else {
+                _self.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
+                  _self.$router.push({path: 'user', query: _self.$route.query});
+                })
+              }
             } else {
               _self.$toast("支付结果查询中");
             }

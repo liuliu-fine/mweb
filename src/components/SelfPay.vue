@@ -503,10 +503,9 @@
                     _self.initFn();
                   }
                 });
-
               }, function () {
                 _self.ajaxUrl("strategy.html?oid=" + _self.init.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
-              });
+              }, "确定放弃", "继续买单");
             } else {
               _self.$nextTick(function () {
                 _self.socket();

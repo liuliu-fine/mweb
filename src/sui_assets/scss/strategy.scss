@@ -187,78 +187,72 @@ $black: rgb(40, 40, 40);
     border-radius: 5px;
     text-align: center;
     padding: .5rem 1rem;
+    .harder {
+      padding: 1rem;
+      font-weight: bold;
+      font-size: .8rem;
+    }
+    .harder:before, .harder:after {
+      content: "";
+      background: url("/sui_assets/img/pay/colorful-decorate-icon.svg") center no-repeat;
+      padding: 16px;
+      vertical-align: middle;
+    }
+    .charge-amount {
+      background: #F6F6F6;
+      height: 60px;
+      line-height: 60px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #00A1FF;
+    }
+    .charge-box {
+      padding: 1rem 2rem;
+    }
+    .inner-box {
+      padding-left: 2rem;
+      padding-bottom: 1rem;
+      font-size: .7rem;
+      border-bottom: 1px solid #EBEBEB;
+      margin-bottom: 1.2rem;
+    }
+
+    .inner-box:before {
+      content: "赠送";
+      float: left;
+      margin-left: -2rem;
+      vertical-align: middle;
+      margin-top: .15rem;
+    }
+    .more {
+      position: absolute;
+      bottom: 3rem;
+      width: 9rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-decoration: underline;
+      background: #fff;
+      color: #000;
+    }
+    .close {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      background: url(/sui_assets/img/vipModal/close.svg) center no-repeat;
+      padding: 24px;
+      z-index: 111;
+    }
+    .benefit {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      line-height: 1.9;
+      align-items: center;
+    }
   }
 
-  .moreFn .harder {
-    padding: 1rem;
-    font-weight: bold;
-    font-size: .8rem;
-  }
-
-  .moreFn .harder:before, .moreFn .harder:after {
-    content: "";
-    background: url("/sui_assets/img/pay/colorful-decorate-icon.svg") center no-repeat;
-    padding: 16px;
-    vertical-align: middle;
-  }
-
-  .moreFn .charge-amount {
-    background: #F6F6F6;
-    height: 60px;
-    line-height: 60px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #00A1FF;
-  }
-
-  .moreFn .charge-box {
-    padding: 1rem 2rem;
-  }
-
-  .moreFn .inner-box:before {
-    content: "赠送";
-    float: left;
-    margin-left: -2rem;
-    vertical-align: middle;
-    margin-top: .15rem;
-  }
-
-  .moreFn .more {
-    position: absolute;
-    bottom: 3rem;
-    width: 9rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-decoration: underline;
-    background: #fff;
-    color: #000;
-  }
-
-  .moreFn .inner-box {
-    padding-left: 2rem;
-    padding-bottom: 1rem;
-    font-size: .7rem;
-    border-bottom: 1px solid #EBEBEB;
-    margin-bottom: 1.2rem;
-  }
-
-  .moreFn .close {
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    background: url(/sui_assets/img/vipModal/close.svg) center no-repeat;
-    padding: 24px;
-    z-index: 111;
-  }
-  .moreFn .benefit {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-    -webkit-justify-content: space-between;
-    line-height: 1.9;
-    align-items: center;
-  }
   .text-gradient {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -270,5 +264,68 @@ $black: rgb(40, 40, 40);
     text-align: left;
     font-size: 12px;
     padding-bottom: .7rem;
+  }
+
+
+  /*智能推荐*/
+  .recommend {
+    background: url(/sui_assets/img/pay/tui-bg.png) center no-repeat;
+    background-color: #009cff;
+    height: 157px;
+    background-size: cover;
+    color: white;
+    -webkit-justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      width: 6rem;
+      /*flex: 1;*/
+      margin: 0 1rem;
+      img {
+        border-radius: 5px;
+        box-shadow: 2px 3px 10px 0 #0070d0;
+        /*width: 100%;*/
+      }
+    }
+    .right {
+      flex: 1;
+      .reco1 {
+        font-size: 30px;
+        font-family: "Times New Roman";
+        background: url("/sui_assets/img/pay/chong.svg") left center no-repeat;
+        padding: 0 5px 0 29px;
+      }
+
+      .reco2 {
+        font-size: 36px;
+        font-family: "Times New Roman";
+        font-style: italic;
+        background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
+        padding: 0 5px 0 28px;
+        border-radius: 50%;
+        position: relative;
+        font-weight: 700;
+      }
+
+      .reco2:before {
+        background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
+        padding: 10px;
+      }
+      .tuijian {
+        background: url(/sui_assets/img/pay/label.png) left bottom no-repeat;
+        background-size: contain;
+        height: 20px;
+        margin-top: 5px;
+      }
+    }
+
+    .other {
+      margin-top: 1px;
+      font-size: .6rem;
+      background: #ffffff;
+      padding: .5rem;
+      line-height: 1.1;
+    }
   }
 }

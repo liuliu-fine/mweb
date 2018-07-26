@@ -1,5 +1,14 @@
 <template>
   <div class="strategy" v-if="data">
+    <div class="recommend i-flex" v-if="data.recommend&&data.recommend.type=='CHARGE'" @click="chargeFn">
+      <div class="left"><img :src="data.recommend.picUrl" style="width: 100%"></div>
+      <div class="right">
+        <div style="margin-top: -6px"><span class="reco1">{{data.recommend.charge}}</span><span
+          class="reco2">{{data.recommend.benefit}}</span></div>
+        <div class="tuijian"></div>
+      </div>
+    </div>
+
     <div v-for="(item,index) in data.strategies" class="plan"
          :class="{'plan-active':(key==index)}" v-if="index==0||more||index==1"
          v-on:click="key=index">
@@ -7,7 +16,7 @@
         <div class="tag"></div>
         <div class="center">
           <div class="amount">￥{{item.finalAmount}}</div>
-          <div class="text-blue" v-on:click="modal = true" v-if="item.charges">本方案参加了充值活动</div>
+          <div class="text-blue" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动</div>
         </div>
         <div>原单￥{{data.amount}}</div>
       </div>

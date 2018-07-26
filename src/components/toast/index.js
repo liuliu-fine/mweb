@@ -114,14 +114,14 @@ Toast.install = function (Vue, options) {
     document.body.appendChild(tpl);
   }
   //confirm
-  Vue.prototype.$confirm = function (title, success, fail) {
+  Vue.prototype.$confirm = function (title, success, fail, successBtn = '确认', failBtn = '取消') {
     // toastVM.show = showToast = false;
     let tmp = '<div class="lx-confirm-bg" v-if="showMessage">' +
       '<div class="lx-confirm">' +
       '<div class="title" v-html="title"></div>' +
       '<div class="buttons">' +
-      '<div class="item" v-on:click="callback(false)">取消</div>' +
-      '<div class="item" v-on:click="callback(true)">确认</div>' +
+      '<div class="item" v-on:click="callback(false)">' + failBtn + '</div>' +
+      '<div class="item" v-on:click="callback(true)">' + successBtn + '</div>' +
       '</div>' +
       '</div>' +
       '</div>';
