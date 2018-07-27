@@ -17,7 +17,8 @@
     <div style="height: 3rem"></div>
     <div class="fixed">
       <div class="left">需付款{{data.sales[0].price}}元</div>
-      <div class="right" :class="payment&&data.usable?'':'disabled'" v-on:click="submitFn"><span v-if="data.stock===0">已售完</span><span v-else>立即购买</span>
+      <div class="right" :class="payment&&data.usable?'':'disabled'" v-on:click="submitFn"><span v-if="data.stock===0">已售完</span><span
+        v-else>立即购买</span>
       </div>
     </div>
   </div>
@@ -109,8 +110,11 @@
               let pay = response.body.result.pay;
               pay.success = function () {
                 _self.$loading.close();
-                _self.$toast("购买成功");
-                _self.initFn();
+                _self.$confirm('购买成功!', function () {
+                  _self.$router.push({path: 'user', query: _self.$route.query});
+                }, function () {
+                  _self.initFn();
+                }, "去看看", "继续逛逛");
               };
               pay.cancel = function () {
                 _self.cancel(order_id);
@@ -138,8 +142,11 @@
                 }
                 if (result.resultCode == "9000") {
                   _self.$loading.close();
-                  _self.$toast("购买成功");
-                  this.initFn();
+                  _self.$confirm('购买成功!', function () {
+                    _self.$router.push({path: 'user', query: _self.$route.query});
+                  }, function () {
+                    _self.initFn();
+                  }, "去看看", "继续逛逛");
                 }
               });
               break;

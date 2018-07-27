@@ -107,8 +107,12 @@
               let pay = response.body.result.pay;
               pay.success = function () {
                 _self.$loading.close();
-                _self.$toast("购买成功");
-                _self.initFn();
+
+                _self.$confirm('购买成功!', function () {
+                  _self.$router.push({path: 'user', query: _self.$route.query});
+                }, function () {
+                  _self.initFn();
+                }, "去看看", "继续逛逛");
               };
               pay.cancel = function () {
                 _self.cancel(order_id);
@@ -134,8 +138,11 @@
                   return;
                 }
                 if (result.resultCode == "9000") {
-                  _self.$toast("购买成功");
-                  _self.initFn();
+                  _self.$confirm('购买成功!', function () {
+                    _self.$router.push({path: 'user', query: _self.$route.query});
+                  }, function () {
+                    _self.initFn();
+                  }, "去看看", "继续逛逛");
                 }
               });
               break;
