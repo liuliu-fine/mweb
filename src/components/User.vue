@@ -131,13 +131,9 @@
               })
             }
           } else {
-            alert(response.body.message);
+            // alert(response.body.message);
           }
         });
-
-      },
-      couponFn(event, id) {
-        this.$couponShow(event, id, 'earned')
       }
     }
   }

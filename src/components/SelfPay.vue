@@ -401,8 +401,8 @@
               </div>
             </div>
             <div class="addon"></div>
-            <div class="close" v-on:click="initFn()"></div>
-            <div class="modal-button" v-on:click="initFn()">我知道了</div>
+            <div class="close" v-on:click="refresh()"></div>
+            <div class="modal-button" v-on:click="refresh()">我知道了</div>
           </div>
         </div>
       </div>

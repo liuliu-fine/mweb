@@ -154,11 +154,6 @@
         }
       }
     },
-    // computed: {
-    //   swiper() {
-    //     return this.$refs.swiper.swiper
-    //   }
-    // },
     created() {
       this.$http.get("/benefit/coupons/guest/" + (this.$route.query.id || this.$route.query.guestid)).then((response) => {
         if (response.body.code == 200) {
@@ -166,7 +161,6 @@
         } else {
           this.data.usable = {total: 0, page: 0, count: 20};
           this.$el.querySelector('.load-more').style.display = 'none';
-          console.log(response.body.message);
         }
       });
     },
