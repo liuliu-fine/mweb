@@ -333,7 +333,7 @@
           <div class="modal-inner">
             <div class="modal-content">
               <div class="overflow">
-                <div class="usable">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
+                <div class="usable" v-if="vip.todayUsableNum">领取后，将有 {{vip.todayUsableNum}} 张优惠券可立即使用</div>
                 <div class="v-coupon" v-if="vip.coupons">
                   <div class="v-item" v-for="coupon in vip.coupons" :class="coupon.todayUsable?'todayUsable':''">
                     <div class="left" v-if="coupon.hasOwnProperty('amount')">
@@ -474,14 +474,14 @@
       initFn() {
         let _self = this;
         let para = {};
-        para.type = this.GLOBAL.version == "WXPAY" ? "wx" : "ali";
+        para.type = this.getVersion() == "WXPAY" ? "wx" : "ali";
         if (this.$route.query.d) {
           para.tableId = this.$route.query.d;
         }
         this.$http.get("/shop/" + this.$route.query.id, {key: para}).then(response => {
           let data = response.body;
           if (data.code == 200) {
-            document.title = (data.result.brandName + "(" + data.result.name + ")");
+            _self.setTitle(data.result.brandName + "(" + data.result.name + ")");
             localStorage.setItem("userId", data.result.user.id);
             _self.init = data.result;
             if (_self.init.preCheckData) _self.post = _self.init.preCheckData;
@@ -518,7 +518,7 @@
                        });
                        qrcode.makeCode(_self.init.checkUserCode);*/
                   _self.refreshCode();
-                  setInterval(_self.refreshCode, 30000);
+                  _self.interval = setInterval(_self.refreshCode, 30000);
                 }
                 /*----------------------*/
                 //买单状态
@@ -574,6 +574,10 @@
         this.$http.get("/check/code").then(response => {
           let data = response.body;
           if (data.code == 200) {
+            if (!document.getElementById("mycode")) {
+              clearInterval(this.interval);
+              return;
+            }
             document.getElementById("mycode").innerHTML = "";
             let qrcode = new QRCode(document.getElementById("mycode"), {
               width: 160,
@@ -718,7 +722,7 @@
         let _self = this;
         this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
           _self.vip = null;
-          if (this.init.existGratuity) {
+          if (_self.init.existGratuity) {
             _self.getFlower();
           }
         });

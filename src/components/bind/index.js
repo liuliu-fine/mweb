@@ -109,7 +109,7 @@ Phone.install = function (Vue, options) {
       }
     });
     let tpl = new toastTpl().$mount().$el;
-    document.body.appendChild(tpl);
+    document.getElementById("app").appendChild(tpl);
   };
 }
 

@@ -42,7 +42,7 @@ Toast.install = function (Vue, options) {
       });
       toastVM = new toastTpl()
       let tpl = toastVM.$mount().$el;
-      document.body.appendChild(tpl);
+      document.getElementById("app").appendChild(tpl);
     }
     toastVM.type = 'lx-toast-' + curType;
     toastVM.tip = tips;
@@ -78,7 +78,7 @@ Toast.install = function (Vue, options) {
       loadNode = new loadTpl();
       let tpl = loadNode.$mount().$el;
 
-      document.body.appendChild(tpl);
+      document.getElementById("app").appendChild(tpl);
       loadNode.show = showLoad = true;
     }
   };
@@ -111,7 +111,7 @@ Toast.install = function (Vue, options) {
       }
     });
     let tpl = new toastTpl().$mount().$el;
-    document.body.appendChild(tpl);
+    document.getElementById("app").appendChild(tpl);
   }
   //confirm
   Vue.prototype.$confirm = function (title, success, fail, successBtn = '确认', failBtn = '取消') {
@@ -146,7 +146,7 @@ Toast.install = function (Vue, options) {
       }
     });
     let tpl = new toastTpl().$mount().$el;
-    document.body.appendChild(tpl);
+    document.getElementById("app").appendChild(tpl);
   }
 }
 

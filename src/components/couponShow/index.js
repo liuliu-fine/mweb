@@ -116,7 +116,7 @@ Coupon.install = function (Vue) {
       methods: {}
     });
     let tpl = new toastTpl().$mount().$el;
-    document.body.appendChild(tpl);
+    document.getElementById("app").appendChild(tpl);
   };
 }
 

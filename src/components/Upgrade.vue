@@ -108,7 +108,7 @@
         if (data.code == 200) {
           _self.data = data.result;
           _self.$nextTick(function () {
-            _self.$http.get("/shop/" + (_self.$route.query.id || _self.$route.query.guestid) + "/paymode", {key: {"type": this.GLOBAL.version}}).then(response => {
+            _self.$http.get("/shop/" + (_self.$route.query.id || _self.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
               let data1 = response.body;
               if (data1.code == 200) {
                 _self.payment = data1.result.payMode;

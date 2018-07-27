@@ -53,7 +53,7 @@
       }
     },
     created() {
-      this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.GLOBAL.version}}).then(response => {
+      this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
         if (response.body.code == 200) {
           this.payment = response.body.result;
         }
@@ -111,6 +111,7 @@
         }
         this.$http.post("/benefit/recharge/guest/" + (this.$route.query.id || this.$route.query.guestid), para).then(response => {
           if (response.body.code != 200) {
+            this.$loading.close();
             if (response.body.code == 405017) {
               let re = confirm("只有指定级别顾客可参与活动，确定升级为该级别？");
               if (re) {
@@ -118,7 +119,6 @@
                 return;
               }
             } else {
-              this.$loading.close();
               alert(response.body.message);
             }
             return;

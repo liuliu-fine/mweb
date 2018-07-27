@@ -287,7 +287,7 @@
     },
     created() {
       let para = {};
-      para.type = this.GLOBAL.version == "WXPAY" ? "wx" : "ali";
+      para.type = this.getVersion() == "WXPAY" ? "wx" : "ali";
       let url = "/activities/shop";
       if (this.$route.query.id) {
         para.id = this.$route.query.id;

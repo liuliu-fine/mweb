@@ -157,7 +157,7 @@
     methods: {
       initFn() {
         let _self = this;
-        this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.GLOBAL.version}}).then(response => {
+        this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
           if (response.body.code == 200) {
             this.payment = response.body.result;
           }
@@ -292,7 +292,7 @@
         }
         let mode = _self.payment;
         _self.$loading();
-        let json = {
+        let param = {
           orderId: _self.id,
           strategyId: _self.data.strategies[_self.key].id,
           payCategory: mode ? mode.payMode : '',
@@ -300,19 +300,43 @@
           failedUrl: encodeURIComponent(location.href)
         };
         if (_self.data.gratuity && !_self.data.gratuity.check) {
-          json.gratuityId = _self.data.gratuity.id;
+          param.gratuityId = _self.data.gratuity.id;
         }
-        this.$http.post("/check/pay", json).then(response => {
+        this.$http.post("/check/pay", param).then(response => {
           let data = response.body;
           if (data.code == 404014) {
             _self.$loading.close();
             alert("订单不存在！");
             _self.$router.push({path: '/selfPay', query: _self.$route.query})
+          } else if (data.code == 405009) {
+            _self.$loading.close();
+            _self.$confirm("支付遇到问题，是否重新支付？", function () {
+              _self.$http.post("/order/" + _self.id + "/pay/revoke").then(response => {
+                let data = response.body;
+                if (data.code == 200) {
+                  _self.submitFn();
+                } else {
+                  alert(data.message);
+                }
+              });
+            }, function () {
+              _self.$http.get("/order/" + _self.id + "/pay/result").then(response => {
+                if (response.body.code == 200) {
+                  _self.$router.push({path: '/payment', query: json});
+                } else if (response.body.code == 403055) {
+                  alert("此订单正在支付中，请稍后再试！");
+                } else {
+                  alert(response.body.message);
+                }
+              });
+            }, "重新支付", "我已支付");
+            return;
           } else if (data.code != 200) {
             _self.$loading.close();
             alert(data.message);
             return;
           }
+          _self.$loading.close();
           //跳转链接参数
           let json = _self.$route.query;
           json.oid = json.oid || _self.id;
@@ -331,7 +355,7 @@
               let pay = data.result.pay;
               pay.success = function () {
                 //查询支付结果
-                _self.$http.get("/order/" + _self.id + "/pay/result", {}).then(response => {
+                _self.$http.get("/order/" + _self.id + "/pay/result").then(response => {
                   _self.$router.push({path: '/payment', query: json});
                 });
               };
@@ -358,7 +382,7 @@
                   return;
                 }
                 if (result.resultCode == "9000") {
-                  _self.$http.get("/order/" + _self.id + "/pay/result", {}).then(response => {
+                  _self.$http.get("/order/" + _self.id + "/pay/result").then(response => {
                     _self.$router.push({path: '/payment', query: json});
                   });
                 }
@@ -369,8 +393,7 @@
 
       },
       cancelPay: function () {
-        this.$http.get("/order/" + this.id + "/pay/revoke", {}).then(response => {
-          this.$loading.close();
+        this.$http.post("/order/" + this.id + "/pay/revoke").then(response => {
         });
       }
     },
