@@ -49,17 +49,15 @@ ssh:47.96.190.4
 tail -f /alidata/www/mws/logs/catalina.out 
 tail -f /alidata/www/bm/logs/catalina.out 
  ```
-
- npm i -D webpack-dev-server@2.9.7
+###server  bug fix
 
 npm ERR! Failed at the dev@1.0.0 dev script.
 npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /Users/liuliu/.npm/_logs/2018-07-14T16_04_36_191Z-debug.log
-liuliudeMacBook-Pro:vue liuliu$ npm i -D webpack-dev-server@2.9.7
-^R░░░░░░░░░░░░░░░░░⸩ ⠙ fetchMetadata: sill resolveWithNewModule i
-
+ ```
+npm i -D webpack-dev-server@2.9.7
+ ```
+ ### pull最新版本
+ git pull origin master
 
 
 

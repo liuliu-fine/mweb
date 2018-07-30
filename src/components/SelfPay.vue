@@ -816,6 +816,7 @@
         });
       },
       bindPhone1() {
+        let _self = this;
         if (this.phone1.phone && this.phone1.validateCode && this.phone1.phone.length == 11 && this.phone1.validateCode.length == 6) {
           let jsonA = {shopId: this.$route.query.id};
           jsonA.phone = this.phone1.phone;
@@ -827,7 +828,12 @@
               if (data.result && data.result.token) {
                 this.$cookie.set("token", data.result.token, {"expires": '30d'});
               }
-              this.closeSuccessAddVip();
+              this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
+                _self.vip = null;
+                _self.initFn();
+
+              });
+//              this.closeSuccessAddVip();
             } else {
               this.$toast(data.message);
             }
