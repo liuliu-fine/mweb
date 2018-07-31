@@ -237,15 +237,15 @@
                 break;
               case "500051":
                 alert("买单被取消");
-                _self.initFn();
+                _self.$router.push({path: '/selfPay', query: json});
                 break;
               case "500052":
                 alert("pad下线");
-                _self.initFn();
+                _self.$router.push({path: '/selfPay', query: json});
                 break;
               case "500053":
                 alert("买单请求超时未处理被取消");
-                _self.initFn();
+                _self.$router.push({path: '/selfPay', query: json});
                 break;
               case "500054":
                 _self.$router.push({path: '/strategy', query: json});

@@ -68,7 +68,7 @@ Coupon.install = function (Vue) {
           }
         });
       },
-      template: " <transition  name=\"bounceUp\"> <div class=\"popup popup-coupon\" v-if='data'>\n" +
+      template: " <transition  name=\"bounceUp\"> <div @touchmove.prevent class=\"popup popup-coupon\" v-if='data'>\n" +
       "    <div class=\"liner\"><span class=\"text2\">{{category[data.category]}}</span><span class=\"md-close\" v-on:click.stop='data=false'></span></div>\n" +
       "    <div class='overflow'>" +
       "    <div class=\"coupon-show-box\">\n" +

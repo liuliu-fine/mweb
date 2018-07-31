@@ -432,7 +432,6 @@
         post: {amount: '', nonParticationAmount: ''},
         coupons: [],
         init: {},
-        socketObj: "",
         swiper: "",
         ads: [],
         vip: "",
@@ -718,7 +717,7 @@
           this.getFlower();
         }
       },
-      closeSuccessAddVip() {
+     /* closeSuccessAddVip() {
         let _self = this;
         this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
           _self.vip = null;
@@ -726,7 +725,7 @@
             _self.getFlower();
           }
         });
-      },
+      },*/
       replaceUrl(item) {
         if (!item.activityCategory) {
           if (item.linkUrl) {
@@ -891,7 +890,7 @@
           let a;
           let uri = "wss://" + location.hostname + "/websocket?id=" + _self.init.user.id;
           let websocket;
-          _self.socketObj = websocket = new WebSocket(uri);
+          websocket = new WebSocket(uri);
           websocket.onopen = function () {
             a = setInterval(function () {
               websocket.send("1");
@@ -902,7 +901,7 @@
             let data = JSON.parse(evt.data);
             data.orderId && _self.$cookie.set("order_id", data.orderId, {"path": "/"});
             let json = _self.$route.query;
-            json.oid = data.orderId;
+            if(data.orderId)json.oid = data.orderId;
             switch (data.type) {
               case "500000":
                 _self.ajaxUrl("waiting.html");
@@ -913,14 +912,17 @@
                 break;
               case "500051":
                 alert("买单被取消");
+                // _self.$router.push({path: '/selfPay', query: json});
                 _self.initFn();
                 break;
               case "500052":
                 alert("pad下线");
+                // _self.$router.push({path: '/selfPay', query: json});
                 _self.initFn();
                 break;
               case "500053":
                 alert("买单请求超时未处理被取消");
+                // _self.$router.push({path: '/selfPay', query: json});
                 _self.initFn();
                 break;
               case "500054":
@@ -934,6 +936,7 @@
                 break;
               case "500050":
                 alert("服务员未响应");
+                // _self.$router.push({path: '/selfPay', query: json});
                 _self.initFn();
                 break;
               //coupon state

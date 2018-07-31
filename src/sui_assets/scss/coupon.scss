@@ -74,10 +74,15 @@
   }
   .swiper-wrapper {
     padding-top: 2rem;
+    .swiper-slide{
+      min-height: 500px;
+    }
     .empty {
       text-align: center;
-      padding-top: 38%;
+      margin: 38% auto;
       display: block;
+      width: 152px;
+      height: 109px;
     }
   }
   .swiper-pagination {
