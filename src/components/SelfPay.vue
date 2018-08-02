@@ -377,32 +377,17 @@
       <div class="modal addVip1" v-else>
         <div class="modal-inner">
           <div class="modal-content">
-            <div class="card-box">
-              <div class="item">
-                <div class="tag">恭喜获得</div>
-                <div class="name">{{vip.memberGradeName}}</div>
-              </div>
-              <div class="item second" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}">
-                <img :src="vip.logo">
-              </div>
+
+            <div class="top">
+              <div class="card-box" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}">></div>
+              <div class="card-line"></div>
+              <div class="card-text">请在“会员中心”查看权益<br>
+                使用自助买单可自动抵用优惠</div>
             </div>
-            <div class="overflow" v-if="vip.coupons||(vip.activities&&vip.activities.length)">
-              <div class="o-box" v-if="vip.coupons">
-                <div class="o-item" v-for="item in vip.coupons">
-                  {{item.name}}
-                  <div class="grey">{{item.useStrategy}} {{item.time}}</div>
-                </div>
-              </div>
-              <div class="o-box1" v-if="vip.activities&&vip.activities.length">
-                <div class="o-item" v-for="item in vip.activities">
-                  {{item.contents.join("，")}}
-                  <div class="grey">{{textFn(item)}}</div>
-                </div>
-              </div>
-            </div>
-            <div class="addon"></div>
+
+            <div v-on:click="refresh()" class="v-button">我知道了</div>
+
             <div class="close" v-on:click="refresh()"></div>
-            <div class="modal-button" v-on:click="refresh()">我知道了</div>
           </div>
         </div>
       </div>
@@ -617,6 +602,7 @@
                 }
               }
               _self.flower = data.result;
+              _self.flower.once = true;
             }
           });
         }
@@ -717,15 +703,15 @@
           this.getFlower();
         }
       },
-     /* closeSuccessAddVip() {
-        let _self = this;
-        this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
-          _self.vip = null;
-          if (_self.init.existGratuity) {
-            _self.getFlower();
-          }
-        });
-      },*/
+      /* closeSuccessAddVip() {
+         let _self = this;
+         this.$message("操作成功！", "请在“会员中心”查看权益，使用自助买单可自动抵用优惠。", function () {
+           _self.vip = null;
+           if (_self.init.existGratuity) {
+             _self.getFlower();
+           }
+         });
+       },*/
       replaceUrl(item) {
         if (!item.activityCategory) {
           if (item.linkUrl) {
@@ -854,7 +840,11 @@
           delete this.init.couponCount;
           this.init.existCoupon = true;
         }
-        this.addVip();
+        if (this.init.existRemindBenefit) {
+          this.addVip();
+        } else if (this.init.existGratuity && !this.flower.once) {
+          this.getFlower();
+        }
       },
       clear: function () {
         if (this.data.result.specialDishes) {
@@ -901,7 +891,7 @@
             let data = JSON.parse(evt.data);
             data.orderId && _self.$cookie.set("order_id", data.orderId, {"path": "/"});
             let json = _self.$route.query;
-            if(data.orderId)json.oid = data.orderId;
+            if (data.orderId) json.oid = data.orderId;
             switch (data.type) {
               case "500000":
                 _self.ajaxUrl("waiting.html");

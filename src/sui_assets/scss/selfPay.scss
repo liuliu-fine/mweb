@@ -1069,7 +1069,7 @@ $warm-grey: rgb(156, 156, 156);
     left: 50%;
     margin-left: -7.75rem;
     margin-top: 0;
-    top: 9%;
+    top: 10%;
     text-align: center;
     border-radius: .35rem;
     animation: show-modal .5s;
@@ -1261,7 +1261,7 @@ $warm-grey: rgb(156, 156, 156);
   }
 }
 
-.addVip1 {
+/*.addVip1 {
   padding-top: 4rem;
   .modal-inner {
     padding: 0;
@@ -1269,7 +1269,7 @@ $warm-grey: rgb(156, 156, 156);
       background: url("/sui_assets/img/addVip/02 bg@2x.png") center top no-repeat;
       background-color: #e8ecf9;
       background-size: contain;
-      /*padding: 1rem 2rem;*/
+      !*padding: 1rem 2rem;*!
       margin-bottom: 1rem;
       .o-box {
         background: url("/sui_assets/img/addVip/box1.svg") center top no-repeat;
@@ -1386,7 +1386,7 @@ $warm-grey: rgb(156, 156, 156);
       background: url(/sui_assets/img/addVip/card-shadow@2x.png) center no-repeat;
       position: absolute;
       height: 20px;
-      /* width: 100px; */
+      !* width: 100px; *!
       bottom: -20px;
       left: 0;
       right: 0;
@@ -1404,7 +1404,7 @@ $warm-grey: rgb(156, 156, 156);
     font-weight: bold;
     color: #000000;
   }
-}
+}*/
 
 .addVip2 {
   input::-webkit-input-placeholder {
@@ -1483,6 +1483,63 @@ $warm-grey: rgb(156, 156, 156);
         letter-spacing: 3px;
       }
     }
+  }
+}
+
+.addVip1 {
+  .modal-inner:before {
+    content: "";
+    background: url(/sui_assets/img/addVip/slogan.png) center no-repeat;
+    left: 0;
+    right: 0;
+    top: -1rem;
+    padding: 24px 0;
+    text-align: left;
+    display: block;
+    position: absolute;
+    background-size: 50%;
+    z-index: 1;
+  }
+  .modal-content {
+    background-color: #D74E4E;
+    position: relative;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 1.5rem 0;
+    .top {
+      background: #D15353;
+      .card-box {
+        width: 9.2rem;
+        height: 5.5rem;
+        box-shadow: 0 1px 4px 4px rgba(0, 0, 0, .1);
+        background-size: cover;
+        margin: 1.5rem auto 1rem;
+        border-radius: 6px;
+      }
+      .card-line {
+        font-size: .7rem;
+        line-height: 2;
+        background: url(/sui_assets/img/addVip/oval.png) bottom center no-repeat/contain;
+        padding-bottom: 2rem;
+      }
+      .card-text {
+        font-size: .9rem;
+        line-height: 2;
+        padding: 1.9rem 0 3rem;
+      }
+    }
+    .v-button {
+      background-image: linear-gradient(to bottom, #FAD961, #F7BD1C);
+      height: 2rem;
+      font-size: .9rem;
+      line-height: 2rem;
+      text-align: center;
+      border-radius: 25px;
+      color: rgb(190, 73, 73);
+      letter-spacing: 3px;
+      margin: auto 1rem;
+    }
+
   }
 }
 
