@@ -106,8 +106,8 @@ Vue.http.interceptors.push(function (request) {
         if (response.body.code == 403000) {
           Vue.cookie.set("url", location.href, {expires: '2m'});
           localStorage.setItem("url", location.href);
-          location.href = "index.html?" + location.hash.split("?")[1];
-
+          // location.href = "index.html?" + location.search;
+          location.href = "index.html?" + location.hash.split("?")[1].split("&state=1")[0];
         }else if (response.body.code == 400000) {
           location.href = "error.html#7";
         } else if (response.body.code == 403060) {

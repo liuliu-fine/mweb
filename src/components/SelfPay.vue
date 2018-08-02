@@ -379,7 +379,7 @@
           <div class="modal-content">
 
             <div class="top">
-              <div class="card-box" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}">></div>
+              <div class="card-box" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}"></div>
               <div class="card-line"></div>
               <div class="card-text">请在“会员中心”查看权益<br>
                 使用自助买单可自动抵用优惠</div>
