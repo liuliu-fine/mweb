@@ -51,14 +51,21 @@ $black: rgb(40, 40, 40);
       font-size: .7rem;
       color: #8c8c8c;
     }
-    .used {
-      color: rgb(140, 140, 140);
-      padding: .5rem 0;
-      border-bottom: 1px solid rgb(240, 240, 240);
+    .nonPart{
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem .9rem 0.5rem 1.8rem;
+      margin-bottom: -1REM;
+      color: rgb(255,175,175);
       .none:before {
         content: "不计优惠部分：";
         width: 30px;
       }
+    }
+    .used {
+      color: rgb(140, 140, 140);
+      padding: .5rem 0;
+      border-bottom: 1px solid rgb(240, 240, 240);
       .text-blue {
         color: $blue;
         font-size: .7rem;
@@ -105,6 +112,7 @@ $black: rgb(40, 40, 40);
               left: 0;
               right: 0;
               bottom: 0;
+              font-weight: bold;
             }
           }
           .item + .item {

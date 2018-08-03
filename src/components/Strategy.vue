@@ -20,14 +20,13 @@
         </div>
         <div>原单￥{{data.amount}}</div>
       </div>
-
-      <div class="used" v-if="item.useAll.length||item.nonPart||item.segmentAll.length">
-        <div class="all" v-if="item.useAll.length||item.nonPart">
+      <div class="nonPart" v-if="item.nonPart">
+        <div class="none">{{item.nonPart.name}}</div>
+        <div class="">￥{{item.nonPart.amount}}</div>
+      </div>
+      <div class="used" v-if="item.useAll.length||item.segmentAll.length">
+        <div class="all" v-if="item.useAll.length">
           <div class="label">门店折扣</div>
-          <div class="benefit" v-if="item.nonPart">
-            <div class="none">{{item.nonPart.name}}</div>
-            <div class="">￥{{item.nonPart.amount}}</div>
-          </div>
           <div class="benefit" v-for="use in item.useAll">
             <div class="">{{use.content}}</div>
             <div class="">

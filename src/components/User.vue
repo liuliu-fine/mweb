@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="user" v-if="data">
     <div class="content">
       <div class="i-bg" v-if="data.existMemberRule">
         <div class="i-card" v-on:click="ajaxUrl('vip.html')"
