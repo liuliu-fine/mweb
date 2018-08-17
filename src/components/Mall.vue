@@ -39,7 +39,7 @@
     created() {
       this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
         if (response.body.code == 200) {
-          if (response.body.result.needAuthorize) {
+          if (response.body.result.oasis) {
             this.author();
             return;
           }

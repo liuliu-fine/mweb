@@ -111,21 +111,13 @@
             _self.$http.get("/shop/" + (_self.$route.query.id || _self.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
               let data1 = response.body;
               if (data1.code == 200) {
-                if (response.body.result.needAuthorize) {
+                if (response.body.result.oasis) {
                   _self.author();
                   return;
                 }
                 _self.payment = data1.result.payMode;
               }
             });
-            // if ($(".swiper-slide").length > 0) {
-            //   new Swiper('.swiper-container', {
-            //     slidesPerView: 1.5,
-            //     spaceBetween: 15,
-            //     centeredSlides: true,
-            //   });
-            // }
-            // bind();
           })
         } else {
           if (data.code == 4050450) {

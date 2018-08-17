@@ -45,32 +45,13 @@
             <div class="text-xs">还有 <span class="i-red">{{data.couponCount||0}}</span> 张未用</div>
           </div>
         </router-link>
-        <div class="item" v-on:click="ajaxUrl('reward.html')">
+        <div class="item" v-on:click="ajaxUrl('reward.html?count='+ data.reward)">
           <div class="icon-left i-icon2"></div>
           <div class="right">
             <div>代用币</div>
             <div class="i-red">{{data.reward||0}}</div>
           </div>
         </div>
-        <!--  <div class="item" v-on:click="ajaxUrl('charge.html')">
-            <div><span>余额 </span><span class="pl i-icon i-icon5"></span></div>
-            <div class="pt">
-              <span class="i-icon i-icon0"></span>
-              <span class="i-red charge">{{data.charge||0}}</span>
-            </div>
-          </div>-->
-        <!--<div class="item" v-on:click="ajaxUrl('reward.html')">-->
-        <!--<div><span>代用币 </span><span class="pl i-icon8"></span></div>-->
-        <!--<div class="pt">-->
-        <!--<span class="i-icon9"></span>-->
-        <!--<span class="i-red reward">{{data.reward||0}}</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!-- <div class="item" v-on:click="ajaxUrl('face.html')" style="text-align: center;padding-left: 0">
-           <span class="i-btn">在线买单</span>
-
-           <div class="text-grey pt">自动计算优惠</div>
-         </div>-->
       </div>
       <div class="order hide" style="padding: .5rem 1rem .1rem;background: #f0f0f0">
         <div v-on:click="state()"
@@ -121,6 +102,8 @@
         this.$http.get("/benefit/guest/" + (this.$route.query.id || this.$route.query.guestid)).then(response => {
           if (response.body.code == 200) {
             this.data = response.body.result;
+            this.$cookie.set("reward", this.data.reward ||0 );
+            this.$cookie.set("relation_id", this.data.customerRelationId);
             if (!this.data.phone) {
               this.$bind({
                 title: "绑定手机号",

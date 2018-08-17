@@ -151,21 +151,14 @@
       }
     },
     created() {
-      let _self = this;
-      const id = _self.$route.query.oid || _self.$cookie.get("order_id");
-      if (_self.$cookie.get(id + "forFuiou")) {
-        this.initFn();
-      } else {
-        _self.$cookie.set(id + "forFuiou", true);
-        location.href = location.origin + "/author/" + (this.$route.query.id || this.$route.query.guestid) + "/fuiou?url=" + encodeURIComponent(location.href);
-      }
+      this.initFn();
     },
     methods: {
       initFn() {
         let _self = this;
         this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
           if (response.body.code == 200) {
-            if (response.body.result.needAuthorize) {
+            if (response.body.result.oasis) {
               this.author();
               return;
             }
