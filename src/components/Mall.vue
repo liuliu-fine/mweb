@@ -39,6 +39,10 @@
     created() {
       this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
         if (response.body.code == 200) {
+          if (response.body.result.needAuthorize) {
+            this.author();
+            return;
+          }
           this.payment = response.body.result;
         }
       });
@@ -62,7 +66,6 @@
         this.$router.push({path: '/mallDetail', query: this.$route.query});
       },
       submitFn(id) {
-        console.log(1)
         let show = this.$loading('loading...');
         if (show) return;
         if (id) {

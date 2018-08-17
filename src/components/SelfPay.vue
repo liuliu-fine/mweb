@@ -382,7 +382,8 @@
               <div class="card-box" v-bind:style="{backgroundImage:'url('+ vip.cardUrl+')'}"></div>
               <div class="card-line"></div>
               <div class="card-text">请在“会员中心”查看权益<br>
-                使用自助买单可自动抵用优惠</div>
+                使用自助买单可自动抵用优惠
+              </div>
             </div>
 
             <div v-on:click="refresh()" class="v-button">我知道了</div>
@@ -478,7 +479,9 @@
                     _self.$toast(data1.message);
                     if (data1.code == 403108) {
                       setTimeout(function () {
-                        _self.ajaxUrl("strategy.html?oid=" + _self.init.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
+                        let json = _self.$route.query;
+                        json.oid = _self.init.order.orderId;
+                        _self.$router.push({path: '/strategy', query: json});
                       }, 200)
                     } else {
                       _self.initFn();
@@ -488,7 +491,9 @@
                   }
                 });
               }, function () {
-                _self.ajaxUrl("strategy.html?oid=" + _self.init.order.orderId + (_self.$route.query.d ? ("&d=" + _self.$route.query.d) : ''));
+                let json = _self.$route.query;
+                json.oid = _self.init.order.orderId;
+                _self.$router.push({path: '/strategy', query: json});
               }, "确定放弃", "继续买单");
             } else {
               _self.$nextTick(function () {
@@ -916,17 +921,16 @@
                 _self.initFn();
                 break;
               case "500054":
-                _self.ajaxUrl("strategy.html?oid=" + data.orderId);
+                _self.$router.push({path: '/strategy', query: json});
                 break;
               case "500005":
                 _self.$router.push({path: '/payment', query: json});
                 break;
               case "500055":
-                _self.ajaxUrl("strategy.html?oid=" + data.orderId);
+                _self.$router.push({path: '/strategy', query: json});
                 break;
               case "500050":
                 alert("服务员未响应");
-                // _self.$router.push({path: '/selfPay', query: json});
                 _self.initFn();
                 break;
               //coupon state
@@ -1160,8 +1164,6 @@
             json = _self.$route.query;
             json.oid = data.result.orderId;
             _self.$router.push({path: '/strategy', query: json})
-
-            // this.ajaxUrl("strategy.html?oid=" + data.result.orderId + (this.$route.query.d ? ("&d=" + this.$route.query.d) : ''));
           } else if (data.code == 405004) {
             let re = confirm("您在" + (data.result.shopname || ("本店" + data.result.tableNo + "号桌")) + "有一个买单正在进行中,是否放弃此订单？")
             if (re) {
@@ -1220,6 +1222,7 @@
         );
       },
       stateFn() {
+        let _self = this;
         this.$http.get("/check/" + this.init.order.orderId).then(response => {
           let data = response.body;
           if (data.code == 200) {
@@ -1234,7 +1237,9 @@
                 this.$toast("上宾正在加速为您配置专属优惠方案");
               }
             } else if (result.state >= 2) {
-              this.ajaxUrl("strategy.html?oid=" + data.result.orderId);
+              let json = _self.$route.query;
+              json.oid = data.result.orderId;
+              _self.$router.push({path: '/strategy', query: json});
             } else {
               this.initFn();
             }

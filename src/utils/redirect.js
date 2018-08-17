@@ -38,6 +38,10 @@ export default {
     Vue.prototype.refresh = function () {
       location.reload();
     }
+    Vue.prototype.author = function () {
+      location.href = location.origin + "/author/" + (this.$route.query.id || this.$route.query.guestid) + "/fuiou?url=" + encodeURIComponent(location.href);
+
+    }
     Vue.prototype.setTitle = function (name) {
       document.title = name;
       let i = document.createElement('iframe');

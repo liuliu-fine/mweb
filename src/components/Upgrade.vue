@@ -111,6 +111,10 @@
             _self.$http.get("/shop/" + (_self.$route.query.id || _self.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
               let data1 = response.body;
               if (data1.code == 200) {
+                if (response.body.result.needAuthorize) {
+                  _self.author();
+                  return;
+                }
                 _self.payment = data1.result.payMode;
               }
             });

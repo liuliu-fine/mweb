@@ -58,6 +58,12 @@ npm i -D webpack-dev-server@2.9.7
  ```
  ### pull最新版本
  git pull origin master
+ 
+ ### webstorm 注册机
+  ```
+http://idea.wrbugtest.tk/    
+https://idea.ouyanglol.com/
+  ```
 
 
 

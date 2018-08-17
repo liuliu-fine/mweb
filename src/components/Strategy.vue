@@ -132,7 +132,7 @@
           <div class="text-gradient" style="font-weight: bold;font-size: .8rem">{{data.charge.remindCharge}}元</div>
         </div>
       </div>
-      <div class="more" onclick="ajaxUrl('charge.html')">查看其它充值方案</div>
+      <div class="more" @click="chargeFn">查看其它充值方案</div>
     </div>
   </div>
 </template>
@@ -151,17 +151,30 @@
       }
     },
     created() {
-      this.initFn();
+      let _self = this;
+      const id = _self.$route.query.oid || _self.$cookie.get("order_id");
+      if (_self.$cookie.get(id + "forFuiou")) {
+        this.initFn();
+      } else {
+        _self.$cookie.set(id + "forFuiou", true);
+        location.href = location.origin + "/author/" + (this.$route.query.id || this.$route.query.guestid) + "/fuiou?url=" + encodeURIComponent(location.href);
+      }
     },
     methods: {
       initFn() {
         let _self = this;
         this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
           if (response.body.code == 200) {
+            if (response.body.result.needAuthorize) {
+              this.author();
+              return;
+            }
             this.payment = response.body.result;
+            a();
+          } else {
+            a();
           }
         });
-        a();
 
         function a() {
           const id = _self.$route.query.oid || _self.$cookie.get("order_id");
@@ -274,7 +287,12 @@
         this.$set(this.data.strategies[index], "check", !this.data.strategies[index].check);
       },
       chargeFn: function () {
-        this.ajaxUrl("admin.html#/charge?type=channel&rid=" + this.data.recommend.ruleTupleId);
+        this.$route.query.type = "channel";
+        if (this.data.recommend && this.data.recommend.ruleTupleId) {
+          this.$route.query.rid = this.data.recommend.ruleTupleId;
+        }
+        this.$router.push({path: '/charge', query: this.$route.query});
+
       },
       submitFn: function () {
         let _self = this;
