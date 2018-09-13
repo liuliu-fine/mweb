@@ -1,5 +1,5 @@
 /*
-Error: Invalid GBK character "\xE8"
+Error: Invalid GBK character "\xE4"
         on line 179 of strategy.scss
 
 174:       -webkit-justify-content: space-between;
@@ -7,7 +7,7 @@ Error: Invalid GBK character "\xE8"
 176:     }
 177:   }
 178:   .used:before {
-179:     content: "费用详情";
+179:     content: "优惠详情";
 180:     border-bottom: 1px solid #d8d8d8;
 181:     display: block;
 182:     padding: .3rem 0 .5rem;
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE8\"\A         on line 179 of strategy.scss\A \A 174:       -webkit-justify-content: space-between;\A 175:       font-size: .65rem;\A 176:     }\A 177:   }\A 178:   .used:before {\A 179:     content: \"费用详情\";\A 180:     border-bottom: 1px solid #d8d8d8;\A 181:     display: block;\A 182:     padding: .3rem 0 .5rem;\A 183:     text-align: center;\A 184:     color: #000000;"; }
+  content: "Error: Invalid GBK character \"\xE4\"\A         on line 179 of strategy.scss\A \A 174:       -webkit-justify-content: space-between;\A 175:       font-size: .65rem;\A 176:     }\A 177:   }\A 178:   .used:before {\A 179:     content: \"优惠详情\";\A 180:     border-bottom: 1px solid #d8d8d8;\A 181:     display: block;\A 182:     padding: .3rem 0 .5rem;\A 183:     text-align: center;\A 184:     color: #000000;"; }

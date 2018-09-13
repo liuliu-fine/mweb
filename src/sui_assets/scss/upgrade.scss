@@ -27,8 +27,18 @@
       position: relative;
       border-radius: 5px;
       box-sizing: border-box;
-      //width: 12rem;
-      //margin: auto;
+      .corn{
+        background: url(/sui_assets/img/upgrade/corn.png) center top no-repeat;
+        position: absolute;
+        right: -24px;
+        top: -6px;
+        width: 87px;
+        height: 51px;
+        line-height: 50px;
+        text-align: center;
+        background-size: contain;
+        transform: rotate(45deg);
+      }
       .coupon-bg {
         height: 7rem;
         background-size: cover;

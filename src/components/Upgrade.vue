@@ -7,9 +7,10 @@
       <swiper :options="swiperOption">
         <swiper-slide class="add" v-for="(item,key) in data.coupons"
                       :key="key">
+          <div class="corn" v-if="item.count>1">{{item.count}}张</div>
           <div class="coupon-bg" :class="item.todayUsable?'today':''"
                :style="{backgroundImage: 'url('+ (item.picUrl||'./sui_assets/img/mass/place-coupon.png') +')'}"></div>
-          <div class="name">{{item.name}}<span v-if="item.count>1">({{item.count}}张)</span></div>
+          <div class="name">{{item.name}}</div>
           <div class="limit">{{item.times}};{{item.useStrategy}}</div>
         </swiper-slide>
         <swiper-slide class="" v-if="data.reward">

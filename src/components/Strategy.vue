@@ -17,7 +17,7 @@
           <div class="title">
             <div class="tag"></div>
             <div class="center">
-              <div class="amount">实际支付￥{{item.finalAmount}}</div>
+              <div class="amount">支付￥{{item.finalAmount}}</div>
               <div class="text-blue" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动</div>
               <div class="pre-amount">原单￥{{data.amount}}</div>
             </div>
@@ -29,13 +29,14 @@
               <div class="benefit1">
                 <div class="item" v-if="item.charges&&item.remindCharge">
                   <div>充值卡余额</div>
-                  <div class="text-blue">{{item.remindCharge}}元</div>
+                  <div class="text-blue">￥{{item.remindCharge}}</div>
                 </div>
                 <!---->
                 <div class="item" v-for="upgrade in item.upgrades">
                   <div v-if="upgrade.category == '1013'">升级为</div>
                   <div v-else class="ellipsis" style="-webkit-box-orient: vertical;">{{upgrade.name}}</div>
                   <div class="text-blue" v-if="upgrade.category == '1013'">{{upgrade.name}}</div>
+                  <div class="text-blue" v-if="upgrade.category == '1015'">{{upgrade.point}}</div>
                   <span class="text-blue" v-else-if="upgrade.count">{{upgrade.count}}张</span>
                 </div>
                 <div class="item" v-for="get in item.got">
@@ -52,8 +53,8 @@
             </div>
           </div>
           <div class="label" v-if="item.nonPart||item.useAll.length||item.segmentAll.length"><span
-            class="hui-icon"></span>使用优惠{{item.usedAmount}}元<span class="pull-right" :class="item.check?'open':''"
-                                                                  v-on:click="switchStateFn(item)">费用详情</span>
+            class="hui-icon"></span>优惠￥{{item.usedAmount}}<span class="pull-right" :class="item.check?'open':''"
+                                                                  v-on:click="switchStateFn(item)">优惠详情</span>
           </div>
 
           <div v-if="!(item.nonPart||item.used||item.got)" style='padding: .5rem 1.8rem;font-size: .7rem'>
@@ -63,7 +64,7 @@
         <transition enter-active-class="pull-enter-active" leave-active-class="pull-leave-active">
           <div class="used" v-if="item.check">
             <div class="benefit" v-if="item.nonPart">
-              <div class="">不记优惠部分：{{item.nonPart.name}}</div>
+              <div class="">不计优惠部分：{{item.nonPart.name}}</div>
               <div class="">￥{{item.nonPart.amount}}</div>
             </div>
             <div class="all" v-if="item.useAll.length">
@@ -78,7 +79,7 @@
             <div class="segment" v-if="item.segmentAll.length">
               <div class="label">账户抵扣</div>
               <div class="benefit" :class="use.type=='6011'?'text-blue':''" v-for="use in item.segmentAll">
-                <div class=""><span v-if="use.type=='6011'">使用充值卡</span><span v-else>使用{{use.content}}</span></div>
+                <div class=""><span v-if="use.type=='6011'">使用充值卡</span><span v-else>{{use.content}}</span></div>
                 <div class="">
                   -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
                 </div>
