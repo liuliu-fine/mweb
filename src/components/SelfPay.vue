@@ -102,18 +102,16 @@
                 </div>
               </div>
             </div>
-            <div class="submit" v-on:click="flowerStateFn('close')">关闭</div>
+            <div class="behind"><div class="submit" v-on:click="flowerStateFn('close')">关闭</div></div>
           </div>
           <div class="flower zoom" v-else-if="!flower.state">
-            <div class="header">
-              <div class="title">服务评价</div>
-              <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
-              <div class="pull-left" v-on:click="flowerStateFn('other')">不是这个服务员</div>
-            </div>
+            <!--<div class="close" v-on:click="flowerStateFn('close')"></div>-->
             <div class="content1">
-              <div class="avatar"
-                   :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></div>
+              <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
               <div class="nickname">{{flower.staffs[posts.index].nickname}}</div>
+              <div class="avatar"  v-on:click="flowerStateFn('other')"
+                   :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></div>
+              <div class="addon">点击头像切换服务员</div>
               <div class="labels">
                 <div class="label" :class="posts.satisfied?'active':''" v-on:click="posts.satisfied = true"><span
                   class="up"></span>满意
@@ -133,12 +131,18 @@
                 </div>
               </div>
             </div>
-            <div class="grey" v-show="posts.satisfied">
-              <img :src="flower.gratuity.ico">送我{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，我们将回馈给您：
-              <span class="blue-text" v-on:click="$couponShow($event,item)" v-for="item in flower.benefits">{{item.name}} </span>
+
+            <div class="behind">
+              <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">送{{flower.staffs[posts.index].gender=='2'?'她':'他'}}{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}</span><span
+                v-else>提交</span></div>
+              <div class="gift" v-show="posts.satisfied">
+                <div class="transform">
+                  送{{flower.staffs[posts.index].gender=='2'?'她':'他'}}{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，回馈给您：<span class="blue-text"
+                                                                                                     v-on:click="$couponShow($event,item)"
+                                                                                                     v-for="item in flower.benefits">{{item.name}} </span>
+                </div>
+              </div>
             </div>
-            <div class="submit" v-on:click="sendFlowerFn"><span v-if="posts.satisfied">鼓励一下</span><span
-              v-else>提交</span></div>
           </div>
           <div class="flower" v-if="flower.state == 'other'">
             <div class="header">
@@ -615,7 +619,7 @@
       flowerStateFn(state) {
         this.$set(this.flower, 'state', state);
         /* if (state == 'close' && !this.flower.once) {
-           this.flower.once = true;
+           this.flower.once = trnue;
            this.addVip();
          }*/
       },
@@ -658,19 +662,17 @@
             //
             let _self = this;
             if (json.satisfied) {
-              this.$message("感谢您的评价", "回馈奖励将在买单后发放<br>到您的账户", function () {
-                // _self.flower.once = true;
-                // _self.addVip();
+              let bet = ""
+              for (let j in this.flower.benefits) {
+                bet += this.flower.benefits[j].name + ",";
+              }
+              bet = bet.slice(0, -1);
+              this.$message("感谢您的评价", bet + "将在买单后发放<br>到您的账户", function () {
               });
             } else {
               this.$message("感谢您的评价", "我们会重视您本次的反馈", function () {
-                // _self.flower.once = true;
-                // _self.addVip();
               });
             }
-            // this.flower.once = true;
-            // this.addVip();
-            // this.flower = {};
           } else {
             this.$toast(data.message);
           }

@@ -8,7 +8,7 @@ import Crypto from 'crypto';
 import VueCookie from 'vue-cookie'
 import Redirect from './utils/redirect'
 import Common from './utils/common'
-import 'vue2-animate/dist/vue2-animate.min.css';
+import 'vue2-animate/dist/vue2-animate.css';
 
 import './components/toast/toast.css';
 import Toast from './components/toast/index'
@@ -29,6 +29,9 @@ Vue.use(Coupon)
 Vue.prototype.GLOBAL = Common
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
+  if (location.href.split("token").length > 1) {
+    Vue.cookie.set("token", location.href.split("token=")[1], {expires: '7d'});
+  }
   if (document.cookie.split("token").length < 2) {
     Vue.cookie.set("url", location.href, {expires: '2m'});
     if (to.query.id) {
@@ -108,7 +111,7 @@ Vue.http.interceptors.push(function (request) {
           localStorage.setItem("url", location.href);
           // location.href = "index.html?" + location.search;
           location.href = "index.html?" + location.hash.split("?")[1].split("&state=1")[0];
-        }else if (response.body.code == 400000) {
+        } else if (response.body.code == 400000) {
           location.href = "error.html#7";
         } else if (response.body.code == 403060) {
           location.href = "bind.html?" + location.hash.split("?")[1];

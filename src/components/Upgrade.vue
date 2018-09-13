@@ -9,7 +9,7 @@
                       :key="key">
           <div class="coupon-bg" :class="item.todayUsable?'today':''"
                :style="{backgroundImage: 'url('+ (item.picUrl||'./sui_assets/img/mass/place-coupon.png') +')'}"></div>
-          <div class="name">{{item.name}}</div>
+          <div class="name">{{item.name}}<span v-if="item.count>1">({{item.count}}张)</span></div>
           <div class="limit">{{item.times}};{{item.useStrategy}}</div>
         </swiper-slide>
         <swiper-slide class="" v-if="data.reward">

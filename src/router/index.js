@@ -18,6 +18,7 @@ const More = r => require.ensure([], () => r(require('@/components/More')))
 const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
 const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
 const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
+const Vip = r => require.ensure([], () => r(require('@/components/Vip')))
 
 //test
 const Login = r => require.ensure([], () => r(require('@/components/Login')))
@@ -71,6 +72,11 @@ export default new Router({
       name: 'User',
       alias: '/my',
       component: User
+    },
+    {
+      path: '/vip',
+      name: 'Vip',
+      component: Vip
     },
     {
       path: '/exchange',

@@ -234,17 +234,17 @@ th {
   }
 }
 
-//@media only screen and (min-width: 414px) {
-//  html {
-//    font-size: 22.08px;
-//  }
-//}
-
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 414px) {
   html {
-    font-size: 25.6px !important;
+    font-size: 22.08px;
   }
 }
+
+//@media only screen and (min-width: 480px) {
+//  html {
+//    font-size: 25.6px !important;
+//  }
+//}
 
 //@font-face {
 //  font-family: "Bitstream Vera Serif Bold";

@@ -73,7 +73,7 @@ Toast.install = function (Vue, options) {
             show: showLoad
           }
         },
-        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf"></div></div></div></div>'
+        template: '<div v-show="show" class="lx-load-mark"><div class="lx-load-box"><div class="lx-loading"><div class="loading_leaf"></div></div>' + (tips||'') + '</div></div>'
       });
       loadNode = new loadTpl();
       let tpl = loadNode.$mount().$el;

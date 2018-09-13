@@ -1,21 +1,21 @@
 /*
-Error: Invalid GBK character "\xE4"
-        on line 59 of strategy.scss
+Error: Invalid GBK character "\xE8"
+        on line 179 of strategy.scss
 
-54:     .used {
-55:       color: rgb(140, 140, 140);
-56:       padding: .5rem 0;
-57:       border-bottom: 1px solid rgb(240, 240, 240);
-58:       .none:before {
-59:         content: "不计优惠部分：";
-60:         width: 30px;
-61:       }
-62:       .text-blue {
-63:         color: $blue;
-64:         font-size: .7rem;
+174:       -webkit-justify-content: space-between;
+175:       font-size: .65rem;
+176:     }
+177:   }
+178:   .used:before {
+179:     content: "费用详情";
+180:     border-bottom: 1px solid #d8d8d8;
+181:     display: block;
+182:     padding: .3rem 0 .5rem;
+183:     text-align: center;
+184:     color: #000000;
 
 Backtrace:
-strategy.scss:59
+strategy.scss:179
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE4\"\A         on line 59 of strategy.scss\A \A 54:     .used {\A 55:       color: rgb(140, 140, 140);\A 56:       padding: .5rem 0;\A 57:       border-bottom: 1px solid rgb(240, 240, 240);\A 58:       .none:before {\A 59:         content: \"不计优惠部分：\";\A 60:         width: 30px;\A 61:       }\A 62:       .text-blue {\A 63:         color: $blue;\A 64:         font-size: .7rem;"; }
+  content: "Error: Invalid GBK character \"\xE8\"\A         on line 179 of strategy.scss\A \A 174:       -webkit-justify-content: space-between;\A 175:       font-size: .65rem;\A 176:     }\A 177:   }\A 178:   .used:before {\A 179:     content: \"费用详情\";\A 180:     border-bottom: 1px solid #d8d8d8;\A 181:     display: block;\A 182:     padding: .3rem 0 .5rem;\A 183:     text-align: center;\A 184:     color: #000000;"; }

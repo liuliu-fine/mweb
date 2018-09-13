@@ -64,7 +64,9 @@ npm i -D webpack-dev-server@2.9.7
 http://idea.wrbugtest.tk/    
 https://idea.ouyanglol.com/
   ```
-
-
+ ### vue transition 出不来的原因
+  ```
+<transition appear></transition>
+  ```
 
 

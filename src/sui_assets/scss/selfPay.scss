@@ -50,7 +50,7 @@ $warm-grey: rgb(156, 156, 156);
         padding: .2rem .5rem .2rem .2rem;
         line-height: 2rem;
         font-size: .7rem;
-        img{
+        img {
           height: 2rem;
           vertical-align: middle;
         }
@@ -580,6 +580,16 @@ $warm-grey: rgb(156, 156, 156);
       animation-direction: alternate;
       //height: calc(100vh - 55px);
       background: rgba(0, 0, 0, .7);
+      //.close {
+      //  background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
+      //  background-position: -6px -150px;
+      //  padding: 14px;
+      //  background-size: 58px;
+      //  margin-top: .5rem;
+      //  margin-right: .5rem;
+      //  position: absolute;
+      //  right: 0;
+      //}
       .header {
         font-size: .9rem;
         border-bottom: 1px solid rgb(217, 217, 217);
@@ -723,8 +733,20 @@ $warm-grey: rgb(156, 156, 156);
           }
         }
         .content1 {
-          padding: 1rem 2.3rem;
+          padding: 1rem 2.3rem 8rem;
           text-align: center;
+          overflow: auto;
+          height: 100%;
+          position: relative;
+          .pull-right {
+            background: url(/sui_assets/img/selfPay/sprite.png) center no-repeat;
+            background-position: 0 -153px;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            padding: 14px;
+            background-size: 57px;
+          }
           .avatar {
             width: 60px;
             height: 60px;
@@ -733,7 +755,7 @@ $warm-grey: rgb(156, 156, 156);
             //display: inline-block;
             background-size: contain;
             background-repeat: no-repeat;
-            margin: 0 auto .5rem;
+            margin: 0 auto .3rem;
           }
           .nickname {
             font-size: .8rem;
@@ -742,6 +764,11 @@ $warm-grey: rgb(156, 156, 156);
             white-space: nowrap;
             text-overflow: ellipsis;
             display: inline-block;
+            padding-bottom: .2rem;
+          }
+          .addon{
+            color: #6ba2ba;
+            font-size: .5rem;
           }
           .thanks {
             font-size: .7rem;
@@ -769,7 +796,7 @@ $warm-grey: rgb(156, 156, 156);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            margin: 1.2rem 0;
+            margin: 1.2rem 0 1rem;
             .label {
               width: 4.7rem;
               height: 1.5rem;
@@ -809,6 +836,8 @@ $warm-grey: rgb(156, 156, 156);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            //max-height: 6.5rem;
+            //overflow-y: auto;
             .dec {
               margin: .25rem 3%;
               width: 43%;
@@ -825,70 +854,46 @@ $warm-grey: rgb(156, 156, 156);
             }
           }
         }
-        .grey {
-          padding: .5rem;
-          text-align: center;
+        .behind{
           position: absolute;
           right: 0;
           left: 0;
-          bottom: 3rem;
-          img {
-            width: 16px;
-            height: 16px;
-            vertical-align: text-bottom;
-          }
-          .blue-text {
-            color: rgb(255, 57, 46);
-            font-size: .6rem;
-            font-weight: bold;
-            position: relative;
-          }
-          .blue-text:after {
-            content: "查看详情";
-            background: url(/sui_assets/img/selfPay/anim.png) center no-repeat;
-            padding: 7px 7px 11px 11px;
-            line-height: 1.3;
-            position: absolute;
-            top: -47px;
-            left: 0;
-            right: 0;
-            animation: run 0.5s infinite;
-            animation-direction: alternate;
-            animation-delay: .5s;
-            color: white;
-            font-size: 10px;
-            width: 37px;
-            letter-spacing: 3px;
+          bottom: 0;
+          background: white;
+          .gift {
+            padding: 2.1rem 1.5rem 0;
             text-align: center;
+            background: url(/sui_assets/img/selfPay/gift.png) center no-repeat;
+            height: 5rem;
             background-size: contain;
-            margin: auto;
-          }
-          @keyframes run {
-            0% {
-              transform: rotate(-17deg) scale(1);
+            margin: -.5rem .5rem 0;
+            font-size: .7rem;
+            color: white;
+            .transform{
+              transform: scaleY(1.5);
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              display: -webkit-inline-box;
             }
-            //80%{
-            //  transform: rotate(10deg)  scale(1.1);
-            //}
-            100% {
-              transform: rotate(-10deg) scale(1.1);
+            .blue-text {
+              color: #fcf334;
+              //font-size: .6rem;
+              font-weight: bold;
+              position: relative;
             }
           }
-
-        }
-        .submit {
-          color: #fff;
-          border-radius: 5px;
-          background: $grey-blue;
-          line-height: 2.2rem;
-          height: 2.2rem;
-          font-size: 0.8rem;
-          text-align: center;
-          margin: 0rem .8rem 1rem;
-          position: absolute;
-          right: 0;
-          left: 0;
-          bottom: 0rem;
+          .submit {
+            color: #fff;
+            border-radius: 5px;
+            background: $grey-blue;
+            line-height: 2.2rem;
+            height: 2.2rem;
+            font-size: 0.8rem;
+            text-align: center;
+            margin: 0rem .8rem .6rem;
+          }
         }
       }
     }

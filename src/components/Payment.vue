@@ -187,7 +187,7 @@
         }, 1000)
       },
       openFn: function () {
-        this.ajaxUrl("comment.html?oid=" + (this.$route.query.order || _self.$route.query.oid));
+        this.ajaxUrl("comment.html?oid=" + (this.$route.query.order || this.$route.query.oid));
       },
       bindFn: function () {
         this.phone1 = {text: '获取验证码', able: true};

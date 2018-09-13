@@ -8,95 +8,111 @@
         <div class="tuijian"></div>
       </div>
     </div>
-
-    <div v-for="(item,index) in data.strategies" class="plan"
-         :class="{'plan-active':(key==index)}" v-if="index==0||more||index==1"
-         v-on:click="key=index">
-      <div class="title">
-        <div class="tag"></div>
-        <div class="center">
-          <div class="amount">￥{{item.finalAmount}}</div>
-          <div class="text-blue" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动</div>
-        </div>
-        <div>原单￥{{data.amount}}</div>
-      </div>
-      <div class="nonPart" v-if="item.nonPart">
-        <div class="none">{{item.nonPart.name}}</div>
-        <div class="">￥{{item.nonPart.amount}}</div>
-      </div>
-      <div class="used" v-if="item.useAll.length||item.segmentAll.length">
-        <div class="all" v-if="item.useAll.length">
-          <div class="label">门店折扣</div>
-          <div class="benefit" v-for="use in item.useAll">
-            <div class="">{{use.content}}</div>
-            <div class="">
-              -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
+    <transition-group name="fade" tag="div" class="list-group" appear>
+      <div v-for="(item,index) in data.strategies" class="list-group-item" v-if="index==0||more||index==1"
+           v-bind:key="index">
+        <div class="plan"
+             :class="{'plan-active':(key==index)}"
+             v-on:click="key=index">
+          <div class="title">
+            <div class="tag"></div>
+            <div class="center">
+              <div class="amount">实际支付￥{{item.finalAmount}}</div>
+              <div class="text-blue" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动</div>
+              <div class="pre-amount">原单￥{{data.amount}}</div>
             </div>
           </div>
-        </div>
-        <div class="segment" v-if="item.segmentAll.length">
-          <div class="label">账户抵扣</div>
-          <div class="benefit" :class="use.type=='6011'?'text-blue':''" v-for="use in item.segmentAll">
-            <div class=""><span v-if="use.type=='6011'">使用充值卡</span><span v-else>使用{{use.content}}</span></div>
-            <div class="">
-              -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="got" v-if="item.got||item.charges">
-        <!---->
-        <div class="label">消费奖励</div>
-        <div class="overflow">
-          <div class="benefit1">
-            <div class="item" v-if="item.charges&&item.remindCharge">
-              <div>充值卡余额</div>
-              <div class="text-blue">{{item.remindCharge}}元</div>
-            </div>
+          <div class="got" v-if="item.got||item.charges">
             <!---->
-            <div class="item" v-for="upgrade in item.upgrades">
-              <div v-if="upgrade.category == '1013'">升级为</div>
-              <div v-else class="ellipsis" style="-webkit-box-orient: vertical;">{{upgrade.name}}</div>
-              <div class="text-blue" v-if="upgrade.category == '1013'">{{upgrade.name}}</div>
-              <span class="text-blue" v-else-if="upgrade.count">{{upgrade.count}}张</span>
-            </div>
-            <div class="item" v-for="get in item.got">
-              <div class="" v-if="get.category == '1016'">
-                <div class="ellipsis" style="-webkit-box-orient: vertical;"> {{get.name}}</div>
-                <div class="text-blue">{{get.count}}张</div>
-              </div>
-              <div class="" v-else>
-                <div> 获得积分</div>
-                <div class="text-blue">{{get.point}}</div>
+            <div class="label"><span class="gift-icon"></span>获得奖励</div>
+            <div class="overflow">
+              <div class="benefit1">
+                <div class="item" v-if="item.charges&&item.remindCharge">
+                  <div>充值卡余额</div>
+                  <div class="text-blue">{{item.remindCharge}}元</div>
+                </div>
+                <!---->
+                <div class="item" v-for="upgrade in item.upgrades">
+                  <div v-if="upgrade.category == '1013'">升级为</div>
+                  <div v-else class="ellipsis" style="-webkit-box-orient: vertical;">{{upgrade.name}}</div>
+                  <div class="text-blue" v-if="upgrade.category == '1013'">{{upgrade.name}}</div>
+                  <span class="text-blue" v-else-if="upgrade.count">{{upgrade.count}}张</span>
+                </div>
+                <div class="item" v-for="get in item.got">
+                  <div class="" v-if="get.category == '1016'">
+                    <div class="ellipsis" style="-webkit-box-orient: vertical;"> {{get.name}}</div>
+                    <div class="text-blue">{{get.count}}张</div>
+                  </div>
+                  <div class="" v-else>
+                    <div> 获得积分</div>
+                    <div class="text-blue">{{get.point}}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div class="label" v-if="item.nonPart||item.useAll.length||item.segmentAll.length"><span
+            class="hui-icon"></span>使用优惠{{item.usedAmount}}元<span class="pull-right" :class="item.check?'open':''"
+                                                                  v-on:click="switchStateFn(item)">费用详情</span>
+          </div>
 
-      <div v-if="!(item.nonPart||item.used||item.got)" style='padding: 1rem;background: white;'>
-        本策略不使用优惠
+          <div v-if="!(item.nonPart||item.used||item.got)" style='padding: .5rem 1.8rem;font-size: .7rem'>
+            本策略不使用优惠
+          </div>
+        </div>
+        <transition enter-active-class="pull-enter-active" leave-active-class="pull-leave-active">
+          <div class="used" v-if="item.check">
+            <div class="benefit" v-if="item.nonPart">
+              <div class="">不记优惠部分：{{item.nonPart.name}}</div>
+              <div class="">￥{{item.nonPart.amount}}</div>
+            </div>
+            <div class="all" v-if="item.useAll.length">
+              <div class="label"><span class="hui-icon"></span>门店折扣</div>
+              <div class="benefit" v-for="use in item.useAll">
+                <div class="">{{use.content}}</div>
+                <div class="">
+                  -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
+                </div>
+              </div>
+            </div>
+            <div class="segment" v-if="item.segmentAll.length">
+              <div class="label">账户抵扣</div>
+              <div class="benefit" :class="use.type=='6011'?'text-blue':''" v-for="use in item.segmentAll">
+                <div class=""><span v-if="use.type=='6011'">使用充值卡</span><span v-else>使用{{use.content}}</span></div>
+                <div class="">
+                  -￥{{use.amount + ((use.count&&use.type !== "SETMEAL") ? "（" + use.count + "张）":"")}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
       </div>
-    </div>
-    <!--addon end-->
+    </transition-group>  <!--addon end-->
     <div class="other" v-if="data.strategies.length>2&&!more" v-on:click="more=true">
       展开其他方案
     </div>
-    <div style="height: 4.5rem"></div>
+    <div style="height: 5rem"></div>
     <div class="pay-fixed">
-      <div class="flower" v-if="data.gratuity" v-on:click="flowerFn(data.gratuity)">
-        <span class="tag" :class="data.gratuity.check?'':'check'"></span>
-        送{{data.gratuity.staffName}}{{data.gratuity.count}}{{data.gratuity.unit}}{{data.gratuity.name}}
-        <span class="text-blue">获赠<span
-          v-if="data.gratuity.benefits" v-for="gift in data.gratuity.benefits"><span
-          v-if="gift.category == '1017'">{{gift.amount}}元</span>{{gift.name}}</span></span> <span class="pull-right"> +{{data.gratuity.amount}}</span>
-      </div>
-      <div class="submit"
-           v-if="(payment&&payment.payMode)||data.strategies[key].finalAmount ==0"
-           v-on:click="submitFn">支付
-        ￥{{(data.gratuity&&!data.gratuity.check)?(parseFloat(data.strategies[key].finalAmount) +
-        parseFloat(data.gratuity.amount)).toFixed(2):data.strategies[key].finalAmount}}
+      <transition name="slideUp" appear>
+        <div class="flower" v-if="data.gratuity&&showFlower" v-on:click="switchStateFn(data.gratuity)">
+          <span class="tag" :class="data.gratuity.check?'':'check'"></span>
+          送{{data.gratuity.staffName}}{{data.gratuity.count}}{{data.gratuity.unit}}{{data.gratuity.name}}
+          <span>获赠<span
+            v-if="data.gratuity.benefits" v-for="gift in data.gratuity.benefits"><span
+            v-if="gift.category == '1017'">{{gift.amount}}元</span>{{gift.name}}</span></span> <span
+          class="pull-right"> +￥{{data.gratuity.amount}}</span>
+        </div>
+      </transition>
+      <div class="bottom">
+        <div class="">本方案需支付金额 ¥{{(data.gratuity&&!data.gratuity.check)?(parseFloat(data.strategies[key].finalAmount)
+          +
+          parseFloat(data.gratuity.amount)).toFixed(2):data.strategies[key].finalAmount}}
+        </div>
+        <div class="submit"
+             v-if="(payment&&payment.payMode)||data.strategies[key].finalAmount ==0"
+             v-on:click="submitFn">立即支付
+
+        </div>
       </div>
     </div>
     <div class="moreFn" v-if="modal">
@@ -132,7 +148,7 @@
           <div class="text-gradient" style="font-weight: bold;font-size: .8rem">{{data.charge.remindCharge}}元</div>
         </div>
       </div>
-      <div class="more" @click="chargeFn">查看其它充值方案</div>
+      <div class="more" @click="chargeFn">更多优惠方案</div>
     </div>
   </div>
 </template>
@@ -147,7 +163,8 @@
         key: 0,
         payment: {},
         more: false,
-        modal: false
+        modal: false,
+        showFlower: false
       }
     },
     created() {
@@ -156,6 +173,11 @@
     methods: {
       initFn() {
         let _self = this;
+        this.$loading('正在匹配适合您的优惠');
+        setTimeout(function () {
+          _self.$loading.close();
+          _self.showFlower = true
+        }, 2200);
         this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
           if (response.body.code == 200) {
             if (response.body.result.oasis) {
@@ -189,10 +211,11 @@
               }
 
               for (let i in data.result.strategies) {
-                let useAll = [], segmentAll = [];
+                let useAll = [], segmentAll = [], usedAmount = 0;
                 if (data.result.strategies[i].used) {
                   let item = data.result.strategies[i].used;
                   for (let j in item) {
+                    usedAmount = item[j].amount - 0 + usedAmount;
                     let type = item[j].type;
                     //自己的权益放在segment中
                     if (type == '6010' || type == '6009' || type == '6011' || type == '6016') {
@@ -201,8 +224,8 @@
                       useAll.push(item[j]);
                     }
                   }
-
                 }
+                data.result.strategies[i].usedAmount = usedAmount.toFixed(2);
                 data.result.strategies[i].useAll = useAll;
                 data.result.strategies[i].segmentAll = segmentAll;
               }
@@ -273,7 +296,7 @@
           };
         }, 3000)
       },
-      flowerFn: function (item) {
+      switchStateFn(item) {
         this.$set(item, "check", !item.check);
       },
       showMore: function (index) {

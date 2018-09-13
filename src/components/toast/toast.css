@@ -57,18 +57,19 @@
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 20400; }
+  z-index: 20400;
+  padding-top: 64%;
+  text-align: center; }
 
 .lx-load-box {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  padding: .4rem;
-  margin-left: -1.25rem;
-  margin-top: -1.25rem;
+  padding: .7rem;
   background: rgba(0, 0, 0, 0.8);
   z-index: 11000;
-  border-radius: .25rem; }
+  border-radius: .25rem;
+  line-height: 3;
+  color: white;
+  font-size: .7rem;
+  display: inline-block; }
 
 .lx-load-content {
   margin-top: 64%;
@@ -78,7 +79,8 @@
   display: block;
   width: 1.7rem;
   height: 1.7rem;
-  animation: preloader-spin 1s steps(12, end) infinite; }
+  animation: preloader-spin 1s steps(12, end) infinite;
+  margin: auto; }
 
 .lx-loading:after {
   display: block;
@@ -449,10 +451,6 @@
   .lx-message-bg .lx-message {
     background: white;
     margin: 47% 14%;
-
-    /*margin: 0 14%;*/
-    /*position: relative;*/
-    /*top: 30%;*/
     border-radius: 5px;
     text-align: center; }
     .lx-message-bg .lx-message .title {
@@ -484,7 +482,7 @@
     top: 30%;
     border-radius: 5px;
     text-align: center;
-    font-size: .7rem; }
+    font-size: .8rem; }
     .lx-confirm-bg .lx-confirm .title {
       padding: 2.1rem 2rem 1.9rem; }
     .lx-confirm-bg .lx-confirm .buttons {
@@ -493,8 +491,7 @@
       align-items: center;
       border-top: 1px solid #8c8c8c; }
       .lx-confirm-bg .lx-confirm .buttons .item {
-        flex: 1;
-        font-size: .7rem; }
+        flex: 1; }
       .lx-confirm-bg .lx-confirm .buttons .item:nth-child(2) {
         color: red;
         border-left: 1px solid #8c8c8c;
