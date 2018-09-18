@@ -1,21 +1,21 @@
 /*
 Error: Invalid GBK character "\xE6"
-        on line 75 of upgrade.scss
+        on line 79 of upgrade.scss
 
-70:         display: -webkit-box;
-71:         overflow: hidden;
-72:       }
-73:     }
-74:     .swiper-slide.add:after {
-75:       content: "查看详情";
-76:       position: absolute;
-77:       bottom: 0;
-78:       left: 0;
-79:       right: 0;
-80:       line-height: 3;
+74:         display: -webkit-box;
+75:         overflow: hidden;
+76:       }
+77:     }
+78:     .swiper-slide.add:after {
+79:       content: "查看详情";
+80:       position: absolute;
+81:       bottom: 0;
+82:       left: 0;
+83:       right: 0;
+84:       line-height: 3;
 
 Backtrace:
-upgrade.scss:75
+upgrade.scss:79
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE6\"\A         on line 75 of upgrade.scss\A \A 70:         display: -webkit-box;\A 71:         overflow: hidden;\A 72:       }\A 73:     }\A 74:     .swiper-slide.add:after {\A 75:       content: \"查看详情\";\A 76:       position: absolute;\A 77:       bottom: 0;\A 78:       left: 0;\A 79:       right: 0;\A 80:       line-height: 3;"; }
+  content: "Error: Invalid GBK character \"\xE6\"\A         on line 79 of upgrade.scss\A \A 74:         display: -webkit-box;\A 75:         overflow: hidden;\A 76:       }\A 77:     }\A 78:     .swiper-slide.add:after {\A 79:       content: \"查看详情\";\A 80:       position: absolute;\A 81:       bottom: 0;\A 82:       left: 0;\A 83:       right: 0;\A 84:       line-height: 3;"; }

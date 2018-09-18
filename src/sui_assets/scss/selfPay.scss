@@ -565,6 +565,17 @@ $warm-grey: rgb(156, 156, 156);
     color: #009EFF;
     vertical-align: middle;
   }
+  .qrcode{
+    width: 88px;
+    background: url(/sui_assets/img/selfPay/qrcode.png) center no-repeat/contain;
+    padding: 8px 10px 43px;
+    position: fixed;
+    right: .6rem;
+    bottom: 4.5rem;
+    img{
+      width: 100%;
+    }
+  }
 
   .bottom {
     position: fixed;
@@ -941,21 +952,12 @@ $warm-grey: rgb(156, 156, 156);
       font-size: 10px;
       font-weight: bold;
       line-height: 2;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
       display: flex;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-      -moz-box-orient: horizontal;
-      -moz-box-direction: normal;
-      -webkit-flex-direction: row;
-      -ms-flex-direction: row;
       flex-direction: row;
       justify-content: space-between;
       -webkit-justify-content: space-between;
       align-items: center;
+      clear: both;
 
       .item {
         flex-grow: 1;

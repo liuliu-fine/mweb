@@ -72,13 +72,15 @@
         <span class="i-icon i_record"></span>
         买单记录
       </div>
-      <div class="i-list" v-on:click="ajaxUrl('userInfo.html')">
+      <router-link class="i-list" :to="{ path: 'setting', query:  $route.query}">
+        <!--<div class="i-list" v-on:click="ajaxUrl('userInfo.html')">-->
         <span class="i-icon i-userinfo"></span>
         账户设置
         <!--券待领-->
         <span class="earn-box1" v-if="data.obtaining">您有优惠尚未领取</span>
         <span class="phone-box" v-else-if="!data.phone">补全手机，保护/同步您的权益</span>
-      </div>
+      </router-link>
+      <!--</div>-->
 
     </div>
   </div>
@@ -102,7 +104,7 @@
         this.$http.get("/benefit/guest/" + (this.$route.query.id || this.$route.query.guestid)).then(response => {
           if (response.body.code == 200) {
             this.data = response.body.result;
-            this.$cookie.set("reward", this.data.reward ||0 );
+            this.$cookie.set("reward", this.data.reward || 0);
             this.$cookie.set("relation_id", this.data.customerRelationId);
             if (!this.data.phone) {
               this.$bind({

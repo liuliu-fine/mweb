@@ -77,6 +77,7 @@
         <div class="pull-left">{{item.title}}</div>
         <div class="pull-right">看一看 ></div>
       </div>
+      <div class="qrcode" v-if="qrcode"><img :src="qrcode.url"></div>
 
       <div style="height: 6rem"></div>
       <!---->
@@ -102,14 +103,16 @@
                 </div>
               </div>
             </div>
-            <div class="behind"><div class="submit" v-on:click="flowerStateFn('close')">关闭</div></div>
+            <div class="behind">
+              <div class="submit" v-on:click="flowerStateFn('close')">关闭</div>
+            </div>
           </div>
           <div class="flower zoom" v-else-if="!flower.state">
             <!--<div class="close" v-on:click="flowerStateFn('close')"></div>-->
             <div class="content1">
               <div class="pull-right" v-on:click="flowerStateFn('close')"></div>
               <div class="nickname">{{flower.staffs[posts.index].nickname}}</div>
-              <div class="avatar"  v-on:click="flowerStateFn('other')"
+              <div class="avatar" v-on:click="flowerStateFn('other')"
                    :style="{'backgroundImage':'url('+ (flower.staffs[posts.index].avatarUrl||'/sui_assets/img/avatar.png')+')'}"></div>
               <div class="addon">点击头像切换服务员</div>
               <div class="labels">
@@ -137,9 +140,10 @@
                 v-else>提交</span></div>
               <div class="gift" v-show="posts.satisfied">
                 <div class="transform">
-                  送{{flower.staffs[posts.index].gender=='2'?'她':'他'}}{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，回馈给您：<span class="blue-text"
-                                                                                                     v-on:click="$couponShow($event,item)"
-                                                                                                     v-for="item in flower.benefits">{{item.name}} </span>
+                  送{{flower.staffs[posts.index].gender=='2'?'她':'他'}}{{flower.countLimit}}{{flower.gratuity.unit}}{{flower.gratuity.name}}，回馈给您：<span
+                  class="blue-text"
+                  v-on:click="$couponShow($event,item)"
+                  v-for="item in flower.benefits">{{item.name}} </span>
                 </div>
               </div>
             </div>
@@ -161,7 +165,6 @@
 
           </div>
         </div>
-
         <div class="i-flex" v-show="flower.state == 'close'||!flower.staffs">
           <div class="item" v-if="init.couponCount||init.existCoupon" v-on:click="getCoupons()">
             <div class="label3" v-if="init.couponCount">已出示{{init.couponCount}}</div>
@@ -438,7 +441,8 @@
         posts: {
           satisfied: true,
           index: 0
-        }//评赏
+        },//评赏
+        qrcode: ""
       }
     },
     created() {
@@ -551,6 +555,17 @@
                   if (data.code == 200) {
                     let _self = this;
                     _self.ads = data.result;
+                  }
+                });
+                let para1 = {};
+                if (this.$route.query.d) {
+                  para1.tableId = this.$route.query.d;
+                }
+                this.$http.get("/shop/" + this.$route.query.id + "/qrcode", {key: para1}).then(response => {
+                  let data = response.body;
+                  if (data.code == 200) {
+                    let _self = this;
+                    _self.qrcode = data.result;
                   }
                 });
                 /*----------------------*/

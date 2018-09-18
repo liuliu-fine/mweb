@@ -90,7 +90,6 @@
               </ul>
             </div>
           </div>
-          <div class="gift-item"></div>
         </div>
       </div>
       <div class="label"><span class="icon2"></span>不定期礼券，随时给你小惊喜</div>

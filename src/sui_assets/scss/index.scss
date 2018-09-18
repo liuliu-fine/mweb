@@ -565,10 +565,6 @@ html body {
   display: none !important;
 }
 
-.disabled {
-  pointer-events: none;
-}
-
 .footer {
   background: url("/sui_assets/img/footer-white.svg") center no-repeat;
   height: 40px;
@@ -581,6 +577,9 @@ html body {
 a {
   text-decoration: none;
   color: inherit;
+}
+ul{
+  padding-left: 0;
 }
 
 .gmodal {
@@ -670,6 +669,14 @@ a {
   cursor: none;
   background: #c8c8c8 !important;
   border: 1px solid #c8c8c8 !important;
+  pointer-events: none;
+
+}
+.empty{
+  background: url(/sui_assets/img/empty.png) center no-repeat;
+  background-size: contain;
+  height: 30%;
+  margin-top: 20%;
 }
 
 .coupon_show {

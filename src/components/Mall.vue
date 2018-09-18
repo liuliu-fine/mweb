@@ -1,29 +1,23 @@
 <template>
-  <div class="goods-list-wrapper">
-    <div class="cap-goods-list">
-      <ul class="cap-goods-list__container cap-goods-list__container--list cap-goods-list__container--card">
-        <li class="cap-goods-list__wrapper" v-for="item in data.items">
-          <div v-on:click="redirectFn(item.id)"
-               class="cap-goods-list__item cap-goods-list__item--list card cap-goods-list__item--btn4 cap-goods-list__item--whitespace">
-            <div class="cap-goods-list__photo">
-              <img class="cap-goods-list__img" :src="item.picUrl"></div>
-            <div class="cap-goods-list__info has-title has-price has-btn">
-              <h3 class="title">{{item.title}}</h3>
-
-              <div class="time" v-if="item.stock === undefined">不限量</div>
-              <div class="time" v-else>库存：{{item.stock}}</div>
-              <p class="sale-info"><span class="sale-price">¥ {{item.sales[0].price}}</span></p></div>
-            <div class="cap-goods-list__buy-btn-wrapper cap-goods-list__buy-btn-wrapper--4">
-              <button class="cap-goods-list__buy-btn-4 van-button van-button--default van-button--small"
-                      :class="payment&&item.usable?'':'disabled'"
-                      v-on:click.stop="submitFn(item.id)">
-                <span class="van-button__text"><span v-if="item.stock===0">已售完</span><span v-else>购买</span></span>
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
+  <div class="mall">
+    <div class="bar">
+      <router-link class="item" :to="{ path: 'exchange', query:  $route.query}">积分兑换</router-link>
+      <div class="item active">会员商城</div>
     </div>
+    <div class="flex" v-if="data">
+      <div class="item" v-for="item in data.items" v-on:click="redirectFn(item.id)">
+        <img class="cap-goods-list__img" :src="item.picUrl">
+        <div class="text">
+          <div class="title">{{item.title}}</div>
+          <div class="time" v-if="item.stock === undefined">不限量</div>
+          <div class="time" v-else>库存{{item.stock}}</div>
+        </div>
+        <div class="amount">¥ {{item.sales[0].price}}</div>
+      </div>
+      <div class="item"></div>
+    </div>
+    <div class="empty" v-else></div>
+    <router-link class="record" :to="{ path: 'mallRecord', query:  $route.query}"></router-link>
   </div>
 </template>
 
@@ -37,15 +31,15 @@
       }
     },
     created() {
-      this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
-        if (response.body.code == 200) {
-          if (response.body.result.oasis) {
-            this.author();
-            return;
-          }
-          this.payment = response.body.result;
-        }
-      });
+      // this.$http.get("/shop/" + (this.$route.query.id || this.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
+      //   if (response.body.code == 200) {
+      //     if (response.body.result.oasis) {
+      //       this.author();
+      //       return;
+      //     }
+      //     this.payment = response.body.result;
+      //   }
+      // });
       this.initFn();
     },
     methods: {
@@ -54,18 +48,14 @@
           let data = response.body;
           if (data.code == 200) {
             this.data = data.result;
-          } else if (data.code === 404000) {
-
-          } else {
-
           }
         });
       },
       redirectFn(id) {
         this.$route.query.aid = id;
         this.$router.push({path: '/mallDetail', query: this.$route.query});
-      },
-      submitFn(id) {
+      }
+      /*submitFn(id) {
         let show = this.$loading('loading...');
         if (show) return;
         if (id) {
@@ -156,7 +146,7 @@
         this.$loading.close();
         this.$http.post("/order/" + orderId + "/pay/revoke").then(response => {
         });
-      }
+      }*/
     }
   }
 </script>

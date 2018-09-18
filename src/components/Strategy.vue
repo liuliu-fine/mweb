@@ -18,7 +18,9 @@
             <div class="tag"></div>
             <div class="center">
               <div class="amount">支付￥{{item.finalAmount}}</div>
-              <div class="text-blue" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动</div>
+              <div class="text-blue quote" v-on:click="modal = true" v-if="item.charges&&item.automatic">本方案参加了充值活动
+              </div>
+              <div class="text-blue" v-if="item.chargeFree">{{item.chargeFree.content}}</div>
               <div class="pre-amount">原单￥{{data.amount}}</div>
             </div>
           </div>
@@ -54,7 +56,7 @@
           </div>
           <div class="label" v-if="item.nonPart||item.useAll.length||item.segmentAll.length"><span
             class="hui-icon"></span>优惠￥{{item.usedAmount}}<span class="pull-right" :class="item.check?'open':''"
-                                                                  v-on:click="switchStateFn(item)">优惠详情</span>
+                                                                v-on:click="switchStateFn(item)">优惠详情</span>
           </div>
 
           <div v-if="!(item.nonPart||item.used||item.got)" style='padding: .5rem 1.8rem;font-size: .7rem'>
@@ -222,6 +224,9 @@
                     if (type == '6010' || type == '6009' || type == '6011' || type == '6016') {
                       segmentAll.push(item[j]);
                     } else {
+                      if (type == '6017') {
+                        data.result.strategies[i].chargeFree = item[j];
+                      }
                       useAll.push(item[j]);
                     }
                   }

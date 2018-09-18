@@ -1,6 +1,10 @@
 .upgrade {
   background: #030200;
   padding-bottom: 1px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  overflow-y: auto;
   .bg {
     //padding: 2rem 2rem 4rem;
     text-align: center;

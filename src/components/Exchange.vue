@@ -1,38 +1,38 @@
 <template>
   <div class="exchange" v-if="data">
+    <div class="bar">
+      <div class="item active">积分兑换</div>
+      <router-link class="item" :to="{ path: 'mall', query:  $route.query}">会员商城</router-link>
+    </div>
     <div class="header">
-      <div class="">我的积分</div>
-      <div>
+      <div class="">
+        <div>我的积分</div>
         <div class="amount">{{data.point}}</div>
-        <div class="btn-record" v-if="data.customerRelationId"
-             v-on:click="ajaxUrl('pointRecord.html?rid='+ data.customerRelationId)">积分记录
-        </div>
+      </div>
+      <div class="btn-record" v-if="data.customerRelationId"
+           v-on:click="ajaxUrl('pointRecord.html?rid='+ data.customerRelationId)">积分记录
       </div>
     </div>
-    <div class="content">
-      <div v-for="activity in data.activity" v-on:click="directFn(activity.coupons)">
-        <div class="item"
-             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}">
-          <div class="remain" v-if="activity.remainCount!==undefined">{{activity.remainCount}}</div>
-          <div class="addon">
-            <div class="left" v-if="activity.type=='1020'">
-              <div class="ellipsis bold">{{activity.name}}<span class="name">会员升级</span></div>
-              <div class="ellipsis text-xs" v-if="activity.from">仅限：{{activity.from}}</div>
-            </div>
-            <div class="left" v-for="coupon in activity.coupons" v-else>
-              <div class="ellipsis bold"><span v-if="coupon.amount">￥{{coupon.amount}}</span><span class="name">{{coupon.name}}</span>
-              </div>
-              <div class="ellipsis text-xs"><span v-if="activity.from">仅限：{{activity.from}}</span> {{coupon.times}}
-              </div>
-            </div>
-            <div class="right"
-                 v-on:click.stop="submitFn(activity.activityId,activity.ruleTupleId,activity.usable,activity.amount)">
-              {{activity.amount}}<span style="font-size: .75rem;">积分</span>
-            </div>
+    <div class="content" v-if="data">
+      <div class="flex" v-for="activity in data.activity">
+        <div class="image" v-on:click="directFn(activity.coupons)" :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}"></div>
+        <div class="item">
+          <div class="ellipsis bold"  v-if="activity.type=='1020'">{{activity.name}}</div>
+          <div class="ellipsis bold" v-for="coupon in activity.coupons" v-else>{{coupon.name}}</div>
+          <div class="grey">
+            <div class="" v-if="activity.from">仅限：{{activity.from}}</div>
+            <span v-if="activity.remainCount">仅剩{{activity.remainCount}}份</span>
+          </div>
+          <div class="amount">{{activity.amount}}积分</div>
+          <div class="btn" :class="{'unabled':!activity.usable}"
+               v-on:click.stop="submitFn(activity.activityId,activity.ruleTupleId,activity.usable,activity.amount)">
+            立即兑换
           </div>
         </div>
       </div>
     </div>
+    <div class="empty" v-else></div>
+
   </div>
 
 </template>
@@ -68,7 +68,7 @@
       },
       submitFn(aid, rid, usable, number) {
         if (!usable) {
-          this.$toast("您还不满足兑换条件");
+          // this.$toast("您还不满足兑换条件");
           return;
         }
         let _self = this;

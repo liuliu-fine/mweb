@@ -260,7 +260,6 @@
           ul {
             margin: 0;
             padding-left: 1.1rem;
-
           }
         }
       }
@@ -271,7 +270,7 @@
     background: url(/sui_assets/img/newVip/coupon.png) 1.5rem .2rem no-repeat;
     background-size: 36%;
     background-color: #dae2f7;
-    padding-left: 40%;
+    padding-left: 50%;
     display: flex;
     align-items: center;
     ul {
@@ -282,12 +281,12 @@
   .birth-wrapper {
     ul {
       color: #8c8c8c;
-      margin: 0 0 .5rem -1.2rem;
+      margin: 0 0 .5rem .8rem;
       font-size: .5rem;
       line-height: 1.6;
     }
     .birth-inner {
-      background: url(/sui_assets/img/newVip/birth.png) center no-repeat/contain;
+      background: url(/sui_assets/img/newVip/birth.png) center no-repeat/cover;
       height: 4.3rem;
       padding-left: 40%;
       text-align: center;
@@ -442,14 +441,14 @@
     }
     .service-item1 {
       background: url(/sui_assets/img/newVip/line-card.png) center left no-repeat/contain;
-      height: 9.1rem;
+      height: 10.1rem;
       width: 48%;
       float: left;
       display: inline-block;
     }
     .service-item2 {
       background: url(/sui_assets/img/newVip/reserve-card.png) center right no-repeat/contain;
-      height: 9.1rem;
+      height: 10.1rem;
       width: 48%;
       display: inline-block;
       margin-left: 4%;

@@ -17,7 +17,9 @@
       width: 45%;
       margin-top: 1rem;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
-      padding-left: 8px; }
+      padding-left: 8px;
+      display: flex;
+      align-items: center; }
       .user .i-flex .item .icon-left {
         background-image: url(/sui_assets/img/user/sprite.svg);
         padding: 16px;
@@ -28,7 +30,8 @@
       .user .i-flex .item .right {
         vertical-align: middle;
         display: inline-block;
-        font-size: 14px; }
+        font-size: 14px;
+        padding-left: .2rem; }
         .user .i-flex .item .right .pl {
           padding-left: 5px; }
         .user .i-flex .item .right .pl:after {
@@ -108,7 +111,8 @@
     padding: 1rem 1.5rem;
     font-size: .7rem;
     color: #333333;
-    border-top: 1px solid #f0f0f0; }
+    border-bottom: 1px solid #f0f0f0;
+    display: block; }
     .user .i-list .phone-box {
       border-radius: 1rem;
       background: linear-gradient(to right, #ff3c3c, #ff6420);
@@ -130,6 +134,6 @@
     .user .i-list .i-more {
       background-position: 0 -215px; }
   .user .border-top {
-    border-top-width: .5rem; }
+    border-top: .5rem  solid #f0f0f0; }
 
 /*# sourceMappingURL=user.css.map */

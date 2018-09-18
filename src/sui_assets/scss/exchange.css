@@ -1,46 +1,118 @@
-/*
-Error: Invalid GBK character "\xE5"
-        on line 61 of exchange.scss
+.exchange {
+  background: #f5f5f5;
+  font-size: .7rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; }
+  .exchange .bar {
+    display: flex;
+    justify-content: space-around;
+    font-size: .7rem;
+    color: #58b7ef;
+    border-bottom: 2px solid white;
+    background: white;
+    height: 2.2rem;
+    line-height: 2.2rem; }
+    .exchange .bar .item {
+      padding: 0 .2rem; }
+    .exchange .bar .active {
+      color: #3aa6e7;
+      font-size: .9rem;
+      border-bottom: 2px solid #3aa6e7; }
+  .exchange .header {
+    padding: .5rem .8rem .5rem .8rem;
+    font-weight: 700;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #f5f5f5;
+    position: relative; }
+    .exchange .header .amount {
+      color: #333333;
+      font-size: 1.4rem;
+      padding-top: .2rem;
+      font-weight: bold; }
+    .exchange .header .btn-record {
+      height: 1.3rem;
+      line-height: 1.3rem;
+      color: #5e5e5e;
+      border: 1px solid #ccc;
+      width: 4rem;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: normal;
+      font-size: .7rem; }
+  .exchange .header:after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: #f5f5f5;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.8rem;
+    right: 0.8rem; }
+  .exchange .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    white-space: nowrap; }
+  .exchange .content {
+    padding: 0 1.6rem; }
+    .exchange .content .flex {
+      display: flex;
+      align-items: center;
+      background: white;
+      margin: .7rem 0;
+      height: 6.3rem;
+      box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 10px; }
+      .exchange .content .flex .image {
+        width: 5rem;
+        height: 5rem;
+        background-size: cover;
+        margin-left: -.8rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 8px -5px rgba(0, 0, 0, 0.2); }
+      .exchange .content .flex .item {
+        width: 100px;
+        height: 6.3rem;
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: .8rem;
+        position: relative;
+        padding: .5rem 0; }
+        .exchange .content .flex .item .bold {
+          color: #333;
+          font-size: .9rem;
+          width: 96%;
+          overflow-x: auto; }
+        .exchange .content .flex .item .grey {
+          color: #9c9c9c;
+          font-size: .6rem;
+          width: 96%; }
+        .exchange .content .flex .item .amount {
+          color: #ffab5d;
+          font-size: .8rem; }
+        .exchange .content .flex .item .btn {
+          background-color: #ff6666;
+          box-shadow: 0 3px 7px 0 rgba(255, 102, 102, 0.5);
+          height: 1.2rem;
+          line-height: 1.2rem;
+          width: 4.2rem;
+          color: #ffffff;
+          font-size: .7rem;
+          position: absolute;
+          right: -.8rem;
+          bottom: 0.85rem; }
+        .exchange .content .flex .item .unabled {
+          background: #c8c8c8;
+          box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1);
+          pointer-events: none; }
 
-56:         text-align: center;
-57:         padding-top: .3rem;
-58: 
-59:       }
-60:       .remain:before {
-61:         content: "剩余";
-62:         font-size: .5rem;
-63:         font-weight: normal;
-64:         display: block;
-65:       }
-66:       .addon {
-
-Backtrace:
-exchange.scss:61
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each_with_index'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `find_encoding_error'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:778:in `rescue in check_sass_encoding'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:774:in `check_sass_encoding'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:444:in `check_encoding!'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:400:in `_to_tree'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin.rb:82:in `update_stylesheets'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:51:in `process_result'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
-C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/bin/scss:13:in `<top (required)>'
-C:/Ruby24-x64/bin/scss:23:in `load'
-C:/Ruby24-x64/bin/scss:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE5\"\A         on line 61 of exchange.scss\A \A 56:         text-align: center;\A 57:         padding-top: .3rem;\A 58: \A 59:       }\A 60:       .remain:before {\A 61:         content: \"剩余\";\A 62:         font-size: .5rem;\A 63:         font-weight: normal;\A 64:         display: block;\A 65:       }\A 66:       .addon {"; }
+/*# sourceMappingURL=exchange.css.map */

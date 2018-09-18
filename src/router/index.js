@@ -11,6 +11,7 @@ const MallRecord = r => require.ensure([], () => r(require('@/components/MallRec
 const Coupon = r => require.ensure([], () => r(require('@/components/Coupon')))
 const Payment = r => require.ensure([], () => r(require('@/components/Payment')))
 const Strategy = r => require.ensure([], () => r(require('@/components/Strategy')))
+const Setting = r => require.ensure([], () => r(require('@/components/Setting')))
 
 //无入口
 const Error = r => require.ensure([], () => r(require('@/components/Error')))
@@ -77,6 +78,10 @@ export default new Router({
       path: '/vip',
       name: 'Vip',
       component: Vip
+    },    {
+      path: '/setting',
+      name: 'Setting',
+      component: Setting
     },
     {
       path: '/exchange',
