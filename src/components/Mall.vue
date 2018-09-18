@@ -6,7 +6,8 @@
     </div>
     <div class="flex" v-if="data">
       <div class="item" v-for="item in data.items" v-on:click="redirectFn(item.id)">
-        <img class="cap-goods-list__img" :src="item.picUrl">
+        <!--<img  :src="item.picUrl">-->
+        <div class="img" :style="{backgroundImage: 'url('+ (item.picUrl||'') +')'}"></div>
         <div class="text">
           <div class="title">{{item.title}}</div>
           <div class="time" v-if="item.stock === undefined">不限量</div>

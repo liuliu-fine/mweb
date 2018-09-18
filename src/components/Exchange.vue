@@ -15,9 +15,10 @@
     </div>
     <div class="content" v-if="data">
       <div class="flex" v-for="activity in data.activity">
-        <div class="image" v-on:click="directFn(activity.coupons)" :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}"></div>
+        <div class="image" v-on:click="directFn(activity.coupons)"
+             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}"></div>
         <div class="item">
-          <div class="ellipsis bold"  v-if="activity.type=='1020'">{{activity.name}}</div>
+          <div class="ellipsis bold" v-if="activity.type=='1020'">{{activity.name}}</div>
           <div class="ellipsis bold" v-for="coupon in activity.coupons" v-else>{{coupon.name}}</div>
           <div class="grey">
             <div class="" v-if="activity.from">仅限：{{activity.from}}</div>
@@ -32,7 +33,6 @@
       </div>
     </div>
     <div class="empty" v-else></div>
-
   </div>
 
 </template>
