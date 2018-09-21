@@ -24,51 +24,60 @@
   }
   .flex {
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    line-height: 1.7;
     .item {
       width: 48%;
-      margin: 1%;
+      margin: 3px 0 3px 0;
       background: white;
       border-radius: 5px;
       overflow: hidden;
-      img {
+      position: relative;
+      .img {
         width: 100%;
         height: 40vw;
+        background-size: cover;
+        background-position: center;
       }
-      .text{
+      .text {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        padding: 0 .6rem;
+        padding: 0 .6rem 0.2rem;
+        .time {
+          right: 0.5rem;
+          color: #757575;
+          font-size: .55rem;
+          top: 1px;
+        }
+        .amount {
+          font-size: .75rem;
+          color: #e51c23;
+        }
       }
       .title {
         color: #333;
+        padding: 5px .6rem .3rem;
         font-size: .65rem;
-        //padding: 0 2.2rem 0 .6rem;
-        position: relative;
-        overflow: auto;
-        //width: rem;
-        white-space:nowrap;
-        height: 1rem;
-        width: 10px;
-        flex: 1;
+        border-top: 1px solid #eeeeee;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; //需要控制的文本行数
+        overflow: hidden;
+
       }
-      .time{
-        //position: absolute;
-        right: 0.5rem;
-        color: #757575;
-        font-size: .5rem;
-        top: 1px;
-      }
-      .amount {
-        font-size: .75rem;
-        color: #e51c23;
-        padding: 0 .6rem;
-        line-height: 2;
+      .label{
+        position: absolute;
+        top:10px;
+        border-radius: 0 10px 10px 0;
+        background-image: linear-gradient(to bottom, #db1fab, #f81955);
+        padding: 3px 5px;
+        font-size: 10px;
+        color: #fff;
       }
     }
   }
-  .record{
+  .record {
     position: fixed;
     bottom: 4rem;
     right: .5rem;
@@ -78,7 +87,6 @@
     color: white;
     text-align: center;
     border-radius: 50%;
-
 
   }
 }

@@ -54,56 +54,56 @@
     <div class="benefit" v-if="data.redEnvelopes||data.lottery||data.commentBenefit">
       <div class="title">精彩活动</div>
       <div class="activity"
-           :style="{backgroundImage: 'url('+ (data.redEnvelopes.picUrl||'/sui_assets/img/payment/activity1.jpg') +')'}"
+           :style="{backgroundImage: 'url('+ (data.redEnvelopes[0].picUrl||'/sui_assets/img/payment/activity1.jpg') +')'}"
            v-on:click="openFn()" v-if="data.redEnvelopes" style="line-height: 1.4">
-        <div class="text-red">{{data.redEnvelopes.name}}</div>
+        <div class="text-red">{{data.redEnvelopes[0].name}}</div>
         <div class="button">发红包给好友</div>
 
-        <div class="addon" v-if="data.commentBenefit">自己还可获得{{data.commentBenefit.name}}</div>
+        <div class="addon" v-if="data.commentBenefit">自己还可获得{{data.commentBenefit[0].name}}</div>
 
       </div>
       <div class="activity"
-           :style="{backgroundImage: 'url('+ (data.commentBenefit.picUrl||'/sui_assets/img/payment/activity1.jpg') +')'}"
+           :style="{backgroundImage: 'url('+ (data.commentBenefit[0].picUrl||'/sui_assets/img/payment/activity1.jpg') +')'}"
            v-on:click="openFn()" v-else-if="data.commentBenefit">
         <div class="text-red">评论红包</div>
-        <div v-if="data.commentBenefit.category == '1016'">
-          <div v-if="data.commentBenefit.couponCategory == '901'">
-            <span class="lg">￥{{data.commentBenefit.amount}}</span>代金券
+        <div v-if="data.commentBenefit[0].category == '1016'">
+          <div v-if="data.commentBenefit[0].couponCategory == '901'">
+            <span class="lg">￥{{data.commentBenefit[0].amount}}</span>代金券
           </div>
-          <div class="lg" v-if="data.commentBenefit.couponCategory == '9011'">
-            <span class="lg">{{data.commentBenefit.name}}</span>
+          <div class="lg" v-if="data.commentBenefit[0].couponCategory == '9011'">
+            <span class="lg">{{data.commentBenefit[0].name}}</span>
           </div>
-          <div v-if="data.commentBenefit.couponCategory == '9021'||data.commentBenefit.couponCategory == '902'">
-            现价<span class="lg">￥{{data.commentBenefit.currentAmount}}</span>
-            <span>价值￥{{data.commentBenefit.amount}}</span>{data.commentBenefit.name}}
+          <div v-if="data.commentBenefit[0].couponCategory == '9021'||data.commentBenefit[0].couponCategory == '902'">
+            现价<span class="lg">￥{{data.commentBenefit[0].currentAmount}}</span>
+            <span>价值￥{{data.commentBenefit[0].amount}}</span>{data.commentBenefit[0].name}}
           </div>
-          <div class="lg" v-if="data.commentBenefit.couponCategory == '903'">
-            <span class="lg">{{data.commentBenefit.amount}}折<</span>
+          <div class="lg" v-if="data.commentBenefit[0].couponCategory == '903'">
+            <span class="lg">{{data.commentBenefit[0].amount}}折<</span>
             全场折扣券
           </div>
-          <div v-if="data.commentBenefit.couponCategory == '9031'">
-            <div class="lg">{{data.commentBenefit.amount}}折</div>
-            {{data.commentBenefit.name}}
+          <div v-if="data.commentBenefit[0].couponCategory == '9031'">
+            <div class="lg">{{data.commentBenefit[0].amount}}折</div>
+            {{data.commentBenefit[0].name}}
           </div>
-          <div v-if="data.commentBenefit.couponCategory == '904'">
-            <div v-if="data.commentBenefit.amount">价值<span class="lg">￥{{data.commentBenefit.amount}}</span></div>
-            {{data.commentBenefit.name}}
+          <div v-if="data.commentBenefit[0].couponCategory == '904'">
+            <div v-if="data.commentBenefit[0].amount">价值<span class="lg">￥{{data.commentBenefit[0].amount}}</span></div>
+            {{data.commentBenefit[0].name}}
           </div>
         </div>
-        <div v-if="data.commentBenefit.category !== '1016'">
-          <div>价值<span class="lg">￥{{data.commentBenefit.amount}}</span>代用币</div>
+        <div v-if="data.commentBenefit[0].category !== '1016'">
+          <div>价值<span class="lg">￥{{data.commentBenefit[0].amount}}</span>代用币</div>
         </div>
         <div>提交评论后获得</div>
         <div class="button">领红包</div>
       </div>
 
       <div class="activity"
-           :style="{backgroundImage: 'url('+ (data.lottery.picUrl||'/sui_assets/img/payment/activity.jpg') +')'}"
-           v-if="data.lottery" v-on:click="openFn()">
+           :style="{backgroundImage: 'url('+ (data.lottery[0].picUrl||'/sui_assets/img/payment/activity.jpg') +')'}"
+           v-if="data.lottery[0]" v-on:click="openFn()">
         <div class="text-red">
-          <div v-if="data.lottery.couponCategory == '901'&&data.lottery.category == '1016'">代金券</div>
-          <div v-if="data.lottery.category == '1017'">代用币</div>
-          <div v-else>{{data.lottery.name}}</div>
+          <div v-if="data.lottery[0].couponCategory == '901'&&data.lottery[0].category == '1016'">代金券</div>
+          <div v-if="data.lottery[0].category == '1017'">代用币</div>
+          <div v-else>{{data.lottery[0].name}}</div>
         </div>
         <div class="button">立即报名霸王餐</div>
       </div>

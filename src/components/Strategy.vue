@@ -1,12 +1,18 @@
 <template>
   <div class="strategy" v-if="data">
-    <div class="recommend i-flex" v-if="data.recommend&&data.recommend.type=='CHARGE'" @click="chargeFn">
+<!--    <div class="recommend i-flex" v-if="data.recommend&&data.recommend.type=='CHARGE'" @click="chargeFn" :style="{backgroundImage: 'url('+ (data.recommend.picUrl||'') +')'}">
       <div class="left"><img :src="data.recommend.picUrl" style="width: 100%"></div>
       <div class="right">
         <div style="margin-top: -6px"><span class="reco1">{{data.recommend.charge}}</span><span
           class="reco2">{{data.recommend.benefit}}</span></div>
         <div class="tuijian"></div>
       </div>
+    </div>-->
+    <div class="ad-show"  v-if="data.recommend&&data.recommend.type=='CHARGE'" v-on:click="chargeFn">
+      <div class="cbg" :style="{backgroundImage: 'url('+ (data.recommend.picUrl||'') +')'}">
+      </div>
+      <div class="pull-left">充{{data.recommend.charge}}<span v-if="data.recommend.benefit">送{{data.recommend.benefit}}</span></div>
+      <div class="pull-right">看一看 ></div>
     </div>
     <transition-group name="fade" tag="div" class="list-group" appear>
       <div v-for="(item,index) in data.strategies" class="list-group-item" v-if="index==0||more||index==1"

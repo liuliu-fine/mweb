@@ -22,6 +22,7 @@ $black: rgb(40, 40, 40);
   background: rgb(245, 245, 245);
   min-height: 667px;
   padding: 1px 0;
+
   .tag {
     border: 0.05rem solid #979797;
     display: inline-block;
@@ -355,64 +356,109 @@ $black: rgb(40, 40, 40);
   }
 
   /*智能推荐*/
-  .recommend {
-    background: url(/sui_assets/img/pay/tui-bg.png) center no-repeat;
-    background-color: #009cff;
-    height: 157px;
-    background-size: cover;
-    color: white;
-    -webkit-justify-content: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .left {
-      width: 6rem;
-      /*flex: 1;*/
-      margin: 0 1rem;
-      img {
-        border-radius: 5px;
-        box-shadow: 2px 3px 10px 0 #0070d0;
-        /*width: 100%;*/
-      }
+  .ad-show {
+    border: 1px solid #e8e8e8;
+    color: #8b8b8b;
+    overflow: auto;
+    line-height: 2;
+    margin: -1px 0;
+    background: white;
+    .cbg {
+      height: 8rem;
+      background-size: 100% 100%;
     }
-    .right {
-      flex: 1;
-      .reco1 {
-        font-size: 30px;
-        font-family: "Times New Roman";
-        background: url("/sui_assets/img/pay/chong.svg") left center no-repeat;
-        padding: 0 5px 0 29px;
-      }
-
-      .reco2 {
-        font-size: 36px;
-        font-family: "Times New Roman";
-        font-style: italic;
-        background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
-        padding: 0 5px 0 28px;
-        border-radius: 50%;
-        position: relative;
-        font-weight: 700;
-      }
-
-      .reco2:before {
-        background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
-        padding: 10px;
-      }
-      .tuijian {
-        background: url(/sui_assets/img/pay/label.png) left bottom no-repeat;
-        background-size: contain;
-        height: 20px;
-        margin-top: 5px;
-      }
+    .pull-left:before {
+      content: "推荐";
+      display: inline-block;
+      width: 30px;
+      height: 15px;
+      line-height: 15px;
+      border: 1px solid;
+      color: #FF9393;
+      font-size: 10px;
+      text-align: center;
+      font-weight: normal;
+      margin-right: .5rem;
+      vertical-align: text-bottom;
     }
-
-    .other {
-      margin-top: 1px;
+    .pull-left {
+      margin: .4rem;
+      color: #788486;
+      font-weight: bold;
+      float: left;
+      font-size: .7rem;
+    }
+    .pull-right {
+      /*color: #5d6993;*/
+      color: #ffffff;
+      background: #EC1700;
+      margin: .5rem;
       font-size: .6rem;
-      background: #ffffff;
-      padding: .5rem;
-      line-height: 1.1;
+      border-radius: 10px;
+      width: 63px;
+      text-align: center;
     }
+
   }
+  //
+  //.recommend {
+  //  background: url(/sui_assets/img/pay/tui-bg.png) center no-repeat;
+  //  background-color: #009cff;
+  //  height: 157px;
+  //  background-size: cover;
+  //  color: white;
+  //  -webkit-justify-content: center;
+  //  display: flex;
+  //  justify-content: space-between;
+  //  align-items: center;
+  //  .left {
+  //    width: 6rem;
+  //    /*flex: 1;*/
+  //    margin: 0 1rem;
+  //    img {
+  //      border-radius: 5px;
+  //      box-shadow: 2px 3px 10px 0 #0070d0;
+  //      /*width: 100%;*/
+  //    }
+  //  }
+  //  .right {
+  //    flex: 1;
+  //    .reco1 {
+  //      font-size: 30px;
+  //      font-family: "Times New Roman";
+  //      background: url("/sui_assets/img/pay/chong.svg") left center no-repeat;
+  //      padding: 0 5px 0 29px;
+  //    }
+  //
+  //    .reco2 {
+  //      font-size: 36px;
+  //      font-family: "Times New Roman";
+  //      font-style: italic;
+  //      background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
+  //      padding: 0 5px 0 28px;
+  //      border-radius: 50%;
+  //      position: relative;
+  //      font-weight: 700;
+  //    }
+  //
+  //    .reco2:before {
+  //      background: url("/sui_assets/img/pay/song.svg") left center no-repeat;
+  //      padding: 10px;
+  //    }
+  //    .tuijian {
+  //      background: url(/sui_assets/img/pay/label.png) left bottom no-repeat;
+  //      background-size: contain;
+  //      height: 20px;
+  //      margin-top: 5px;
+  //    }
+  //  }
+  //
+  //  .other {
+  //    margin-top: 1px;
+  //    font-size: .6rem;
+  //    background: #ffffff;
+  //    padding: .5rem;
+  //    line-height: 1.1;
+  //  }
+  //}
 }

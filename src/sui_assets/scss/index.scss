@@ -578,7 +578,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
-ul{
+
+ul {
   padding-left: 0;
 }
 
@@ -672,11 +673,20 @@ ul{
   pointer-events: none;
 
 }
-.empty{
+
+.empty {
   background: url(/sui_assets/img/empty.png) center no-repeat;
   background-size: contain;
-  height: 30%;
-  margin-top: 20%;
+  height: 25%;
+  margin-top: 25%;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .coupon_show {

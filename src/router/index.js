@@ -12,6 +12,11 @@ const Coupon = r => require.ensure([], () => r(require('@/components/Coupon')))
 const Payment = r => require.ensure([], () => r(require('@/components/Payment')))
 const Strategy = r => require.ensure([], () => r(require('@/components/Strategy')))
 const Setting = r => require.ensure([], () => r(require('@/components/Setting')))
+const Reward = r => require.ensure([], () => r(require('@/components/Reward')))
+const Vip = r => require.ensure([], () => r(require('@/components/Vip')))
+const Activity = r => require.ensure([], () => r(require('@/components/Activity')))
+const UserLine = r => require.ensure([], () => r(require('@/components/UserLine')))
+const UserReserve = r => require.ensure([], () => r(require('@/components/UserReserve')))
 
 //无入口
 const Error = r => require.ensure([], () => r(require('@/components/Error')))
@@ -19,7 +24,6 @@ const More = r => require.ensure([], () => r(require('@/components/More')))
 const Upgrade = r => require.ensure([], () => r(require('@/components/Upgrade')))
 const GrouponInfo = r => require.ensure([], () => r(require('@/components/GrouponInfo')))
 const Groupon = r => require.ensure([], () => r(require('@/components/Groupon')))
-const Vip = r => require.ensure([], () => r(require('@/components/Vip')))
 
 //test
 const Login = r => require.ensure([], () => r(require('@/components/Login')))
@@ -78,7 +82,12 @@ export default new Router({
       path: '/vip',
       name: 'Vip',
       component: Vip
-    },    {
+    },
+    {
+      path: '/activity',
+      name: 'Activity',
+      component: Activity
+    }, {
       path: '/setting',
       name: 'Setting',
       component: Setting
@@ -87,6 +96,18 @@ export default new Router({
       path: '/exchange',
       name: 'Exchange',
       component: Exchange
+    }, {
+      path: '/reward',
+      name: 'Reward',
+      component: Reward
+    }, {
+      path: '/userReserve',
+      name: 'UserReserve',
+      component: UserReserve
+    }, {
+      path: '/userLine',
+      name: 'UserLine',
+      component: UserLine
     },
     {
       path: '/upgrade',

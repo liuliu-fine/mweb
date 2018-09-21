@@ -13,10 +13,10 @@
            v-on:click="ajaxUrl('pointRecord.html?rid='+ data.customerRelationId)">积分记录
       </div>
     </div>
-    <div class="content" v-if="data">
+    <div class="content" v-if="data.activity">
       <div class="flex" v-for="activity in data.activity">
         <div class="image" v-on:click="directFn(activity.coupons)"
-             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.jpg'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.jpg')) +')'}"></div>
+             :style="{backgroundImage: 'url('+ (activity.coupons?(activity.coupons[0].picUrl||'/sui_assets/img/exchange/placeholder.png'):(activity.orgDesUrl||'/sui_assets/img/exchange/placeholder.png')) +')'}"></div>
         <div class="item">
           <div class="ellipsis bold" v-if="activity.type=='1020'">{{activity.name}}</div>
           <div class="ellipsis bold" v-for="coupon in activity.coupons" v-else>{{coupon.name}}</div>

@@ -1,32 +1,29 @@
 <template>
   <div class="charge" v-if="data">
-    <div class="header">
-      <div class="record" v-if="data.customerRelationId"
-           v-on:click="ajaxUrl('remainder.html?rid='+ data.customerRelationId)">充值记录
+    <div class="top">
+      <div class="header">
+        <div class="">
+          <div>我的余额</div>
+          <div class="amount">{{data.charge||0}}</div>
+        </div>
+        <div class="btn-record" v-if="data.customerRelationId"
+             v-on:click="ajaxUrl('remainder.html?rid='+ data.customerRelationId)">充值记录
+        </div>
       </div>
-      <div class="right" v-if="data.used" v-on:click="showModal=true"><span>?</span>使用规则</div>
-      <strong class="number">当前余额<span>￥{{data.charge}}</span></strong>
       <div class="limit" v-if="data.used&&data.used[0].limit">{{data.used[0].limit[0]}}</div>
     </div>
-    <div class="detail" v-if="data.activity&&data.activity.length">
+    <div class="detail" v-if="(data.activity&&data.activity.length)||data.used">
       <div class="box" v-for="(item,index) in data.activity" v-on:click="key=index">
         <div class="left" v-bind:class="{'active': (key == index)}"></div>
         <div class="right">
           <span class="label" v-if="item.from&&item.from!='普通顾客'">{{item.from}}</span>
-          <span class="">{{item.amount}}元</span><span v-if="item.str"> 送{{item.str}}</span>
+          <span class="">{{item.amount}}元</span><span v-if="item.str">送{{item.str}}</span>
           <div class="grey">{{item.times}}</div>
         </div>
       </div>
-    </div>
-    <div class="submit" v-if="payment&&payment.payMode&&data.activity&&data.activity.length">
-      <div class="left">支付{{data.activity[key].amount}}元</div>
-      <div class="right" v-on:click="submitFn">确认充值</div>
-    </div>
-
-    <div class="gmodal" v-if="showModal">
-      <div class="g-modal-border" style="margin-top: 25%;">
-        <div class="text1">充值卡使用规则</div>
-        <ul style="padding-left: 0">
+      <div class="rule" v-if="data.used">
+        <div class="title">使用规则</div>
+        <ul>
           <li v-if="data.used[0].time">{{data.used[0].time}}</li>
           <li v-if="data.used[0].periods">{{data.used[0].periods}}</li>
           <li v-if="data.used[0].shared">{{data.used[0].shared}}</li>
@@ -36,7 +33,11 @@
           <li>最终解释权归本店所有</li>
         </ul>
       </div>
-      <div class="close-white" v-on:click="showModal = false"></div>
+    </div>
+    <div class="empty" v-else></div>
+    <div class="submit" v-if="payment&&payment.payMode&&data.activity&&data.activity.length">
+      <div class="left">支付{{data.activity[key].amount}}元</div>
+      <div class="right" v-on:click="submitFn">确认充值</div>
     </div>
   </div>
 </template>
@@ -49,7 +50,6 @@
         data: "",
         key: 0,
         payment: {},
-        showModal: false
       }
     },
     created() {

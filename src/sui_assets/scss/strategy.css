@@ -1,21 +1,21 @@
 /*
 Error: Invalid GBK character "\xE4"
-        on line 179 of strategy.scss
+        on line 180 of strategy.scss
 
-174:       -webkit-justify-content: space-between;
-175:       font-size: .65rem;
-176:     }
-177:   }
-178:   .used:before {
-179:     content: "优惠详情";
-180:     border-bottom: 1px solid #d8d8d8;
-181:     display: block;
-182:     padding: .3rem 0 .5rem;
-183:     text-align: center;
-184:     color: #000000;
+175:       -webkit-justify-content: space-between;
+176:       font-size: .65rem;
+177:     }
+178:   }
+179:   .used:before {
+180:     content: "优惠详情";
+181:     border-bottom: 1px solid #d8d8d8;
+182:     display: block;
+183:     padding: .3rem 0 .5rem;
+184:     text-align: center;
+185:     color: #000000;
 
 Backtrace:
-strategy.scss:179
+strategy.scss:180
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1048:in `rescue in block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1045:in `block in find_encoding_error'
 C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/util.rb:1044:in `each'
@@ -42,4 +42,4 @@ C:/Ruby24-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid GBK character \"\xE4\"\A         on line 179 of strategy.scss\A \A 174:       -webkit-justify-content: space-between;\A 175:       font-size: .65rem;\A 176:     }\A 177:   }\A 178:   .used:before {\A 179:     content: \"优惠详情\";\A 180:     border-bottom: 1px solid #d8d8d8;\A 181:     display: block;\A 182:     padding: .3rem 0 .5rem;\A 183:     text-align: center;\A 184:     color: #000000;"; }
+  content: "Error: Invalid GBK character \"\xE4\"\A         on line 180 of strategy.scss\A \A 175:       -webkit-justify-content: space-between;\A 176:       font-size: .65rem;\A 177:     }\A 178:   }\A 179:   .used:before {\A 180:     content: \"优惠详情\";\A 181:     border-bottom: 1px solid #d8d8d8;\A 182:     display: block;\A 183:     padding: .3rem 0 .5rem;\A 184:     text-align: center;\A 185:     color: #000000;"; }

@@ -10,7 +10,6 @@
                 <div class="i-flex i-coupon">
                   <div class="a4001" :class="'a'+ item.state"></div>
                   <div class="item">
-                    <!--<img class="avatar" src="/sui_assets/img/avatar.png">-->
                     <div class="name" style="padding-top: 0.4rem">{{item.name}}</div>
                     <div class="amount0" v-if="item.category =='9031'">
                       <span style="font-size: .6rem">{{item.value}}</span>{{item.amount}}
@@ -35,10 +34,7 @@
               </div>
             </div>
             <div class="set-coupon" v-else>
-              <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
-                <img src="/sui_assets/img/my/empty.svg">
-              </router-link>
-              <!--<div style="text-align: center;padding-top: 38%;"><img src="/sui_assets/img/my/empty.svg"></div>-->
+              <router-link class="empty" :to="{ path: 'user', query:  $route.query}"></router-link>
             </div>
           </swiper-slide>
           <swiper-slide>
@@ -47,7 +43,6 @@
                 <div class="i-flex i-coupon">
                   <div class="a4001" :class="'a'+ item.state"></div>
                   <div class="item">
-                    <!--<img class="avatar" src="/sui_assets/img/avatar.png">-->
                     <div class="name" style="padding-top: 0.4rem">{{item.name}}</div>
                     <div class="amount0" v-if="item.category =='9031'">
                       <span style="font-size: .6rem">{{item.value}}</span>{{item.amount}}
@@ -69,10 +64,7 @@
               </div>
             </div>
             <div class="set-coupon" v-else>
-              <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
-                <img src="/sui_assets/img/my/empty.svg">
-              </router-link>
-              <!--<div style="text-align: center;padding-top: 38%;"><img src="/sui_assets/img/my/empty.svg"></div>-->
+              <router-link class="empty" :to="{ path: 'user', query:  $route.query}"></router-link>
             </div>
           </swiper-slide>
           <swiper-slide>
@@ -81,7 +73,6 @@
                 <div class="i-flex i-coupon">
                   <div class="a4001" :class="'a'+  item.state"></div>
                   <div class="item">
-                    <!--<img class="avatar" src="/sui_assets/img/avatar.png">-->
                     <div class="name" style="padding-top: 0.4rem">{{item.name}}</div>
                     <div class="amount0" v-if="item.category =='9031'">
                       <span style="font-size: .6rem">{{item.value}}</span>{{item.amount}}
@@ -103,10 +94,7 @@
               </div>
             </div>
             <div class="set-coupon" v-else>
-              <router-link class="empty" :to="{ path: 'user', query:  $route.query}">
-                <img src="/sui_assets/img/my/empty.svg">
-              </router-link>
-              <!--<div style="text-align: center;padding-top: 38%;"></div>-->
+              <router-link class="empty" :to="{ path: 'user', query:  $route.query}"></router-link>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination" id="swiper-pagination"></div>
@@ -122,7 +110,6 @@
   import VueAwesomeSwiper from 'vue-awesome-swiper'
 
   Vue.use(VueAwesomeSwiper);
-
   export default {
     name: "User",
     data() {

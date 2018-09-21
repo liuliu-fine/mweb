@@ -1,80 +1,17 @@
 <template>
   <div class="upgrade" v-if="data">
-    <div class="bg">
-      <div class="name">{{data.toName}}</div>
+    <div class="card" :style="{backgroundImage: 'url('+ (data.cardUrl||'') +')',backgroundColor: (data.backgroundColor||'#ffffff')}">
+      <img class="avatar" :src="data.logoUrl">
+      <span class="shop">{{data.brandName}}</span>
     </div>
-    <div class="box1" v-if="data.coupons||data.reward||data.point">
-      <swiper :options="swiperOption">
-        <swiper-slide class="add" v-for="(item,key) in data.coupons"
-                      :key="key">
-          <div class="corn" v-if="item.count>1">{{item.count}}张</div>
-          <div class="coupon-bg" :class="item.todayUsable?'today':''"
-               :style="{backgroundImage: 'url('+ (item.picUrl||'./sui_assets/img/mass/place-coupon.png') +')'}"></div>
-          <div class="name">{{item.name}}</div>
-          <div class="limit">{{item.times}};{{item.useStrategy}}</div>
-        </swiper-slide>
-        <swiper-slide class="" v-if="data.reward">
-          <div class="coupon-bg" style="background-image: url('./sui_assets/img/mass/place-reward.png')"></div>
-          <div class="name">{{data.reward}}元代用币</div>
-        </swiper-slide>
-        <swiper-slide class="swiper-slide" v-if="data.point">
-          <div class="coupon-bg" style="background-image: url('./sui_assets/img/mass/place-point.png')"></div>
-          <div class="name" style="padding-top: 2rem">{{data.point}}积分</div>
-        </swiper-slide>
-      </swiper>
-    </div>
-    <div class="box2" v-if="data.activities">
-      <div class="item" v-for="item in data.activities" v-if="item.category !='6011'" v-on:click="redirectFn(item)">
-        <div class="name" style="-webkit-box-orient: vertical;">{{item.contents.join("，")}}</div>
-        <div class="addon">{{item.period}} {{item.time}}</div>
-      </div>
-    </div>
-    <div class="box3" v-if="data.strategies">
-      <img src="/sui_assets/img/upgrade/title3.svg" style="margin-bottom: 1rem">
-      <div class="item" v-for="item in data.strategies">{{item.content}}</div>
-    </div>
-    <div v-if="data.needPhone" style="height: 12rem"></div>
-    <div v-else style="height: 5rem"></div>
-    <div class="fixed" v-if="data.currentGradeName">
-      <div class="btn" v-on:click="ajaxUrl('vip.html')">您已是{{data.currentGradeName}}</div>
-    </div>
-    <div class="fixed" v-else-if="data.strategies">
-      <div class="" v-if="data.needPhone">
-        <div class="modal-phone">
-          <input type="tel" placeholder="输入您的手机号码" v-model="phone.phone" id="tel" maxlength="11" minlength="11">
-          <div class="input-text" v-on:click.stop="validateFn">{{phone.text}}</div>
-          <input type="tel" placeholder="输入收到的验证码" v-model="phone.validateCode" id="validate" maxlength="6">
-          <div id="bindPhone" v-on:click.stop="bindPhone" class="v-button">激活会员</div>
-        </div>
-      </div>
-      <div v-else>
-        <div class="btn" v-if="data.free" v-on:click="submitFn()">立即领取</div>
-        <div class="btn" v-else v-on:click="checked=false" v-show="checked">立即升级</div>
-        <div class="rule-text" v-if="!data.free" v-show="!checked">
-          <div class="i-flex" v-for="(item,index) in data.strategies">
-            <div class="text">{{item.content}}</div>
-            <div class="btn" v-if="item.usable&&item.type=='FREE'" v-on:click="submitFn(index)">去升级
-            </div>
-            <div class="btn" v-else-if="item.usable&&payment&&item.type!='SUM_COST'" v-on:click="submitFn(index)">去升级
-            </div>
-          </div>
-          <div class="close" v-on:click="checked = true"></div>
-        </div>
-      </div>
-    </div>
-    <div class="page-group"></div>
+    <div class="separate"></div>
+    <vip-module v-bind:data="data" v-bind:upgrade="true"></vip-module>
   </div>
-
-
 </template>
 
 <script>
 
-  import Vue from 'vue'
-  import 'swiper/dist/css/swiper.css'
-  import VueAwesomeSwiper from 'vue-awesome-swiper'
-
-  Vue.use(VueAwesomeSwiper)
+  import vipModule from "./module/vip"
 
   export default {
     name: 'upgrade',
@@ -98,32 +35,23 @@
         }
       }
     },
+    components: {
+      vipModule
+    },
     beforeCreate: function () {
       let _self = this;
       let json = {};
       if (this.$route.query.tid) {
         json.gradeId = this.$route.query.tid;
       }
-      this.$http.get("/membership/guest/" + (this.$route.query.id || this.$route.query.guestid) + "/grade", {key: json}).then(response => {
+      this.$http.get("/membership/guest/" + (this.$route.query.id || this.$route.query.guestid) + "/upgrade", {key: json}).then(response => {
         let data = response.body;
         if (data.code == 200) {
           _self.data = data.result;
-          _self.$nextTick(function () {
-            _self.$http.get("/shop/" + (_self.$route.query.id || _self.$route.query.guestid) + "/paymode", {key: {"type": this.getVersion()}}).then(response => {
-              let data1 = response.body;
-              if (data1.code == 200) {
-                if (response.body.result.oasis) {
-                  _self.author();
-                  return;
-                }
-                _self.payment = data1.result.payMode;
-              }
-            });
-          })
         } else {
           if (data.code == 4050450) {
             alert("您已经是最高等级会员");
-            this.ajaxUrl("vip.html");
+            _self.$router.push({path: 'vip', query: _self.$route.query});
           } else {
             // location.href = "error.html#3"
           }

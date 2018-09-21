@@ -33,9 +33,7 @@
               v-bind:value="post.nonParticationAmount"
               decimal="2" v-bind:unabled="init.preCheckData?true:false"
               v-bind:placeholder="init.nonPart"
-              label="不参与优惠项" @input="nonPartsFn"/><!--
-              <input-val v-bind:val="post.nonParticationAmount" v-bind:label="'不参与优惠项'"
-                         v-bind:placeholder="init.nonPart" @input="nonPartsFn"></input-val>-->
+              label="不参与优惠项" @input="nonPartsFn"/>
 
           </div>
           <div class="check-meal-border" v-on:click="getDishes" v-if="init.activityTypes">
@@ -557,17 +555,19 @@
                     _self.ads = data.result;
                   }
                 });
-                let para1 = {};
-                if (this.$route.query.d) {
-                  para1.tableId = this.$route.query.d;
-                }
-                this.$http.get("/shop/" + this.$route.query.id + "/qrcode", {key: para1}).then(response => {
-                  let data = response.body;
-                  if (data.code == 200) {
-                    let _self = this;
-                    _self.qrcode = data.result;
+                if (this.getVersion() == "WXPAY") {
+                  let para1 = {};
+                  if (this.$route.query.d) {
+                    para1.tableId = this.$route.query.d;
                   }
-                });
+                  this.$http.get("/shop/" + this.$route.query.id + "/qrcode", {key: para1}).then(response => {
+                    let data = response.body;
+                    if (data.code == 200) {
+                      let _self = this;
+                      _self.qrcode = data.result;
+                    }
+                  });
+                }
                 /*----------------------*/
               })
             }
